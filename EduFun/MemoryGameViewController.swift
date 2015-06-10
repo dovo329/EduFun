@@ -54,14 +54,14 @@ class MemoryGameViewController: UIViewController {
                 
                 columnArray.append(newCard)
                 
-                newCard.button.addTarget(self, action:"buttonMethod:", forControlEvents: .TouchUpInside)
+                newCard.addTarget(self, action:"buttonMethod:", forControlEvents: .TouchUpInside)
             }
             card2dArr.append(columnArray)
         }
         
         for nrow in 0...(card2dArr.count-1) {
             for ncolumn in 0...(card2dArr[nrow].count-1) {
-                self.view.addSubview(card2dArr[nrow][ncolumn].button)
+                self.view.addSubview(card2dArr[nrow][ncolumn])
             }
         }
         
@@ -106,7 +106,8 @@ class MemoryGameViewController: UIViewController {
     }
     
     func buttonMethod(sender: UIButton!) {
-        println("button was pressed")
+        var card : Card = (sender as? Card)!
+        println("button was pressed with row: \(card.row) column: \(card.column)")
     }
     
     override func didReceiveMemoryWarning() {
