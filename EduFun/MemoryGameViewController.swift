@@ -108,6 +108,7 @@ class MemoryGameViewController: UIViewController {
     func buttonMethod(sender: UIButton!) {
         var card : Card = (sender as? Card)!
         println("button was pressed with row: \(card.row) column: \(card.column)")
+        card.isFlipped = !card.isFlipped
     }
     
     override func didReceiveMemoryWarning() {
