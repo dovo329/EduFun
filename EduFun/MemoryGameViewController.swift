@@ -14,14 +14,9 @@ let kCardHeightToScreen: CGFloat = (1.0/4.0)
 
 let bgImg: UIImage = UIImage(named: "SkyGrassBackground")!
 
-let imgNameArr: Array = ["BearCard", "StarCard", "FlowerCard", "IceCreamCard", "RainbowCard"]
+let imgNameArr: Array = ["BearCard", "StarCard", "FlowerCard", "IceCreamCard", "RainbowCard", "CarCard"]
 
 let cardBackImg : UIImage = UIImage(named: "CardBack")!
-let bearImg : UIImage = UIImage(named: "BearCard")!
-let starImg : UIImage = UIImage(named: "StarCard")!
-let flowerImg : UIImage = UIImage(named: "FlowerCard")!
-let iceCreamImg : UIImage = UIImage(named: "IceCreamCard")!
-let rainbowImg : UIImage = UIImage(named: "RainbowCard")!
 
 class MemoryGameViewController: UIViewController {
     var bgImgView: UIImageView?
@@ -43,14 +38,11 @@ class MemoryGameViewController: UIViewController {
         for row in 0...(NumRows-1) {
             var columnArray = Array<Card>()
             for column in 0...(NumColumns-1) {
-                var randInput : UInt32 = UInt32(imgNameArr.count-1)
+                var randInput : UInt32 = UInt32(imgNameArr.count)
                 var randIndex : UInt32 = arc4random_uniform(randInput)
                 var imgNameStr : String = imgNameArr[Int(randIndex)]
-                var randIsFlipped : UInt32 = arc4random_uniform(2)
-                var randIsFlippedBool : Bool
-                if (randIsFlipped != 0) { randIsFlippedBool = true } else {randIsFlippedBool = false }
-                
-                var newCard : Card = Card(imgName:imgNameStr, isFlippedBool:randIsFlippedBool, row:CGFloat(row), column:CGFloat(column), width:cardWidth, height:cardHeight)
+
+                var newCard : Card = Card(imgName:imgNameStr, isFlipped:false, row:CGFloat(row), column:CGFloat(column), width:cardWidth, height:cardHeight)
                 //let singleTap = UITapGestureRecognizer(target: self, action: Selector("tapped:"))
                 let singleTap = TapGestureRecognizerWithRowColumn(target: self, action: Selector("tappedSubclassed:"))
                 singleTap.numberOfTapsRequired = 1
@@ -119,7 +111,11 @@ class MemoryGameViewController: UIViewController {
         //println("tappy tap tap! row:\(sender2.row) column:\(sender2.column) \(sender2)")
         println("tappy tap tap! row:\(row) column:\(column)")
 
-        self.card2dArr[row][column].isFlipped = !self.card2dArr[row][column].isFlipped
+        if (sender.state == .Ended) {
+            println("ended row:\(row) column:\(column); isFlipped==\(self.card2dArr[row][column].isFlipped)")
+            self.card2dArr[row][column].isFlipped = !self.card2dArr[row][column].isFlipped
+            println("post ended row:\(row) column:\(column); isFlipped==\(self.card2dArr[row][column].isFlipped)")
+        }
     }
     
     func tapped(sender:UITapGestureRecognizer) {

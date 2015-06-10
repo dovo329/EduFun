@@ -19,9 +19,9 @@ class Card {
     {
         didSet {
             if (self.isFlipped) {
-                UIView.transitionFromView(self.cardFrontImgView, toView:self.cardBackImgView, duration: 1, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: nil)
-            } else {
                 UIView.transitionFromView(self.cardBackImgView, toView:self.cardFrontImgView, duration: 1, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
+            } else {
+                UIView.transitionFromView(self.cardFrontImgView, toView:self.cardBackImgView, duration: 1, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: nil)
             }
         }
     }
@@ -31,14 +31,14 @@ class Card {
     var width : CGFloat = 0.0
     var height : CGFloat = 0.0
     
-    init (imgName:String, isFlippedBool:Bool, row:CGFloat, column:CGFloat, width:CGFloat, height:CGFloat) {
+    init (imgName:String, isFlipped:Bool, row:CGFloat, column:CGFloat, width:CGFloat, height:CGFloat) {
         
         self.cardFrontImgView = UIImageView(image: UIImage(named: imgName)!)
         self.row = row
         self.column = column
         self.width = width
         self.height = height
-        self.isFlipped = isFlippedBool
+        self.isFlipped = isFlipped
         
         self.cardBackImgView.contentMode = .ScaleToFill
         self.cardFrontImgView.contentMode = .ScaleToFill
