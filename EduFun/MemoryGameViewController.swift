@@ -25,6 +25,7 @@ let rainbowImg : UIImage = UIImage(named: "RainbowCard")!
 
 class MemoryGameViewController: UIViewController {
     var bgImgView: UIImageView?
+    var card2dArr = Array<Array<Card>>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,6 @@ class MemoryGameViewController: UIViewController {
         
         var NumColumns = 5
         var NumRows = 3
-        var card2dArr = Array<Array<Card>>()
         
         for row in 0...(NumRows-1) {
             var columnArray = Array<Card>()
@@ -51,17 +51,24 @@ class MemoryGameViewController: UIViewController {
                 if (randIsFlipped != 0) { randIsFlippedBool = true } else {randIsFlippedBool = false }
                 
                 var newCard : Card = Card(imgName:imgNameStr, isFlippedBool:randIsFlippedBool, row:CGFloat(row), column:CGFloat(column), width:cardWidth, height:cardHeight)
+                //let singleTap = UITapGestureRecognizer(target: self, action: Selector("tapped:"))
+                let singleTap = TapGestureRecognizerWithRowColumn(target: self, action: Selector("tappedSubclassed:"))
+                singleTap.numberOfTapsRequired = 1
+                singleTap.row = row
+                singleTap.column = column
+                newCard.cardView.addGestureRecognizer(singleTap)
+                newCard.cardView.userInteractionEnabled = true
                 
                 columnArray.append(newCard)
                 
-                newCard.addTarget(self, action:"buttonMethod:", forControlEvents: .TouchUpInside)
+                
             }
             card2dArr.append(columnArray)
         }
         
         for nrow in 0...(card2dArr.count-1) {
             for ncolumn in 0...(card2dArr[nrow].count-1) {
-                self.view.addSubview(card2dArr[nrow][ncolumn])
+                self.view.addSubview(card2dArr[nrow][ncolumn].cardView)
             }
         }
         
@@ -105,10 +112,23 @@ class MemoryGameViewController: UIViewController {
         }
     }
     
-    func buttonMethod(sender: UIButton!) {
-        var card : Card = (sender as? Card)!
-        println("button was pressed with row: \(card.row) column: \(card.column)")
-        card.isFlipped = !card.isFlipped
+    func tappedSubclassed(sender:UITapGestureRecognizer) {
+        var sender2 : TapGestureRecognizerWithRowColumn = (sender as? TapGestureRecognizerWithRowColumn)!
+        var row : Int = sender2.row
+        var column : Int = sender2.column
+        //println("tappy tap tap! row:\(sender2.row) column:\(sender2.column) \(sender2)")
+        println("tappy tap tap! row:\(row) column:\(column)")
+
+        self.card2dArr[row][column].isFlipped = !self.card2dArr[row][column].isFlipped
+    }
+    
+    func tapped(sender:UITapGestureRecognizer) {
+        println("tappy tap tap! \(sender)")
+    }
+    
+    func cardTouchedMethod(sender: Card!) {
+        println("Card was touched with row: \(sender.row) column: \(sender.column)")
+        sender.isFlipped = !sender.isFlipped
     }
     
     override func didReceiveMemoryWarning() {

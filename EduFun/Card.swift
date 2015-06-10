@@ -10,17 +10,18 @@ import UIKit
 
 let kInterCardMargin : CGFloat = 15.0
 
-class Card : UIButton {
-    let cardBackImg : UIImage = UIImage(named: "CardBack")!
+class Card {
+    var cardView : UIView
+    var cardBackImgView : UIImageView = UIImageView(image: UIImage(named: "CardBack")!)
     
-    var img : UIImage
+    var cardFrontImgView : UIImageView
     var isFlipped : Bool
     {
         didSet {
             if (self.isFlipped) {
-                self.setImage(self.img, forState: .Normal)
+                UIView.transitionFromView(self.cardFrontImgView, toView:self.cardBackImgView, duration: 1, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: nil)
             } else {
-                self.setImage(cardBackImg, forState: .Normal)
+                UIView.transitionFromView(self.cardBackImgView, toView:self.cardFrontImgView, duration: 1, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
             }
         }
     }
@@ -32,24 +33,29 @@ class Card : UIButton {
     
     init (imgName:String, isFlippedBool:Bool, row:CGFloat, column:CGFloat, width:CGFloat, height:CGFloat) {
         
-        self.img = UIImage(named:imgName)!
+        self.cardFrontImgView = UIImageView(image: UIImage(named: imgName)!)
         self.row = row
         self.column = column
         self.width = width
         self.height = height
         self.isFlipped = isFlippedBool
         
-        var buttonFrame : CGRect = CGRectMake(column*(self.width+kInterCardMargin), row*(self.height+kInterCardMargin), self.width, self.height)
-        super.init(frame:buttonFrame)
+        self.cardBackImgView.contentMode = .ScaleToFill
+        self.cardFrontImgView.contentMode = .ScaleToFill
+
+        var imgFrame : CGRect = CGRectMake(0.0, 0.0, self.width, self.height)
+        
+        self.cardFrontImgView.frame = imgFrame
+        self.cardBackImgView.frame = imgFrame
+        
+        var cardFrame : CGRect = CGRectMake(column*(self.width+kInterCardMargin), row*(self.height+kInterCardMargin), self.width, self.height)
+        
+        self.cardView = UIView(frame:cardFrame)
+        self.cardView.addSubview(self.cardBackImgView)
+
         
         //self.frame = CGRectMake(column*(self.width+kInterCardMargin), row*(self.height+kInterCardMargin), self.width, self.height)
-        self.imageView?.contentMode = .ScaleToFill
         
-        if (self.isFlipped) {
-            self.setImage(self.img, forState: .Normal)
-        } else {
-            self.setImage(cardBackImg, forState: .Normal)
-        }
         //self.addTarget(self, action:"buttonMethod:", forControlEvents: .TouchUpInside)
     }
 
