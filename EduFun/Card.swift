@@ -11,9 +11,15 @@ import UIKit
 class Card {
     var isFlipped : Bool = false
     var imageName : String?
+    var matched : Bool = false
+    var row : Int = 0
+    var column : Int = 0
     
     init () {
         self.isFlipped = false
         self.imageName = "BearCard"
+        self.matched = false
+        self.row = 0
+        self.column = 0
     }
 }
