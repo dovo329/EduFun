@@ -94,6 +94,12 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         collectionView!.backgroundColor = UIColor.whiteColor()
         collectionView!.scrollEnabled = false
         
+        var cardCountDict = [String:Int]()
+        for imageName in imageNameArr
+        {
+            cardCountDict[imageName] = 0
+        }
+        
         var row : Int = 0
         var column : Int = 0
         for row=0; row < numRows; row++
@@ -102,9 +108,27 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             for column=0; column < numColumns; column++
             {
                 var card : Card = Card()
-                card.isFlipped = (arc4random_uniform(2) > 0)
-                card.imageName = imageNameArr[Int(arc4random_uniform(UInt32(imageNameArr.count)))]
+                //card.isFlipped = (arc4random_uniform(2) > 0)
+                card.isFlipped = false
+
+                var iterationCnt = 0
+                var imageName : String
+                // select an imageName that hasn't been used twice yet
+                do {
+                    imageName = imageNameArr[Int(arc4random_uniform(UInt32(imageNameArr.count)))]
+                    iterationCnt++
+                    if (iterationCnt > 100)
+                    {
+                        fatalError("Failed to find another card to use after 100 random tries")
+                    }
+                } while cardCountDict[imageName] >= 2
+                
+                card.imageName = imageName
+                cardCountDict[card.imageName!]!++
+                println("cardCountDict[\(card.imageName)]==\(cardCountDict[card.imageName!]!)")
+                    
                 columnArr.append(card)
+                
             }
             self.card2dArr.append(columnArr)
         }
