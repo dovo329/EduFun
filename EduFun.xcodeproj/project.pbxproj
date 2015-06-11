@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A524FE591B27EC08000F09D9 /* TapGestureRecognizerWithRowColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = A524FE581B27EC08000F09D9 /* TapGestureRecognizerWithRowColumn.swift */; };
 		A532ADE11B27959F00A46930 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = A532ADE01B27959F00A46930 /* Card.swift */; };
 		A5B85EB51B276636008012F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85EB41B276636008012F7 /* AppDelegate.swift */; };
 		A5B85EB71B276636008012F7 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A5B85EB61B276636008012F7 /* GameScene.sks */; };
@@ -31,7 +30,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A524FE581B27EC08000F09D9 /* TapGestureRecognizerWithRowColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizerWithRowColumn.swift; sourceTree = "<group>"; };
 		A532ADE01B27959F00A46930 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		A5B85EAF1B276636008012F7 /* EduFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EduFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B85EB31B276636008012F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -90,7 +88,6 @@
 				A5B85EB41B276636008012F7 /* AppDelegate.swift */,
 				A532ADE01B27959F00A46930 /* Card.swift */,
 				A5B85ED81B2767E3008012F7 /* MemoryGameViewController.swift */,
-				A524FE581B27EC08000F09D9 /* TapGestureRecognizerWithRowColumn.swift */,
 				A5B85EB61B276636008012F7 /* GameScene.sks */,
 				A5B85EB81B276636008012F7 /* GameScene.swift */,
 				A5B85EBA1B276636008012F7 /* GameViewController.swift */,
@@ -229,7 +226,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A524FE591B27EC08000F09D9 /* TapGestureRecognizerWithRowColumn.swift in Sources */,
 				A5B85EB91B276636008012F7 /* GameScene.swift in Sources */,
 				A5B85EBB1B276636008012F7 /* GameViewController.swift in Sources */,
 				A532ADE11B27959F00A46930 /* Card.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  MemoryGameViewController.swift
+//  ViewController.swift
 //  CollectionViewTest
 //
 //  Created by Douglas Voss on 6/10/15.
@@ -8,76 +8,22 @@
 
 import UIKit
 
-class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+//class ViewController: UIViewController {
     let numRows : Int = 3
     let numColumns : Int = 3
     let imageNameArr : [String] = ["BearCard", "CarCard", "FlowerCard", "IceCreamCard","RainbowCard", "StarCard"]
+    let cardBackImgView : UIImageView = UIImageView(image: UIImage(named: "CardBack")!)
+    let cardFrontImgView : UIImageView = UIImageView(image: UIImage(named: "BearCard")!)
     let kCardMinMargin : CGFloat = 5.0
     var collectionView: UICollectionView?
     let cardImg : UIImage = UIImage(named: "IceCreamCard")!
-    let bgImgView : UIImageView = UIImageView(image: UIImage(named: "SkyGrassBackground"))
     var card2dArr = Array<Array<Card>>()
     let kCellReuseId : String = "cell.reuse.id"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        self.view.addSubview(bgImgView)
-      
-        self.bgImgView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        
-        let viewsDictionary = ["bg": self.bgImgView]
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[bg]|",
-            options: NSLayoutFormatOptions.AlignAllBaseline,
-            metrics: nil,
-            views: viewsDictionary))
-        
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[bg]|",
-            options: NSLayoutFormatOptions.AlignAllBaseline,
-            metrics: nil,
-            views: viewsDictionary))
-        
-        /*self.view.addConstraint(
-            NSLayoutConstraint(
-                item: self.bgImgView,
-                attribute: .Top,
-                relatedBy: .Equal,
-                toItem: self.view,
-                attribute: .Top,
-                multiplier: 1.0,
-                constant: 0.0));
-        
-        self.view.addConstraint(
-            NSLayoutConstraint(
-                item: self.bgImgView,
-                attribute: .Bottom,
-                relatedBy: .Equal,
-                toItem: self.view,
-                attribute: .Bottom,
-                multiplier: 1.0,
-                constant: 0.0));
-        
-        self.view.addConstraint(
-            NSLayoutConstraint(
-                item: self.bgImgView,
-                attribute: .Left,
-                relatedBy: .Equal,
-                toItem: self.view,
-                attribute: .Left,
-                multiplier: 1.0,
-                constant: 0.0));
-        
-        self.view.addConstraint(
-            NSLayoutConstraint(
-                item: self.bgImgView,
-                attribute: .Right,
-                relatedBy: .Equal,
-                toItem: self.view,
-                attribute: .Right,
-                multiplier: 1.0,
-                constant: 0.0));*/
-        
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: kCardMinMargin, left: kCardMinMargin, bottom: kCardMinMargin, right: kCardMinMargin)
         var aspectRatio : CGFloat = cardImg.size.width/cardImg.size.height
@@ -108,7 +54,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             }
             self.card2dArr.append(columnArr)
         }
-        self.collectionView?.backgroundColor = UIColor.clearColor()
+        
         self.view.addSubview(collectionView!)
         self.collectionViewConstraints()
     }
