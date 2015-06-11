@@ -18,6 +18,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     let bgImgView : UIImageView = UIImageView(image: UIImage(named: "SkyGrassBackground"))
     var card2dArr = Array<Array<Card>>()
     let kCellReuseId : String = "cell.reuse.id"
+    var flippedCnt = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,7 +126,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                 
                 card.imageName = imageName
                 cardCountDict[card.imageName!]!++
-                println("cardCountDict[\(card.imageName)]==\(cardCountDict[card.imageName!]!)")
+                //println("cardCountDict[\(card.imageName)]==\(cardCountDict[card.imageName!]!)")
                     
                 columnArr.append(card)
                 
@@ -209,7 +210,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             cell.backgroundView = UIImageView(image: UIImage(named: "CardBack")!)
         }
         
-        println("storedCell at row:\(indexPath.section) column:\(indexPath.row) isFlipped:\(card.isFlipped) imageNames:\(card.imageName)")
+        //println("storedCell at row:\(indexPath.section) column:\(indexPath.row) isFlipped:\(card.isFlipped) imageNames:\(card.imageName)")
 
         return cell as UICollectionViewCell
     }
@@ -219,23 +220,85 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         var cell = collectionView.cellForItemAtIndexPath(indexPath)
         
         var card : Card = card2dArr[indexPath.section][indexPath.row]
-        println("selectedCell at row:\(indexPath.section) column:\(indexPath.row) isFlipped:\(card.isFlipped)")
+        //println("selectedCell at row:\(indexPath.section) column:\(indexPath.row) isFlipped:\(card.isFlipped)")
         
-        var newImgView : UIImageView?
-        if (card.isFlipped)
+        if (flippedCnt < 2)
         {
-            newImgView = UIImageView(image: UIImage(named: "CardBack")!)
-        } else {
-            newImgView = UIImageView(image: UIImage(named: card.imageName!)!)
+            if !card.isFlipped
+            {
+                flippedCnt++
+                println("flippedCnt=\(flippedCnt)")
+                
+                var newImgView : UIImageView?
+                newImgView = UIImageView(image: UIImage(named: card.imageName!)!)
+                newImgView!.frame = ((cell!.backgroundView)!).frame
+                UIView.transitionFromView((cell!.backgroundView)!, toView:newImgView!, duration: 1, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
+                ((cell!.backgroundView)!) = newImgView!
+                card2dArr[indexPath.section][indexPath.row].isFlipped = true
+            } else {
+                fatalError("tried to flip a card that was already flipped")
+            }
+            
+            if (flippedCnt >= 2)
+            {
+                var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(1.1 * Double(NSEC_PER_SEC)))
+                dispatch_after(dispatchTime, dispatch_get_main_queue(),
+                    {
+                        var compareArr = [Card]()
+                        // check for match if 2 cards have been flipped over
+                        println("checkForMatch called")
+                        
+                        
+                        // find all flipped over cards and add them to an array
+                        for var row=0; row<self.card2dArr.count; row++
+                        {
+                            for var column=0; column<self.card2dArr[row].count; column++
+                            {
+                                if self.card2dArr[row][column].isFlipped
+                                {
+                                    compareArr.append(self.card2dArr[row][column])
+                                    println("true isFlipped row=\(row) column=\(column)")
+                                }
+                            }
+                        }
+                        
+                        if compareArr.count > 2
+                        {
+                            fatalError("more than 2 cards flipped over.  Error alert!")
+                        }
+                        
+                        if (compareArr[0].imageName == compareArr[1].imageName)
+                        {
+                            println("You made a match! Yay!")
+                        } else {
+                            println("Nope, no match for you.")
+                        }
+                        
+                        // unflip all cards
+                        self.flippedCnt = 0
+                        // find all flipped over cards and add them to an array
+                        for var row=0; row<self.card2dArr.count; row++
+                        {
+                            for var column=0; column<self.card2dArr[row].count; column++
+                            {
+                                if (self.card2dArr[row][column].isFlipped) {
+                                    var indexPath = NSIndexPath(forRow: column, inSection: row)
+                                    var cell = collectionView.cellForItemAtIndexPath(indexPath)
+                                    
+                                    var newImgView = UIImageView(image: UIImage(named: "CardBack")!)
+                                    newImgView.frame = ((cell!.backgroundView)!).frame
+                                    UIView.transitionFromView((cell!.backgroundView)!, toView:newImgView, duration: 1, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
+                                    ((cell!.backgroundView)!) = newImgView
+                                    self.card2dArr[indexPath.section][indexPath.row].isFlipped = false
+                                }
+                            }
+                        }
+                })
+            }
         }
-        newImgView!.frame = ((cell!.backgroundView)!).frame
-        UIView.transitionFromView((cell!.backgroundView)!, toView:newImgView!, duration: 1, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
-        ((cell!.backgroundView)!) = newImgView!
-        card.isFlipped = !card.isFlipped
-        card2dArr[indexPath.section][indexPath.row] = card
     }
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        println("DeselectedCell at row:\(indexPath.section) column:\(indexPath.row)")
+        //println("DeselectedCell at row:\(indexPath.section) column:\(indexPath.row)")
     }
 }
