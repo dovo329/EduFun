@@ -9,8 +9,8 @@
 import UIKit
 
 class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    let numRows : Int = 2
-    let numColumns : Int = 2
+    let numRows : Int = 4
+    let numColumns : Int = 4
     let imageNameArr : [String] = ["BearCard", "CarCard", "FlowerCard", "IceCreamCard","RainbowCard", "StarCard", "CatCard", "PenguinCard"]
     let kCardMinMargin : CGFloat = 5.0
     var collectionView: UICollectionView?
@@ -159,6 +159,11 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         self.collectionView?.backgroundColor = UIColor.clearColor()
         self.view.addSubview(collectionView!)
         self.collectionViewConstraints()
+        
+        self.view.addSubview(self.completeLabel)
+        self.view.addSubview(self.elapsedTimeLabel)
+        
+        //self.roundCompleteMethod()
     }
 
     func collectionViewConstraints() {
@@ -315,10 +320,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                                 // check for all matches
                                 if self.allMatched()
                                 {
-                                    println("Complete!")
-                                    let endTime = NSDate();
-                                    let elapsedTime: Double = endTime.timeIntervalSinceDate(self.startTime);
-                                    println("Elapsed time: \(elapsedTime) seconds");
+                                    self.roundCompleteMethod()
                                 }
                             } else {
                                 println("Nope, no match for you.")
@@ -383,6 +385,26 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             }
         }
         return allMatched
+    }
+    
+    func roundCompleteMethod() {
+        println("Complete!")
+        let endTime = NSDate();
+        let elapsedTime: Double = endTime.timeIntervalSinceDate(self.startTime);
+        println("Time: \(elapsedTime) seconds");
+        
+        self.completeLabel.text = "Complete!"
+        self.completeLabel.font = UIFont(name: "ChalkDuster", size: 25.0)
+        self.completeLabel.frame = CGRect(x: self.view.frame.size.width/2.0, y: self.view.frame.size.height/4.0, width: self.view.frame.size.width, height: self.view.frame.size.height/3.0)
+        UIView.animateWithDuration(3.0) {
+            self.completeLabel.transform = CGAffineTransformMakeScale(2.0, 2.0)
+        }
+        self.elapsedTimeLabel.text = NSString(format: "Time: %.0f seconds", elapsedTime) as? String
+        self.elapsedTimeLabel.font = UIFont(name: "ChalkDuster", size: 25.0)
+        self.elapsedTimeLabel.frame = CGRect(x: self.view.frame.size.width/2.0, y: self.view.frame.size.height/4.0+100.0, width: self.view.frame.size.width, height: self.view.frame.size.height/3.0)
+        UIView.animateWithDuration(3.0) {
+            self.elapsedTimeLabel.transform = CGAffineTransformMakeScale(2.0, 2.0)
+        }
     }
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
