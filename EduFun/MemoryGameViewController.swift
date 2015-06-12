@@ -9,8 +9,8 @@
 import UIKit
 
 class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    let numRows : Int = 4
-    let numColumns : Int = 4
+    let numRows : Int = 2
+    let numColumns : Int = 2
     let imageNameArr : [String] = ["BearCard", "CarCard", "FlowerCard", "IceCreamCard","RainbowCard", "StarCard", "CatCard", "PenguinCard"]
     let kCardMinMargin : CGFloat = 5.0
     var collectionView: UICollectionView?
@@ -19,6 +19,11 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     var card2dArr = Array<Array<Card>>()
     let kCellReuseId : String = "cell.reuse.id"
     var flippedCnt = 0
+    var completeLabel : UILabel = UILabel()
+    var elapsedTimeLabel : UILabel = UILabel()
+    let startTime = NSDate()
+    
+    var elapsedTime : Double = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,6 +106,25 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             cardCountDict[imageName] = 0
         }
         
+        var numCards = numRows*numColumns
+        var numRequiredImages = Int(ceil(Double(numCards)/2.0))
+        
+        if (numRequiredImages > imageNameArr.count)
+        {
+            fatalError("Need more cards than have unique images")
+        }
+        
+        var imageNameSubArr = imageNameArr // swift copies arrays with assignment = operator
+        var imageNameLtdArr = [String]()
+        
+        for var i=0; i < numRequiredImages; i++
+        {
+            var randIndex = Int(arc4random_uniform(UInt32(imageNameSubArr.count)))
+            imageNameLtdArr.append(imageNameSubArr[randIndex])
+            imageNameSubArr.removeAtIndex(randIndex)
+            println("i=\(i) imageNameLtdArr=\(imageNameLtdArr)")
+        }
+        
         var row : Int = 0
         var column : Int = 0
         for row=0; row < numRows; row++
@@ -112,16 +136,13 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                 //card.isFlipped = (arc4random_uniform(2) > 0)
                 card.isFlipped = false
                 
-                var iterationCnt = 0
                 var imageName : String
-                // select an imageName that hasn't been used twice yet
+                var randIndex = Int(arc4random_uniform(UInt32(imageNameLtdArr.count)))
+                // find a random card image that hasn't been assigned twice yet
+                // if randIndex has already been assigned just pick the next image
                 do {
-                    imageName = imageNameArr[Int(arc4random_uniform(UInt32(imageNameArr.count)))]
-                    iterationCnt++
-                    if (iterationCnt > 100)
-                    {
-                        fatalError("Failed to find another card to use after 100 random tries")
-                    }
+                    imageName = imageNameLtdArr[randIndex]
+                    randIndex = (randIndex + 1) % imageNameLtdArr.count
                 } while cardCountDict[imageName] >= 2
                 
                 card.imageName = imageName
@@ -282,7 +303,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                                 var indexPath0 = NSIndexPath(forRow: compareArr[0].column, inSection: compareArr[0].row)
                                 var cell0 = collectionView.cellForItemAtIndexPath(indexPath0)
                                 var blankView0 = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-                                UIView.transitionFromView((cell0!.backgroundView)!, toView:blankView0, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, completion: nil)
+                                UIView.transitionFromView((cell0!.backgroundView)!, toView:blankView0, duration: 1, options: UIViewAnimationOptions.TransitionCurlUp, completion: nil)
                                 
                                 self.card2dArr[compareArr[1].row][compareArr[1].column].matched = true
                                 self.card2dArr[compareArr[1].row][compareArr[1].column].isFlipped = false
@@ -290,6 +311,15 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                                 var cell1 = collectionView.cellForItemAtIndexPath(indexPath1)
                                 var blankView1 = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
                                 UIView.transitionFromView((cell1!.backgroundView)!, toView:blankView1, duration: 1, options: UIViewAnimationOptions.TransitionCurlUp, completion: nil)
+                                
+                                // check for all matches
+                                if self.allMatched()
+                                {
+                                    println("Complete!")
+                                    let endTime = NSDate();
+                                    let elapsedTime: Double = endTime.timeIntervalSinceDate(self.startTime);
+                                    println("Elapsed time: \(elapsedTime) seconds");
+                                }
                             } else {
                                 println("Nope, no match for you.")
                                 
@@ -337,6 +367,22 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                 }
             }
         }
+    }
+    
+    func allMatched() -> Bool
+    {
+        var allMatched = true
+        for var row=0; row<self.card2dArr.count; row++
+        {
+            for var column=0; column<self.card2dArr[row].count; column++
+            {
+                if !self.card2dArr[row][column].matched
+                {
+                    allMatched = false
+                }
+            }
+        }
+        return allMatched
     }
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
