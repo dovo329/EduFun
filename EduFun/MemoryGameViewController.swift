@@ -9,9 +9,9 @@
 import UIKit
 
 class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    let numRows : Int = 3
-    let numColumns : Int = 3
-    let imageNameArr : [String] = ["BearCard", "CarCard", "FlowerCard", "IceCreamCard","RainbowCard", "StarCard"]
+    let numRows : Int = 4
+    let numColumns : Int = 4
+    let imageNameArr : [String] = ["BearCard", "CarCard", "FlowerCard", "IceCreamCard","RainbowCard", "StarCard", "CatCard", "PenguinCard"]
     let kCardMinMargin : CGFloat = 5.0
     var collectionView: UICollectionView?
     let cardImg : UIImage = UIImage(named: "IceCreamCard")!
@@ -282,14 +282,14 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                                 var indexPath0 = NSIndexPath(forRow: compareArr[0].column, inSection: compareArr[0].row)
                                 var cell0 = collectionView.cellForItemAtIndexPath(indexPath0)
                                 var blankView0 = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-                                UIView.transitionFromView((cell0!.backgroundView)!, toView:blankView0, duration: 1, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
+                                UIView.transitionFromView((cell0!.backgroundView)!, toView:blankView0, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, completion: nil)
                                 
                                 self.card2dArr[compareArr[1].row][compareArr[1].column].matched = true
                                 self.card2dArr[compareArr[1].row][compareArr[1].column].isFlipped = false
                                 var indexPath1 = NSIndexPath(forRow: compareArr[1].column, inSection: compareArr[1].row)
                                 var cell1 = collectionView.cellForItemAtIndexPath(indexPath1)
                                 var blankView1 = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-                                UIView.transitionFromView((cell1!.backgroundView)!, toView:blankView1, duration: 1, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
+                                UIView.transitionFromView((cell1!.backgroundView)!, toView:blankView1, duration: 1, options: UIViewAnimationOptions.TransitionCurlUp, completion: nil)
                             } else {
                                 println("Nope, no match for you.")
                                 
