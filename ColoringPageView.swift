@@ -12,6 +12,20 @@ class ColoringPageView: UIView {
     
     let img = UIImage(named: "TestColorShape")!
 
+    var colorDict : [UInt32 : UInt32] = [UInt32 : UInt32]()
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init coder not implemented")
+    }
+    
+    override init(frame: CGRect) {
+        colorDict[0xff000000] = 0xff0000ff // change black to red
+        colorDict[0xffff0000] = 0xff00ff00 // change red to green
+        colorDict[0xff0000ff] = 0xffff00ff // change blue to pink (max red and blue)
+        colorDict[0xffffffff] = 0xff00ffff // change white to yellow (max green and red)
+        super.init(frame:frame)
+    }
+    
     let maskColor1 : [CGFloat] = [255.0, 255.0, 0.0, 0.0, 0.0, 0.0]
     let maskColor2 : [CGFloat] = [0.0, 0.0, 0.0, 0.0, 255.0, 255.0]
     
@@ -45,14 +59,13 @@ class ColoringPageView: UIView {
                 var green = (color & 0x0000ff00)>>8
                 var blue = (color & 0x00ff0000)>>16
                 
-                if (red == 0xff) && (blue==0x00) && (green==0x00)
+                if colorDict[color] != nil // color exists in lookup
                 {
-                    // change red to green
-                    color = 0x0000ff00
-                } else if (red == 0x00) && (blue==0xff) && (green==0x00)
-                {
-                    // change blue to yellow
-                    color = 0x00ff00ff
+                    //println(String(format:"colorDict[%x]==%x", color, colorDict[color]!))
+                    color = colorDict[color]! // remap color
+                } else {
+                    println(String(format:"colorDict[%x]==nil", color))
+                    fatalError("What happen?")
                 }
                 //print(String(format: "%x ", color))
                 //print(String(format: "%x ", ptr))

@@ -10,16 +10,36 @@ import UIKit
 
 class ColorMaskTestViewController: UIViewController {
 
-    var bgImgView : UIImageView = UIImageView(image: UIImage(named: "TestColorShape"))
-    var triangleImgView : UIImageView = UIImageView(image: UIImage(named: "Triangle")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate))
     var touchesMovedCnt : Int = 0
-    
+    var coloringPageView : ColoringPageView = ColoringPageView()
+    var colorSelBar : UIScrollView = UIScrollView()
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var coloringPageView : ColoringPageView = ColoringPageView()
-        coloringPageView.frame = self.view.frame
+        self.coloringPageView.frame = self.view.frame
         self.view.addSubview(coloringPageView)
+        
+        self.colorSelBar.backgroundColor = UIColor.purpleColor()
+        self.view.addSubview(colorSelBar)
+        
+        self.coloringPageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.colorSelBar.setTranslatesAutoresizingMaskIntoConstraints(false)
+        
+        let viewsDictionary = ["pg": self.coloringPageView, "bar": self.colorSelBar]
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[pg][bar(==100)]|",
+            options: nil,
+            metrics: nil,
+            views: viewsDictionary))
+        
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[pg]|",
+            options: nil,
+            metrics: nil,
+            views: viewsDictionary))
+        
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[bar]|",
+            options: nil,
+            metrics: nil,
+                    views: viewsDictionary))
         
         //self.view.backgroundColor = UIColor.blueColor()
         
