@@ -10,6 +10,7 @@ import UIKit
 
 class ColorMaskTestViewController: UIViewController {
 
+    var toggle : Bool = true
     var touchesMovedCnt : Int = 0
     var coloringPageView : ColoringPageView = ColoringPageView()
     var colorSelBar : UIScrollView = UIScrollView()
@@ -86,6 +87,23 @@ class ColorMaskTestViewController: UIViewController {
         var touch : UITouch = touches.first as! UITouch
         var pointTouched : CGPoint = touch.locationInView(self.view)
         println("touches ended pointTouched x:\(pointTouched.x) y:\(pointTouched.y)")
+        
+        if (self.toggle)
+        {
+            self.coloringPageView.colorLUT =
+            [
+                0xff808080, // 0 red to gray
+                0xff0080ff  // 1 blue to ?
+            ]
+        } else {
+            self.coloringPageView.colorLUT =
+            [
+                0xff00ffff, // 0 red to yellow
+                0xffffff00  // 1 blue to whatever cyan
+            ]
+        }
+        self.coloringPageView.setNeedsDisplay()
+        self.toggle = !self.toggle
     }
     
     override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {

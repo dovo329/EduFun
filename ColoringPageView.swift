@@ -8,21 +8,34 @@
 
 import UIKit
 
+enum ColorIndex: UInt32 {
+        case colInd0 = 0xffff0000
+        case colInd1 = 0xff0000ff
+}
+
 class ColoringPageView: UIView {
     
     let img = UIImage(named: "TestColorShape")!
 
-    var colorDict : [UInt32 : UInt32] = [UInt32 : UInt32]()
+    //var colorDict : [UInt32 : UInt32] = [UInt32 : UInt32]()
+    var colorLUT : [UInt32]
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init coder not implemented")
     }
     
     override init(frame: CGRect) {
-        colorDict[0xff000000] = 0xff0000ff // change black to red
-        colorDict[0xffff0000] = 0xff00ff00 // change red to green
-        colorDict[0xff0000ff] = 0xffff00ff // change blue to pink (max red and blue)
-        colorDict[0xffffffff] = 0xff00ffff // change white to yellow (max green and red)
+        
+        //colorDict[0xff000000] = 0xff0000ff // change black to red
+        //colorDict[0xffff0000] = 0xff00ff00 // change red to green
+        //colorDict[0xff0000ff] = 0xffff00ff // change blue to pink (max red and blue)
+        //colorDict[0xffffffff] = 0xff00ffff // change white to yellow (max green and red)
+        
+        colorLUT =
+        [
+            0xff00ffff, // 0 red to yellow
+            0xffffff00  // 1 blue to whatever cyan
+        ]
         super.init(frame:frame)
     }
     
@@ -59,17 +72,27 @@ class ColoringPageView: UIView {
                 var green = (color & 0x0000ff00)>>8
                 var blue = (color & 0x00ff0000)>>16
                 
-                if colorDict[color] != nil // color exists in lookup
+                if (color == ColorIndex.colInd0.rawValue)
+                {
+                    color = colorLUT[0]
+                    ptr.memory = color
+                }
+                
+                if (color == ColorIndex.colInd1.rawValue)
+                {
+                    color = colorLUT[1]
+                    ptr.memory = color
+                }
+                /*if colorDict[color] != nil // color exists in lookup
                 {
                     //println(String(format:"colorDict[%x]==%x", color, colorDict[color]!))
                     color = colorDict[color]! // remap color
                 } else {
                     println(String(format:"colorDict[%x]==nil", color))
                     fatalError("What happen?")
-                }
+                }*/
                 //print(String(format: "%x ", color))
                 //print(String(format: "%x ", ptr))
-                ptr.memory = color
                 ptr++
             }
             //println("")
