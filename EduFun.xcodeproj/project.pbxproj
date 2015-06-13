@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A532ADE11B27959F00A46930 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = A532ADE01B27959F00A46930 /* Card.swift */; };
+		A54683941B2B3B6A00979670 /* ColorMaskTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54683931B2B3B6A00979670 /* ColorMaskTestViewController.swift */; };
 		A5B85EB51B276636008012F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85EB41B276636008012F7 /* AppDelegate.swift */; };
 		A5B85EB71B276636008012F7 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A5B85EB61B276636008012F7 /* GameScene.sks */; };
 		A5B85EB91B276636008012F7 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85EB81B276636008012F7 /* GameScene.swift */; };
@@ -17,6 +18,7 @@
 		A5B85EC31B276636008012F7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5B85EC11B276636008012F7 /* LaunchScreen.xib */; };
 		A5B85ECF1B276636008012F7 /* EduFunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85ECE1B276636008012F7 /* EduFunTests.swift */; };
 		A5B85ED91B2767E3008012F7 /* MemoryGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85ED81B2767E3008012F7 /* MemoryGameViewController.swift */; };
+		A5C577B51B2B75BD0013B351 /* ColoringPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C577B41B2B75BD0013B351 /* ColoringPageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		A532ADE01B27959F00A46930 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		A54683931B2B3B6A00979670 /* ColorMaskTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMaskTestViewController.swift; sourceTree = "<group>"; };
 		A5B85EAF1B276636008012F7 /* EduFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EduFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B85EB31B276636008012F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5B85EB41B276636008012F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +47,7 @@
 		A5B85ECD1B276636008012F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5B85ECE1B276636008012F7 /* EduFunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduFunTests.swift; sourceTree = "<group>"; };
 		A5B85ED81B2767E3008012F7 /* MemoryGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryGameViewController.swift; sourceTree = "<group>"; };
+		A5C577B41B2B75BD0013B351 /* ColoringPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColoringPageView.swift; path = ../ColoringPageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,8 @@
 			isa = PBXGroup;
 			children = (
 				A5B85EB41B276636008012F7 /* AppDelegate.swift */,
+				A54683931B2B3B6A00979670 /* ColorMaskTestViewController.swift */,
+				A5C577B41B2B75BD0013B351 /* ColoringPageView.swift */,
 				A532ADE01B27959F00A46930 /* Card.swift */,
 				A5B85ED81B2767E3008012F7 /* MemoryGameViewController.swift */,
 				A5B85EB61B276636008012F7 /* GameScene.sks */,
@@ -226,6 +232,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A54683941B2B3B6A00979670 /* ColorMaskTestViewController.swift in Sources */,
+				A5C577B51B2B75BD0013B351 /* ColoringPageView.swift in Sources */,
 				A5B85EB91B276636008012F7 /* GameScene.swift in Sources */,
 				A5B85EBB1B276636008012F7 /* GameViewController.swift in Sources */,
 				A532ADE11B27959F00A46930 /* Card.swift in Sources */,

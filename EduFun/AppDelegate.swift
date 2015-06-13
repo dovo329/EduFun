@@ -19,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.backgroundColor = UIColor.whiteColor()
-        window!.rootViewController = MemoryGameViewController()
+        //window!.rootViewController = MemoryGameViewController()
+        window!.rootViewController = ColorMaskTestViewController()
         window!.makeKeyAndVisible()
         return true
     }
