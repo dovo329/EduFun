@@ -13,5 +13,6 @@
 #import "OBShapedButton.h"
 #import "OBShapedView.h"
 #import "UIImage+ColorAtPixel.h"
+#import "ColorCubeView.h"
 
 #endif

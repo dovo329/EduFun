@@ -21,8 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.backgroundColor = UIColor.whiteColor()
         //window!.rootViewController = MemoryGameViewController()
         //window!.rootViewController = ColorMaskTestViewController()
-        window!.rootViewController = ColorChangeViewController()
+        //window!.rootViewController = ColorChangeViewController()
         //window!.rootViewController = TestObjCViewController()
+        window!.rootViewController = ColorCubeViewController()
         window!.makeKeyAndVisible()
         return true
     }
