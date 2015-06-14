@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A5112BFD1B2CEF7A00215DA2 /* ColorChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5112BFC1B2CEF7A00215DA2 /* ColorChangeViewController.swift */; };
+		A5112C081B2D019F00215DA2 /* OBShapedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C051B2D019F00215DA2 /* OBShapedButton.m */; };
+		A5112C091B2D019F00215DA2 /* UIImage+ColorAtPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C071B2D019F00215DA2 /* UIImage+ColorAtPixel.m */; };
+		A5112C0C1B2D01B400215DA2 /* TestObjCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C0B1B2D01B400215DA2 /* TestObjCViewController.m */; };
+		A5112C131B2D087600215DA2 /* ColoringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5112C121B2D087600215DA2 /* ColoringView.swift */; };
+		A5112C161B2D0E7F00215DA2 /* OBShapedView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C151B2D0E7F00215DA2 /* OBShapedView.m */; };
 		A532ADE11B27959F00A46930 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = A532ADE01B27959F00A46930 /* Card.swift */; };
 		A54683941B2B3B6A00979670 /* ColorMaskTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54683931B2B3B6A00979670 /* ColorMaskTestViewController.swift */; };
 		A5B85EB51B276636008012F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85EB41B276636008012F7 /* AppDelegate.swift */; };
@@ -32,6 +38,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A5112BFC1B2CEF7A00215DA2 /* ColorChangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorChangeViewController.swift; sourceTree = "<group>"; };
+		A5112C041B2D018D00215DA2 /* OBShapedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBShapedButton.h; sourceTree = "<group>"; };
+		A5112C051B2D019F00215DA2 /* OBShapedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBShapedButton.m; sourceTree = "<group>"; };
+		A5112C061B2D019F00215DA2 /* UIImage+ColorAtPixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ColorAtPixel.h"; sourceTree = "<group>"; };
+		A5112C071B2D019F00215DA2 /* UIImage+ColorAtPixel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ColorAtPixel.m"; sourceTree = "<group>"; };
+		A5112C0A1B2D01B400215DA2 /* TestObjCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObjCViewController.h; sourceTree = "<group>"; };
+		A5112C0B1B2D01B400215DA2 /* TestObjCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestObjCViewController.m; sourceTree = "<group>"; };
+		A5112C0E1B2D030200215DA2 /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		A5112C121B2D087600215DA2 /* ColoringView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColoringView.swift; path = ../ColoringView.swift; sourceTree = "<group>"; };
+		A5112C141B2D0E7F00215DA2 /* OBShapedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBShapedView.h; sourceTree = "<group>"; };
+		A5112C151B2D0E7F00215DA2 /* OBShapedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBShapedView.m; sourceTree = "<group>"; };
 		A532ADE01B27959F00A46930 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		A54683931B2B3B6A00979670 /* ColorMaskTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMaskTestViewController.swift; sourceTree = "<group>"; };
 		A5B85EAF1B276636008012F7 /* EduFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EduFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,6 +88,15 @@
 		A5B85EA61B276636008012F7 = {
 			isa = PBXGroup;
 			children = (
+				A5112C141B2D0E7F00215DA2 /* OBShapedView.h */,
+				A5112C151B2D0E7F00215DA2 /* OBShapedView.m */,
+				A5112C0A1B2D01B400215DA2 /* TestObjCViewController.h */,
+				A5112C0B1B2D01B400215DA2 /* TestObjCViewController.m */,
+				A5112C0E1B2D030200215DA2 /* Header.h */,
+				A5112C041B2D018D00215DA2 /* OBShapedButton.h */,
+				A5112C051B2D019F00215DA2 /* OBShapedButton.m */,
+				A5112C061B2D019F00215DA2 /* UIImage+ColorAtPixel.h */,
+				A5112C071B2D019F00215DA2 /* UIImage+ColorAtPixel.m */,
 				A5B85EB11B276636008012F7 /* EduFun */,
 				A5B85ECB1B276636008012F7 /* EduFunTests */,
 				A5B85EB01B276636008012F7 /* Products */,
@@ -89,8 +115,10 @@
 		A5B85EB11B276636008012F7 /* EduFun */ = {
 			isa = PBXGroup;
 			children = (
+				A5112C121B2D087600215DA2 /* ColoringView.swift */,
 				A5B85EB41B276636008012F7 /* AppDelegate.swift */,
 				A54683931B2B3B6A00979670 /* ColorMaskTestViewController.swift */,
+				A5112BFC1B2CEF7A00215DA2 /* ColorChangeViewController.swift */,
 				A5C577B41B2B75BD0013B351 /* ColoringPageView.swift */,
 				A532ADE01B27959F00A46930 /* Card.swift */,
 				A5B85ED81B2767E3008012F7 /* MemoryGameViewController.swift */,
@@ -232,12 +260,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5112C161B2D0E7F00215DA2 /* OBShapedView.m in Sources */,
 				A54683941B2B3B6A00979670 /* ColorMaskTestViewController.swift in Sources */,
 				A5C577B51B2B75BD0013B351 /* ColoringPageView.swift in Sources */,
 				A5B85EB91B276636008012F7 /* GameScene.swift in Sources */,
 				A5B85EBB1B276636008012F7 /* GameViewController.swift in Sources */,
 				A532ADE11B27959F00A46930 /* Card.swift in Sources */,
+				A5112C091B2D019F00215DA2 /* UIImage+ColorAtPixel.m in Sources */,
 				A5B85EB51B276636008012F7 /* AppDelegate.swift in Sources */,
+				A5112BFD1B2CEF7A00215DA2 /* ColorChangeViewController.swift in Sources */,
+				A5112C081B2D019F00215DA2 /* OBShapedButton.m in Sources */,
+				A5112C131B2D087600215DA2 /* ColoringView.swift in Sources */,
+				A5112C0C1B2D01B400215DA2 /* TestObjCViewController.m in Sources */,
 				A5B85ED91B2767E3008012F7 /* MemoryGameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,6 +406,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = Header.h;
 			};
 			name = Debug;
 		};
@@ -384,6 +419,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = Header.h;
 			};
 			name = Release;
 		};

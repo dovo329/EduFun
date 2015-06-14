@@ -20,7 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.backgroundColor = UIColor.whiteColor()
         //window!.rootViewController = MemoryGameViewController()
-        window!.rootViewController = ColorMaskTestViewController()
+        //window!.rootViewController = ColorMaskTestViewController()
+        window!.rootViewController = ColorChangeViewController()
+        //window!.rootViewController = TestObjCViewController()
         window!.makeKeyAndVisible()
         return true
     }
