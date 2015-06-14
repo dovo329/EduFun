@@ -8,20 +8,42 @@
 
 import UIKit
 
-class ColorChangeViewController: UIViewController {
+class ColorChangeViewController: UIViewController, OBShapedViewDelegate {
     var redImg : UIImageView = UIImageView(image: UIImage(named: "redOnlySmall"))
     var blueImg : UIImageView = UIImageView(image: UIImage(named: "blueOnlySmall"))
     
     var toggle : Bool = true
+    var testView : OBShapedView? = nil
     
+    func changeTintColorOfImageView(imgView: UIImageView!) {
+        if (toggle)
+        {
+            NSLog("delegate method called toggle1")
+            testView!.imgView.tintColor = UIColor.yellowColor()
+        } else {
+            NSLog("delegate method called toggle2")
+            testView!.imgView.tintColor = UIColor.purpleColor()
+        }
+        self.toggle = !self.toggle
+    }
+    
+    /*required init(coder aDecoder: NSCoder) {
+
+        self.testView = OBShapedView()
+        
+        super.init(coder: aDecoder)
+        
+        self.testView.frame = self.view.frame
+    }*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
      
         //var testView = ColoringView(frame:self.view.frame)
         //self.view.addSubview(testView)
-        var testView = OBShapedView(frame: self.view.frame)
-        self.view.addSubview(testView)
+        self.testView = OBShapedView(frame: self.view.frame)
+        self.testView!.delegate = self
+        self.view.addSubview(testView!)
     }
         //var testButton : OBShapedButton = OBShapedButton(frame:self.view.frame)
         //testButton.setImage(UIImage(named:"redOnlySmall"), forState: .Normal)

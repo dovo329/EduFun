@@ -48,6 +48,9 @@
     if (self) {
         self.imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redOnlySmall"]];
         self.imgView.frame = frame;
+        self.imgView.image = [self.imgView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [self.imgView setTintColor:[UIColor redColor]];
+        
         [self addSubview:self.imgView];
         [self resetHitTestCache];
     }
@@ -110,6 +113,10 @@
     NSLog(@"did get touched");
     
     self.previousTouchHitTestResponse = response;
+    if (response) {
+        // call delegate method here
+        [self.delegate changeTintColorOfImageView:self.imgView];
+    }
     return response;
 }
 

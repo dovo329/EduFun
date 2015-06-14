@@ -39,8 +39,18 @@
 // So we will do the same and treat pixels with alpha < 0.1 as transparent.
 #define kAlphaVisibleThreshold (0.1f)
 
+@protocol OBShapedViewDelegate;
+
 @interface OBShapedView : UIView
 
+@property (nonatomic, weak) id<OBShapedViewDelegate> delegate;
 @property (strong, nonatomic) UIImageView *imgView;
+
+@end
+
+@protocol OBShapedViewDelegate <NSObject>
+
+@required
+-(void)changeTintColorOfImageView:(UIImageView *)imgView;
 
 @end
