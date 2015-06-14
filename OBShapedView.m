@@ -42,11 +42,11 @@
 
 @implementation OBShapedView
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame image:(UIImage *)img
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redOnlySmall"]];
+        self.imgView = [[UIImageView alloc] initWithImage:img];
         self.imgView.frame = frame;
         self.imgView.image = [self.imgView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         [self.imgView setTintColor:[UIColor redColor]];
@@ -55,6 +55,11 @@
         [self resetHitTestCache];
     }
     return self;
+}
+
+- (id)initWithFrame:(CGRect)frame
+{
+    return [self initWithFrame:frame image:[UIImage imageNamed:@"redOnlySmall"]];
 }
 
 #pragma mark - Hit testing

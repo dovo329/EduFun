@@ -14,15 +14,16 @@ class ColorChangeViewController: UIViewController, OBShapedViewDelegate {
     
     var toggle : Bool = true
     var testView : OBShapedView? = nil
+    var testView2 : OBShapedView? = nil
     
     func changeTintColorOfImageView(imgView: UIImageView!) {
         if (toggle)
         {
             NSLog("delegate method called toggle1")
-            testView!.imgView.tintColor = UIColor.yellowColor()
+            imgView.tintColor = UIColor.yellowColor()
         } else {
             NSLog("delegate method called toggle2")
-            testView!.imgView.tintColor = UIColor.purpleColor()
+            imgView.tintColor = UIColor.greenColor()
         }
         self.toggle = !self.toggle
     }
@@ -44,6 +45,10 @@ class ColorChangeViewController: UIViewController, OBShapedViewDelegate {
         self.testView = OBShapedView(frame: self.view.frame)
         self.testView!.delegate = self
         self.view.addSubview(testView!)
+        
+        self.testView2 = OBShapedView(frame: self.view.frame, image:UIImage(named:"blueOnlySmall")!)
+        self.testView2!.delegate = self
+        self.view.addSubview(testView2!)
     }
         //var testButton : OBShapedButton = OBShapedButton(frame:self.view.frame)
         //testButton.setImage(UIImage(named:"redOnlySmall"), forState: .Normal)

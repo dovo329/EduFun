@@ -46,6 +46,8 @@
 @property (nonatomic, weak) id<OBShapedViewDelegate> delegate;
 @property (strong, nonatomic) UIImageView *imgView;
 
+- (id)initWithFrame:(CGRect)frame image:(UIImage *)img;
+
 @end
 
 @protocol OBShapedViewDelegate <NSObject>
