@@ -31,9 +31,9 @@
                 // The minimum and maximum hue angle depends on
                 // the color you want to remove
                 // Calculate premultiplied alpha values for the cube
-                c[0] = rgb[1];
+                c[0] = rgb[2];
                 c[1] = rgb[0];
-                c[2] = rgb[2];
+                c[2] = rgb[1];
                 c[3] = 1.0;
                 c += 4; // advance our pointer into memory for the next color value
             }

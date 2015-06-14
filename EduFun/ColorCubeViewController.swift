@@ -14,7 +14,7 @@ class ColorCubeViewController: UIViewController {
         super.viewDidLoad()
         
         var testView : ColorCubeView = ColorCubeView()
-        let UIImg = UIImage(named:"redOnlySmall")!
+        let UIImg = UIImage(named:"TestColorShape")!
         testView.inputCGImg = UIImg.CGImage
         testView.frame = self.view.frame
         self.view.addSubview(testView)
