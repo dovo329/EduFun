@@ -11,5 +11,6 @@
 @interface ColorCubeView : UIView
 
 @property (assign, nonatomic) CGImageRef inputCGImg;
+@property (assign, nonatomic) BOOL toggle;
 
 @end

@@ -10,13 +10,21 @@ import UIKit
 
 class ColorCubeViewController: UIViewController {
 
+    var testView : ColorCubeView = ColorCubeView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var testView : ColorCubeView = ColorCubeView()
         let UIImg = UIImage(named:"TestColorShape")!
         testView.inputCGImg = UIImg.CGImage
+        testView.toggle = false
         testView.frame = self.view.frame
         self.view.addSubview(testView)
+    }
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        NSLog("toggle")
+        self.testView.toggle = !self.testView.toggle
+        self.testView.setNeedsDisplay()
     }
 }
