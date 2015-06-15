@@ -10,9 +10,17 @@
 
 @interface ColorCubeView : UIView
 
+@property (strong, nonatomic) NSData *cubeNSData;
+
 @property (assign, nonatomic) CGImageRef inputCGImg;
 @property (assign, nonatomic) BOOL toggle;
+@property (assign, nonatomic) BOOL firstTime;
 @property (assign, nonatomic) float *cubeData; // color cube
-@property (strong, nonatomic) NSData *cubeNSData;
+
+@property (strong, nonatomic) CIContext *ciContext;
+@property (strong, nonatomic) CIFilter *filter;
+@property (strong, nonatomic) CIImage *inputCIImage;
+
+-(void)updateFilter;
 
 @end

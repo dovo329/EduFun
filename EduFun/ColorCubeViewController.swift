@@ -15,8 +15,8 @@ class ColorCubeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let UIImg = UIImage(named:"TestColorShapeBig")!
-        testView.inputCGImg = UIImg.CGImage
+        //let UIImg = UIImage(named:"TestColorShapeBig")!
+        //testView.inputCGImg = UIImg.CGImage
         testView.toggle = false
         testView.frame = self.view.frame
         self.view.addSubview(testView)
@@ -25,6 +25,9 @@ class ColorCubeViewController: UIViewController {
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         NSLog("toggle")
         self.testView.toggle = !self.testView.toggle
+        //self.testView.updateFilter()
         self.testView.setNeedsDisplay()
+        
+        println("touchesBegan")
     }
 }
