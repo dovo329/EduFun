@@ -32,8 +32,22 @@ class ColorCubeViewController: UIViewController {
         //NSLog("toggle")
         self.testView.toggle = !(self.testView.toggle)
         // convert point to pixel
-        point.x *= 2.0
-        point.y *= 2.0
+        var mainScreenScale = UIScreen.mainScreen().scale
+        var scale : CGFloat!
+        
+        if (mainScreenScale > 2.9) {
+            // is iphone 6+ 3x
+            scale = 3.0
+        } else if (mainScreenScale > 1.9) {
+            // is 2x
+            scale = 2.0
+        } else {
+            // is 1x
+            scale = 1.0
+        }
+    
+        point.x *= scale
+        point.y *= scale
         var color : UIColor = self.UIImg.colorAtPixel(point)
         
         var fRed : CGFloat = 0
