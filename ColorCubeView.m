@@ -8,23 +8,77 @@
 
 #import "ColorCubeView.h"
 
+#define kColorCubeSideSize 4
+#define kColorCubeSize kColorCubeSideSize * kColorCubeSideSize * kColorCubeSideSize * sizeof (float) * 4
+
 @implementation ColorCubeView
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        // Allocate memory
+
+        self.cubeData = (float *)malloc (kColorCubeSize);
+
+        float rgb[3], *c = self.cubeData;
+        // Populate cube with a simple gradient going from 0 to 1
+        for (int z = 0; z < kColorCubeSideSize; z++){
+            rgb[2] = ((double)z)/(kColorCubeSideSize-1); // Blue value
+            for (int y = 0; y < kColorCubeSideSize; y++){
+                rgb[1] = ((double)y)/(kColorCubeSideSize-1); // Green value
+                for (int x = 0; x < kColorCubeSideSize; x ++){
+                    rgb[0] = ((double)x)/(kColorCubeSideSize-1); // Red value
+                    // Convert RGB to HSV
+                    // You can find publicly available rgbToHSV functions on the Internet
+                    // Use the hue value to determine which to make transparent
+                    // The minimum and maximum hue angle depends on
+                    // the color you want to remove
+                    // Calculate premultiplied alpha values for the cube
+                    if (self.toggle) {
+                        c[0] = rgb[0];
+                        c[1] = rgb[1];
+                        c[2] = rgb[2];
+                        c[3] = 1.0;
+                    } else {
+                        c[0] = rgb[2];
+                        c[1] = rgb[0];
+                        c[2] = rgb[1];
+                        c[3] = 1.0;
+                    }
+                    c += 4; // advance our pointer into memory for the next color value
+                }
+            }
+        }
+        // Create memory with the cube data
+        self.cubeNSData = [NSData dataWithBytesNoCopy:self.cubeData
+                                        length:kColorCubeSize
+                                  freeWhenDone:YES];
+    }
+    return self;
+}
 
 - (void)drawRect:(CGRect)rect {
-    // Allocate memory
-    const unsigned int size = 64;
-    const unsigned int cubeDataSize = size * size * size * sizeof (float) * 4;
-    float *cubeData = (float *)malloc (cubeDataSize);
-    float rgb[3], *c = cubeData;
+    /*float rgb[3], *c = self.cubeData;
+    if (self.toggle) {
+
+    } else {
+        
+    }
+    // Create memory with the cube data
+    self.cubeNSData = [NSData dataWithBytesNoCopy:self.cubeData
+                                           length:kColorCubeSize
+                                     freeWhenDone:YES];*/
+    self.cubeData = (float *)malloc (kColorCubeSize);
     
+    float rgb[3], *c = self.cubeData;
     // Populate cube with a simple gradient going from 0 to 1
-    for (int z = 0; z < size; z++){
-        rgb[2] = ((double)z)/(size-1); // Blue value
-        for (int y = 0; y < size; y++){
-            rgb[1] = ((double)y)/(size-1); // Green value
-            for (int x = 0; x < size; x ++){
-                rgb[0] = ((double)x)/(size-1); // Red value
+    for (int z = 0; z < kColorCubeSideSize; z++){
+        rgb[2] = ((double)z)/(kColorCubeSideSize-1); // Blue value
+        for (int y = 0; y < kColorCubeSideSize; y++){
+            rgb[1] = ((double)y)/(kColorCubeSideSize-1); // Green value
+            for (int x = 0; x < kColorCubeSideSize; x ++){
+                rgb[0] = ((double)x)/(kColorCubeSideSize-1); // Red value
                 // Convert RGB to HSV
                 // You can find publicly available rgbToHSV functions on the Internet
                 // Use the hue value to determine which to make transparent
@@ -47,13 +101,14 @@
         }
     }
     // Create memory with the cube data
-    NSData *data = [NSData dataWithBytesNoCopy:cubeData
-                                        length:cubeDataSize
-                                  freeWhenDone:YES];
+    self.cubeNSData = [NSData dataWithBytesNoCopy:self.cubeData
+                                           length:kColorCubeSize
+                                     freeWhenDone:YES];
+
     CIFilter *colorCube = [CIFilter filterWithName:@"CIColorCube"];
-    [colorCube setValue:@(size) forKey:@"inputCubeDimension"];
+    [colorCube setValue:@(kColorCubeSideSize) forKey:@"inputCubeDimension"];
     // Set data for cube
-    [colorCube setValue:data forKey:@"inputCubeData"];
+    [colorCube setValue:self.cubeNSData forKey:@"inputCubeData"];
 
     CIImage *inputCIImg = [[CIImage alloc] initWithCGImage:self.inputCGImg];
     [colorCube setValue:inputCIImg forKey:kCIInputImageKey];
@@ -65,6 +120,8 @@
     CGContextTranslateCTM(UIGraphicsGetCurrentContext(), 0.0, rect.size.height);
     CGContextScaleCTM(UIGraphicsGetCurrentContext(), 1.0, -1.0);
     CGContextDrawImage(UIGraphicsGetCurrentContext(), rect, img);
+    
+    CGImageRelease(img);
 }
 
 

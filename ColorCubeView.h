@@ -12,5 +12,7 @@
 
 @property (assign, nonatomic) CGImageRef inputCGImg;
 @property (assign, nonatomic) BOOL toggle;
+@property (assign, nonatomic) float *cubeData; // color cube
+@property (strong, nonatomic) NSData *cubeNSData;
 
 @end

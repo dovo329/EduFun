@@ -15,7 +15,7 @@ class ColorCubeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let UIImg = UIImage(named:"TestColorShape")!
+        let UIImg = UIImage(named:"TestColorShapeBig")!
         testView.inputCGImg = UIImg.CGImage
         testView.toggle = false
         testView.frame = self.view.frame
