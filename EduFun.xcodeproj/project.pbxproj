@@ -27,6 +27,9 @@
 		A5BFF9921B2D3406003A547A /* ColorCubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BFF9911B2D3406003A547A /* ColorCubeViewController.swift */; };
 		A5BFF9971B2D351C003A547A /* ColorCubeView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5BFF9961B2D351C003A547A /* ColorCubeView.m */; };
 		A5C577B51B2B75BD0013B351 /* ColoringPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C577B41B2B75BD0013B351 /* ColoringPageView.swift */; };
+		A5CA0F4F1B2F64CA008BD79D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F4E1B2F64CA008BD79D /* UIImage+Resize.m */; };
+		A5CA0F541B2F67FA008BD79D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F511B2F67FA008BD79D /* UIImage+Resize.m */; };
+		A5CA0F551B2F67FA008BD79D /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +73,12 @@
 		A5BFF9951B2D351C003A547A /* ColorCubeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCubeView.h; sourceTree = "<group>"; };
 		A5BFF9961B2D351C003A547A /* ColorCubeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorCubeView.m; sourceTree = "<group>"; };
 		A5C577B41B2B75BD0013B351 /* ColoringPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColoringPageView.swift; path = ../ColoringPageView.swift; sourceTree = "<group>"; };
+		A5CA0F4D1B2F64CA008BD79D /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Art/UIImage+Resize.h"; sourceTree = "<group>"; };
+		A5CA0F4E1B2F64CA008BD79D /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Art/UIImage+Resize.m"; sourceTree = "<group>"; };
+		A5CA0F501B2F67FA008BD79D /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Art/UIImage+Resize.h"; sourceTree = "<group>"; };
+		A5CA0F511B2F67FA008BD79D /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Art/UIImage+Resize.m"; sourceTree = "<group>"; };
+		A5CA0F521B2F67FA008BD79D /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RoundedCorner.h"; path = "Art/UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCorner.m"; path = "Art/UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +102,12 @@
 		A5B85EA61B276636008012F7 = {
 			isa = PBXGroup;
 			children = (
+				A5CA0F4D1B2F64CA008BD79D /* UIImage+Resize.h */,
+				A5CA0F4E1B2F64CA008BD79D /* UIImage+Resize.m */,
+				A5CA0F501B2F67FA008BD79D /* UIImage+Resize.h */,
+				A5CA0F511B2F67FA008BD79D /* UIImage+Resize.m */,
+				A5CA0F521B2F67FA008BD79D /* UIImage+RoundedCorner.h */,
+				A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */,
 				A5BFF9951B2D351C003A547A /* ColorCubeView.h */,
 				A5BFF9961B2D351C003A547A /* ColorCubeView.m */,
 				A5112C141B2D0E7F00215DA2 /* OBShapedView.h */,
@@ -277,11 +292,14 @@
 				A5BFF9921B2D3406003A547A /* ColorCubeViewController.swift in Sources */,
 				A532ADE11B27959F00A46930 /* Card.swift in Sources */,
 				A5112C091B2D019F00215DA2 /* UIImage+ColorAtPixel.m in Sources */,
+				A5CA0F4F1B2F64CA008BD79D /* UIImage+Resize.m in Sources */,
+				A5CA0F551B2F67FA008BD79D /* UIImage+RoundedCorner.m in Sources */,
 				A5B85EB51B276636008012F7 /* AppDelegate.swift in Sources */,
 				A5112BFD1B2CEF7A00215DA2 /* ColorChangeViewController.swift in Sources */,
 				A5112C081B2D019F00215DA2 /* OBShapedButton.m in Sources */,
 				A5112C131B2D087600215DA2 /* ColoringView.swift in Sources */,
 				A5112C0C1B2D01B400215DA2 /* TestObjCViewController.m in Sources */,
+				A5CA0F541B2F67FA008BD79D /* UIImage+Resize.m in Sources */,
 				A5B85ED91B2767E3008012F7 /* MemoryGameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

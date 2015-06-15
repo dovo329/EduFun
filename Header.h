@@ -14,5 +14,6 @@
 #import "OBShapedView.h"
 #import "UIImage+ColorAtPixel.h"
 #import "ColorCubeView.h"
+#import "UIImage+Resize.h"
 
 #endif
