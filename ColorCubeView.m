@@ -21,8 +21,8 @@
         self.firstTime = true;
         // Allocate memory
         self.ciContext = [CIContext contextWithOptions:nil];
-        //UIImage *UIImg = [UIImage imageNamed:@"TestColorShapeBig"];
-        UIImage *UIImg = [UIImage imageNamed:@"mtnHouseWithSun"];
+        UIImage *UIImg = [UIImage imageNamed:@"TestColorShapeBig"];
+        //UIImage *UIImg = [UIImage imageNamed:@"mtnHouseWithSun"];
         
         UIImage *resizedImg = [UIImg resizedImage:CGSizeMake(480.0, 960.0) interpolationQuality:kCGInterpolationHigh];
         
@@ -85,7 +85,7 @@
 }
 
 - (void)drawRect:(CGRect)rect {
-    NSLog(@"start %s", __PRETTY_FUNCTION__);
+    //NSLog(@"start %s", __PRETTY_FUNCTION__);
     /*float rgb[3], *c = self.cubeData;
     if (self.toggle) {
 
@@ -145,7 +145,7 @@
 
     self.firstTime = false;
     
-    NSLog(@"end %s", __PRETTY_FUNCTION__);
+    //NSLog(@"end %s", __PRETTY_FUNCTION__);
 }
 
 -(void)updateFilter
