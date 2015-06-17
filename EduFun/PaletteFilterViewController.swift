@@ -28,7 +28,7 @@ class PaletteFilterViewController: UIViewController, UIScrollViewDelegate {
         self.scrollView = UIScrollView(frame: self.view.frame)
         self.scrollView.contentSize = self.coloringPageImgView.frame.size
         self.scrollView.addSubview(self.coloringPageImgView)
-        self.scrollView.minimumZoomScale = 1.0
+        self.scrollView.minimumZoomScale = 0.1
         self.scrollView.zoomScale = 1.0
         self.scrollView.maximumZoomScale = 6.0
         self.scrollView.delegate = self
@@ -38,6 +38,10 @@ class PaletteFilterViewController: UIViewController, UIScrollViewDelegate {
         gestureRecognizer.numberOfTapsRequired = 1
         gestureRecognizer.numberOfTouchesRequired = 1
         self.scrollView.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return self.coloringPageImgView
     }
     
     /*override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
