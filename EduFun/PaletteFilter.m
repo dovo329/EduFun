@@ -48,6 +48,7 @@
         
         self.toggle = !self.toggle;
         self.cubeData2 = (float *)malloc (kColorCubeSize);
+        c = self.cubeData;
         float *c2 = self.cubeData2;
         // Populate cube with a simple gradient going from 0 to 1
         for (int z = 0; z < kColorCubeSideSize; z++){
@@ -57,11 +58,21 @@
                 for (int x = 0; x < kColorCubeSideSize; x ++){
                     rgb[0] = ((double)x)/(kColorCubeSideSize-1); // Red value
                     // Calculate premultiplied alpha values for the cube
-                    c2[0] = rgb[2];
-                    c2[1] = rgb[0];
-                    c2[2] = rgb[1];
+                    //c2[0] = rgb[2];
+                    //c2[1] = rgb[0];
+                    //c2[2] = rgb[1];
+                    if (rgb[0]==1.0 && rgb[1]==0.0 && rgb[2]==0.0) {
+                        c2[0] = 0.0;
+                        c2[1] = rgb[0];
+                        c2[2] = 0.0;
+                    } else {
+                        c2[0] = c[0];
+                        c2[1] = c[1];
+                        c2[2] = c[2];
+                    }
                     c2[3] = 1.0;
                     c2 += kSizeOfColor; // advance our pointer into memory for the next color value
+                    c += kSizeOfColor;
                 }
             }
         }
@@ -110,6 +121,25 @@
     ptr[3] = 1.0; // alpha
 }
 
+- (UIImage *)createNonInterpolatedUIImageFromCIImage:(CIImage *)image withScale:(CGFloat)scale
+{
+    // Render the CIImage into a CGImage
+    CGImageRef cgImage = [[CIContext contextWithOptions:nil] createCGImage:image fromRect:image.extent];
+    
+    // Now we'll rescale using CoreGraphics
+    UIGraphicsBeginImageContext(CGSizeMake(image.extent.size.width * scale, image.extent.size.width * scale));
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    // We don't want to interpolate (since we've got a pixel-correct image)
+    CGContextSetInterpolationQuality(context, kCGInterpolationNone);
+    CGContextDrawImage(context, CGContextGetClipBoundingBox(context), cgImage);
+    // Get the image out
+    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    // Tidy up
+    UIGraphicsEndImageContext();
+    CGImageRelease(cgImage);
+    return scaledImage;
+}
+
 - (void)doFilter {
     if (self.toggle)
     {
@@ -117,8 +147,28 @@
     } else {
         [self.filter setValue:self.cubeNSData2 forKey:@"inputCubeData"];
     }
+    
+    /*+(UIImage*)sepian:(UIImage*)img withInensity:(float)intensity{
+        
+        CIImage *cimage = [[CIImage alloc] initWithImage:img];
+        
+        CIFilter *sepiaFilter = [CIFilter filterWithName:@"CISepiaTone"];
+        [sepiaFilter setDefaults];
+        [sepiaFilter setValue:cimage forKey:@"inputImage"];
+        [sepiaFilter setValue:[NSNumber numberWithFloat:intensity]
+                       forKey:@"inputIntensity"];
+        
+        CIImage *outputImage = [sepiaFilter outputImage];
+        CIContext *context = [CIContext contextWithOptions:nil];
+        CGImageRef cgImage = [context createCGImage:
+                              outputImage fromRect:[outputImage extent]];
+        UIImage *resultUIImage = [UIImage imageWithCGImage:cgImage];
+        CGImageRelease(cgImage);
+        return resultUIImage;*/
+    
     self.outputCIImage = [self.filter valueForKey:kCIOutputImageKey];
-    self.outputUIImage = [[UIImage alloc] initWithCIImage:self.outputCIImage];
+    self.outputUIImage = [self createNonInterpolatedUIImageFromCIImage:self.outputCIImage withScale:1.0];
+    //self.outputUIImage = [[UIImage alloc] initWithCIImage:self.outputCIImage];
 }
 
 @end

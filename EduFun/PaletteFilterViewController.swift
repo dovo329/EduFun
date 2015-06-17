@@ -20,18 +20,28 @@ class PaletteFilterViewController: UIViewController, UIScrollViewDelegate {
 
         // Do any additional setup after loading the view.
         //self.coloringPageImg = UIImage(named: "mtnHouseWithSun")
-        self.coloringPageImg = UIImage(named: "TestColorShapeBig")
+        //self.coloringPageImg = UIImage(named: "TestColorShapeBig")
+        self.coloringPageImg = UIImage(named: "TestColorShape4Sscaled")
+        
+        /*var dataProvider : CGDataProviderRef = CGDataProviderCreateWithFilename("TestColorShape4Sscaled.png")
+        var cgImg : CGImageRef = CGImageCreateWithPNGDataProvider(dataProvider, nil, false, kCGRenderingIntentDefault)
+        
+        self.coloringPageImg = UIImage(CGImage: cgImg)*/
+        
+        //self.coloringPageImg = UIImage(named: "testSmallImg")
         self.filter = PaletteFilter(image: self.coloringPageImg)
-        self.filter.toggle = true
+        self.filter.toggle = false
         self.filter.doFilter()
-        self.coloringPageImgView = UIImageView(image: self.filter.outputUIImage)
+        //self.coloringPageImgView = UIImageView(image: self.filter.outputUIImage)
+        self.coloringPageImgView = UIImageView(image: self.coloringPageImg)
+        self.coloringPageImgView.layer.magnificationFilter = kCAFilterNearest
         
         self.scrollView = UIScrollView(frame: self.view.frame)
         self.scrollView.contentSize = self.coloringPageImgView.frame.size
         self.scrollView.addSubview(self.coloringPageImgView)
         self.scrollView.minimumZoomScale = 0.1
         self.scrollView.zoomScale = 1.0
-        self.scrollView.maximumZoomScale = 6.0
+        self.scrollView.maximumZoomScale = 20.0
         self.scrollView.delegate = self
         self.view.addSubview(self.scrollView)
         
@@ -56,10 +66,14 @@ class PaletteFilterViewController: UIViewController, UIScrollViewDelegate {
         color.getRed(&red, green: &green, blue: &blue, alpha:&alpha)
         //NSLog("updateFilter began")
         println("point x:\(touchPoint.x) y:\(touchPoint.y) color r:\(red) g:\(green) b:\(blue) a:\(alpha)")
-        var toColor = UIColor.greenColor()
-        self.filter.updatePaletteFromColor(color, toColor: toColor);
-        //self.filter.toggle = !self.filter.toggle
+        //var toColor = UIColor.purpleColor()
+        //self.filter.updatePaletteFromColor(color, toColor: toColor);
+        self.filter.toggle = !self.filter.toggle
         self.filter.doFilter()
-        self.coloringPageImgView.image = self.filter.outputUIImage;
+        self.coloringPageImgView.image = self.filter.outputUIImage
+        
+        //self.coloringPageImgView.removeFromSuperview()
+        //self.coloringPageImgView = UIImageView(image: self.filter.outputUIImage)
+        //self.scrollView.addSubview(self.coloringPageImgView)
     }
 }

@@ -15,6 +15,7 @@
 		A5112C161B2D0E7F00215DA2 /* OBShapedView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C151B2D0E7F00215DA2 /* OBShapedView.m */; };
 		A532ADE11B27959F00A46930 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = A532ADE01B27959F00A46930 /* Card.swift */; };
 		A54683941B2B3B6A00979670 /* ColorMaskTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54683931B2B3B6A00979670 /* ColorMaskTestViewController.swift */; };
+		A5554D4C1B3239AE002B06E5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */; };
 		A57630331B31272B00945038 /* PaletteFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A57630321B31272B00945038 /* PaletteFilter.m */; };
 		A57630351B312AE900945038 /* PaletteFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57630341B312AE900945038 /* PaletteFilterViewController.swift */; };
 		A5B85EB51B276636008012F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85EB41B276636008012F7 /* AppDelegate.swift */; };
@@ -58,6 +59,7 @@
 		A5112C151B2D0E7F00215DA2 /* OBShapedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBShapedView.m; sourceTree = "<group>"; };
 		A532ADE01B27959F00A46930 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		A54683931B2B3B6A00979670 /* ColorMaskTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMaskTestViewController.swift; sourceTree = "<group>"; };
+		A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A57630311B31272B00945038 /* PaletteFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaletteFilter.h; sourceTree = "<group>"; };
 		A57630321B31272B00945038 /* PaletteFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaletteFilter.m; sourceTree = "<group>"; };
 		A57630341B312AE900945038 /* PaletteFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteFilterViewController.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5554D4C1B3239AE002B06E5 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +110,7 @@
 		A5B85EA61B276636008012F7 = {
 			isa = PBXGroup;
 			children = (
+				A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */,
 				A5CA0F4D1B2F64CA008BD79D /* UIImage+Resize.h */,
 				A5CA0F4E1B2F64CA008BD79D /* UIImage+Resize.m */,
 				A5CA0F501B2F67FA008BD79D /* UIImage+Resize.h */,
