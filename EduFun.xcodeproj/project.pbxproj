@@ -15,7 +15,6 @@
 		A5112C161B2D0E7F00215DA2 /* OBShapedView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C151B2D0E7F00215DA2 /* OBShapedView.m */; };
 		A532ADE11B27959F00A46930 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = A532ADE01B27959F00A46930 /* Card.swift */; };
 		A54683941B2B3B6A00979670 /* ColorMaskTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54683931B2B3B6A00979670 /* ColorMaskTestViewController.swift */; };
-		A5554D4A1B31C9D5002B06E5 /* UIScrollView+Touch.m in Sources */ = {isa = PBXBuildFile; fileRef = A5554D491B31C9D5002B06E5 /* UIScrollView+Touch.m */; };
 		A57630331B31272B00945038 /* PaletteFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A57630321B31272B00945038 /* PaletteFilter.m */; };
 		A57630351B312AE900945038 /* PaletteFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57630341B312AE900945038 /* PaletteFilterViewController.swift */; };
 		A5B85EB51B276636008012F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85EB41B276636008012F7 /* AppDelegate.swift */; };
@@ -59,8 +58,6 @@
 		A5112C151B2D0E7F00215DA2 /* OBShapedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBShapedView.m; sourceTree = "<group>"; };
 		A532ADE01B27959F00A46930 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		A54683931B2B3B6A00979670 /* ColorMaskTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMaskTestViewController.swift; sourceTree = "<group>"; };
-		A5554D481B31C9D5002B06E5 /* UIScrollView+Touch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Touch.h"; sourceTree = "<group>"; };
-		A5554D491B31C9D5002B06E5 /* UIScrollView+Touch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Touch.m"; sourceTree = "<group>"; };
 		A57630311B31272B00945038 /* PaletteFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaletteFilter.h; sourceTree = "<group>"; };
 		A57630321B31272B00945038 /* PaletteFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaletteFilter.m; sourceTree = "<group>"; };
 		A57630341B312AE900945038 /* PaletteFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteFilterViewController.swift; sourceTree = "<group>"; };
@@ -122,11 +119,11 @@
 				A5112C151B2D0E7F00215DA2 /* OBShapedView.m */,
 				A5112C0A1B2D01B400215DA2 /* TestObjCViewController.h */,
 				A5112C0B1B2D01B400215DA2 /* TestObjCViewController.m */,
-				A5112C0E1B2D030200215DA2 /* Header.h */,
 				A5112C041B2D018D00215DA2 /* OBShapedButton.h */,
 				A5112C051B2D019F00215DA2 /* OBShapedButton.m */,
 				A5112C061B2D019F00215DA2 /* UIImage+ColorAtPixel.h */,
 				A5112C071B2D019F00215DA2 /* UIImage+ColorAtPixel.m */,
+				A5112C0E1B2D030200215DA2 /* Header.h */,
 				A5B85EB11B276636008012F7 /* EduFun */,
 				A5B85ECB1B276636008012F7 /* EduFunTests */,
 				A5B85EB01B276636008012F7 /* Products */,
@@ -152,8 +149,6 @@
 				A5C577B41B2B75BD0013B351 /* ColoringPageView.swift */,
 				A5BFF9911B2D3406003A547A /* ColorCubeViewController.swift */,
 				A57630341B312AE900945038 /* PaletteFilterViewController.swift */,
-				A5554D481B31C9D5002B06E5 /* UIScrollView+Touch.h */,
-				A5554D491B31C9D5002B06E5 /* UIScrollView+Touch.m */,
 				A57630311B31272B00945038 /* PaletteFilter.h */,
 				A57630321B31272B00945038 /* PaletteFilter.m */,
 				A532ADE01B27959F00A46930 /* Card.swift */,
@@ -310,7 +305,6 @@
 				A5CA0F4F1B2F64CA008BD79D /* UIImage+Resize.m in Sources */,
 				A5CA0F551B2F67FA008BD79D /* UIImage+RoundedCorner.m in Sources */,
 				A5B85EB51B276636008012F7 /* AppDelegate.swift in Sources */,
-				A5554D4A1B31C9D5002B06E5 /* UIScrollView+Touch.m in Sources */,
 				A5112BFD1B2CEF7A00215DA2 /* ColorChangeViewController.swift in Sources */,
 				A5112C081B2D019F00215DA2 /* OBShapedButton.m in Sources */,
 				A5112C131B2D087600215DA2 /* ColoringView.swift in Sources */,

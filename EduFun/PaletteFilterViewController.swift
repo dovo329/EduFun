@@ -19,9 +19,10 @@ class PaletteFilterViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.coloringPageImg = UIImage(named: "mtnHouseWithSun")
+        //self.coloringPageImg = UIImage(named: "mtnHouseWithSun")
+        self.coloringPageImg = UIImage(named: "TestColorShapeBig")
         self.filter = PaletteFilter(image: self.coloringPageImg)
-        self.filter.toggle = false
+        self.filter.toggle = true
         self.filter.doFilter()
         self.coloringPageImgView = UIImageView(image: self.filter.outputUIImage)
         
@@ -44,17 +45,19 @@ class PaletteFilterViewController: UIViewController, UIScrollViewDelegate {
         return self.coloringPageImgView
     }
     
-    /*override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        //NSLog("touchesBegan")
-        self.filter.toggle = !self.filter.toggle
-        self.filter.doFilter()
-        self.coloringPageImgView.image = self.filter.outputUIImage
-    }*/
     func updateFilter(sender:UITapGestureRecognizer)
     {
-        NSLog("updateFilter began")
-        self.filter.toggle = !self.filter.toggle
-        self.filter.doFilter()
-        self.coloringPageImgView.image = self.filter.outputUIImage;
+        var touchPoint : CGPoint = sender.locationOfTouch(0, inView: self.coloringPageImgView)
+        var color : UIColor = self.coloringPageImg.colorAtPixel(touchPoint)
+        var red   : CGFloat = 0
+        var green : CGFloat = 0
+        var blue  : CGFloat = 0
+        var alpha : CGFloat = 0
+        color.getRed(&red, green: &green, blue: &blue, alpha:&alpha)
+        //NSLog("updateFilter began")
+        println("point x:\(touchPoint.x) y:\(touchPoint.y) color r:\(red) g:\(green) b:\(blue) a:\(alpha)")
+        //self.filter.toggle = !self.filter.toggle
+        //self.filter.doFilter()
+        //self.coloringPageImgView.image = self.filter.outputUIImage;
     }
 }

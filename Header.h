@@ -16,6 +16,5 @@
 #import "ColorCubeView.h"
 #import "UIImage+Resize.h"
 #import "PaletteFilter.h"
-//#import "UIScrollView+Touch.h"
 
 #endif
