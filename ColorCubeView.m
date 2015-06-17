@@ -21,8 +21,8 @@
         self.firstTime = true;
         // Allocate memory
         self.ciContext = [CIContext contextWithOptions:nil];
-        UIImage *UIImg = [UIImage imageNamed:@"TestColorShapeBig"];
-        //UIImage *UIImg = [UIImage imageNamed:@"mtnHouseWithSun"];
+        //UIImage *UIImg = [UIImage imageNamed:@"TestColorShapeBig"];
+        UIImage *UIImg = [UIImage imageNamed:@"mtnHouseWithSun"];
         
         UIImage *resizedImg = [UIImg resizedImage:CGSizeMake(480.0, 960.0) interpolationQuality:kCGInterpolationHigh];
         

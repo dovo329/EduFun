@@ -10,7 +10,7 @@ import UIKit
 
 class ColorCubeViewController: UIViewController {
 
-    let UIImg = UIImage(named:"TestColorShape4Sscaled")!
+    let UIImg = UIImage(named:"mtnHouseWithSun")!
     var testView : ColorCubeView!
     
     override func viewDidLoad() {
