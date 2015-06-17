@@ -33,10 +33,10 @@
                 for (int x = 0; x < kColorCubeSideSize; x ++){
                     rgb[0] = ((double)x)/(kColorCubeSideSize-1); // Red value
                     // Calculate premultiplied alpha values for the cube
-                    c[0] = rgb[0];
-                    c[1] = rgb[1];
-                    c[2] = rgb[2];
-                    c[3] = 1.0;
+                    c[0] = rgb[0]; // red
+                    c[1] = rgb[1]; // green
+                    c[2] = rgb[2]; // blue
+                    c[3] = 1.0; // alpha
                     c += 4; // advance our pointer into memory for the next color value
                 }
             }
@@ -61,7 +61,7 @@
                     c2[1] = rgb[0];
                     c2[2] = rgb[1];
                     c2[3] = 1.0;
-                    c2 += 4; // advance our pointer into memory for the next color value
+                    c2 += kSizeOfColor; // advance our pointer into memory for the next color value
                 }
             }
         }
@@ -77,6 +77,37 @@
         [self.filter setValue:self.inputCIImage forKey:kCIInputImageKey];
     }
     return self;
+}
+
+- (void)updatePaletteFromColor:(UIColor *)fromColor toColor:(UIColor *)toColor
+{
+    float *ptr = self.cubeData;
+    CGFloat red = 0.0;
+    CGFloat green = 0.0;
+    CGFloat blue = 0.0;
+    CGFloat alpha = 0.0;
+    [fromColor getRed:&red green:&green blue:&blue alpha:&alpha];
+    // convert from 0-255.0 to 0-63.0
+    int intRed = (int)floor(red*63.0);
+    int intGreen = (int)floor(green*63.0);
+    int intBlue = (int)floor(blue*63.0);
+    
+    ptr += kSizeOfColor*(kColorCubeSideSize*kColorCubeSideSize)*intBlue;
+    ptr += kSizeOfColor*(kColorCubeSideSize)*intGreen;
+    ptr += kSizeOfColor*intRed;
+    
+    CGFloat toRed = 0.0;
+    CGFloat toGreen = 0.0;
+    CGFloat toBlue = 0.0;
+    CGFloat toAlpha = 0.0;
+    [toColor getRed:&toRed green:&toGreen blue:&toBlue alpha:&toAlpha];
+    // convert from 0-255.0 to 0-63.0
+    
+    // update color cube for this index only
+    ptr[0] = (toRed*63.0); // red
+    ptr[1] = (toGreen*63.0); // green
+    ptr[2] = (toBlue*63.0); // blue
+    ptr[3] = 1.0; // alpha
 }
 
 - (void)doFilter {

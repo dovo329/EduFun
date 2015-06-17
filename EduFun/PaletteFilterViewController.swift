@@ -56,8 +56,10 @@ class PaletteFilterViewController: UIViewController, UIScrollViewDelegate {
         color.getRed(&red, green: &green, blue: &blue, alpha:&alpha)
         //NSLog("updateFilter began")
         println("point x:\(touchPoint.x) y:\(touchPoint.y) color r:\(red) g:\(green) b:\(blue) a:\(alpha)")
+        var toColor = UIColor.greenColor()
+        self.filter.updatePaletteFromColor(color, toColor: toColor);
         //self.filter.toggle = !self.filter.toggle
-        //self.filter.doFilter()
-        //self.coloringPageImgView.image = self.filter.outputUIImage;
+        self.filter.doFilter()
+        self.coloringPageImgView.image = self.filter.outputUIImage;
     }
 }

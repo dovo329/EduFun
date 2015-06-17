@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreImage/CoreImage.h>
 
+#define kSizeOfColor 4
 #define kColorCubeSideSize 64
 #define kColorCubeSize kColorCubeSideSize * kColorCubeSideSize * kColorCubeSideSize * sizeof (float) * 4
 
@@ -27,6 +28,7 @@
 @property (strong, nonatomic) UIImage *outputUIImage;
 
 - (instancetype)initWithImage:(UIImage *)inputUIImage;
+- (void)updatePaletteFromColor:(UIColor *)fromColor toColor:(UIColor *)toColor;
 - (void)doFilter;
 
 @end
