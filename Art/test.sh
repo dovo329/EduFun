@@ -6,17 +6,17 @@
 #convert TestColorShape.png -matte +clone -transparent black -compose DstOut -composite output.png
 
 
-convert TestColorShapeSmall.png -transparent 'rgb(255,0,0)' matteInput.png
-convert TestColorShapeSmall.png -matte matteInput.png -compose DstOut -composite redOnlySmall.png
+convert TestColorShape.png -transparent 'rgb(255,0,0)' matteInput.png
+convert TestColorShape.png -matte matteInput.png -compose DstOut -composite redOnly.png
 
-convert TestColorShapeSmall.png -transparent 'rgb(0,0,255)' matteInput.png
-convert TestColorShapeSmall.png -matte matteInput.png -compose DstOut -composite blueOnlySmall.png
+convert TestColorShape.png -transparent 'rgb(0,0,255)' matteInput.png
+convert TestColorShape.png -matte matteInput.png -compose DstOut -composite blueOnly.png
 
-convert TestColorShapeSmall.png -transparent 'rgb(255,255,255)' matteInput.png
-convert TestColorShapeSmall.png -matte matteInput.png -compose DstOut -composite whiteOnlySmall.png
+convert TestColorShape.png -transparent 'rgb(255,255,255)' matteInput.png
+convert TestColorShape.png -matte matteInput.png -compose DstOut -composite whiteOnly.png
 
-convert TestColorShapeSmall.png -transparent 'rgb(0,0,0)' matteInput.png
-convert TestColorShapeSmall.png -matte matteInput.png -compose DstOut -composite blackOnlySmall.png
+convert TestColorShape.png -transparent 'rgb(0,0,0)' matteInput.png
+convert TestColorShape.png -matte matteInput.png -compose DstOut -composite blackOnly.png
 
 #convert TestColorShape.png -transparent 'rgb(255,0,0)' alpha.png
 #convert TestColorShape.png -matte alpha.png -compose DstOut -composite output.png

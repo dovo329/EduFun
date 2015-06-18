@@ -13,45 +13,50 @@ class ShapeFillViewController: UIViewController, UIScrollViewDelegate {
     var scrollView : UIScrollView!
     
     var toggle : Bool = false
-    var blackOnlyImg : UIImage!
-    var redOnlyImg : UIImage!
-    var blueOnlyImg : UIImage!
-    var whiteOnlyImg : UIImage!
+    var blackOnlyImgView : UIImageView!
+    var redOnlyImgView : UIImageView!
+    var blueOnlyImgView : UIImageView!
+    var whiteOnlyImgView : UIImageView!
     
-    var coloringPageImgView : UIImageView!
+    var coloringPageView : UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.blackOnlyImg = UIImage(named: "blackOnly")
-        self.redOnlyImg = UIImage(named: "redOnly")
-        self.blueOnlyImg = UIImage(named: "blueOnly")
-        self.whiteOnlyImg = UIImage(named: "whiteOnly")
+        blackOnlyImgView = UIImageView(image: UIImage(named: "blackOnly"))
+        redOnlyImgView = UIImageView(image: UIImage(named: "redOnly"))
+        blueOnlyImgView = UIImageView(image: UIImage(named: "blueOnly"))
+        whiteOnlyImgView = UIImageView(image: UIImage(named: "whiteOnly"))
+        
+        coloringPageView = UIView(frame: view.frame)
+        coloringPageView.addSubview(redOnlyImgView)
+        coloringPageView.addSubview(blackOnlyImgView)
+        coloringPageView.addSubview(blueOnlyImgView)
+        coloringPageView.addSubview(whiteOnlyImgView)
 
-        self.coloringPageImgView = UIImageView(image: self.redOnlyImg)
-        self.scrollView = UIScrollView(frame: self.view.frame)
-        self.scrollView.contentSize = self.coloringPageImgView.frame.size
-        self.scrollView.addSubview(self.coloringPageImgView)
-        self.scrollView.minimumZoomScale = 0.1
-        self.scrollView.zoomScale = 1.0
-        self.scrollView.maximumZoomScale = 20.0
-        self.scrollView.delegate = self
-        self.view.addSubview(self.scrollView)
+        scrollView = UIScrollView(frame: view.frame)
+        scrollView.contentSize = coloringPageView.frame.size
+        scrollView.addSubview(coloringPageView)
+        scrollView.minimumZoomScale = 0.1
+        scrollView.zoomScale = 1.0
+        scrollView.maximumZoomScale = 20.0
+        scrollView.delegate = self
+        view.addSubview(scrollView)
         
         var gestureRecognizer = UITapGestureRecognizer.init(target:self, action:"updateFilter:")
         gestureRecognizer.numberOfTapsRequired = 1
         gestureRecognizer.numberOfTouchesRequired = 1
-        self.scrollView.addGestureRecognizer(gestureRecognizer)
+        scrollView.addGestureRecognizer(gestureRecognizer)
     }
     
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
-        return self.coloringPageImgView
+        return coloringPageView
     }
     
     func updateFilter(sender:UITapGestureRecognizer)
     {
-        var touchPoint : CGPoint = sender.locationOfTouch(0, inView: self.coloringPageImgView)
-        var image1 : UIImage = self.redOnlyImg!
+        var touchPoint : CGPoint = sender.locationOfTouch(0, inView: coloringPageView)
+        var image1 : UIImage = redOnlyImgView.image!
         var color : UIColor = image1.colorAtPixel(touchPoint)
         var red   : CGFloat = 0
         var green : CGFloat = 0
@@ -75,7 +80,13 @@ class ShapeFillViewController: UIViewController, UIScrollViewDelegate {
         var img : UIImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
-        var flippedImage : UIImage = UIImage(CGImage: img.CGImage, scale: 1.0, orientation: UIImageOrientation.DownMirrored)!
-        self.coloringPageImgView.image = flippedImage
+        var flippedImage : UIImage!
+        if (toggle)
+        {
+            flippedImage = UIImage(CGImage: img.CGImage, scale: 1.0, orientation: UIImageOrientation.DownMirrored)!
+        } else {
+            flippedImage = UIImage(CGImage: img.CGImage, scale: 1.0, orientation: UIImageOrientation.Up)!
+        }
+        redOnlyImgView.image = flippedImage
     }
 }
