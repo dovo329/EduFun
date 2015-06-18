@@ -1,26 +1,34 @@
 #convert all black colors to white
-#convert TestColorShape.png -fill 'rgb(255,255,255)' -opaque 'rgb(0,0,0)' out.png
+#convert TestColorCatShape.png -fill 'rgb(255,255,255)' -opaque 'rgb(0,0,0)' out.png
 #convert white to clear
 #convert out.png -fill clear -opaque white out2.png
 
-#convert TestColorShape.png -matte +clone -transparent black -compose DstOut -composite output.png
+convert Cat.png -transparent 'rgb(128,0,0)' matteInput.png
+convert Cat.png -matte matteInput.png -compose DstOut -composite catShape1.png
 
+convert Cat.png -transparent 'rgb(255,0,0)' matteInput.png
+convert Cat.png -matte matteInput.png -compose DstOut -composite catShape2.png
 
-convert TestColorShape.png -transparent 'rgb(255,0,0)' matteInput.png
-convert TestColorShape.png -matte matteInput.png -compose DstOut -composite redOnly.png
+convert Cat.png -transparent 'rgb(0,128,0)' matteInput.png
+convert Cat.png -matte matteInput.png -compose DstOut -composite catShape3.png
 
-convert TestColorShape.png -transparent 'rgb(0,0,255)' matteInput.png
-convert TestColorShape.png -matte matteInput.png -compose DstOut -composite blueOnly.png
+convert Cat.png -transparent 'rgb(0,255,0)' matteInput.png
+convert Cat.png -matte matteInput.png -compose DstOut -composite catShape4.png
 
-convert TestColorShape.png -transparent 'rgb(255,255,255)' matteInput.png
-convert TestColorShape.png -matte matteInput.png -compose DstOut -composite whiteOnly.png
+convert Cat.png -transparent 'rgb(0,0,128)' matteInput.png
+convert Cat.png -matte matteInput.png -compose DstOut -composite catShape5.png
 
-convert TestColorShape.png -transparent 'rgb(0,0,0)' matteInput.png
-convert TestColorShape.png -matte matteInput.png -compose DstOut -composite blackOnly.png
+convert Cat.png -transparent 'rgb(0,0,255)' matteInput.png
+convert Cat.png -matte matteInput.png -compose DstOut -composite catShape6.png
 
-#convert TestColorShape.png -transparent 'rgb(255,0,0)' alpha.png
-#convert TestColorShape.png -matte alpha.png -compose DstOut -composite output.png
+convert Cat.png -transparent 'rgb(128,128,0)' matteInput.png
+convert Cat.png -matte matteInput.png -compose DstOut -composite catShape7.png
 
-#convert input.png -transparent 'rgb(255,0,0)' matteInput.png
-#convert input.png -matte matteInput.png -compose DstOut -composite output.png
+convert Cat.png -transparent 'rgb(255,255,0)' matteInput.png
+convert Cat.png -matte matteInput.png -compose DstOut -composite catShape8.png
 
+convert Cat.png -transparent 'rgb(0,128,128)' matteInput.png
+convert Cat.png -matte matteInput.png -compose DstOut -composite catShape9.png
+
+convert Cat.png -transparent 'rgb(0,255,255)' matteInput.png
+convert Cat.png -matte matteInput.png -compose DstOut -composite catShape10.png

@@ -154,8 +154,9 @@
         return resultUIImage;*/
     
     self.outputCIImage = [self.filter valueForKey:kCIOutputImageKey];
-    //self.outputUIImage = [self createNonInterpolatedUIImageFromCIImage:self.outputCIImage withScale:1.0];
-    self.outputUIImage = [[UIImage alloc] initWithCIImage:self.outputCIImage];
+    UIImage *flippedUIImage = [self createNonInterpolatedUIImageFromCIImage:self.outputCIImage withScale:1.0];
+    self.outputUIImage = [UIImage imageWithCGImage:flippedUIImage.CGImage scale:1.0 orientation:  UIImageOrientationDownMirrored];
+    //self.outputUIImage = [[UIImage alloc] initWithCIImage:self.outputCIImage];
 }
 
 - (UIImage *)createNonInterpolatedUIImageFromCIImage:(CIImage *)image withScale:(CGFloat)scale
@@ -177,6 +178,7 @@
     return scaledImage;
 }
 
+/*
 -(void)drawRect:(CGRect)rect
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -194,6 +196,6 @@
     CGContextDrawImage(context, cgImgRect, self.outputUIImage.CGImage);
     //CGContextDrawImage(context, cgImgRect, self.inputUIImage.CGImage);
     CGContextRelease(context);
-}
+}*/
 
 @end

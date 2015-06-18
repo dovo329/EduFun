@@ -13,7 +13,7 @@
 #define kColorCubeSideSize 64
 #define kColorCubeSize kColorCubeSideSize * kColorCubeSideSize * kColorCubeSideSize * sizeof (float) * 4
 
-@interface PaletteFilter : UIView
+@interface PaletteFilter : NSObject
 
 @property (strong, nonatomic) UIImage *inputUIImage;
 @property (strong, nonatomic) CIImage *inputCIImage;
