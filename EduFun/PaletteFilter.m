@@ -61,7 +61,12 @@
                     //c2[0] = rgb[2];
                     //c2[1] = rgb[0];
                     //c2[2] = rgb[1];
-                    if (rgb[0]==1.0 && rgb[1]==0.0 && rgb[2]==0.0) {
+                    //if (rgb[0]==1.0 && rgb[1]==0.0 && rgb[2]==0.0) {
+                    //if (rgb[1]==0.0 && rgb[2]==0.0) {
+                    
+                    //if (x >= ((kColorCubeSideSize-1)-16) && rgb[1]==0.0 && rgb[2]==0.0) { // this one works but why?  why does it think I have a range of red when I don't?
+                    if (y == 0 && z == 0 && x >= 56)
+                    {
                         c2[0] = 0.0;
                         c2[1] = rgb[0];
                         c2[2] = 0.0;
@@ -121,25 +126,6 @@
     ptr[3] = 1.0; // alpha
 }
 
-- (UIImage *)createNonInterpolatedUIImageFromCIImage:(CIImage *)image withScale:(CGFloat)scale
-{
-    // Render the CIImage into a CGImage
-    CGImageRef cgImage = [[CIContext contextWithOptions:nil] createCGImage:image fromRect:image.extent];
-    
-    // Now we'll rescale using CoreGraphics
-    UIGraphicsBeginImageContext(CGSizeMake(image.extent.size.width * scale, image.extent.size.width * scale));
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    // We don't want to interpolate (since we've got a pixel-correct image)
-    CGContextSetInterpolationQuality(context, kCGInterpolationNone);
-    CGContextDrawImage(context, CGContextGetClipBoundingBox(context), cgImage);
-    // Get the image out
-    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
-    // Tidy up
-    UIGraphicsEndImageContext();
-    CGImageRelease(cgImage);
-    return scaledImage;
-}
-
 - (void)doFilter {
     if (self.toggle)
     {
@@ -169,6 +155,41 @@
     self.outputCIImage = [self.filter valueForKey:kCIOutputImageKey];
     self.outputUIImage = [self createNonInterpolatedUIImageFromCIImage:self.outputCIImage withScale:1.0];
     //self.outputUIImage = [[UIImage alloc] initWithCIImage:self.outputCIImage];
+}
+
+- (UIImage *)createNonInterpolatedUIImageFromCIImage:(CIImage *)image withScale:(CGFloat)scale
+{
+    // Render the CIImage into a CGImage
+    CGImageRef cgImage = [[CIContext contextWithOptions:nil] createCGImage:image fromRect:image.extent];
+    
+    // Now we'll rescale using CoreGraphics
+    UIGraphicsBeginImageContext(CGSizeMake(image.extent.size.width * scale, image.extent.size.width * scale));
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    // We don't want to interpolate (since we've got a pixel-correct image)
+    CGContextSetInterpolationQuality(context, kCGInterpolationNone);
+    CGContextDrawImage(context, CGContextGetClipBoundingBox(context), cgImage);
+    // Get the image out
+    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    // Tidy up
+    UIGraphicsEndImageContext();
+    CGImageRelease(cgImage);
+    return scaledImage;
+}
+
+-(void)drawRect:(CGRect)rect
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetInterpolationQuality(context, kCGInterpolationNone);
+    
+    [self.filter setValue:self.cubeNSData2 forKey:@"inputCubeData"];
+    self.outputCIImage = [self.filter valueForKey:kCIOutputImageKey];
+    //self.outputUIImage = [[UIImage alloc] initWithCIImage:self.outputCIImage];
+    
+    self.outputUIImage = [self createNonInterpolatedUIImageFromCIImage:self.outputCIImage withScale:1.0];
+    
+    //CGContextDrawImage(context, rect, cgImg);
+    CGContextDrawImage(context, rect, self.outputUIImage.CGImage);
+    CGContextRelease(context);
 }
 
 @end

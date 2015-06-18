@@ -22,6 +22,7 @@ class PaletteFilterViewController: UIViewController, UIScrollViewDelegate {
         //self.coloringPageImg = UIImage(named: "mtnHouseWithSun")
         //self.coloringPageImg = UIImage(named: "TestColorShapeBig")
         self.coloringPageImg = UIImage(named: "TestColorShape4Sscaled")
+        //self.coloringPageImg = UIImage(named: "testSmallImg")
         
         /*var dataProvider : CGDataProviderRef = CGDataProviderCreateWithFilename("TestColorShape4Sscaled.png")
         var cgImg : CGImageRef = CGImageCreateWithPNGDataProvider(dataProvider, nil, false, kCGRenderingIntentDefault)
@@ -31,9 +32,10 @@ class PaletteFilterViewController: UIViewController, UIScrollViewDelegate {
         //self.coloringPageImg = UIImage(named: "testSmallImg")
         self.filter = PaletteFilter(image: self.coloringPageImg)
         self.filter.toggle = false
+        self.filter.layer.magnificationFilter = kCAFilterNearest
         self.filter.doFilter()
-        //self.coloringPageImgView = UIImageView(image: self.filter.outputUIImage)
-        self.coloringPageImgView = UIImageView(image: self.coloringPageImg)
+        self.coloringPageImgView = UIImageView(image: self.filter.outputUIImage)
+        //self.coloringPageImgView = UIImageView(image: self.coloringPageImg)
         self.coloringPageImgView.layer.magnificationFilter = kCAFilterNearest
         
         self.scrollView = UIScrollView(frame: self.view.frame)
@@ -44,6 +46,8 @@ class PaletteFilterViewController: UIViewController, UIScrollViewDelegate {
         self.scrollView.maximumZoomScale = 20.0
         self.scrollView.delegate = self
         self.view.addSubview(self.scrollView)
+        self.filter.frame = self.view.frame
+        //self.view.addSubview(self.filter)
         
         var gestureRecognizer = UITapGestureRecognizer.init(target:self, action:"updateFilter:")
         gestureRecognizer.numberOfTapsRequired = 1
