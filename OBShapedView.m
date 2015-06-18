@@ -34,6 +34,7 @@
 
 @property (nonatomic, assign) CGPoint previousTouchPoint;
 @property (nonatomic, assign) BOOL previousTouchHitTestResponse;
+@property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 
 - (void)resetHitTestCache;
 
@@ -53,8 +54,16 @@
         
         [self addSubview:self.imgView];
         [self resetHitTestCache];
+        self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandle)];
+        [self addGestureRecognizer:self.tapGesture];
     }
     return self;
+}
+
+-(void)tapHandle
+{
+    //NSLog(@"tap handled in obshapedview");
+    [self.delegate changeTintColorOfImageView:self.imgView];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -114,14 +123,10 @@
     BOOL response = NO;
     
     response = [self isAlphaVisibleAtPoint:point forImage:self.imgView.image];
-    NSLog(@"image response = %@", response ? @"yes" : @"no");
-    NSLog(@"did get touched");
+    //NSLog(@"image response = %@", response ? @"yes" : @"no");
+    //NSLog(@"did get touched");
     
     self.previousTouchHitTestResponse = response;
-    if (response) {
-        // call delegate method here
-        [self.delegate changeTintColorOfImageView:self.imgView];
-    }
     return response;
 }
 

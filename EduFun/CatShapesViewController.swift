@@ -8,9 +8,13 @@
 
 import UIKit
 
-class CatShapesViewController: UIViewController, OBShapedViewDelegate {
+class CatShapesViewController: UIViewController, OBShapedViewDelegate, UIScrollViewDelegate {
     
+    let kNumShapes : Int = 13
     var shapeViewArr  : [OBShapedView] = [OBShapedView]()
+    var tapGesture : UITapGestureRecognizer!
+    var contentView : UIView!
+    var scrollView : UIScrollView!
     
     var currentColor : UIColor = UIColor.purpleColor()
     let colorList : [UIColor] =
@@ -36,13 +40,37 @@ class CatShapesViewController: UIViewController, OBShapedViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for var i=0; i<13; i++
+        scrollView = UIScrollView(frame: view.frame)
+        contentView = UIView(frame: view.frame)
+        
+        for var i=0; i<kNumShapes; i++
         {
             var imgStr : String = String(format:"catShape%d",i+1)
             println("\(imgStr)")
             shapeViewArr.append(OBShapedView(frame: view.frame, image:UIImage(named:imgStr)))
             shapeViewArr[i].delegate = self
-            view.addSubview(shapeViewArr[i])
+            //view.addSubview(shapeViewArr[i])
+            contentView.addSubview(shapeViewArr[i])
         }
+        scrollView.addSubview(contentView)
+        view.addSubview(scrollView)
+        
+        //tapGesture = UITapGestureRecognizer(target: self, action: "tapHandle")
+        //tapGesture.cancelsTouchesInView = false
+        //scrollView.addGestureRecognizer(tapGesture)
+        scrollView.minimumZoomScale = 0.1
+        scrollView.zoomScale = 2.0
+        scrollView.maximumZoomScale = 10.0
+        scrollView.contentSize = CGSizeMake(view.frame.size.width*1.5, view.frame.size.height*1.5)
+        scrollView.delegate = self
     }
+    
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return contentView
+    }
+    
+    /*func tapHandle()
+    {
+        println("Tappy tap tap")
+    }*/
 }

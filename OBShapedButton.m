@@ -135,7 +135,7 @@
             response = [self isAlphaVisibleAtPoint:point forImage:self.buttonBackground];
         }
     }
-    NSLog(@"did get touched");
+    //NSLog(@"did get touched");
     self.previousTouchHitTestResponse = response;
     return response;
 }
