@@ -8,16 +8,30 @@
 
 import UIKit
 
-class ColorChangeViewController: UIViewController, OBShapedViewDelegate {
-    var redImg : UIImageView = UIImageView(image: UIImage(named: "redOnlySmall"))
-    var blueImg : UIImageView = UIImageView(image: UIImage(named: "blueOnlySmall"))
+class ColorChangeViewController: UIViewController, OBShapedViewDelegate, UIScrollViewDelegate {
+
+    var blackView : OBShapedView!
+    var whiteView : OBShapedView!
+    var blueView  : OBShapedView!
+    var redView  : OBShapedView!
+    var contentView : UIView!
+    var toggle : Bool = false
+    var scrollView : UIScrollView!
     
-    var toggle : Bool = true
-    var testView : OBShapedView? = nil
-    var testView2 : OBShapedView? = nil
+    var currentColor : UIColor = UIColor.purpleColor()
+    let colorList : [UIColor] =
+    [
+        UIColor.redColor(),
+        UIColor.orangeColor(),
+        UIColor.yellowColor(),
+        UIColor.greenColor(),
+        UIColor.blueColor(),
+        UIColor.purpleColor()
+    ]
+    var colorListIndex : Int = 0
     
     func changeTintColorOfImageView(imgView: UIImageView!) {
-        if (toggle)
+        /*if (toggle)
         {
             NSLog("delegate method called toggle1")
             imgView.tintColor = UIColor.yellowColor()
@@ -25,74 +39,56 @@ class ColorChangeViewController: UIViewController, OBShapedViewDelegate {
             NSLog("delegate method called toggle2")
             imgView.tintColor = UIColor.greenColor()
         }
-        self.toggle = !self.toggle
+        toggle = !toggle*/
+        imgView.tintColor = colorList[colorListIndex]
+        colorListIndex++
+        if (colorListIndex >= colorList.count)
+        {
+            colorListIndex = 0
+        }
     }
     
-    /*required init(coder aDecoder: NSCoder) {
-
-        self.testView = OBShapedView()
-        
-        super.init(coder: aDecoder)
-        
-        self.testView.frame = self.view.frame
-    }*/
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return contentView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        //var testView = ColoringView(frame:self.view.frame)
-        //self.view.addSubview(testView)
-        self.testView = OBShapedView(frame: self.view.frame)
-        self.testView!.delegate = self
-        self.view.addSubview(testView!)
+        blackView = OBShapedView(frame: view.frame, image:UIImage(named:"blackOnlySmall"))
+        blackView.delegate = self
+        blackView.userInteractionEnabled = false // don't let them change colors on the black outlines
         
-        self.testView2 = OBShapedView(frame: self.view.frame, image:UIImage(named:"blueOnlySmall")!)
-        self.testView2!.delegate = self
-        self.view.addSubview(testView2!)
+        redView = OBShapedView(frame: view.frame, image:UIImage(named:"redOnlySmall"))
+        redView.delegate = self
+        
+        blueView = OBShapedView(frame: view.frame, image:UIImage(named:"blueOnlySmall"))
+        blueView.delegate = self
+        
+        whiteView = OBShapedView(frame: view.frame, image:UIImage(named:"whiteOnlySmall"))
+        whiteView.delegate = self
+
+        /*contentView = UIView()
+        contentView.addSubview(blackView)
+        contentView.addSubview(redView)
+        contentView.addSubview(blueView)
+        contentView.addSubview(whiteView)
+        contentView.userInteractionEnabled = false
+        contentView.backgroundColor = UIColor.clearColor()
+        
+        scrollView = UIScrollView()
+        scrollView.frame = self.view.frame
+        scrollView.contentSize = contentView.frame.size
+        scrollView.minimumZoomScale = 1.0
+        scrollView.zoomScale = 1.0
+        scrollView.maximumZoomScale = 20.0
+        scrollView.delegate = self
+        scrollView.addSubview(contentView)
+        view.addSubview(scrollView)*/
+        
+        view.addSubview(blackView)
+        view.addSubview(redView)
+        view.addSubview(blueView)
+        view.addSubview(whiteView)
     }
-        //var testButton : OBShapedButton = OBShapedButton(frame:self.view.frame)
-        //testButton.setImage(UIImage(named:"redOnlySmall"), forState: .Normal)
-        //testButton.setImage(UIImage(named:"blueOnlySmall"), forState: .Highlighted)
-        
-        //self.view.addSubview(testButton)
-    //}
-        /*redImg.frame = self.view.frame
-        redImg.image = redImg.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        
-        blueImg.frame = self.view.frame
-        blueImg.image = blueImg.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        
-        self.view.addSubview(redImg)
-        self.view.addSubview(blueImg)
-    }*/
-
-    /*override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        NSLog("touchesEnded called")
-        if (toggle)
-        {
-            redImg.tintColor = UIColor.yellowColor()
-            //blueImg.tintColor = UIColor.brownColor()
-        } else {
-            redImg.tintColor = UIColor.purpleColor()
-            //blueImg.tintColor = UIColor.orangeColor()
-        }
-        toggle = !toggle
-    }*/
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
