@@ -65,7 +65,8 @@
                     //if (rgb[1]==0.0 && rgb[2]==0.0) {
                     
                     //if (x >= ((kColorCubeSideSize-1)-16) && rgb[1]==0.0 && rgb[2]==0.0) { // this one works but why?  why does it think I have a range of red when I don't?
-                    if (y == 0 && z == 0 && x >= 56)
+                    // because it's interpolating somewhere and changing the red amount to less than max
+                    if (y == 0 && z == 0 && x >= (kColorCubeSideSize-1))
                     {
                         c2[0] = 0.0;
                         c2[1] = rgb[0];
@@ -153,8 +154,8 @@
         return resultUIImage;*/
     
     self.outputCIImage = [self.filter valueForKey:kCIOutputImageKey];
-    self.outputUIImage = [self createNonInterpolatedUIImageFromCIImage:self.outputCIImage withScale:1.0];
-    //self.outputUIImage = [[UIImage alloc] initWithCIImage:self.outputCIImage];
+    //self.outputUIImage = [self createNonInterpolatedUIImageFromCIImage:self.outputCIImage withScale:1.0];
+    self.outputUIImage = [[UIImage alloc] initWithCIImage:self.outputCIImage];
 }
 
 - (UIImage *)createNonInterpolatedUIImageFromCIImage:(CIImage *)image withScale:(CGFloat)scale
@@ -163,7 +164,7 @@
     CGImageRef cgImage = [[CIContext contextWithOptions:nil] createCGImage:image fromRect:image.extent];
     
     // Now we'll rescale using CoreGraphics
-    UIGraphicsBeginImageContext(CGSizeMake(image.extent.size.width * scale, image.extent.size.width * scale));
+    UIGraphicsBeginImageContext(CGSizeMake(image.extent.size.width, image.extent.size.height));
     CGContextRef context = UIGraphicsGetCurrentContext();
     // We don't want to interpolate (since we've got a pixel-correct image)
     CGContextSetInterpolationQuality(context, kCGInterpolationNone);
@@ -188,7 +189,10 @@
     self.outputUIImage = [self createNonInterpolatedUIImageFromCIImage:self.outputCIImage withScale:1.0];
     
     //CGContextDrawImage(context, rect, cgImg);
-    CGContextDrawImage(context, rect, self.outputUIImage.CGImage);
+    //CGContextDrawImage(context, rect, self.outputUIImage.CGImage);
+    CGRect cgImgRect = CGRectMake(0, 0, CGImageGetWidth(self.inputUIImage.CGImage), CGImageGetHeight(self.inputUIImage.CGImage));
+    CGContextDrawImage(context, cgImgRect, self.outputUIImage.CGImage);
+    //CGContextDrawImage(context, cgImgRect, self.inputUIImage.CGImage);
     CGContextRelease(context);
 }
 

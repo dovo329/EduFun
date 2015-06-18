@@ -24,7 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //window!.rootViewController = ColorChangeViewController()
         //window!.rootViewController = TestObjCViewController()
         //window!.rootViewController = ColorCubeViewController()
-        window!.rootViewController = PaletteFilterViewController()
+        //window!.rootViewController = PaletteFilterViewController()
+        window!.rootViewController = ShapeFillViewController()
         window!.makeKeyAndVisible()
         return true
     }

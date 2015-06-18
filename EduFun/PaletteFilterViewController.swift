@@ -31,11 +31,11 @@ class PaletteFilterViewController: UIViewController, UIScrollViewDelegate {
         
         //self.coloringPageImg = UIImage(named: "testSmallImg")
         self.filter = PaletteFilter(image: self.coloringPageImg)
-        self.filter.toggle = false
+        self.filter.toggle = true
         self.filter.layer.magnificationFilter = kCAFilterNearest
         self.filter.doFilter()
-        self.coloringPageImgView = UIImageView(image: self.filter.outputUIImage)
-        //self.coloringPageImgView = UIImageView(image: self.coloringPageImg)
+        //self.coloringPageImgView = UIImageView(image: self.filter.outputUIImage)
+        self.coloringPageImgView = UIImageView(image: self.coloringPageImg)
         self.coloringPageImgView.layer.magnificationFilter = kCAFilterNearest
         
         self.scrollView = UIScrollView(frame: self.view.frame)
@@ -70,9 +70,9 @@ class PaletteFilterViewController: UIViewController, UIScrollViewDelegate {
         color.getRed(&red, green: &green, blue: &blue, alpha:&alpha)
         //NSLog("updateFilter began")
         println("point x:\(touchPoint.x) y:\(touchPoint.y) color r:\(red) g:\(green) b:\(blue) a:\(alpha)")
-        //var toColor = UIColor.purpleColor()
-        //self.filter.updatePaletteFromColor(color, toColor: toColor);
-        self.filter.toggle = !self.filter.toggle
+        var toColor = UIColor.purpleColor()
+        self.filter.updatePaletteFromColor(color, toColor: toColor);
+        //self.filter.toggle = !self.filter.toggle
         self.filter.doFilter()
         self.coloringPageImgView.image = self.filter.outputUIImage
         
