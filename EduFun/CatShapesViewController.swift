@@ -58,10 +58,9 @@ class CatShapesViewController: UIViewController, OBShapedViewDelegate, UIScrollV
         //tapGesture = UITapGestureRecognizer(target: self, action: "tapHandle")
         //tapGesture.cancelsTouchesInView = false
         //scrollView.addGestureRecognizer(tapGesture)
-        scrollView.minimumZoomScale = 0.1
-        scrollView.zoomScale = 2.0
+        scrollView.minimumZoomScale = 1.0
         scrollView.maximumZoomScale = 10.0
-        scrollView.contentSize = CGSizeMake(view.frame.size.width*1.5, view.frame.size.height*1.5)
+        scrollView.contentSize = CGSizeMake(view.frame.size.width, view.frame.size.height)
         scrollView.delegate = self
     }
     
