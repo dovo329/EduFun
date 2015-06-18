@@ -20,6 +20,9 @@ class CatShapesViewController: UIViewController, OBShapedViewDelegate {
     var catShape8View  : OBShapedView!
     var catShape9View  : OBShapedView!
     var catShape10View : OBShapedView!
+    var catShape11View : OBShapedView!
+    var catShape12View : OBShapedView!
+    var catShape13View : OBShapedView!
     
     var currentColor : UIColor = UIColor.purpleColor()
     let colorList : [UIColor] =
@@ -84,5 +87,17 @@ class CatShapesViewController: UIViewController, OBShapedViewDelegate {
         catShape10View = OBShapedView(frame: view.frame, image:UIImage(named:"catShape10"))
         catShape10View.delegate = self
         view.addSubview(catShape10View)
+        
+        catShape11View = OBShapedView(frame: view.frame, image:UIImage(named:"catShape11"))
+        catShape11View.delegate = self
+        view.addSubview(catShape11View)
+        
+        catShape12View = OBShapedView(frame: view.frame, image:UIImage(named:"catShape12"))
+        catShape12View.delegate = self
+        view.addSubview(catShape12View)
+        
+        catShape13View = OBShapedView(frame: view.frame, image:UIImage(named:"catShape13"))
+        catShape13View.delegate = self
+        view.addSubview(catShape13View)
     }
 }

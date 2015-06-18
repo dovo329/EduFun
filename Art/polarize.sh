@@ -3,4 +3,5 @@
 #convert white to clear
 #convert out.png -fill clear -opaque white out2.png
 
-convert ColoringBookPictureScanBW.png -threshold 50% BWonly.png
+convert CatOutline.png -alpha remove CatOutlineNoAlpha.png
+convert CatOutlineNoAlpha.png -threshold 50% CatOutlineBW.png

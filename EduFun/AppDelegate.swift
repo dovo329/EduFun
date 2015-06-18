@@ -18,9 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window!.backgroundColor = UIColor.whiteColor()
-        //window!.rootViewController = CatShapesViewController()
-        window!.rootViewController = MemoryGameViewController()
+        window!.backgroundColor = UIColor.blueColor()
+        window!.rootViewController = CatShapesViewController()
+        //window!.rootViewController = MemoryGameViewController()
         //window!.rootViewController = ColorMaskTestViewController()
         //window!.rootViewController = ColorChangeViewController()
         //window!.rootViewController = TestObjCViewController()

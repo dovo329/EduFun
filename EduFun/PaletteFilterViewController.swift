@@ -17,10 +17,11 @@ class PaletteFilterViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = UIColor.blueColor()
         // Do any additional setup after loading the view.
         //coloringPageImg = UIImage(named: "ColoringBookPictureScanBW")
-        coloringPageImg = UIImage(named: "BWonly")
+        //coloringPageImg = UIImage(named: "BWonly")
+        coloringPageImg = UIImage(named: "CatOutlineBWRGB")
         //coloringPageImg = UIImage(named: "mtnHouseWithSun")
         //coloringPageImg = UIImage(named: "TestColorShapeBig")
         //coloringPageImg = UIImage(named: "TestColorShape4Sscaled")
