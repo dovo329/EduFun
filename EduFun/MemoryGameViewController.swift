@@ -267,7 +267,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                     ((cell!.backgroundView)!) = newImgView!
                     card2dArr[indexPath.section][indexPath.row].isFlipped = true
                 } else {
-                    fatalError("tried to flip a card that was already flipped")
+                    //fatalError("tried to flip a card that was already flipped")
+                    // do nothing because it's already been flipped over
                 }
                 
                 if (flippedCnt >= 2)
