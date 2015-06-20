@@ -16,11 +16,9 @@
 		A532ADE11B27959F00A46930 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = A532ADE01B27959F00A46930 /* Card.swift */; };
 		A53600621B351EAC00443B93 /* SVGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A536005B1B351E0600443B93 /* SVGKit.framework */; };
 		A53600631B351EAC00443B93 /* SVGKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A536005B1B351E0600443B93 /* SVGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A536006A1B35367600443B93 /* mtnHouse.svg in Resources */ = {isa = PBXBuildFile; fileRef = A53600691B35367600443B93 /* mtnHouse.svg */; };
 		A536006C1B35394000443B93 /* MonkeySketch.svg in Resources */ = {isa = PBXBuildFile; fileRef = A536006B1B35394000443B93 /* MonkeySketch.svg */; };
 		A536FE771B350D2C00443B93 /* DougViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A536FE731B350D2C00443B93 /* DougViewController.m */; };
 		A536FE781B350D2C00443B93 /* PaletteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A536FE751B350D2C00443B93 /* PaletteViewController.m */; };
-		A536FE791B350D2C00443B93 /* House.svg in Resources */ = {isa = PBXBuildFile; fileRef = A536FE761B350D2C00443B93 /* House.svg */; };
 		A54683941B2B3B6A00979670 /* ColorMaskTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54683931B2B3B6A00979670 /* ColorMaskTestViewController.swift */; };
 		A5554D4C1B3239AE002B06E5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */; };
 		A564C5081B3259D900706E1F /* ShapeFillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A564C5071B3259D900706E1F /* ShapeFillViewController.swift */; };
@@ -42,6 +40,7 @@
 		A5CA0F4F1B2F64CA008BD79D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F4E1B2F64CA008BD79D /* UIImage+Resize.m */; };
 		A5CA0F541B2F67FA008BD79D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F511B2F67FA008BD79D /* UIImage+Resize.m */; };
 		A5CA0F551B2F67FA008BD79D /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */; };
+		A5EBCCC51B361F0E006E52D6 /* mtnHouse.svg in Resources */ = {isa = PBXBuildFile; fileRef = A5EBCCC41B361F0E006E52D6 /* mtnHouse.svg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,13 +102,11 @@
 		A5112C151B2D0E7F00215DA2 /* OBShapedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBShapedView.m; sourceTree = "<group>"; };
 		A532ADE01B27959F00A46930 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		A53600551B351E0600443B93 /* SVGKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SVGKit.xcodeproj; path = SVGKit/SVGKit.xcodeproj; sourceTree = "<group>"; };
-		A53600691B35367600443B93 /* mtnHouse.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mtnHouse.svg; sourceTree = "<group>"; };
 		A536006B1B35394000443B93 /* MonkeySketch.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MonkeySketch.svg; sourceTree = "<group>"; };
 		A536FE721B350D2C00443B93 /* DougViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DougViewController.h; path = ../DougViewController.h; sourceTree = "<group>"; };
 		A536FE731B350D2C00443B93 /* DougViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DougViewController.m; path = ../DougViewController.m; sourceTree = "<group>"; };
 		A536FE741B350D2C00443B93 /* PaletteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaletteViewController.h; path = ../PaletteViewController.h; sourceTree = "<group>"; };
 		A536FE751B350D2C00443B93 /* PaletteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PaletteViewController.m; path = ../PaletteViewController.m; sourceTree = "<group>"; };
-		A536FE761B350D2C00443B93 /* House.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = House.svg; path = ../House.svg; sourceTree = "<group>"; };
 		A54683931B2B3B6A00979670 /* ColorMaskTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMaskTestViewController.swift; sourceTree = "<group>"; };
 		A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A564C5071B3259D900706E1F /* ShapeFillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeFillViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +137,7 @@
 		A5CA0F511B2F67FA008BD79D /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Art/UIImage+Resize.m"; sourceTree = "<group>"; };
 		A5CA0F521B2F67FA008BD79D /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RoundedCorner.h"; path = "Art/UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCorner.m"; path = "Art/UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		A5EBCCC41B361F0E006E52D6 /* mtnHouse.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mtnHouse.svg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,13 +216,12 @@
 		A5B85EB11B276636008012F7 /* EduFun */ = {
 			isa = PBXGroup;
 			children = (
-				A53600691B35367600443B93 /* mtnHouse.svg */,
 				A5112C0E1B2D030200215DA2 /* Header.h */,
 				A536FE721B350D2C00443B93 /* DougViewController.h */,
+				A5EBCCC41B361F0E006E52D6 /* mtnHouse.svg */,
 				A536FE731B350D2C00443B93 /* DougViewController.m */,
 				A536FE741B350D2C00443B93 /* PaletteViewController.h */,
 				A536FE751B350D2C00443B93 /* PaletteViewController.m */,
-				A536FE761B350D2C00443B93 /* House.svg */,
 				A536006B1B35394000443B93 /* MonkeySketch.svg */,
 				A5112C121B2D087600215DA2 /* ColoringView.swift */,
 				A5B85EB41B276636008012F7 /* AppDelegate.swift */,
@@ -385,9 +382,8 @@
 				A5B85EC31B276636008012F7 /* LaunchScreen.xib in Resources */,
 				A5B85EC01B276636008012F7 /* Images.xcassets in Resources */,
 				A5B85EB71B276636008012F7 /* GameScene.sks in Resources */,
-				A536FE791B350D2C00443B93 /* House.svg in Resources */,
 				A5B85EBE1B276636008012F7 /* Main.storyboard in Resources */,
-				A536006A1B35367600443B93 /* mtnHouse.svg in Resources */,
+				A5EBCCC51B361F0E006E52D6 /* mtnHouse.svg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
