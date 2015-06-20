@@ -19,7 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.backgroundColor = UIColor.blueColor()
-        window!.rootViewController = DougViewController()
+        
+        var navigationController = UINavigationController(rootViewController: DougViewController())
+        window!.rootViewController = navigationController
+        
+        //window!.rootViewController = DougViewController()
         //window!.rootViewController = CatShapesViewController()
         //window!.rootViewController = MemoryGameViewController()
         //window!.rootViewController = ColorMaskTestViewController()
