@@ -47,9 +47,10 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.imgView = [[UIImageView alloc] initWithImage:img];
+        self.imgView = [UIImageView new];
         self.imgView.frame = frame;
-        self.imgView.image = [self.imgView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+                
+        self.imgView.image = [img imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         [self.imgView setTintColor:[UIColor redColor]];
         
         [self addSubview:self.imgView];

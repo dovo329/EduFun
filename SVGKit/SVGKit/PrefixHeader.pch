@@ -1,0 +1,14 @@
+//
+//  PrefixHeader.pch
+//  SVGKit
+//
+//  Created by Douglas Voss on 6/19/15.
+//  Copyright (c) 2015 SVGKit. All rights reserved.
+//
+
+#ifndef SVGKit_PrefixHeader_pch
+#define SVGKit_PrefixHeader_pch
+
+#import <TargetConditionals.h>
+
+#endif

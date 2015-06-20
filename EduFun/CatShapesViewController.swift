@@ -11,10 +11,13 @@ import UIKit
 class CatShapesViewController: UIViewController, OBShapedViewDelegate, UIScrollViewDelegate {
     
     let kNumShapes : Int = 13
-    var shapeViewArr  : [OBShapedView] = [OBShapedView]()
+    //let kNumShapes : Int = 25
+    //var shapeViewArr  : [OBShapedView] = [OBShapedView]()
     var tapGesture : UITapGestureRecognizer!
     var contentView : UIView!
     var scrollView : UIScrollView!
+    var initIndex : Int = 0
+    var timer : NSTimer!
     
     var currentColor : UIColor = UIColor.purpleColor()
     let colorList : [UIColor] =
@@ -46,11 +49,14 @@ class CatShapesViewController: UIViewController, OBShapedViewDelegate, UIScrollV
         for var i=0; i<kNumShapes; i++
         {
             var imgStr : String = String(format:"catShape%d",i+1)
+            //var imgStr : String = String(format:"mtnShape%d",i+1)
             println("\(imgStr)")
-            shapeViewArr.append(OBShapedView(frame: view.frame, image:UIImage(named:imgStr)))
-            shapeViewArr[i].delegate = self
+            //shapeViewArr.append(OBShapedView(frame: view.frame, image:UIImage(named:imgStr)))
+            //shapeViewArr[i].delegate = self
             //view.addSubview(shapeViewArr[i])
-            contentView.addSubview(shapeViewArr[i])
+            var obShapedView = OBShapedView(frame: view.frame, image:UIImage(named:imgStr))
+            obShapedView.delegate = self
+        contentView.addSubview(obShapedView)
         }
         scrollView.addSubview(contentView)
         view.addSubview(scrollView)
@@ -62,7 +68,26 @@ class CatShapesViewController: UIViewController, OBShapedViewDelegate, UIScrollV
         scrollView.maximumZoomScale = 10.0
         scrollView.contentSize = CGSizeMake(view.frame.size.width, view.frame.size.height)
         scrollView.delegate = self
+        
+        //timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("timedInit"), userInfo: nil, repeats: true);
     }
+    
+    /*func timedInit()
+    {
+        //var imgStr : String = String(format:"catShape%d",i+1)
+        var imgStr : String = String(format:"mtnShape%d",initIndex+1)
+        println("\(imgStr)")
+        //shapeViewArr.append(OBShapedView(frame: view.frame, image:UIImage(named:imgStr)))
+        //shapeViewArr[i].delegate = self
+        //view.addSubview(shapeViewArr[i])
+        var obShapedView = OBShapedView(frame: view.frame, image:UIImage(named:imgStr))
+        obShapedView.delegate = self
+        contentView.addSubview(obShapedView)
+        initIndex++
+        if (initIndex > 24) {
+            timer.invalidate()
+        }
+    }*/
     
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
         return contentView
@@ -71,5 +96,12 @@ class CatShapesViewController: UIViewController, OBShapedViewDelegate, UIScrollV
     /*func tapHandle()
     {
         println("Tappy tap tap")
+    }*/
+    
+    /*func deinit() {
+        for var i=0; i<kNumShapes; i++
+        {
+            shapeViewArr[i] = nil
+        }
     }*/
 }

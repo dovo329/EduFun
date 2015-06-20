@@ -16,5 +16,7 @@
 #import "ColorCubeView.h"
 #import "UIImage+Resize.h"
 #import "PaletteFilter.h"
+#import "DougViewController.h"
+#import "PaletteViewController.h"
 
 #endif

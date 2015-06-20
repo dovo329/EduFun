@@ -1,0 +1,4 @@
+[submodule "SVGKit/SVGKit/Source"]
+	path = SVGKit/SVGKit/Source
+	url = https://github.com/SVGKit/SVGKit.git
+	branch = master-ARC
