@@ -12,7 +12,7 @@ import QuartzCore
 class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     let kFlipDuration : NSTimeInterval = 0.5
-    let kMatchDisappearDuration : NSTimeInterval = 0.5
+    let kMatchDisappearDuration : NSTimeInterval = 3.0
     let numRows : Int = 4
     let numColumns : Int = 4
     let imageNameArr : [String] = ["BearCard", "CarCard", "FlowerCard", "IceCreamCard","RainbowCard", "StarCard", "CatCard", "PenguinCard"]
@@ -32,8 +32,20 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     var emitterLayer : CAEmitterLayer!
     var emitterCell : CAEmitterCell!
     
+    func stopMatchSparkles() {
+        emitterLayer.removeFromSuperlayer()
+    }
+    
+    func startMatchSparkles(#frame: CGRect) {
+        emitterLayer.emitterPosition = CGPointMake(frame.origin.x + frame.size.width/2, frame.origin.y + frame.size.height/2)
+        emitterLayer.emitterSize = CGSizeMake(frame.width, frame.height)
+        emitterLayer.emitterShape = kCAEmitterLayerRectangle
+        view.layer.addSublayer(emitterLayer)
+    }
+    
     func setupMatchSparkles() {
-                emitterLayer = CAEmitterLayer()
+        
+        emitterLayer = CAEmitterLayer()
         emitterLayer.emitterPosition = CGPointMake(view.frame.origin.x + (view.frame.size.width/2), view.frame.origin.y + (view.frame.size.height/2))
         emitterLayer.emitterSize = CGSizeMake(self.view.frame.size.width/4.0, self.view.frame.size.height/4.0);
         emitterLayer.emitterShape = kCAEmitterLayerRectangle
@@ -65,34 +77,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         emitterCell.scaleRange = 0.0
         
         emitterLayer.emitterCells = [emitterCell]
-        view.layer.addSublayer(emitterLayer)
-        
-        /*
-        emitterCell.birthRate = 40;
-        emitterCell.lifetime = 1.5;
-        emitterCell.lifetimeRange = 0.5;
-        emitterCell.color = [UIColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:1.0].CGColor;
-        emitterCell.redRange = 0.0;
-        emitterCell.redSpeed = 0.0;
-        emitterCell.blueRange = 0.0;
-        emitterCell.blueSpeed = 1.0;
-        emitterCell.greenRange = 0.0;
-        emitterCell.greenSpeed = -1.0;
-        emitterCell.alphaSpeed = 0.0;
-        
-        emitterCell.spin = 0.0;
-        emitterCell.spinRange = 10.0;
-        
-        emitterCell.velocity = 200;
-        emitterCell.velocityRange = 50;
-        emitterCell.yAcceleration = 400;
-        emitterCell.emissionLongitude = -M_PI / 2;
-        emitterCell.emissionRange = M_PI/6;
-        
-        emitterCell.scale = 0.25;
-        emitterCell.scaleSpeed = -0.125;
-        emitterCell.scaleRange = 0.0;
-        */
+        //view.layer.addSublayer(emitterLayer)
     }
     
     override func viewDidLoad() {
@@ -332,7 +317,10 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                     var newImgView : UIImageView?
                     newImgView = UIImageView(image: UIImage(named: card.imageName!)!)
                     newImgView!.frame = ((cell!.backgroundView)!).frame
-                    UIView.transitionFromView((cell!.backgroundView)!, toView:newImgView!, duration: kFlipDuration, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
+                    UIView.transitionFromView((cell!.backgroundView)!, toView:newImgView!, duration: kFlipDuration, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: {(Bool)  in
+                           // do nothing
+                        }
+                    )
                     ((cell!.backgroundView)!) = newImgView!
                     card2dArr[indexPath.section][indexPath.row].isFlipped = true
                 } else {
@@ -342,12 +330,12 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                 
                 if (flippedCnt >= 2)
                 {
-                    var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(1.1 * Double(NSEC_PER_SEC)))
+                    var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((kFlipDuration) * Double(NSEC_PER_SEC)))
                     dispatch_after(dispatchTime, dispatch_get_main_queue(),
                         {
                             var compareArr = [Card]()
                             // check for match if 2 cards have been flipped over
-                            println("checkForMatch called")
+                            //println("checkForMatch called")
                             
                             
                             // find all flipped over cards and add them to an array
@@ -358,7 +346,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                                     if self.card2dArr[row][column].isFlipped
                                     {
                                         compareArr.append(self.card2dArr[row][column])
-                                        println("true isFlipped row=\(row) column=\(column)")
+                                        //println("true isFlipped row=\(row) column=\(column)")
                                     }
                                 }
                             }
@@ -371,14 +359,19 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                             self.flippedCnt = 0
                             if (compareArr[0].imageName == compareArr[1].imageName)
                             {
-                                println("You made a match! Yay!")
+                                //println("You made a match! Yay!")
                                 
                                 self.card2dArr[compareArr[0].row][compareArr[0].column].matched = true
                                 self.card2dArr[compareArr[0].row][compareArr[0].column].isFlipped = false
                                 var indexPath0 = NSIndexPath(forRow: compareArr[0].column, inSection: compareArr[0].row)
                                 var cell0 = collectionView.cellForItemAtIndexPath(indexPath0)
+                                self.startMatchSparkles(frame:cell0!.frame)
                                 var blankView0 = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-                                UIView.transitionFromView((cell0!.backgroundView)!, toView:blankView0, duration: self.kFlipDuration, options: UIViewAnimationOptions.TransitionCurlUp, completion: nil)
+                                UIView.transitionFromView((cell0!.backgroundView)!, toView:blankView0, duration: self.kMatchDisappearDuration, options: UIViewAnimationOptions.TransitionCurlUp, completion:
+                                    {(Bool) in
+                                    self.stopMatchSparkles()
+                                    }
+                                )
                                 
                                 self.card2dArr[compareArr[1].row][compareArr[1].column].matched = true
                                 self.card2dArr[compareArr[1].row][compareArr[1].column].isFlipped = false
