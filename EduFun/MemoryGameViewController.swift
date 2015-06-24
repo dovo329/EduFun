@@ -48,16 +48,19 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     }
     
     func startMatchSparkles(#frame1: CGRect, frame2: CGRect) {
+        
         emitterLayerArr[0].emitterPosition = CGPointMake(frame1.origin.x + frame1.size.width/2, frame1.origin.y + frame1.size.height/2)
         emitterLayerArr[0].emitterSize = frame1.size
         emitterLayerArr[0].emitterShape = kCAEmitterLayerRectangle
         emitterLayerArr[0].lifetime = kSparkleLifetimeMean
+        emitterLayerArr[0].beginTime = CACurrentMediaTime()
         view.layer.addSublayer(emitterLayerArr[0])
         
         emitterLayerArr[1].emitterPosition = CGPointMake(frame2.origin.x + frame2.size.width/2, frame2.origin.y + frame2.size.height/2)
         emitterLayerArr[1].emitterSize = frame2.size
         emitterLayerArr[1].emitterShape = kCAEmitterLayerRectangle
         emitterLayerArr[1].lifetime = kSparkleLifetimeMean
+        emitterLayerArr[1].beginTime = CACurrentMediaTime()
         view.layer.addSublayer(emitterLayerArr[1])
     }
     
