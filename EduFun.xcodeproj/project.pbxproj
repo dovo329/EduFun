@@ -7,36 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A5112BFD1B2CEF7A00215DA2 /* ColorChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5112BFC1B2CEF7A00215DA2 /* ColorChangeViewController.swift */; };
 		A5112C081B2D019F00215DA2 /* OBShapedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C051B2D019F00215DA2 /* OBShapedButton.m */; };
 		A5112C091B2D019F00215DA2 /* UIImage+ColorAtPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C071B2D019F00215DA2 /* UIImage+ColorAtPixel.m */; };
-		A5112C0C1B2D01B400215DA2 /* TestObjCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C0B1B2D01B400215DA2 /* TestObjCViewController.m */; };
-		A5112C131B2D087600215DA2 /* ColoringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5112C121B2D087600215DA2 /* ColoringView.swift */; };
 		A5112C161B2D0E7F00215DA2 /* OBShapedView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C151B2D0E7F00215DA2 /* OBShapedView.m */; };
 		A532ADE11B27959F00A46930 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = A532ADE01B27959F00A46930 /* Card.swift */; };
 		A53600621B351EAC00443B93 /* SVGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A536005B1B351E0600443B93 /* SVGKit.framework */; };
 		A53600631B351EAC00443B93 /* SVGKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A536005B1B351E0600443B93 /* SVGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A536006C1B35394000443B93 /* MonkeySketch.svg in Resources */ = {isa = PBXBuildFile; fileRef = A536006B1B35394000443B93 /* MonkeySketch.svg */; };
-		A536FE771B350D2C00443B93 /* DougViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A536FE731B350D2C00443B93 /* DougViewController.m */; };
-		A536FE781B350D2C00443B93 /* PaletteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A536FE751B350D2C00443B93 /* PaletteViewController.m */; };
-		A54683941B2B3B6A00979670 /* ColorMaskTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54683931B2B3B6A00979670 /* ColorMaskTestViewController.swift */; };
+		A536FE771B350D2C00443B93 /* ColoringBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A536FE731B350D2C00443B93 /* ColoringBookViewController.m */; };
 		A5554D4C1B3239AE002B06E5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */; };
-		A564C5081B3259D900706E1F /* ShapeFillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A564C5071B3259D900706E1F /* ShapeFillViewController.swift */; };
-		A564C50A1B326F5300706E1F /* CatShapesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A564C5091B326F5300706E1F /* CatShapesViewController.swift */; };
-		A57630331B31272B00945038 /* PaletteFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A57630321B31272B00945038 /* PaletteFilter.m */; };
-		A57630351B312AE900945038 /* PaletteFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57630341B312AE900945038 /* PaletteFilterViewController.swift */; };
+		A595C3E11B3B0A2E001C6040 /* PaletteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A595C3E01B3B0A2E001C6040 /* PaletteViewController.m */; };
+		A595C3E41B3B0B53001C6040 /* EmitterTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A595C3E31B3B0B53001C6040 /* EmitterTestViewController.m */; };
 		A5B85EB51B276636008012F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85EB41B276636008012F7 /* AppDelegate.swift */; };
-		A5B85EB71B276636008012F7 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A5B85EB61B276636008012F7 /* GameScene.sks */; };
-		A5B85EB91B276636008012F7 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85EB81B276636008012F7 /* GameScene.swift */; };
-		A5B85EBB1B276636008012F7 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85EBA1B276636008012F7 /* GameViewController.swift */; };
 		A5B85EBE1B276636008012F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B85EBC1B276636008012F7 /* Main.storyboard */; };
 		A5B85EC01B276636008012F7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5B85EBF1B276636008012F7 /* Images.xcassets */; };
 		A5B85EC31B276636008012F7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5B85EC11B276636008012F7 /* LaunchScreen.xib */; };
 		A5B85ECF1B276636008012F7 /* EduFunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85ECE1B276636008012F7 /* EduFunTests.swift */; };
 		A5B85ED91B2767E3008012F7 /* MemoryGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85ED81B2767E3008012F7 /* MemoryGameViewController.swift */; };
-		A5BFF9921B2D3406003A547A /* ColorCubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BFF9911B2D3406003A547A /* ColorCubeViewController.swift */; };
-		A5BFF9971B2D351C003A547A /* ColorCubeView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5BFF9961B2D351C003A547A /* ColorCubeView.m */; };
-		A5C577B51B2B75BD0013B351 /* ColoringPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C577B41B2B75BD0013B351 /* ColoringPageView.swift */; };
 		A5CA0F4F1B2F64CA008BD79D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F4E1B2F64CA008BD79D /* UIImage+Resize.m */; };
 		A5CA0F541B2F67FA008BD79D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F511B2F67FA008BD79D /* UIImage+Resize.m */; };
 		A5CA0F551B2F67FA008BD79D /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */; };
@@ -89,37 +76,26 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A5112BFC1B2CEF7A00215DA2 /* ColorChangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorChangeViewController.swift; sourceTree = "<group>"; };
 		A5112C041B2D018D00215DA2 /* OBShapedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBShapedButton.h; sourceTree = "<group>"; };
 		A5112C051B2D019F00215DA2 /* OBShapedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBShapedButton.m; sourceTree = "<group>"; };
 		A5112C061B2D019F00215DA2 /* UIImage+ColorAtPixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ColorAtPixel.h"; sourceTree = "<group>"; };
 		A5112C071B2D019F00215DA2 /* UIImage+ColorAtPixel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ColorAtPixel.m"; sourceTree = "<group>"; };
-		A5112C0A1B2D01B400215DA2 /* TestObjCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObjCViewController.h; sourceTree = "<group>"; };
-		A5112C0B1B2D01B400215DA2 /* TestObjCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestObjCViewController.m; sourceTree = "<group>"; };
 		A5112C0E1B2D030200215DA2 /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Header.h; path = ../Header.h; sourceTree = "<group>"; };
-		A5112C121B2D087600215DA2 /* ColoringView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColoringView.swift; path = ../ColoringView.swift; sourceTree = "<group>"; };
 		A5112C141B2D0E7F00215DA2 /* OBShapedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBShapedView.h; sourceTree = "<group>"; };
 		A5112C151B2D0E7F00215DA2 /* OBShapedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBShapedView.m; sourceTree = "<group>"; };
 		A532ADE01B27959F00A46930 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		A53600551B351E0600443B93 /* SVGKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SVGKit.xcodeproj; path = SVGKit/SVGKit.xcodeproj; sourceTree = "<group>"; };
 		A536006B1B35394000443B93 /* MonkeySketch.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MonkeySketch.svg; sourceTree = "<group>"; };
-		A536FE721B350D2C00443B93 /* DougViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DougViewController.h; path = ../DougViewController.h; sourceTree = "<group>"; };
-		A536FE731B350D2C00443B93 /* DougViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DougViewController.m; path = ../DougViewController.m; sourceTree = "<group>"; };
-		A536FE741B350D2C00443B93 /* PaletteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaletteViewController.h; path = ../PaletteViewController.h; sourceTree = "<group>"; };
-		A536FE751B350D2C00443B93 /* PaletteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PaletteViewController.m; path = ../PaletteViewController.m; sourceTree = "<group>"; };
-		A54683931B2B3B6A00979670 /* ColorMaskTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMaskTestViewController.swift; sourceTree = "<group>"; };
+		A536FE721B350D2C00443B93 /* ColoringBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColoringBookViewController.h; path = ../ColoringBookViewController.h; sourceTree = "<group>"; };
+		A536FE731B350D2C00443B93 /* ColoringBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColoringBookViewController.m; path = ../ColoringBookViewController.m; sourceTree = "<group>"; };
 		A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		A564C5071B3259D900706E1F /* ShapeFillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeFillViewController.swift; sourceTree = "<group>"; };
-		A564C5091B326F5300706E1F /* CatShapesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatShapesViewController.swift; sourceTree = "<group>"; };
-		A57630311B31272B00945038 /* PaletteFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaletteFilter.h; sourceTree = "<group>"; };
-		A57630321B31272B00945038 /* PaletteFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaletteFilter.m; sourceTree = "<group>"; };
-		A57630341B312AE900945038 /* PaletteFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteFilterViewController.swift; sourceTree = "<group>"; };
+		A595C3DF1B3B0A2E001C6040 /* PaletteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaletteViewController.h; sourceTree = "<group>"; };
+		A595C3E01B3B0A2E001C6040 /* PaletteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaletteViewController.m; sourceTree = "<group>"; };
+		A595C3E21B3B0B53001C6040 /* EmitterTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmitterTestViewController.h; sourceTree = "<group>"; };
+		A595C3E31B3B0B53001C6040 /* EmitterTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmitterTestViewController.m; sourceTree = "<group>"; };
 		A5B85EAF1B276636008012F7 /* EduFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EduFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B85EB31B276636008012F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5B85EB41B276636008012F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A5B85EB61B276636008012F7 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		A5B85EB81B276636008012F7 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		A5B85EBA1B276636008012F7 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		A5B85EBD1B276636008012F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A5B85EBF1B276636008012F7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A5B85EC21B276636008012F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -127,10 +103,6 @@
 		A5B85ECD1B276636008012F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5B85ECE1B276636008012F7 /* EduFunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduFunTests.swift; sourceTree = "<group>"; };
 		A5B85ED81B2767E3008012F7 /* MemoryGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryGameViewController.swift; sourceTree = "<group>"; };
-		A5BFF9911B2D3406003A547A /* ColorCubeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCubeViewController.swift; sourceTree = "<group>"; };
-		A5BFF9951B2D351C003A547A /* ColorCubeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCubeView.h; sourceTree = "<group>"; };
-		A5BFF9961B2D351C003A547A /* ColorCubeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorCubeView.m; sourceTree = "<group>"; };
-		A5C577B41B2B75BD0013B351 /* ColoringPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColoringPageView.swift; path = ../ColoringPageView.swift; sourceTree = "<group>"; };
 		A5CA0F4D1B2F64CA008BD79D /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Art/UIImage+Resize.h"; sourceTree = "<group>"; };
 		A5CA0F4E1B2F64CA008BD79D /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Art/UIImage+Resize.m"; sourceTree = "<group>"; };
 		A5CA0F501B2F67FA008BD79D /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Art/UIImage+Resize.h"; sourceTree = "<group>"; };
@@ -181,18 +153,16 @@
 		A5B85EA61B276636008012F7 = {
 			isa = PBXGroup;
 			children = (
+				A595C3DF1B3B0A2E001C6040 /* PaletteViewController.h */,
+				A595C3E01B3B0A2E001C6040 /* PaletteViewController.m */,
 				A5CA0F4D1B2F64CA008BD79D /* UIImage+Resize.h */,
 				A5CA0F4E1B2F64CA008BD79D /* UIImage+Resize.m */,
 				A5CA0F501B2F67FA008BD79D /* UIImage+Resize.h */,
 				A5CA0F511B2F67FA008BD79D /* UIImage+Resize.m */,
 				A5CA0F521B2F67FA008BD79D /* UIImage+RoundedCorner.h */,
 				A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */,
-				A5BFF9951B2D351C003A547A /* ColorCubeView.h */,
-				A5BFF9961B2D351C003A547A /* ColorCubeView.m */,
 				A5112C141B2D0E7F00215DA2 /* OBShapedView.h */,
 				A5112C151B2D0E7F00215DA2 /* OBShapedView.m */,
-				A5112C0A1B2D01B400215DA2 /* TestObjCViewController.h */,
-				A5112C0B1B2D01B400215DA2 /* TestObjCViewController.m */,
 				A5112C041B2D018D00215DA2 /* OBShapedButton.h */,
 				A5112C051B2D019F00215DA2 /* OBShapedButton.m */,
 				A5112C061B2D019F00215DA2 /* UIImage+ColorAtPixel.h */,
@@ -217,28 +187,15 @@
 			isa = PBXGroup;
 			children = (
 				A5112C0E1B2D030200215DA2 /* Header.h */,
-				A536FE721B350D2C00443B93 /* DougViewController.h */,
+				A536FE721B350D2C00443B93 /* ColoringBookViewController.h */,
+				A536FE731B350D2C00443B93 /* ColoringBookViewController.m */,
 				A5EBCCC41B361F0E006E52D6 /* mtnHouse.svg */,
-				A536FE731B350D2C00443B93 /* DougViewController.m */,
-				A536FE741B350D2C00443B93 /* PaletteViewController.h */,
-				A536FE751B350D2C00443B93 /* PaletteViewController.m */,
 				A536006B1B35394000443B93 /* MonkeySketch.svg */,
-				A5112C121B2D087600215DA2 /* ColoringView.swift */,
 				A5B85EB41B276636008012F7 /* AppDelegate.swift */,
-				A564C5091B326F5300706E1F /* CatShapesViewController.swift */,
-				A54683931B2B3B6A00979670 /* ColorMaskTestViewController.swift */,
-				A5112BFC1B2CEF7A00215DA2 /* ColorChangeViewController.swift */,
-				A5C577B41B2B75BD0013B351 /* ColoringPageView.swift */,
-				A5BFF9911B2D3406003A547A /* ColorCubeViewController.swift */,
-				A564C5071B3259D900706E1F /* ShapeFillViewController.swift */,
-				A57630341B312AE900945038 /* PaletteFilterViewController.swift */,
-				A57630311B31272B00945038 /* PaletteFilter.h */,
-				A57630321B31272B00945038 /* PaletteFilter.m */,
 				A532ADE01B27959F00A46930 /* Card.swift */,
 				A5B85ED81B2767E3008012F7 /* MemoryGameViewController.swift */,
-				A5B85EB61B276636008012F7 /* GameScene.sks */,
-				A5B85EB81B276636008012F7 /* GameScene.swift */,
-				A5B85EBA1B276636008012F7 /* GameViewController.swift */,
+				A595C3E21B3B0B53001C6040 /* EmitterTestViewController.h */,
+				A595C3E31B3B0B53001C6040 /* EmitterTestViewController.m */,
 				A5B85EBC1B276636008012F7 /* Main.storyboard */,
 				A5B85EBF1B276636008012F7 /* Images.xcassets */,
 				A5B85EC11B276636008012F7 /* LaunchScreen.xib */,
@@ -381,7 +338,6 @@
 				A536006C1B35394000443B93 /* MonkeySketch.svg in Resources */,
 				A5B85EC31B276636008012F7 /* LaunchScreen.xib in Resources */,
 				A5B85EC01B276636008012F7 /* Images.xcassets in Resources */,
-				A5B85EB71B276636008012F7 /* GameScene.sks in Resources */,
 				A5B85EBE1B276636008012F7 /* Main.storyboard in Resources */,
 				A5EBCCC51B361F0E006E52D6 /* mtnHouse.svg in Resources */,
 			);
@@ -401,30 +357,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A536FE781B350D2C00443B93 /* PaletteViewController.m in Sources */,
 				A5112C161B2D0E7F00215DA2 /* OBShapedView.m in Sources */,
-				A54683941B2B3B6A00979670 /* ColorMaskTestViewController.swift in Sources */,
-				A564C5081B3259D900706E1F /* ShapeFillViewController.swift in Sources */,
-				A5BFF9971B2D351C003A547A /* ColorCubeView.m in Sources */,
-				A57630331B31272B00945038 /* PaletteFilter.m in Sources */,
-				A5C577B51B2B75BD0013B351 /* ColoringPageView.swift in Sources */,
-				A5B85EB91B276636008012F7 /* GameScene.swift in Sources */,
-				A5B85EBB1B276636008012F7 /* GameViewController.swift in Sources */,
-				A5BFF9921B2D3406003A547A /* ColorCubeViewController.swift in Sources */,
-				A57630351B312AE900945038 /* PaletteFilterViewController.swift in Sources */,
 				A532ADE11B27959F00A46930 /* Card.swift in Sources */,
 				A5112C091B2D019F00215DA2 /* UIImage+ColorAtPixel.m in Sources */,
 				A5CA0F4F1B2F64CA008BD79D /* UIImage+Resize.m in Sources */,
-				A536FE771B350D2C00443B93 /* DougViewController.m in Sources */,
+				A536FE771B350D2C00443B93 /* ColoringBookViewController.m in Sources */,
+				A595C3E11B3B0A2E001C6040 /* PaletteViewController.m in Sources */,
 				A5CA0F551B2F67FA008BD79D /* UIImage+RoundedCorner.m in Sources */,
 				A5B85EB51B276636008012F7 /* AppDelegate.swift in Sources */,
-				A5112BFD1B2CEF7A00215DA2 /* ColorChangeViewController.swift in Sources */,
 				A5112C081B2D019F00215DA2 /* OBShapedButton.m in Sources */,
-				A5112C131B2D087600215DA2 /* ColoringView.swift in Sources */,
-				A5112C0C1B2D01B400215DA2 /* TestObjCViewController.m in Sources */,
-				A564C50A1B326F5300706E1F /* CatShapesViewController.swift in Sources */,
 				A5CA0F541B2F67FA008BD79D /* UIImage+Resize.m in Sources */,
 				A5B85ED91B2767E3008012F7 /* MemoryGameViewController.swift in Sources */,
+				A595C3E41B3B0B53001C6040 /* EmitterTestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

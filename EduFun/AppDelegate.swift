@@ -20,16 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.backgroundColor = UIColor.blueColor()
         
-        //var navigationController = UINavigationController(rootViewController: DougViewController())
+        //var navigationController = UINavigationController(rootViewController: ColoringBookViewController())
         //window!.rootViewController = navigationController
-        //window!.rootViewController = CatShapesViewController()
-        window!.rootViewController = MemoryGameViewController()
-        //window!.rootViewController = ColorMaskTestViewController()
-        //window!.rootViewController = ColorChangeViewController()
-        //window!.rootViewController = TestObjCViewController()
-        //window!.rootViewController = ColorCubeViewController()
-        //window!.rootViewController = PaletteFilterViewController()
-        //window!.rootViewController = ShapeFillViewController()
+        window!.rootViewController = EmitterTestViewController()
+        //window!.rootViewController = MemoryGameViewController()
         window!.makeKeyAndVisible()
         return true
     }

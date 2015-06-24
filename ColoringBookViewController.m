@@ -6,12 +6,12 @@
 //  Copyright (c) 2015 na. All rights reserved.
 //
 
-#import "DougViewController.h"
+#import "ColoringBookViewController.h"
 #import <SVGKit/SVGKit.h>
 #import "PaletteViewController.h"
 
 
-@interface DougViewController () <UIScrollViewDelegate, PaletteViewControllerDelegate>
+@interface ColoringBookViewController () <UIScrollViewDelegate, PaletteViewControllerDelegate>
 
 @property (nonatomic, strong) SVGKLayeredImageView *svgImageView;
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation DougViewController
+@implementation ColoringBookViewController
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {

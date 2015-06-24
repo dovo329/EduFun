@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DougViewController : UIViewController
+@interface ColoringBookViewController : UIViewController
 
 @end

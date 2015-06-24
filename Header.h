@@ -9,14 +9,13 @@
 #ifndef EduFun_Header_h
 #define EduFun_Header_h
 
-#import "TestObjCViewController.h"
-#import "OBShapedButton.h"
-#import "OBShapedView.h"
-#import "UIImage+ColorAtPixel.h"
-#import "ColorCubeView.h"
+//#import "TestObjCViewController.h"
+//#import "OBShapedButton.h"
+//#import "OBShapedView.h"
+//#import "UIImage+ColorAtPixel.h"
 #import "UIImage+Resize.h"
-#import "PaletteFilter.h"
-#import "DougViewController.h"
+#import "ColoringBookViewController.h"
 #import "PaletteViewController.h"
+#import "EmitterTestViewController.h"
 
 #endif

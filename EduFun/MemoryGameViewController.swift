@@ -28,61 +28,99 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     
     var elapsedTime : Double = 0.0
     
+    var emitterLayer : CAEmitterLayer!
+    var emitterCell : CAEmitterCell!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        emitterLayer = CALayer() as! CAEmitterLayer
+        emitterLayer.emitterPosition = CGPointMake(view.frame.origin.x + (view.frame.size.width/2), view.frame.origin.y + (view.frame.size.height/2))
+        emitterLayer.emitterSize = view.frame.size
+        emitterLayer.emitterShape = kCAEmitterLayerRectangle
         
-        self.view.addSubview(bgImgView)
-      
-        self.bgImgView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        emitterCell = CAEmitterCell()
+        emitterCell.contents = UIImage(named: "StarCell")
+        emitterCell.name = "StarCell"
         
-        let viewsDictionary = ["bg": self.bgImgView]
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[bg]|",
+        emitterCell.birthRate = 150
+        emitterCell.lifetime = 1.0
+        emitterCell.lifetimeRange = 0.5
+        emitterCell.color = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1.0).CGColor
+        emitterCell.redRange = 1.0
+        emitterCell.redSpeed = 0.5
+        emitterCell.blueRange = 1.0
+        emitterCell.blueSpeed = 0.5
+        emitterCell.greenRange = 1.0
+        emitterCell.greenSpeed = 0.5
+        emitterCell.alphaSpeed = -0.2
+        
+        emitterCell.velocity = 50
+        emitterCell.velocityRange = 20
+        emitterCell.yAcceleration = -100
+        emitterCell.emissionLongitude = -CGFloat(M_PI) / 2
+        emitterCell.emissionRange = CGFloat(M_PI) / 4
+        
+        emitterCell.scale = 1.0
+        emitterCell.scaleSpeed = 1.0
+        emitterCell.scaleRange = 1.0
+        
+        var cellArr : [CAEmitterCell] = Array(arrayLiteral: emitterCell)
+        emitterLayer.emitterCells = cellArr
+        
+        view.layer.addSublayer(emitterLayer)
+        
+        view.addSubview(bgImgView)
+        
+        bgImgView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        
+        let viewsDictionary = ["bg": bgImgView]
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[bg]|",
             options: NSLayoutFormatOptions.AlignAllBaseline,
             metrics: nil,
             views: viewsDictionary))
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[bg]|",
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[bg]|",
             options: NSLayoutFormatOptions.AlignAllBaseline,
             metrics: nil,
             views: viewsDictionary))
         
-        /*self.view.addConstraint(
+        /*view.addConstraint(
             NSLayoutConstraint(
-                item: self.bgImgView,
+                item: bgImgView,
                 attribute: .Top,
                 relatedBy: .Equal,
-                toItem: self.view,
+                toItem: view,
                 attribute: .Top,
                 multiplier: 1.0,
                 constant: 0.0));
         
-        self.view.addConstraint(
+        view.addConstraint(
             NSLayoutConstraint(
-                item: self.bgImgView,
+                item: bgImgView,
                 attribute: .Bottom,
                 relatedBy: .Equal,
-                toItem: self.view,
+                toItem: view,
                 attribute: .Bottom,
                 multiplier: 1.0,
                 constant: 0.0));
         
-        self.view.addConstraint(
+        view.addConstraint(
             NSLayoutConstraint(
-                item: self.bgImgView,
+                item: bgImgView,
                 attribute: .Left,
                 relatedBy: .Equal,
-                toItem: self.view,
+                toItem: view,
                 attribute: .Left,
                 multiplier: 1.0,
                 constant: 0.0));
         
-        self.view.addConstraint(
+        view.addConstraint(
             NSLayoutConstraint(
-                item: self.bgImgView,
+                item: bgImgView,
                 attribute: .Right,
                 relatedBy: .Equal,
-                toItem: self.view,
+                toItem: view,
                 attribute: .Right,
                 multiplier: 1.0,
                 constant: 0.0));*/
@@ -90,13 +128,13 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: kCardMinMargin, left: kCardMinMargin, bottom: kCardMinMargin, right: kCardMinMargin)
         var aspectRatio : CGFloat = cardImg.size.width/cardImg.size.height
-        var width : CGFloat = (CGFloat(self.view.frame.size.width)-(CGFloat(numColumns+1)*kCardMinMargin))/CGFloat(numColumns)
+        var width : CGFloat = (CGFloat(view.frame.size.width)-(CGFloat(numColumns+1)*kCardMinMargin))/CGFloat(numColumns)
         var height : CGFloat = width/aspectRatio
         layout.itemSize = CGSize(width: width, height: height)
         layout.minimumInteritemSpacing = kCardMinMargin
         layout.minimumLineSpacing = kCardMinMargin
 
-        collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
         collectionView!.dataSource = self
         collectionView!.delegate = self
         collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: kCellReuseId)
@@ -157,63 +195,63 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                 
                 columnArr.append(card)
             }
-            self.card2dArr.append(columnArr)
+            card2dArr.append(columnArr)
         }
-        self.collectionView?.backgroundColor = UIColor.clearColor()
-        self.view.addSubview(collectionView!)
-        self.collectionViewConstraints()
+        collectionView?.backgroundColor = UIColor.clearColor()
+        view.addSubview(collectionView!)
+        collectionViewConstraints()
         
-        self.view.addSubview(self.completeLabel)
-        self.view.addSubview(self.elapsedTimeLabel)
+        view.addSubview(completeLabel)
+        view.addSubview(elapsedTimeLabel)
         
-        //self.roundCompleteMethod()
+        //roundCompleteMethod()
     }
 
     func collectionViewConstraints() {
         collectionView!.setTranslatesAutoresizingMaskIntoConstraints(false)
         let topConstraint =
         NSLayoutConstraint(
-            item: self.collectionView!,
+            item: collectionView!,
             attribute: .Top,
             relatedBy: .Equal,
-            toItem: self.topLayoutGuide,
+            toItem: topLayoutGuide,
             attribute: .Bottom,
             multiplier: 1.0,
             constant: 0.0);
-        self.view.addConstraint(topConstraint);
+        view.addConstraint(topConstraint);
         
         let bottomConstraint =
         NSLayoutConstraint(
-            item: self.collectionView!,
+            item: collectionView!,
             attribute: .Bottom,
             relatedBy: .Equal,
-            toItem: self.view,
+            toItem: view,
             attribute: .Bottom,
             multiplier: 1.0,
             constant: 0.0);
-        self.view.addConstraint(bottomConstraint);
+        view.addConstraint(bottomConstraint);
         
         let leftConstraint =
         NSLayoutConstraint(
-            item: self.collectionView!,
+            item: collectionView!,
             attribute: .Left,
             relatedBy: .Equal,
-            toItem: self.view,
+            toItem: view,
             attribute: .Left,
             multiplier: 1.0,
             constant: 0.0);
-        self.view.addConstraint(leftConstraint);
+        view.addConstraint(leftConstraint);
         
         let rightConstraint =
         NSLayoutConstraint(
-            item: self.collectionView!,
+            item: collectionView!,
             attribute: .Right,
             relatedBy: .Equal,
-            toItem: self.view,
+            toItem: view,
             attribute: .Right,
             multiplier: 1.0,
             constant: 0.0);
-        self.view.addConstraint(rightConstraint);
+        view.addConstraint(rightConstraint);
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -230,7 +268,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         
         //cell.backgroundColor = .redColor()
         
-        var card : Card = self.card2dArr[indexPath.section][indexPath.row]
+        var card : Card = card2dArr[indexPath.section][indexPath.row]
 
         if (card.isFlipped)
         {
