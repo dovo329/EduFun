@@ -13,6 +13,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     
     let kFlipDuration : NSTimeInterval = 0.5
     let kMatchDisappearDuration : NSTimeInterval = 3.0
+    let kSparkleLifetimeMean : Float = 1.5
+    let kSparkleLifetimeVariance : Float = 0.5
     let numRows : Int = 4
     let numColumns : Int = 4
     let imageNameArr : [String] = ["BearCard", "CarCard", "FlowerCard", "IceCreamCard","RainbowCard", "StarCard", "CatCard", "PenguinCard"]
@@ -33,8 +35,15 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     
     func stopMatchSparkles() {
         var emitterLayer : CAEmitterLayer
+        
         for emitterLayer in emitterLayerArr {
-            emitterLayer.removeFromSuperlayer()
+            emitterLayer.lifetime = 0.0
+            
+            var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(kSparkleLifetimeVariance+kSparkleLifetimeMean)) * Double(NSEC_PER_SEC)))
+            dispatch_after(dispatchTime, dispatch_get_main_queue(),
+            {
+                    emitterLayer.removeFromSuperlayer()
+            })
         }
     }
     
@@ -42,11 +51,13 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         emitterLayerArr[0].emitterPosition = CGPointMake(frame1.origin.x + frame1.size.width/2, frame1.origin.y + frame1.size.height/2)
         emitterLayerArr[0].emitterSize = frame1.size
         emitterLayerArr[0].emitterShape = kCAEmitterLayerRectangle
+        emitterLayerArr[0].lifetime = kSparkleLifetimeMean
         view.layer.addSublayer(emitterLayerArr[0])
         
         emitterLayerArr[1].emitterPosition = CGPointMake(frame2.origin.x + frame2.size.width/2, frame2.origin.y + frame2.size.height/2)
         emitterLayerArr[1].emitterSize = frame2.size
         emitterLayerArr[1].emitterShape = kCAEmitterLayerRectangle
+        emitterLayerArr[1].lifetime = kSparkleLifetimeMean
         view.layer.addSublayer(emitterLayerArr[1])
     }
     
@@ -57,8 +68,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         emitterCell.name = "StarCell"
         
         emitterCell.birthRate = 40
-        emitterCell.lifetime = 1.5
-        emitterCell.lifetimeRange = 0.5
+        emitterCell.lifetime = kSparkleLifetimeMean
+        emitterCell.lifetimeRange = kSparkleLifetimeVariance
         emitterCell.color = UIColor(red: 1.0, green: 1.0, blue: 0.0, alpha: 1.0).CGColor
         emitterCell.redRange = 0.0
         emitterCell.redSpeed = 0.0
@@ -384,13 +395,19 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                                 var blankView0 = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
                                 UIView.transitionFromView((cell0!.backgroundView)!, toView:blankView0, duration: self.kMatchDisappearDuration, options: UIViewAnimationOptions.TransitionCurlUp, completion:
                                     {(Bool) in
-                                    self.stopMatchSparkles()
+                                        //
                                     }
                                 )
                                 
                                 var blankView1 = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
                                 UIView.transitionFromView((cell1!.backgroundView)!, toView:blankView1, duration: self.kMatchDisappearDuration, options: UIViewAnimationOptions.TransitionCurlUp, completion: nil)
                                 
+                                var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(self.kMatchDisappearDuration*(1.0/2.0))) * Double(NSEC_PER_SEC)))
+                                dispatch_after(dispatchTime, dispatch_get_main_queue(),
+                                    {
+                                        self.stopMatchSparkles()
+                                    })
+
                                 // check for all matches
                                 if self.allMatched()
                                 {

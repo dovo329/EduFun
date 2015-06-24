@@ -10,6 +10,8 @@
 
 @interface EmitterTestViewController ()
 
+@property (nonatomic, strong) CAEmitterLayer *emitterLayer;
+
 @end
 
 @implementation EmitterTestViewController
@@ -17,11 +19,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    CAEmitterLayer *emitterLayer = [CAEmitterLayer layer];
+    self.emitterLayer = [CAEmitterLayer layer];
     
-    emitterLayer.emitterPosition = CGPointMake(self.view.frame.origin.x + (self.view.frame.size.width/2), self.view.frame.origin.y + (self.view.frame.size.height/2));
-    emitterLayer.emitterSize = CGSizeMake(self.view.frame.size.width/4.0, self.view.frame.size.height/4.0);
-    emitterLayer.emitterShape = kCAEmitterLayerRectangle;
+    self.emitterLayer.emitterPosition = CGPointMake(self.view.frame.origin.x + (self.view.frame.size.width/2), self.view.frame.origin.y + (self.view.frame.size.height/2));
+    self.emitterLayer.emitterSize = CGSizeMake(self.view.frame.size.width/4.0, self.view.frame.size.height/4.0);
+    self.emitterLayer.emitterShape = kCAEmitterLayerRectangle;
         
     CAEmitterCell *emitterCell = [CAEmitterCell emitterCell];
     emitterCell.contents = (id)[UIImage imageNamed:@"StarCell"].CGImage;
@@ -52,9 +54,22 @@
     emitterCell.scaleSpeed = -0.125;
     emitterCell.scaleRange = 0.0;
     
-    emitterLayer.emitterCells = [NSArray arrayWithObject:emitterCell];
+    self.emitterLayer.emitterCells = [NSArray arrayWithObject:emitterCell];
         
-    [self.view.layer addSublayer:emitterLayer];
+    [self.view.layer addSublayer:self.emitterLayer];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"touches Began!");
+    /*NSString *animationPath = [NSString stringWithFormat:@"%@.birthRate", self.emitterLayer.name];
+    CABasicAnimation *birthRateAnimation = [CABasicAnimation animationWithKeyPath:animationPath];
+    birthRateAnimation.fromValue = [NSNumber numberWithFloat:30.0];
+    birthRateAnimation.toValue = [NSNumber numberWithFloat:0.0];
+    birthRateAnimation.removedOnCompletion = NO;
+    birthRateAnimation.duration = 1.0;
+    [self.emitterLayer addAnimation:birthRateAnimation forKey:@"birthRate"];*/
+    self.emitterLayer.lifetime = 0.0;
 }
 
 - (void)didReceiveMemoryWarning {
