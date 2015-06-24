@@ -17,5 +17,6 @@
 #import "ColoringBookViewController.h"
 #import "PaletteViewController.h"
 #import "EmitterTestViewController.h"
+#import "THLabel.h"
 
 #endif

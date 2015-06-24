@@ -29,8 +29,12 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     var card2dArr = Array<Array<Card>>()
     let kCellReuseId : String = "cell.reuse.id"
     var flippedCnt = 0
-    var completeLabel : UILabel = UILabel()
-    var elapsedTimeLabel : UILabel = UILabel()
+    //var completeLabel : UILabel = UILabel()
+    //var elapsedTimeLabel : UILabel = UILabel()
+    
+    var completeLabel : THLabel = THLabel()
+    var elapsedTimeLabel : THLabel = THLabel()
+    
     let startTime = NSDate()
     
     var elapsedTime : Double = 0.0
@@ -487,35 +491,35 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         return allMatched
     }
     
-    func rotateViewRecurse(label: UILabel, durationPerRotation: NSTimeInterval, numRotationsLeft: Int)
+    func rotateViewRecurse(view: UIView, durationPerRotation: NSTimeInterval, numRotationsLeft: Int)
     {
         UIView.animateWithDuration(
             durationPerRotation/2.0, delay: 0.0, options: UIViewAnimationOptions.CurveLinear,
             animations:
             {(_) -> (Void)
-                in label.transform = CGAffineTransformMakeRotation(π)
+                in view.transform = CGAffineTransformMakeRotation(π)
             },
             completion:
             {(_) -> (Void) in
                 UIView.animateWithDuration(durationPerRotation/2.0, delay: 0.0, options: UIViewAnimationOptions.CurveLinear,
                     animations:
                     {(_) -> (Void)
-                        in label.transform = CGAffineTransformMakeRotation(0)
+                        in view.transform = CGAffineTransformMakeRotation(0)
                     },
                     completion:
                     {(_) -> (Void) in
                         if (numRotationsLeft > 1)
                         {
-                            self.rotateViewRecurse(label, durationPerRotation: durationPerRotation, numRotationsLeft: numRotationsLeft-1)
+                            self.rotateViewRecurse(view, durationPerRotation: durationPerRotation, numRotationsLeft: numRotationsLeft-1)
                         }
                     }
                 )
         })
     }
     
-    func rotateAndScaleView(label: UILabel, duration: CGFloat, numRotations: Int, maxScale: CGFloat)
+    func rotateAndScaleView(view: UIView, duration: CGFloat, numRotations: Int, maxScale: CGFloat)
     {
-        rotateViewRecurse(label, durationPerRotation: NSTimeInterval(duration/CGFloat(numRotations)), numRotationsLeft:numRotations)
+        rotateViewRecurse(view, durationPerRotation: NSTimeInterval(duration/CGFloat(numRotations)), numRotationsLeft:numRotations)
     }
     
     func roundCompleteMethod() {
@@ -524,20 +528,46 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         let elapsedTime: Double = endTime.timeIntervalSinceDate(self.startTime);
         println("Time: \(elapsedTime) seconds");
         
+        var containView : UIView = UIView(frame: CGRect(x: 0.0, y: (view.frame.size.height/2.0)-50.0, width: view.frame.size.width, height: view.frame.size.height/6.0))
+        
         completeLabel.text = "Complete!"
-        completeLabel.font = UIFont(name: "Super Mario 256", size: 50.0)
-        completeLabel.frame = CGRect(x: 0.0, y: (view.frame.size.height/2.0)-50.0, width: view.frame.size.width, height: view.frame.size.height/9.0)
+        completeLabel.font = UIFont(name: "Super Mario 256", size: 45.0)
+        completeLabel.frame = CGRect(x: 0.0, y: 0.0, width: containView.frame.size.width, height: containView.frame.size.height*2.0/3.0)
         completeLabel.textAlignment = NSTextAlignment.Center
         completeLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
+        completeLabel.textColor = UIColor.yellowColor()
+        completeLabel.strokeSize = 3.0
+        completeLabel.strokeColor = UIColor.blackColor()
+        completeLabel.shadowOffset = CGSizeMake(3.0, 3.0)
+        completeLabel.shadowColor = UIColor.blackColor()
+        completeLabel.shadowBlur = 1.0
+        //completeLabel.gradientStartColor = UIColor.yellowColor()
+        //completeLabel.gradientEndColor = UIColor.whiteColor()
+        //completeLabel.innerShadowColor = UIColor.blackColor()
+        //completeLabel.innerShadowOffset = CGSizeMake(2.0, 2.0)
+        //completeLabel.innerShadowBlur = 2.0
+        containView.addSubview(completeLabel)
         
-        rotateAndScaleView(completeLabel, duration:CGFloat(kConfettiTime*1.5), numRotations:6, maxScale:3.0)
+        //rotateAndScaleView(completeLabel, duration:CGFloat(kConfettiTime*5.0), numRotations:1, maxScale:3.0)
         
         elapsedTimeLabel.text = NSString(format: "Time: %.0f seconds", elapsedTime) as? String
         elapsedTimeLabel.font = UIFont(name: "Super Mario 256", size: 25.0)
-        elapsedTimeLabel.frame = CGRect(x: 0.0, y: completeLabel.frame.origin.y+completeLabel.frame.size.height, width: view.frame.size.width, height: view.frame.size.height/16.0)
-        elapsedTimeLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
+        //elapsedTimeLabel.frame = CGRect(x: 0.0, y: completeLabel.frame.origin.y+completeLabel.frame.size.height, width: view.frame.size.width, height: view.frame.size.height/16.0)
+        elapsedTimeLabel.frame = CGRect(x: 0.0, y: completeLabel.frame.size.height, width: containView.frame.size.width, height: containView.frame.size.height/2.0)
         elapsedTimeLabel.textAlignment = NSTextAlignment.Center
-        rotateAndScaleView(elapsedTimeLabel, duration:CGFloat(kConfettiTime*1.5), numRotations:6, maxScale:3.0)
+        elapsedTimeLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
+        elapsedTimeLabel.textColor = UIColor.yellowColor()
+        elapsedTimeLabel.strokeSize = 1.5
+        elapsedTimeLabel.strokeColor = UIColor.blackColor()
+        elapsedTimeLabel.shadowOffset = CGSizeMake(1.5, 1.5)
+        elapsedTimeLabel.shadowColor = UIColor.blackColor()
+        elapsedTimeLabel.shadowBlur = 1.0
+        //rotateAndScaleView(elapsedTimeLabel, duration:CGFloat(kConfettiTime*1.5), numRotations:6, maxScale:3.0)
+        containView.addSubview(elapsedTimeLabel)
+        
+        view.addSubview(containView)
+        
+        rotateAndScaleView(containView, duration:CGFloat(kConfettiTime*1.5), numRotations:2, maxScale:3.0)
         
         var confettiEmitterCell : CAEmitterCell = CAEmitterCell()
         var confettiCellUIImage : UIImage = UIImage(named:"ConfettiCell")!
