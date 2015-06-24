@@ -9,6 +9,9 @@
 import UIKit
 
 class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    
+    let kFlipDuration : NSTimeInterval = 0.5
+    let kMatchDisappearDuration : NSTimeInterval = 0.5
     let numRows : Int = 4
     let numColumns : Int = 4
     let imageNameArr : [String] = ["BearCard", "CarCard", "FlowerCard", "IceCreamCard","RainbowCard", "StarCard", "CatCard", "PenguinCard"]
@@ -263,7 +266,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                     var newImgView : UIImageView?
                     newImgView = UIImageView(image: UIImage(named: card.imageName!)!)
                     newImgView!.frame = ((cell!.backgroundView)!).frame
-                    UIView.transitionFromView((cell!.backgroundView)!, toView:newImgView!, duration: 1, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
+                    UIView.transitionFromView((cell!.backgroundView)!, toView:newImgView!, duration: kFlipDuration, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
                     ((cell!.backgroundView)!) = newImgView!
                     card2dArr[indexPath.section][indexPath.row].isFlipped = true
                 } else {
@@ -309,14 +312,14 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                                 var indexPath0 = NSIndexPath(forRow: compareArr[0].column, inSection: compareArr[0].row)
                                 var cell0 = collectionView.cellForItemAtIndexPath(indexPath0)
                                 var blankView0 = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-                                UIView.transitionFromView((cell0!.backgroundView)!, toView:blankView0, duration: 1, options: UIViewAnimationOptions.TransitionCurlUp, completion: nil)
+                                UIView.transitionFromView((cell0!.backgroundView)!, toView:blankView0, duration: self.kFlipDuration, options: UIViewAnimationOptions.TransitionCurlUp, completion: nil)
                                 
                                 self.card2dArr[compareArr[1].row][compareArr[1].column].matched = true
                                 self.card2dArr[compareArr[1].row][compareArr[1].column].isFlipped = false
                                 var indexPath1 = NSIndexPath(forRow: compareArr[1].column, inSection: compareArr[1].row)
                                 var cell1 = collectionView.cellForItemAtIndexPath(indexPath1)
                                 var blankView1 = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-                                UIView.transitionFromView((cell1!.backgroundView)!, toView:blankView1, duration: 1, options: UIViewAnimationOptions.TransitionCurlUp, completion: nil)
+                                UIView.transitionFromView((cell1!.backgroundView)!, toView:blankView1, duration: self.kMatchDisappearDuration, options: UIViewAnimationOptions.TransitionCurlUp, completion: nil)
                                 
                                 // check for all matches
                                 if self.allMatched()
@@ -330,7 +333,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                                 var cell0 = collectionView.cellForItemAtIndexPath(indexPath0)
                                 var newImgView0 = UIImageView(image: UIImage(named: "CardBack")!)
                                 newImgView0.frame = ((cell0!.backgroundView)!).frame
-                                UIView.transitionFromView((cell0!.backgroundView)!, toView:newImgView0, duration: 1, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
+                                UIView.transitionFromView((cell0!.backgroundView)!, toView:newImgView0, duration: self.kFlipDuration, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
                                 ((cell0!.backgroundView)!) = newImgView0
                                 self.card2dArr[compareArr[0].row][compareArr[0].column].isFlipped = false
                                 
@@ -338,7 +341,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                                 var cell1 = collectionView.cellForItemAtIndexPath(indexPath1)
                                 var newImgView1 = UIImageView(image: UIImage(named: "CardBack")!)
                                 newImgView1.frame = ((cell1!.backgroundView)!).frame
-                                UIView.transitionFromView((cell1!.backgroundView)!, toView:newImgView1, duration: 1, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
+                                UIView.transitionFromView((cell1!.backgroundView)!, toView:newImgView1, duration: self.kFlipDuration, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
                                 ((cell1!.backgroundView)!) = newImgView1
                                 self.card2dArr[compareArr[1].row][compareArr[1].column].isFlipped = false
                             }
