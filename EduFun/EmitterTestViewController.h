@@ -1,5 +1,5 @@
 //
-//  PaletteViewController.h
+//  EmitterTestViewController.h
 //  EduFun
 //
 //  Created by Douglas Voss on 6/24/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PaletteViewController : UIViewController
+@interface EmitterTestViewController : UIViewController
 
 @end

@@ -1,23 +1,22 @@
 //
-//  TestObjCViewController.m
+//  EmitterTestViewController.m
 //  EduFun
 //
-//  Created by Douglas Voss on 6/13/15.
+//  Created by Douglas Voss on 6/24/15.
 //  Copyright (c) 2015 DougsApps. All rights reserved.
 //
 
-#import "TestObjCViewController.h"
+#import "EmitterTestViewController.h"
 
-@interface TestObjCViewController ()
+@interface EmitterTestViewController ()
 
 @end
 
-@implementation TestObjCViewController
+@implementation EmitterTestViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor orangeColor];
 }
 
 - (void)didReceiveMemoryWarning {
