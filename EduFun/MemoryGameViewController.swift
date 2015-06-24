@@ -15,6 +15,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     let kMatchDisappearDuration : NSTimeInterval = 3.0
     let kSparkleLifetimeMean : Float = 1.5
     let kSparkleLifetimeVariance : Float = 0.5
+    let kConfettiTime : NSTimeInterval = 2.0
+    
     let numRows : Int = 4
     let numColumns : Int = 4
     let imageNameArr : [String] = ["BearCard", "CarCard", "FlowerCard", "IceCreamCard","RainbowCard", "StarCard", "CatCard", "PenguinCard"]
@@ -240,6 +242,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         view.addSubview(elapsedTimeLabel)
         
         setupMatchSparkles()
+        
+        roundCompleteMethod()
     }
 
     func collectionViewConstraints() {
@@ -499,6 +503,59 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         UIView.animateWithDuration(3.0) {
             self.elapsedTimeLabel.transform = CGAffineTransformMakeScale(2.0, 2.0)
         }
+        
+        var confettiEmitterCell : CAEmitterCell = CAEmitterCell()
+        var confettiCellUIImage : UIImage = UIImage(named:"ConfettiCell")!
+        confettiEmitterCell.contents = confettiCellUIImage.CGImage;
+        
+        var confettiEmitterLayer = CAEmitterLayer()
+        confettiEmitterLayer.emitterPosition = CGPointMake(self.view.frame.origin.x + (self.view.frame.size.width/2), self.view.frame.origin.y - confettiCellUIImage.size.height)
+        confettiEmitterLayer.emitterSize = CGSizeMake(self.view.frame.size.width, 0.0)
+        confettiEmitterLayer.emitterShape = kCAEmitterLayerLine
+        
+        confettiEmitterCell.name = "ConfettiCell"
+        
+        confettiEmitterCell.birthRate = 50
+        confettiEmitterCell.lifetime = 5
+        confettiEmitterCell.lifetimeRange = 0
+        confettiEmitterCell.color = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1.0).CGColor
+        confettiEmitterCell.redRange = 0.8
+        confettiEmitterCell.redSpeed = 0.0
+        confettiEmitterCell.blueRange = 0.8
+        confettiEmitterCell.blueSpeed = 0.0
+        confettiEmitterCell.greenRange = 0.8
+        confettiEmitterCell.greenSpeed = 0.0
+        confettiEmitterCell.alphaSpeed = 0.0
+        
+        confettiEmitterCell.spin = 0.0
+        confettiEmitterCell.spinRange = 1.5
+        
+        confettiEmitterCell.velocity = 125
+        confettiEmitterCell.velocityRange = 0
+        confettiEmitterCell.yAcceleration = 100
+        confettiEmitterCell.emissionLongitude = CGFloat(M_PI)
+        confettiEmitterCell.emissionRange = CGFloat(M_PI)/4
+        
+        confettiEmitterCell.scale = 0.4
+        confettiEmitterCell.scaleSpeed = 0.0
+        confettiEmitterCell.scaleRange = 0.1
+        
+        confettiEmitterLayer.emitterCells = [confettiEmitterCell]
+        
+        confettiEmitterLayer.beginTime = CACurrentMediaTime()
+        view.layer.addSublayer(confettiEmitterLayer)
+        
+        var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(kConfettiTime)) * Double(NSEC_PER_SEC)))
+        dispatch_after(dispatchTime, dispatch_get_main_queue(),
+        {
+            confettiEmitterLayer.lifetime = 0.0
+        })
+        
+        dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(2*kConfettiTime)) * Double(NSEC_PER_SEC)))
+        dispatch_after(dispatchTime, dispatch_get_main_queue(),
+        {
+            confettiEmitterLayer.removeFromSuperlayer()
+        })
     }
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
