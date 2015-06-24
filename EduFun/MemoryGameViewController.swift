@@ -29,28 +29,30 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     
     var elapsedTime : Double = 0.0
     
-    var emitterLayer : CAEmitterLayer!
-    var emitterCell : CAEmitterCell!
+    var emitterLayerArr : [CAEmitterLayer]! = Array()
     
     func stopMatchSparkles() {
-        emitterLayer.removeFromSuperlayer()
+        var emitterLayer : CAEmitterLayer
+        for emitterLayer in emitterLayerArr {
+            emitterLayer.removeFromSuperlayer()
+        }
     }
     
-    func startMatchSparkles(#frame: CGRect) {
-        emitterLayer.emitterPosition = CGPointMake(frame.origin.x + frame.size.width/2, frame.origin.y + frame.size.height/2)
-        emitterLayer.emitterSize = CGSizeMake(frame.width, frame.height)
-        emitterLayer.emitterShape = kCAEmitterLayerRectangle
-        view.layer.addSublayer(emitterLayer)
+    func startMatchSparkles(#frame1: CGRect, frame2: CGRect) {
+        emitterLayerArr[0].emitterPosition = CGPointMake(frame1.origin.x + frame1.size.width/2, frame1.origin.y + frame1.size.height/2)
+        emitterLayerArr[0].emitterSize = frame1.size
+        emitterLayerArr[0].emitterShape = kCAEmitterLayerRectangle
+        view.layer.addSublayer(emitterLayerArr[0])
+        
+        emitterLayerArr[1].emitterPosition = CGPointMake(frame2.origin.x + frame2.size.width/2, frame2.origin.y + frame2.size.height/2)
+        emitterLayerArr[1].emitterSize = frame2.size
+        emitterLayerArr[1].emitterShape = kCAEmitterLayerRectangle
+        view.layer.addSublayer(emitterLayerArr[1])
     }
     
     func setupMatchSparkles() {
         
-        emitterLayer = CAEmitterLayer()
-        emitterLayer.emitterPosition = CGPointMake(view.frame.origin.x + (view.frame.size.width/2), view.frame.origin.y + (view.frame.size.height/2))
-        emitterLayer.emitterSize = CGSizeMake(self.view.frame.size.width/4.0, self.view.frame.size.height/4.0);
-        emitterLayer.emitterShape = kCAEmitterLayerRectangle
-        
-        emitterCell = CAEmitterCell()
+        var emitterCell : CAEmitterCell = CAEmitterCell()
         emitterCell.contents = UIImage(named: "StarCell")!.CGImage
         emitterCell.name = "StarCell"
         
@@ -76,8 +78,14 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         emitterCell.scaleSpeed = -0.125
         emitterCell.scaleRange = 0.0
         
-        emitterLayer.emitterCells = [emitterCell]
-        //view.layer.addSublayer(emitterLayer)
+        var emitterLayer0 = CAEmitterLayer()!
+        emitterLayer0.emitterCells = [emitterCell]
+        
+        var emitterLayer1 = CAEmitterLayer()!
+        emitterLayer1.emitterCells = [emitterCell]
+        
+        emitterLayerArr.append(emitterLayer0)
+        emitterLayerArr.append(emitterLayer1)
     }
     
     override func viewDidLoad() {
@@ -364,8 +372,15 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                                 self.card2dArr[compareArr[0].row][compareArr[0].column].matched = true
                                 self.card2dArr[compareArr[0].row][compareArr[0].column].isFlipped = false
                                 var indexPath0 = NSIndexPath(forRow: compareArr[0].column, inSection: compareArr[0].row)
+                                self.card2dArr[compareArr[1].row][compareArr[1].column].matched = true
+                                self.card2dArr[compareArr[1].row][compareArr[1].column].isFlipped = false
+                                var indexPath1 = NSIndexPath(forRow: compareArr[1].column, inSection: compareArr[1].row)
+                                
                                 var cell0 = collectionView.cellForItemAtIndexPath(indexPath0)
-                                self.startMatchSparkles(frame:cell0!.frame)
+                                var cell1 = collectionView.cellForItemAtIndexPath(indexPath1)
+                                
+                                self.startMatchSparkles(frame1:cell0!.frame, frame2:cell1!.frame)
+                                
                                 var blankView0 = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
                                 UIView.transitionFromView((cell0!.backgroundView)!, toView:blankView0, duration: self.kMatchDisappearDuration, options: UIViewAnimationOptions.TransitionCurlUp, completion:
                                     {(Bool) in
@@ -373,10 +388,6 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                                     }
                                 )
                                 
-                                self.card2dArr[compareArr[1].row][compareArr[1].column].matched = true
-                                self.card2dArr[compareArr[1].row][compareArr[1].column].isFlipped = false
-                                var indexPath1 = NSIndexPath(forRow: compareArr[1].column, inSection: compareArr[1].row)
-                                var cell1 = collectionView.cellForItemAtIndexPath(indexPath1)
                                 var blankView1 = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
                                 UIView.transitionFromView((cell1!.backgroundView)!, toView:blankView1, duration: self.kMatchDisappearDuration, options: UIViewAnimationOptions.TransitionCurlUp, completion: nil)
                                 
