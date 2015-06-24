@@ -18,6 +18,7 @@
 		A5554D4C1B3239AE002B06E5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */; };
 		A595C3E11B3B0A2E001C6040 /* PaletteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A595C3E01B3B0A2E001C6040 /* PaletteViewController.m */; };
 		A595C3E41B3B0B53001C6040 /* EmitterTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A595C3E31B3B0B53001C6040 /* EmitterTestViewController.m */; };
+		A595C3EA1B3B4990001C6040 /* SuperMario256.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A595C3E91B3B4990001C6040 /* SuperMario256.ttf */; };
 		A5B85EB51B276636008012F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85EB41B276636008012F7 /* AppDelegate.swift */; };
 		A5B85EBE1B276636008012F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B85EBC1B276636008012F7 /* Main.storyboard */; };
 		A5B85EC01B276636008012F7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5B85EBF1B276636008012F7 /* Images.xcassets */; };
@@ -85,7 +86,7 @@
 		A5112C151B2D0E7F00215DA2 /* OBShapedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBShapedView.m; sourceTree = "<group>"; };
 		A532ADE01B27959F00A46930 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		A53600551B351E0600443B93 /* SVGKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SVGKit.xcodeproj; path = SVGKit/SVGKit.xcodeproj; sourceTree = "<group>"; };
-		A536006B1B35394000443B93 /* MonkeySketch.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MonkeySketch.svg; sourceTree = "<group>"; };
+		A536006B1B35394000443B93 /* MonkeySketch.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = MonkeySketch.svg; path = EduFun/MonkeySketch.svg; sourceTree = "<group>"; };
 		A536FE721B350D2C00443B93 /* ColoringBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColoringBookViewController.h; path = ../ColoringBookViewController.h; sourceTree = "<group>"; };
 		A536FE731B350D2C00443B93 /* ColoringBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColoringBookViewController.m; path = ../ColoringBookViewController.m; sourceTree = "<group>"; };
 		A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -93,6 +94,7 @@
 		A595C3E01B3B0A2E001C6040 /* PaletteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaletteViewController.m; sourceTree = "<group>"; };
 		A595C3E21B3B0B53001C6040 /* EmitterTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmitterTestViewController.h; sourceTree = "<group>"; };
 		A595C3E31B3B0B53001C6040 /* EmitterTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmitterTestViewController.m; sourceTree = "<group>"; };
+		A595C3E91B3B4990001C6040 /* SuperMario256.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SuperMario256.ttf; sourceTree = "<group>"; };
 		A5B85EAF1B276636008012F7 /* EduFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EduFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B85EB31B276636008012F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5B85EB41B276636008012F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -109,7 +111,7 @@
 		A5CA0F511B2F67FA008BD79D /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Art/UIImage+Resize.m"; sourceTree = "<group>"; };
 		A5CA0F521B2F67FA008BD79D /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RoundedCorner.h"; path = "Art/UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCorner.m"; path = "Art/UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
-		A5EBCCC41B361F0E006E52D6 /* mtnHouse.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mtnHouse.svg; sourceTree = "<group>"; };
+		A5EBCCC41B361F0E006E52D6 /* mtnHouse.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = mtnHouse.svg; path = EduFun/mtnHouse.svg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A595C3E61B3B4902001C6040 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A595C3E81B3B4924001C6040 /* Vector */,
+				A595C3E71B3B490B001C6040 /* Fonts */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		A595C3E71B3B490B001C6040 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A595C3E91B3B4990001C6040 /* SuperMario256.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+		A595C3E81B3B4924001C6040 /* Vector */ = {
+			isa = PBXGroup;
+			children = (
+				A5EBCCC41B361F0E006E52D6 /* mtnHouse.svg */,
+				A536006B1B35394000443B93 /* MonkeySketch.svg */,
+			);
+			name = Vector;
+			sourceTree = "<group>";
+		};
 		A5B85EA61B276636008012F7 = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +188,7 @@
 				A5CA0F501B2F67FA008BD79D /* UIImage+Resize.h */,
 				A5CA0F511B2F67FA008BD79D /* UIImage+Resize.m */,
 				A5CA0F521B2F67FA008BD79D /* UIImage+RoundedCorner.h */,
+				A595C3E61B3B4902001C6040 /* Resources */,
 				A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */,
 				A5112C141B2D0E7F00215DA2 /* OBShapedView.h */,
 				A5112C151B2D0E7F00215DA2 /* OBShapedView.m */,
@@ -189,8 +218,6 @@
 				A5112C0E1B2D030200215DA2 /* Header.h */,
 				A536FE721B350D2C00443B93 /* ColoringBookViewController.h */,
 				A536FE731B350D2C00443B93 /* ColoringBookViewController.m */,
-				A5EBCCC41B361F0E006E52D6 /* mtnHouse.svg */,
-				A536006B1B35394000443B93 /* MonkeySketch.svg */,
 				A5B85EB41B276636008012F7 /* AppDelegate.swift */,
 				A532ADE01B27959F00A46930 /* Card.swift */,
 				A5B85ED81B2767E3008012F7 /* MemoryGameViewController.swift */,
@@ -336,6 +363,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A536006C1B35394000443B93 /* MonkeySketch.svg in Resources */,
+				A595C3EA1B3B4990001C6040 /* SuperMario256.ttf in Resources */,
 				A5B85EC31B276636008012F7 /* LaunchScreen.xib in Resources */,
 				A5B85EC01B276636008012F7 /* Images.xcassets in Resources */,
 				A5B85EBE1B276636008012F7 /* Main.storyboard in Resources */,

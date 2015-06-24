@@ -9,6 +9,8 @@
 import UIKit
 import QuartzCore
 
+let π : CGFloat = CGFloat(M_PI)
+
 class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     let kFlipDuration : NSTimeInterval = 0.5
@@ -87,8 +89,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         emitterCell.velocity = 200
         emitterCell.velocityRange = 50
         emitterCell.yAcceleration = 400
-        emitterCell.emissionLongitude = -CGFloat(M_PI) / 2
-        emitterCell.emissionRange = CGFloat(M_PI) / 6
+        emitterCell.emissionLongitude = -π / 2
+        emitterCell.emissionRange = π / 6
         
         emitterCell.scale = 0.25
         emitterCell.scaleSpeed = -0.125
@@ -485,20 +487,58 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         return allMatched
     }
     
+    func rotateOnceCompleteLabel(#durationPerRotation: NSTimeInterval, numRotationsLeft: Int)
+    {
+        UIView.animateWithDuration(
+            durationPerRotation/2.0, delay: 0.0, options: UIViewAnimationOptions.CurveLinear,
+            animations:
+            {(_) -> (Void)
+                in self.completeLabel.transform = CGAffineTransformMakeRotation(π)
+            },
+            completion:
+            {(_) -> (Void) in
+                UIView.animateWithDuration(durationPerRotation/2.0, delay: 0.0, options: UIViewAnimationOptions.CurveLinear,
+                    animations:
+                    {(_) -> (Void)
+                        in self.completeLabel.transform = CGAffineTransformMakeRotation(0)
+                    },
+                    completion:
+                    {(_) -> (Void) in
+                        if (numRotationsLeft > 1)
+                        {
+                            self.rotateOnceCompleteLabel(durationPerRotation: durationPerRotation, numRotationsLeft: numRotationsLeft-1)
+                        }
+                    }
+                )
+        })
+    }
+    
+    func rotateAndScaleCompleteLabel(#duration: CGFloat, numRotations: Int, maxScale: CGFloat)
+    {
+        rotateOnceCompleteLabel(durationPerRotation: NSTimeInterval(duration/CGFloat(numRotations)), numRotationsLeft:numRotations)
+    }
+    
     func roundCompleteMethod() {
         println("Complete!")
         let endTime = NSDate();
         let elapsedTime: Double = endTime.timeIntervalSinceDate(self.startTime);
         println("Time: \(elapsedTime) seconds");
         
-        self.completeLabel.text = "Complete!"
-        self.completeLabel.font = UIFont(name: "ChalkDuster", size: 25.0)
-        self.completeLabel.frame = CGRect(x: self.view.frame.size.width/2.0, y: self.view.frame.size.height/4.0, width: self.view.frame.size.width, height: self.view.frame.size.height/3.0)
-        UIView.animateWithDuration(3.0) {
-            self.completeLabel.transform = CGAffineTransformMakeScale(2.0, 2.0)
-        }
+        completeLabel.text = "Complete!"
+        completeLabel.font = UIFont(name: "Super Mario 256", size: 50.0)
+        completeLabel.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height/3.0)
+        completeLabel.textAlignment = NSTextAlignment.Center
+        completeLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
+        
+        rotateAndScaleCompleteLabel(duration:2.0, numRotations:3, maxScale:3.0)
+        
+        //UIView.animateWithDuration(2.0) {
+            //self.completeLabel.transform = CGAffineTransformMakeRotation(π)
+            //self.completeLabel.transform = CGAffineTransformMakeScale(2.0, 2.0)
+        //}
+
         self.elapsedTimeLabel.text = NSString(format: "Time: %.0f seconds", elapsedTime) as? String
-        self.elapsedTimeLabel.font = UIFont(name: "ChalkDuster", size: 25.0)
+        self.elapsedTimeLabel.font = UIFont(name: "Super Mario 256", size: 25.0)
         self.elapsedTimeLabel.frame = CGRect(x: self.view.frame.size.width/2.0, y: self.view.frame.size.height/4.0+100.0, width: self.view.frame.size.width, height: self.view.frame.size.height/3.0)
         UIView.animateWithDuration(3.0) {
             self.elapsedTimeLabel.transform = CGAffineTransformMakeScale(2.0, 2.0)
@@ -533,8 +573,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         confettiEmitterCell.velocity = 125
         confettiEmitterCell.velocityRange = 0
         confettiEmitterCell.yAcceleration = 100
-        confettiEmitterCell.emissionLongitude = CGFloat(M_PI)
-        confettiEmitterCell.emissionRange = CGFloat(M_PI)/4
+        confettiEmitterCell.emissionLongitude = π
+        confettiEmitterCell.emissionRange = π/4
         
         confettiEmitterCell.scale = 0.4
         confettiEmitterCell.scaleSpeed = 0.0
