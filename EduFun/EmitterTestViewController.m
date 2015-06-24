@@ -20,42 +20,47 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.emitterLayer = [CAEmitterLayer layer];
-    
-    self.emitterLayer.emitterPosition = CGPointMake(self.view.frame.origin.x + (self.view.frame.size.width/2), self.view.frame.origin.y + (self.view.frame.size.height/2));
-    self.emitterLayer.emitterSize = CGSizeMake(self.view.frame.size.width/4.0, self.view.frame.size.height/4.0);
-    self.emitterLayer.emitterShape = kCAEmitterLayerRectangle;
-        
+
     CAEmitterCell *emitterCell = [CAEmitterCell emitterCell];
-    emitterCell.contents = (id)[UIImage imageNamed:@"StarCell"].CGImage;
-    emitterCell.name = @"StarCell";
+    UIImage *cellUIImage = [UIImage imageNamed:@"ConfettiCell"];
+    emitterCell.contents = (id)cellUIImage.CGImage;
+    
+    self.emitterLayer.emitterPosition = CGPointMake(self.view.frame.origin.x + (self.view.frame.size.width/2), self.view.frame.origin.y - cellUIImage.size.height);
+    //self.emitterLayer.emitterPosition = CGPointMake(self.view.frame.origin.x + (self.view.frame.size.width/2), self.view.frame.origin.y);
+    self.emitterLayer.emitterSize = CGSizeMake(self.view.frame.size.width, 0.0);
+    self.emitterLayer.emitterShape = kCAEmitterLayerLine;
         
-    emitterCell.birthRate = 40;
-    emitterCell.lifetime = 1.5;
-    emitterCell.lifetimeRange = 0.5;
-    emitterCell.color = [UIColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:1.0].CGColor;
-    emitterCell.redRange = 0.0;
+
+    emitterCell.name = @"ConfettiCell";
+        
+    emitterCell.birthRate = 50;
+    emitterCell.lifetime = 5;
+    emitterCell.lifetimeRange = 0;
+    emitterCell.color = [UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1.0].CGColor;
+    emitterCell.redRange = 0.8;
     emitterCell.redSpeed = 0.0;
-    emitterCell.blueRange = 0.0;
-    emitterCell.blueSpeed = 1.0;
-    emitterCell.greenRange = 0.0;
-    emitterCell.greenSpeed = -1.0;
+    emitterCell.blueRange = 0.8;
+    emitterCell.blueSpeed = 0.0;
+    emitterCell.greenRange = 0.8;
+    emitterCell.greenSpeed = 0.0;
     emitterCell.alphaSpeed = 0.0;
 
     emitterCell.spin = 0.0;
-    emitterCell.spinRange = 10.0;
+    emitterCell.spinRange = 1.5;
     
-    emitterCell.velocity = 200;
-    emitterCell.velocityRange = 50;
-    emitterCell.yAcceleration = 400;
-    emitterCell.emissionLongitude = -M_PI / 2;
-    emitterCell.emissionRange = M_PI/6;
+    emitterCell.velocity = 125;
+    emitterCell.velocityRange = 0;
+    emitterCell.yAcceleration = 100;
+    emitterCell.emissionLongitude = M_PI;
+    emitterCell.emissionRange = M_PI/4;
     
-    emitterCell.scale = 0.25;
-    emitterCell.scaleSpeed = -0.125;
-    emitterCell.scaleRange = 0.0;
+    emitterCell.scale = 0.4;
+    emitterCell.scaleSpeed = 0.0;
+    emitterCell.scaleRange = 0.1;
     
     self.emitterLayer.emitterCells = [NSArray arrayWithObject:emitterCell];
-        
+    
+    self.emitterLayer.beginTime = CACurrentMediaTime();
     [self.view.layer addSublayer:self.emitterLayer];
 }
 
