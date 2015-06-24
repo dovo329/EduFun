@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QuartzCore
 
 class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
@@ -31,44 +32,71 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     var emitterLayer : CAEmitterLayer!
     var emitterCell : CAEmitterCell!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        emitterLayer = CALayer() as! CAEmitterLayer
+    func setupMatchSparkles() {
+                emitterLayer = CAEmitterLayer()
         emitterLayer.emitterPosition = CGPointMake(view.frame.origin.x + (view.frame.size.width/2), view.frame.origin.y + (view.frame.size.height/2))
-        emitterLayer.emitterSize = view.frame.size
+        emitterLayer.emitterSize = CGSizeMake(self.view.frame.size.width/4.0, self.view.frame.size.height/4.0);
         emitterLayer.emitterShape = kCAEmitterLayerRectangle
         
         emitterCell = CAEmitterCell()
-        emitterCell.contents = UIImage(named: "StarCell")
+        emitterCell.contents = UIImage(named: "StarCell")!.CGImage
         emitterCell.name = "StarCell"
         
-        emitterCell.birthRate = 150
-        emitterCell.lifetime = 1.0
+        emitterCell.birthRate = 40
+        emitterCell.lifetime = 1.5
         emitterCell.lifetimeRange = 0.5
-        emitterCell.color = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1.0).CGColor
-        emitterCell.redRange = 1.0
-        emitterCell.redSpeed = 0.5
-        emitterCell.blueRange = 1.0
-        emitterCell.blueSpeed = 0.5
-        emitterCell.greenRange = 1.0
-        emitterCell.greenSpeed = 0.5
-        emitterCell.alphaSpeed = -0.2
+        emitterCell.color = UIColor(red: 1.0, green: 1.0, blue: 0.0, alpha: 1.0).CGColor
+        emitterCell.redRange = 0.0
+        emitterCell.redSpeed = 0.0
+        emitterCell.blueRange = 0.0
+        emitterCell.blueSpeed = 1.0
+        emitterCell.greenRange = 0.0
+        emitterCell.greenSpeed = -1.0
+        emitterCell.alphaSpeed = 0.0
         
-        emitterCell.velocity = 50
-        emitterCell.velocityRange = 20
-        emitterCell.yAcceleration = -100
+        emitterCell.velocity = 200
+        emitterCell.velocityRange = 50
+        emitterCell.yAcceleration = 400
         emitterCell.emissionLongitude = -CGFloat(M_PI) / 2
-        emitterCell.emissionRange = CGFloat(M_PI) / 4
+        emitterCell.emissionRange = CGFloat(M_PI) / 6
         
-        emitterCell.scale = 1.0
-        emitterCell.scaleSpeed = 1.0
-        emitterCell.scaleRange = 1.0
+        emitterCell.scale = 0.25
+        emitterCell.scaleSpeed = -0.125
+        emitterCell.scaleRange = 0.0
         
-        var cellArr : [CAEmitterCell] = Array(arrayLiteral: emitterCell)
-        emitterLayer.emitterCells = cellArr
-        
+        emitterLayer.emitterCells = [emitterCell]
         view.layer.addSublayer(emitterLayer)
+        
+        /*
+        emitterCell.birthRate = 40;
+        emitterCell.lifetime = 1.5;
+        emitterCell.lifetimeRange = 0.5;
+        emitterCell.color = [UIColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:1.0].CGColor;
+        emitterCell.redRange = 0.0;
+        emitterCell.redSpeed = 0.0;
+        emitterCell.blueRange = 0.0;
+        emitterCell.blueSpeed = 1.0;
+        emitterCell.greenRange = 0.0;
+        emitterCell.greenSpeed = -1.0;
+        emitterCell.alphaSpeed = 0.0;
+        
+        emitterCell.spin = 0.0;
+        emitterCell.spinRange = 10.0;
+        
+        emitterCell.velocity = 200;
+        emitterCell.velocityRange = 50;
+        emitterCell.yAcceleration = 400;
+        emitterCell.emissionLongitude = -M_PI / 2;
+        emitterCell.emissionRange = M_PI/6;
+        
+        emitterCell.scale = 0.25;
+        emitterCell.scaleSpeed = -0.125;
+        emitterCell.scaleRange = 0.0;
+        */
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         view.addSubview(bgImgView)
         
@@ -204,7 +232,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         view.addSubview(completeLabel)
         view.addSubview(elapsedTimeLabel)
         
-        //roundCompleteMethod()
+        setupMatchSparkles()
     }
 
     func collectionViewConstraints() {
