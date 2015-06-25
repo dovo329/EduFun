@@ -94,7 +94,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         emitterCell.emissionLongitude = -π / 2
         emitterCell.emissionRange = π / 6
         
-        emitterCell.scale = 0.25
+        //emitterCell.scale = 0.25
+        emitterCell.scale = view.frame.size.width*(0.25/320.0)
         emitterCell.scaleSpeed = -0.125
         emitterCell.scaleRange = 0.0
         
