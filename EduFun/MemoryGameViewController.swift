@@ -249,7 +249,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         
         setupMatchSparkles()
         
-        //roundCompleteMethod()
+        roundCompleteMethod()
     }
 
     func collectionViewConstraints() {
@@ -638,14 +638,59 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         dispatch_after(dispatchTime, dispatch_get_main_queue(),
         {
             confettiEmitterLayer.lifetime = 0.0
+            var newGameButton : UIButton = UIButton(frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8, self.view.frame.width/2, 30.0)) as UIButton
+            newGameButton.setTitle("New Game", forState: UIControlState.Normal)
+            newGameButton.layer.borderColor = UIColor.blackColor().CGColor
+            newGameButton.layer.borderWidth = 2.0
+            newGameButton.layer.cornerRadius = 10.0
+            newGameButton.layer.shadowColor = UIColor.blackColor().CGColor
+            newGameButton.layer.shadowRadius = 3.0
+            newGameButton.layer.shadowOpacity = 0.7
+            newGameButton.layer.shadowOffset = CGSizeMake(3.0, 3.0)
+            newGameButton.layer.masksToBounds = true
+            
+            let gradientLayer1 = CAGradientLayer()
+            var gradientLayer1Rect = newGameButton.bounds
+            gradientLayer1Rect.size.height /= 2.0
+            gradientLayer1.frame = gradientLayer1Rect
+            gradientLayer1.colors = [
+                self.cgColorForRed(64.0, green:255.0, blue:64.0),
+                self.cgColorForRed(128.0, green:255.0, blue:128.0),
+            ]
+            gradientLayer1.startPoint = CGPoint(x: 0.0, y: 0.0)
+            gradientLayer1.endPoint = CGPoint(x: 0.0, y: 1.0)
+            newGameButton.layer.addSublayer(gradientLayer1)
+            
+            let gradientLayer2 = CAGradientLayer()
+            var gradientLayer2Rect = newGameButton.bounds
+            gradientLayer2Rect.size.height /= 2.0
+            gradientLayer2Rect.origin.y += gradientLayer2Rect.size.height
+            gradientLayer2.frame = gradientLayer2Rect
+            gradientLayer2.colors = [
+                self.cgColorForRed(0.0, green:255.0, blue:0.0),
+                self.cgColorForRed(0.0, green:128.0, blue:0.0),
+            ]
+            gradientLayer2.startPoint = CGPoint(x: 0.0, y: 0.0)
+            gradientLayer2.endPoint = CGPoint(x: 0.0, y: 1.0)
+            newGameButton.layer.addSublayer(gradientLayer2)
+            
+            newGameButton.titleLabel!.font = UIFont(name: "Super Mario 256", size: 15.0)
+            newGameButton.setTitleColor(UIColor.yellowColor(), forState: UIControlState.Normal)
+            newGameButton.setTitleShadowColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            //newGameButton.backgroundColor = UIColor.greenColor()
+            self.view.addSubview(newGameButton)
         })
         
         dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(2*kConfettiTime)) * Double(NSEC_PER_SEC)))
         dispatch_after(dispatchTime, dispatch_get_main_queue(),
         {
             confettiEmitterLayer.removeFromSuperlayer()
-            self.dismissViewControllerAnimated(true, completion: nil)
+            //self.dismissViewControllerAnimated(true, completion: nil)
         })
+    }
+    
+    func cgColorForRed(red: CGFloat, green: CGFloat, blue: CGFloat) -> AnyObject {
+        return UIColor(red: red/255.0, green: green/255.0, blue: blue/255.0, alpha: 1.0).CGColor as AnyObject
     }
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
