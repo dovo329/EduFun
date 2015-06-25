@@ -22,7 +22,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     let numRows : Int = 4
     let numColumns : Int = 4
     let imageNameArr : [String] = ["BearCard", "CarCard", "FlowerCard", "IceCreamCard","RainbowCard", "StarCard", "CatCard", "PenguinCard"]
-    var collectionView: UICollectionView?
+    var collectionView: UICollectionView!
     let cardImg : UIImage = UIImage(named: "IceCreamCard")!
     var card2dArr = Array<Array<Card>>()
     let kCellReuseId : String = "cell.reuse.id"
@@ -189,11 +189,11 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         layout.minimumLineSpacing = 0
 
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
-        collectionView!.dataSource = self
-        collectionView!.delegate = self
-        collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: kCellReuseId)
-        collectionView!.backgroundColor = UIColor.whiteColor()
-        collectionView!.scrollEnabled = false
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: kCellReuseId)
+        collectionView.backgroundColor = UIColor.whiteColor()
+        collectionView.scrollEnabled = false
         
         var cardCountDict = [String:Int]()
         for imageName in imageNameArr
@@ -251,8 +251,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             }
             card2dArr.append(columnArr)
         }
-        collectionView?.backgroundColor = UIColor.clearColor()
-        view.addSubview(collectionView!)
+        collectionView.backgroundColor = UIColor.clearColor()
+        view.addSubview(collectionView)
         collectionViewConstraints()
         
         setupMatchSparkles()
@@ -261,50 +261,18 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     }
 
     func collectionViewConstraints() {
-        collectionView!.setTranslatesAutoresizingMaskIntoConstraints(false)
-        let topConstraint =
-        NSLayoutConstraint(
-            item: collectionView!,
-            attribute: .Top,
-            relatedBy: .Equal,
-            toItem: topLayoutGuide,
-            attribute: .Bottom,
-            multiplier: 1.0,
-            constant: 0.0);
-        view.addConstraint(topConstraint);
+        collectionView.setTranslatesAutoresizingMaskIntoConstraints(false)
         
-        let bottomConstraint =
-        NSLayoutConstraint(
-            item: collectionView!,
-            attribute: .Bottom,
-            relatedBy: .Equal,
-            toItem: view,
-            attribute: .Bottom,
-            multiplier: 1.0,
-            constant: 0.0);
-        view.addConstraint(bottomConstraint);
+        let viewsDictionary = ["cv": collectionView]
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[cv]|",
+        options: NSLayoutFormatOptions.AlignAllBaseline,
+        metrics: nil,
+        views: viewsDictionary))
         
-        let leftConstraint =
-        NSLayoutConstraint(
-            item: collectionView!,
-            attribute: .Left,
-            relatedBy: .Equal,
-            toItem: view,
-            attribute: .Left,
-            multiplier: 1.0,
-            constant: 0.0);
-        view.addConstraint(leftConstraint);
-        
-        let rightConstraint =
-        NSLayoutConstraint(
-            item: collectionView!,
-            attribute: .Right,
-            relatedBy: .Equal,
-            toItem: view,
-            attribute: .Right,
-            multiplier: 1.0,
-            constant: 0.0);
-        view.addConstraint(rightConstraint);
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[cv]|",
+        options: NSLayoutFormatOptions.AlignAllBaseline,
+        metrics: nil,
+        views: viewsDictionary))
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -678,9 +646,9 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         {
             confettiEmitterLayer.lifetime = 0.0
             
-            self.makeGradientButtonWithText("New Game", frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8, self.view.frame.width/2, 30.0))
+            self.makeButtonWithText("New Game", frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8, self.view.frame.width/2, self.view.frame.height/16.0))
             
-            self.makeGradientButtonWithText("Quit", frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*6/8, self.view.frame.width/2, 30.0))
+            self.makeButtonWithText("Quit", frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*6/8, self.view.frame.width/2, self.view.frame.height/16.0))
         })
         
         dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(2*confettiTime)) * Double(NSEC_PER_SEC)))
@@ -695,7 +663,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         return UIColor(red: red/255.0, green: green/255.0, blue: blue/255.0, alpha: 1.0).CGColor as AnyObject
     }
     
-    func makeGradientButtonWithText(text : String, frame: CGRect)
+    func makeButtonWithText(text : String, frame: CGRect)
     {
         //var button : UIButton = UIButton(frame: frame) as UIButton
         var button : UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
@@ -710,38 +678,6 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         button.layer.shadowOffset = CGSizeMake(3.0, 3.0)
         button.layer.masksToBounds = true
         button.layer.backgroundColor = UIColor.greenColor().CGColor
-        //button.tintColor = UIColor.greenColor()
-        //button.setTitle("", forState: UIControlState.Normal)
-        //button.setTitle("", forState: UIControlState.Highlighted)
-
-        
-        /*let gradientLayer1 = CAGradientLayer()
-        var gradientLayer1Rect = button.bounds
-        gradientLayer1Rect.size.height /= 2.0
-        gradientLayer1Rect.size.height+=2.0
-        gradientLayer1.frame = gradientLayer1Rect
-        gradientLayer1.colors = [
-            self.cgColorForRed(255.0, green:255.0, blue:255.0),
-            self.cgColorForRed(32.0, green:255.0, blue:32.0),
-        ]
-        gradientLayer1.startPoint = CGPoint(x: 0.0, y: 0.0)
-        gradientLayer1.endPoint = CGPoint(x: 0.0, y: 1.0)
-        gradientLayer1.shouldRasterize = true
-        button.layer.addSublayer(gradientLayer1)
-        
-        let gradientLayer2 = CAGradientLayer()
-        var gradientLayer2Rect = button.bounds
-        gradientLayer2Rect.size.height /= 2.0
-        gradientLayer2Rect.origin.y += (gradientLayer2Rect.size.height)
-        gradientLayer2.frame = gradientLayer2Rect
-        gradientLayer2.colors = [
-            self.cgColorForRed(0.0, green:200.0, blue:0.0),
-            self.cgColorForRed(0.0, green:255.0, blue:0.0),
-        ]
-        gradientLayer2.startPoint = CGPoint(x: 0.0, y: 0.0)
-        gradientLayer2.endPoint = CGPoint(x: 0.0, y: 1.0)
-        //gradientLayer2.shouldRasterize = true
-        button.layer.addSublayer(gradientLayer2)*/
         
         var buttonLabel : THLabel = THLabel()
         buttonLabel.text = text
