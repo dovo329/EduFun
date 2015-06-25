@@ -22,7 +22,6 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     let numRows : Int = 4
     let numColumns : Int = 4
     let imageNameArr : [String] = ["BearCard", "CarCard", "FlowerCard", "IceCreamCard","RainbowCard", "StarCard", "CatCard", "PenguinCard"]
-    let kCardMinMargin : CGFloat = 5.0
     var collectionView: UICollectionView?
     let cardImg : UIImage = UIImage(named: "IceCreamCard")!
     var card2dArr = Array<Array<Card>>()
@@ -178,14 +177,17 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         bgGradLayer.shouldRasterize = true
         view.layer.addSublayer(bgGradLayer)
         
+        let kCardXMargin : CGFloat = view.frame.size.width*(1/69.0)
+        let kCardYMargin : CGFloat = (view.frame.size.height-20.0)*(1/69.0)
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: kCardMinMargin, left: kCardMinMargin, bottom: kCardMinMargin, right: kCardMinMargin)
-        var aspectRatio : CGFloat = cardImg.size.width/cardImg.size.height
-        var width : CGFloat = (CGFloat(view.frame.size.width)-(CGFloat(numColumns+1)*kCardMinMargin))/CGFloat(numColumns)
-        var height : CGFloat = width/aspectRatio
+        layout.sectionInset = UIEdgeInsets(top: kCardYMargin, left: kCardXMargin, bottom: 0, right: kCardXMargin)
+        //var aspectRatio : CGFloat = cardImg.size.width/cardImg.size.height
+        var width : CGFloat = (16.0/69.0)*view.frame.size.width //(CGFloat(view.frame.size.width)-(CGFloat(numColumns+1)*kCardMinMargin))/CGFloat(numColumns)
+        //var height : CGFloat = width/aspectRatio
+        var height : CGFloat = (16.0/69.0)*(view.frame.size.height-20.0)
         layout.itemSize = CGSize(width: width, height: height)
-        layout.minimumInteritemSpacing = kCardMinMargin
-        layout.minimumLineSpacing = kCardMinMargin
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
 
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
         collectionView!.dataSource = self
@@ -737,4 +739,11 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         //println("DeselectedCell at row:\(indexPath.section) column:\(indexPath.row)")
     }
     
+    override func supportedInterfaceOrientations() -> Int {
+        return Int(UIInterfaceOrientation.Portrait.rawValue)
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
 }
