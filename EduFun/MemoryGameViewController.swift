@@ -14,7 +14,7 @@ let π : CGFloat = CGFloat(M_PI)
 class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     let kFlipDuration : NSTimeInterval = 0.5
-    let kMatchDisappearDuration : NSTimeInterval = 3.0
+    let kMatchDisappearDuration : NSTimeInterval = 2.0
     let kSparkleLifetimeMean : Float = 1.5
     let kSparkleLifetimeVariance : Float = 0.5
     let kConfettiTime : NSTimeInterval = 2.0
@@ -644,6 +644,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         dispatch_after(dispatchTime, dispatch_get_main_queue(),
         {
             confettiEmitterLayer.removeFromSuperlayer()
+            self.dismissViewControllerAnimated(true, completion: nil)
         })
     }
     
