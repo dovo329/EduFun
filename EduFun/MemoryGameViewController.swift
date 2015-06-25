@@ -249,7 +249,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         
         setupMatchSparkles()
         
-        roundCompleteMethod()
+        //roundCompleteMethod()
     }
 
     func collectionViewConstraints() {
