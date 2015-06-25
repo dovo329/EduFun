@@ -25,7 +25,6 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     let kCardMinMargin : CGFloat = 5.0
     var collectionView: UICollectionView?
     let cardImg : UIImage = UIImage(named: "IceCreamCard")!
-    let bgImgView : UIImageView = UIImageView(image: UIImage(named: "SkyGrassBackground"))
     var card2dArr = Array<Array<Card>>()
     let kCellReuseId : String = "cell.reuse.id"
     var flippedCnt = 0
@@ -113,7 +112,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addSubview(bgImgView)
+        /*view.addSubview(bgImgView)
         
         bgImgView.setTranslatesAutoresizingMaskIntoConstraints(false)
         
@@ -126,7 +125,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[bg]|",
             options: NSLayoutFormatOptions.AlignAllBaseline,
             metrics: nil,
-            views: viewsDictionary))
+            views: viewsDictionary))*/
         
         /*view.addConstraint(
             NSLayoutConstraint(
@@ -167,6 +166,17 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                 attribute: .Right,
                 multiplier: 1.0,
                 constant: 0.0));*/
+        
+        var bgGradLayer = CAGradientLayer()
+        bgGradLayer.frame = view.bounds
+        bgGradLayer.colors = [
+            cgColorForRed(255.0, green:255.0, blue:255.0),
+            cgColorForRed(0.0, green:217.0, blue:240.0)
+        ]
+        bgGradLayer.startPoint = CGPoint(x:0.0, y:0.0)
+        bgGradLayer.endPoint = CGPoint(x:0.0, y:1.0)
+        bgGradLayer.shouldRasterize = true
+        view.layer.addSublayer(bgGradLayer)
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: kCardMinMargin, left: kCardMinMargin, bottom: kCardMinMargin, right: kCardMinMargin)
@@ -660,7 +670,9 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     
     func makeGradientButtonWithText(text : String, frame: CGRect)
     {
-        var button : UIButton = UIButton(frame: frame) as UIButton
+        //var button : UIButton = UIButton(frame: frame) as UIButton
+        var button : UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+        button.frame = frame
         
         button.layer.borderColor = UIColor.blackColor().CGColor
         button.layer.borderWidth = 2.0
@@ -671,6 +683,10 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         button.layer.shadowOffset = CGSizeMake(3.0, 3.0)
         button.layer.masksToBounds = true
         button.layer.backgroundColor = UIColor.greenColor().CGColor
+        //button.tintColor = UIColor.greenColor()
+        button.setTitle("", forState: UIControlState.Normal)
+        button.setTitle("", forState: UIControlState.Highlighted)
+
         
         /*let gradientLayer1 = CAGradientLayer()
         var gradientLayer1Rect = button.bounds
@@ -720,4 +736,5 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         //println("DeselectedCell at row:\(indexPath.section) column:\(indexPath.row)")
     }
+    
 }
