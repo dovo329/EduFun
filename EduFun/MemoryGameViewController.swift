@@ -17,7 +17,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     let kMatchDisappearDuration : NSTimeInterval = 2.0
     let kSparkleLifetimeMean : Float = 1.5
     let kSparkleLifetimeVariance : Float = 0.5
-    let kConfettiTime : NSTimeInterval = 2.0
+    let kConfetti4STime : NSTimeInterval = 2.0
     
     let numRows : Int = 4
     let numColumns : Int = 4
@@ -552,7 +552,10 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                 // scale on third rotation from 2.0 back down to 1.0
                 completionBlock:
                 {(_)->Void in self.rotateViewRecurse(view, durationPerRotation: NSTimeInterval(duration/3.0), numRotationsLeft:1, scaleIncPerRotation:-1.0, startScale: 2.0,
-                    completionBlock:{(_)->Void in println("completion block called!")}
+                    completionBlock:
+                    {(_)->Void in
+                        //println("completion block called!")
+                    }
                 )}
             )}
         )
@@ -611,7 +614,9 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         
         view.addSubview(containView)
         
-        rotateAndScaleView(containView, duration:CGFloat(kConfettiTime*0.9))
+        var confettiTime = Float(CGFloat(kConfetti4STime/480.0)*CGFloat(self.view.frame.size.height))
+        
+        rotateAndScaleView(containView, duration:CGFloat(confettiTime*0.9))
         //rotateAndScaleView(containView, duration:CGFloat(3.0))
         
         var confettiEmitterCell : CAEmitterCell = CAEmitterCell()
@@ -626,7 +631,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         confettiEmitterCell.name = "ConfettiCell"
         
         confettiEmitterCell.birthRate = 50
-        confettiEmitterCell.lifetime = 5
+        confettiEmitterCell.lifetime = confettiTime
         confettiEmitterCell.lifetimeRange = 0
         confettiEmitterCell.color = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1.0).CGColor
         confettiEmitterCell.redRange = 0.8
@@ -640,13 +645,13 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         confettiEmitterCell.spin = 0.0
         confettiEmitterCell.spinRange = 1.5
         
-        confettiEmitterCell.velocity = 125
+        confettiEmitterCell.velocity = CGFloat((200/480.0)*self.view.frame.size.height)
         confettiEmitterCell.velocityRange = 0
-        confettiEmitterCell.yAcceleration = 100
+        confettiEmitterCell.yAcceleration = CGFloat((150.0/480.0)*self.view.frame.size.height)
         confettiEmitterCell.emissionLongitude = π
         confettiEmitterCell.emissionRange = π/4
         
-        confettiEmitterCell.scale = 0.4
+        confettiEmitterCell.scale = (0.4/320.0)*self.view.frame.size.width
         confettiEmitterCell.scaleSpeed = 0.0
         confettiEmitterCell.scaleRange = 0.1
         
@@ -655,7 +660,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         confettiEmitterLayer.beginTime = CACurrentMediaTime()
         view.layer.addSublayer(confettiEmitterLayer)
         
-        var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(kConfettiTime)) * Double(NSEC_PER_SEC)))
+        var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(confettiTime)) * Double(NSEC_PER_SEC)))
         dispatch_after(dispatchTime, dispatch_get_main_queue(),
         {
             confettiEmitterLayer.lifetime = 0.0
@@ -665,7 +670,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             self.makeGradientButtonWithText("Quit", frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*6/8, self.view.frame.width/2, 30.0))
         })
         
-        dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(2*kConfettiTime)) * Double(NSEC_PER_SEC)))
+        dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(2*confettiTime)) * Double(NSEC_PER_SEC)))
         dispatch_after(dispatchTime, dispatch_get_main_queue(),
         {
             confettiEmitterLayer.removeFromSuperlayer()
