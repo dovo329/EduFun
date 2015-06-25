@@ -72,7 +72,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         
         var emitterCell : CAEmitterCell = CAEmitterCell()
         emitterCell.contents = UIImage(named: "StarCell")!.CGImage
-        emitterCell.name = "StarCell"
+        emitterCell.name = "StarCell" // 🌟
         
         emitterCell.birthRate = 40
         emitterCell.lifetime = kSparkleLifetimeMean
@@ -560,13 +560,19 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     {
         var initialSize : CGSize = label.text!.sizeWithAttributes([NSFontAttributeName : label.font])
         
-        while ( initialSize.width > label.frame.size.width)
+        if (initialSize.width > label.frame.size.width)
         {
-            //[_label setFont:[_label.font fontWithSize:_label.font.pointSize - 1]];
-            label.font = label.font.fontWithSize(label.font.pointSize - 1)
-            
-            //initialSize = [_label.text sizeWithAttributes:@{NSFontAttributeName:_label.font}];
-            initialSize = label.text!.sizeWithAttributes([NSFontAttributeName : label.font])
+            while ( initialSize.width > label.frame.size.width)
+            {
+                label.font = label.font.fontWithSize(label.font.pointSize - 1)
+                initialSize = label.text!.sizeWithAttributes([NSFontAttributeName : label.font])
+            }
+        } else {
+            while ( initialSize.width < label.frame.size.width)
+            {
+                label.font = label.font.fontWithSize(label.font.pointSize + 1)
+                initialSize = label.text!.sizeWithAttributes([NSFontAttributeName : label.font])
+            }
         }
         return label.font.pointSize;
     }
@@ -577,64 +583,48 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         let elapsedTime: Double = endTime.timeIntervalSinceDate(self.startTime);
         println("Time: \(elapsedTime) seconds");
         
-        var containView : UIView = UIView(frame: CGRect(x: 0.0, y: (view.frame.size.height/2.0)-50.0, width: view.frame.size.width, height: view.frame.size.height/4.0))
-        
         completeLabel.text = "Complete!"
         //completeLabel.font = UIFont(name: "Super Mario 256", size: (45.0/320.0)*self.view.frame.size.width)
         //frame.size.height*0.7
-        completeLabel.frame = CGRect(x: 0.0, y: 0.0, width: containView.frame.size.width, height: containView.frame.size.height*2.0/3.0)
-        //completeLabel.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height*2.0/3.0)
-        completeLabel.font = UIFont(name: "Super Mario 256", size: 100.0)
+        //completeLabel.frame = CGRect(x: 0.0, y: containView.frame.size.height*(1.0/8.0), width: containView.frame.size.width, height: containView.frame.size.height*0.667)
+        completeLabel.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: 0.0)
+        completeLabel.font = UIFont(name: "Super Mario 256", size: 45.0)
         completeLabel.font = completeLabel.font.fontWithSize(getFontSizeToFitWidthOfLabel(completeLabel)-5.0)
+        completeLabel.frame.size.height = completeLabel.font.pointSize*1.3
         completeLabel.textAlignment = NSTextAlignment.Center
-        completeLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
         completeLabel.textColor = UIColor.yellowColor()
-        completeLabel.strokeSize = (3.0/320.0)*containView.frame.size.width
+        completeLabel.strokeSize = (3.0/320.0)*completeLabel.frame.size.width
         completeLabel.strokeColor = UIColor.blackColor()
         completeLabel.shadowOffset = CGSizeMake(completeLabel.strokeSize, completeLabel.strokeSize)
         completeLabel.shadowColor = UIColor.blackColor()
-        completeLabel.shadowBlur = (1.0/320.0)*containView.frame.size.width
+        completeLabel.shadowBlur = (1.0/320.0)*completeLabel.frame.size.width
         completeLabel.layer.shouldRasterize = true
         //completeLabel.backgroundColor = UIColor.redColor()
-        
-        //completeLabel.gradientStartColor = UIColor.yellowColor()
-        //completeLabel.gradientEndColor = UIColor.whiteColor()
-        //completeLabel.innerShadowColor = UIColor.blackColor()
-        //completeLabel.innerShadowOffset = CGSizeMake(2.0, 2.0)
-        //completeLabel.innerShadowBlur = 2.0
-        //completeLabel.sizeToFit()
-        //completeLabel.numberOfLines = 1
-        //completeLabel.minimumScaleFactor = 0
-        //completeLabel.adjustsFontSizeToFitWidth = true
-        println("font size is \(completeLabel.font.pointSize)")
-        //println("actual font size is \(getActualFontSizeForLabel(completeLabel))")
-        //println("xheight \(completeLabel.font.xHeight)")
-        //println("hope function is \(getFontSizeToFitWidthOfLabel(completeLabel))")
-        containView.addSubview(completeLabel)
-        //view.addSubview(completeLabel)
-        
-        //rotateAndScaleView(completeLabel, duration:CGFloat(kConfettiTime*5.0), numRotations:1, maxScale:3.0)
-        
+        completeLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
+        //println("completed font size is \(completeLabel.font.pointSize)")
+
         elapsedTimeLabel.text = NSString(format: "Time: %.0f seconds", elapsedTime) as? String
-        //elapsedTimeLabel.font = UIFont(name: "Super Mario 256", size: 25.0)
-        //elapsedTimeLabel.font = UIFont(name: "Super Mario 256", size: (25.0/320.0)*self.view.frame.size.width)
-        //(45.0/320.0)*self.view.frame.size.width
-        //elapsedTimeLabel.frame = CGRect(x: 0.0, y: completeLabel.frame.origin.y+completeLabel.frame.size.height, width: view.frame.size.width, height: view.frame.size.height/16.0)
-        elapsedTimeLabel.frame = CGRect(x: 0.0, y: completeLabel.frame.size.height, width: containView.frame.size.width, height: containView.frame.size.height*1.0/3.0)
-        elapsedTimeLabel.font = UIFont(name: "Super Mario 256", size: elapsedTimeLabel.frame.size.height*0.6)
+        elapsedTimeLabel.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: 0.0)
+        elapsedTimeLabel.font = UIFont(name: "Super Mario 256", size: 25.0)
+        elapsedTimeLabel.font = elapsedTimeLabel.font.fontWithSize(getFontSizeToFitWidthOfLabel(elapsedTimeLabel)-5.0)
+        elapsedTimeLabel.frame.size.height = elapsedTimeLabel.font.pointSize*1.3
+        elapsedTimeLabel.frame.origin.y += completeLabel.frame.size.height
         elapsedTimeLabel.textAlignment = NSTextAlignment.Center
         elapsedTimeLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
         elapsedTimeLabel.textColor = UIColor.yellowColor()
-        elapsedTimeLabel.strokeSize = (1.5/320.0)*containView.frame.size.width
+        elapsedTimeLabel.strokeSize = (1.5/320.0)*elapsedTimeLabel.frame.size.width
         elapsedTimeLabel.strokeColor = UIColor.blackColor()
         elapsedTimeLabel.shadowOffset = CGSizeMake(elapsedTimeLabel.strokeSize, elapsedTimeLabel.strokeSize)
         elapsedTimeLabel.shadowColor = UIColor.blackColor()
-        elapsedTimeLabel.shadowBlur = (1.0/320.0)*containView.frame.size.width
+        elapsedTimeLabel.shadowBlur = (1.0/320.0)*elapsedTimeLabel.frame.size.width
         //elapsedTimeLabel.backgroundColor = UIColor.orangeColor()
+        elapsedTimeLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
         elapsedTimeLabel.layer.shouldRasterize = true
-        //rotateAndScaleView(elapsedTimeLabel, duration:CGFloat(kConfettiTime*1.5), numRotations:6, maxScale:3.0)
-        containView.addSubview(elapsedTimeLabel)
+        //println("completed elapsed time size is \(elapsedTimeLabel.font.pointSize)")
         
+        var containView : UIView = UIView(frame: CGRect(x: 0.0, y: view.frame.size.height*(1.0/3.0), width: view.frame.size.width, height: completeLabel.frame.size.height+elapsedTimeLabel.frame.size.height))
+        containView.addSubview(completeLabel)
+        containView.addSubview(elapsedTimeLabel)
         view.addSubview(containView)
         
         var confettiTime = Float(CGFloat(kConfetti4STime/480.0)*CGFloat(self.view.frame.size.height))
