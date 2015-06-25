@@ -27,9 +27,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     var card2dArr = Array<Array<Card>>()
     let kCellReuseId : String = "cell.reuse.id"
     var flippedCnt = 0
-    //var completeLabel : UILabel = UILabel()
-    //var elapsedTimeLabel : UILabel = UILabel()
-    
+
     var completeLabel : THLabel = THLabel()
     var elapsedTimeLabel : THLabel = THLabel()
     
@@ -256,9 +254,6 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         collectionView?.backgroundColor = UIColor.clearColor()
         view.addSubview(collectionView!)
         collectionViewConstraints()
-        
-        view.addSubview(completeLabel)
-        view.addSubview(elapsedTimeLabel)
         
         setupMatchSparkles()
         
@@ -561,20 +556,36 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         )
     }
     
+    func getFontSizeToFitWidthOfLabel(label: UILabel) -> CGFloat
+    {
+        var initialSize : CGSize = label.text!.sizeWithAttributes([NSFontAttributeName : label.font])
+        
+        while ( initialSize.width > label.frame.size.width)
+        {
+            //[_label setFont:[_label.font fontWithSize:_label.font.pointSize - 1]];
+            label.font = label.font.fontWithSize(label.font.pointSize - 1)
+            
+            //initialSize = [_label.text sizeWithAttributes:@{NSFontAttributeName:_label.font}];
+            initialSize = label.text!.sizeWithAttributes([NSFontAttributeName : label.font])
+        }
+        return label.font.pointSize;
+    }
+    
     func roundCompleteMethod() {
         println("Complete!")
         let endTime = NSDate();
         let elapsedTime: Double = endTime.timeIntervalSinceDate(self.startTime);
         println("Time: \(elapsedTime) seconds");
         
-        var containView : UIView = UIView(frame: CGRect(x: 0.0, y: (view.frame.size.height/2.0)-50.0, width: view.frame.size.width, height: view.frame.size.height/6.0))
+        var containView : UIView = UIView(frame: CGRect(x: 0.0, y: (view.frame.size.height/2.0)-50.0, width: view.frame.size.width, height: view.frame.size.height/4.0))
         
         completeLabel.text = "Complete!"
-        //completeLabel.font = UIFont(name: "Super Mario 256", size: 45.0)
         //completeLabel.font = UIFont(name: "Super Mario 256", size: (45.0/320.0)*self.view.frame.size.width)
         //frame.size.height*0.7
         completeLabel.frame = CGRect(x: 0.0, y: 0.0, width: containView.frame.size.width, height: containView.frame.size.height*2.0/3.0)
-        completeLabel.font = UIFont(name: "Super Mario 256", size: completeLabel.frame.size.height*0.8)
+        //completeLabel.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height*2.0/3.0)
+        completeLabel.font = UIFont(name: "Super Mario 256", size: 100.0)
+        completeLabel.font = completeLabel.font.fontWithSize(getFontSizeToFitWidthOfLabel(completeLabel)-5.0)
         completeLabel.textAlignment = NSTextAlignment.Center
         completeLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
         completeLabel.textColor = UIColor.yellowColor()
@@ -584,12 +595,23 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         completeLabel.shadowColor = UIColor.blackColor()
         completeLabel.shadowBlur = (1.0/320.0)*containView.frame.size.width
         completeLabel.layer.shouldRasterize = true
+        //completeLabel.backgroundColor = UIColor.redColor()
+        
         //completeLabel.gradientStartColor = UIColor.yellowColor()
         //completeLabel.gradientEndColor = UIColor.whiteColor()
         //completeLabel.innerShadowColor = UIColor.blackColor()
         //completeLabel.innerShadowOffset = CGSizeMake(2.0, 2.0)
         //completeLabel.innerShadowBlur = 2.0
+        //completeLabel.sizeToFit()
+        //completeLabel.numberOfLines = 1
+        //completeLabel.minimumScaleFactor = 0
+        //completeLabel.adjustsFontSizeToFitWidth = true
+        println("font size is \(completeLabel.font.pointSize)")
+        //println("actual font size is \(getActualFontSizeForLabel(completeLabel))")
+        //println("xheight \(completeLabel.font.xHeight)")
+        //println("hope function is \(getFontSizeToFitWidthOfLabel(completeLabel))")
         containView.addSubview(completeLabel)
+        //view.addSubview(completeLabel)
         
         //rotateAndScaleView(completeLabel, duration:CGFloat(kConfettiTime*5.0), numRotations:1, maxScale:3.0)
         
@@ -598,8 +620,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         //elapsedTimeLabel.font = UIFont(name: "Super Mario 256", size: (25.0/320.0)*self.view.frame.size.width)
         //(45.0/320.0)*self.view.frame.size.width
         //elapsedTimeLabel.frame = CGRect(x: 0.0, y: completeLabel.frame.origin.y+completeLabel.frame.size.height, width: view.frame.size.width, height: view.frame.size.height/16.0)
-        elapsedTimeLabel.frame = CGRect(x: 0.0, y: completeLabel.frame.size.height, width: containView.frame.size.width, height: containView.frame.size.height/2.0)
-        elapsedTimeLabel.font = UIFont(name: "Super Mario 256", size: elapsedTimeLabel.frame.size.height*0.8)
+        elapsedTimeLabel.frame = CGRect(x: 0.0, y: completeLabel.frame.size.height, width: containView.frame.size.width, height: containView.frame.size.height*1.0/3.0)
+        elapsedTimeLabel.font = UIFont(name: "Super Mario 256", size: elapsedTimeLabel.frame.size.height*0.6)
         elapsedTimeLabel.textAlignment = NSTextAlignment.Center
         elapsedTimeLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
         elapsedTimeLabel.textColor = UIColor.yellowColor()
@@ -608,6 +630,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         elapsedTimeLabel.shadowOffset = CGSizeMake(elapsedTimeLabel.strokeSize, elapsedTimeLabel.strokeSize)
         elapsedTimeLabel.shadowColor = UIColor.blackColor()
         elapsedTimeLabel.shadowBlur = (1.0/320.0)*containView.frame.size.width
+        //elapsedTimeLabel.backgroundColor = UIColor.orangeColor()
         elapsedTimeLabel.layer.shouldRasterize = true
         //rotateAndScaleView(elapsedTimeLabel, duration:CGFloat(kConfettiTime*1.5), numRotations:6, maxScale:3.0)
         containView.addSubview(elapsedTimeLabel)
