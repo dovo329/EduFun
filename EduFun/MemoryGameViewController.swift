@@ -491,26 +491,28 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         return allMatched
     }
     
-    func rotateViewRecurse(view: UIView, durationPerRotation: NSTimeInterval, numRotationsLeft: Int)
+    func rotateViewRecurse(view: UIView, durationPerRotation: NSTimeInterval, numRotationsLeft: Int, scaleIncPerRotation: CGFloat, startScale: CGFloat)
     {
         UIView.animateWithDuration(
             durationPerRotation/2.0, delay: 0.0, options: UIViewAnimationOptions.CurveLinear,
             animations:
-            {(_) -> (Void)
-                in view.transform = CGAffineTransformMakeRotation(π)
+            {(_) -> (Void) in
+                var transform : CGAffineTransform = CGAffineTransformMakeRotation(π)
+                view.transform = CGAffineTransformScale(transform, startScale + (scaleIncPerRotation/2.0), startScale + (scaleIncPerRotation/2.0))
             },
             completion:
             {(_) -> (Void) in
                 UIView.animateWithDuration(durationPerRotation/2.0, delay: 0.0, options: UIViewAnimationOptions.CurveLinear,
                     animations:
-                    {(_) -> (Void)
-                        in view.transform = CGAffineTransformMakeRotation(0)
+                    {(_) -> (Void) in
+                        var transform : CGAffineTransform = CGAffineTransformMakeRotation(0)
+                        view.transform = CGAffineTransformScale(transform, startScale + scaleIncPerRotation, startScale + scaleIncPerRotation)
                     },
                     completion:
                     {(_) -> (Void) in
                         if (numRotationsLeft > 1)
                         {
-                            self.rotateViewRecurse(view, durationPerRotation: durationPerRotation, numRotationsLeft: numRotationsLeft-1)
+                            self.rotateViewRecurse(view, durationPerRotation: durationPerRotation, numRotationsLeft: numRotationsLeft-1, scaleIncPerRotation:scaleIncPerRotation, startScale:(startScale + scaleIncPerRotation))
                         }
                     }
                 )
@@ -519,7 +521,9 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     
     func rotateAndScaleView(view: UIView, duration: CGFloat, numRotations: Int, maxScale: CGFloat)
     {
-        rotateViewRecurse(view, durationPerRotation: NSTimeInterval(duration/CGFloat(numRotations)), numRotationsLeft:numRotations)
+        // start out at zero size
+        view.transform = CGAffineTransformMakeScale(0.0, 0.0)
+        rotateViewRecurse(view, durationPerRotation: NSTimeInterval(duration/CGFloat(numRotations)), numRotationsLeft:numRotations, scaleIncPerRotation:(1.0/CGFloat(numRotations)), startScale: 0.0)
     }
     
     func roundCompleteMethod() {
@@ -567,7 +571,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         
         view.addSubview(containView)
         
-        rotateAndScaleView(containView, duration:CGFloat(kConfettiTime*1.5), numRotations:2, maxScale:3.0)
+        rotateAndScaleView(containView, duration:CGFloat(kConfettiTime*0.9), numRotations:3, maxScale:3.0)
         
         var confettiEmitterCell : CAEmitterCell = CAEmitterCell()
         var confettiCellUIImage : UIImage = UIImage(named:"ConfettiCell")!
