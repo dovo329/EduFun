@@ -670,15 +670,16 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         button.layer.shadowOpacity = 0.7
         button.layer.shadowOffset = CGSizeMake(3.0, 3.0)
         button.layer.masksToBounds = true
+        button.layer.backgroundColor = UIColor.greenColor().CGColor
         
-        let gradientLayer1 = CAGradientLayer()
+        /*let gradientLayer1 = CAGradientLayer()
         var gradientLayer1Rect = button.bounds
         gradientLayer1Rect.size.height /= 2.0
         gradientLayer1Rect.size.height+=2.0
         gradientLayer1.frame = gradientLayer1Rect
         gradientLayer1.colors = [
-            self.cgColorForRed(64.0, green:255.0, blue:64.0),
-            self.cgColorForRed(128.0, green:255.0, blue:128.0),
+            self.cgColorForRed(255.0, green:255.0, blue:255.0),
+            self.cgColorForRed(32.0, green:255.0, blue:32.0),
         ]
         gradientLayer1.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer1.endPoint = CGPoint(x: 0.0, y: 1.0)
@@ -691,13 +692,13 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         gradientLayer2Rect.origin.y += (gradientLayer2Rect.size.height)
         gradientLayer2.frame = gradientLayer2Rect
         gradientLayer2.colors = [
+            self.cgColorForRed(0.0, green:200.0, blue:0.0),
             self.cgColorForRed(0.0, green:255.0, blue:0.0),
-            self.cgColorForRed(0.0, green:128.0, blue:0.0),
         ]
         gradientLayer2.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer2.endPoint = CGPoint(x: 0.0, y: 1.0)
         //gradientLayer2.shouldRasterize = true
-        button.layer.addSublayer(gradientLayer2)
+        button.layer.addSublayer(gradientLayer2)*/
         
         var buttonLabel : THLabel = THLabel()
         buttonLabel.text = text
