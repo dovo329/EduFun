@@ -513,6 +513,31 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         })
     }
     
+    func scaleView(view: UIView, duration: CGFloat)
+    {
+        view.transform = CGAffineTransformMakeScale(0.01, 0.01)
+        
+        UIView.animateWithDuration(
+            NSTimeInterval(duration*(1.0/2.0)), delay: 0.0, options: UIViewAnimationOptions.CurveLinear,
+            animations:
+            {(_) -> (Void) in
+                view.transform = CGAffineTransformMakeScale(1.5, 1.5)
+            },
+            completion:
+            {(_) -> (Void) in
+                UIView.animateWithDuration(
+                    NSTimeInterval(duration*(1.0/2.0)), delay: 0.0, options: UIViewAnimationOptions.CurveLinear,
+                    animations:
+                    {(_) -> (Void) in
+                        view.transform = CGAffineTransformMakeScale(1.0, 1.0)
+                    },
+                    completion:
+                    nil
+                )
+            }
+        )
+    }
+    
     func rotateAndScaleView(view: UIView, duration: CGFloat)
     {
         // start out at (nearly) zero size.  Can't be zero size since this will make the rotation matrix not work when scaling from 0
@@ -611,6 +636,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     func roundCompleteMethod() {
         self.view.addSubview(newGameButton!)
         self.view.addSubview(quitButton!)
+        scaleView(newGameButton!, duration:CGFloat(0.5))
+        scaleView(quitButton!, duration:CGFloat(0.5))
 
         println("Complete!")
         let endTime = NSDate();
