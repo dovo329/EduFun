@@ -90,10 +90,10 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         view.addSubview(collectionView)
         collectionViewConstraints()
         
-        newGameButton = THButton(frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8, self.view.frame.width/2, self.view.frame.height/16.0), text: "New Game")
+        newGameButton = THButton(frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8, self.view.frame.width/2, self.view.frame.height/10.0), text: "New Game")
         newGameButton!.addTarget(self, action: Selector("newGameButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
         
-        quitButton = THButton(frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8 + newGameButton!.frame.size.height+20.0, self.view.frame.width/2, self.view.frame.height/16.0), text:"Quit")
+        quitButton = THButton(frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8 + newGameButton!.frame.size.height+20.0, self.view.frame.width/2, self.view.frame.height/10.0), text:"Quit    ")
         quitButton!.addTarget(self, action: Selector("quitButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
         
         setupMatchSparkles()
@@ -359,6 +359,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                     var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((kFlipDuration) * Double(NSEC_PER_SEC)))
                     dispatch_after(dispatchTime, dispatch_get_main_queue(),
                         {
+                            self.flippedCnt = 0
+                            
                             var compareArr = [Card]()
                             // check for match if 2 cards have been flipped over
                             //println("checkForMatch called")
@@ -381,7 +383,6 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                                 fatalError("more than 2 cards flipped over.  Error alert!")
                             }
                             
-                            self.flippedCnt = 0
                             if (compareArr[0].imageName == compareArr[1].imageName)
                             {
                                 //println("You made a match! Yay!")
