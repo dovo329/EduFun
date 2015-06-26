@@ -35,7 +35,7 @@ class THButton: UIControl {
         label.frame.size = frame.size
         label.text = text
         label.font = UIFont(name: "Super Mario 256", size: 100.0)
-        label.font = label.font.fontWithSize(getFontSizeToFitWidthOfLabel(label)-(5.0*scale))
+        label.font = label.font.fontWithSize(getFontSizeToFitFrameOfLabel(label)-(5.0*scale))
         label.frame.origin.y += label.font.pointSize*1/8.0
         label.textAlignment = NSTextAlignment.Center
         label.textColor = normalTextColor

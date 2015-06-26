@@ -6,11 +6,12 @@
 //  Copyright (c) 2015 DougsApps. All rights reserved.
 //
 
-public func getFontSizeToFitWidthOfLabel(label: UILabel) -> CGFloat
+public func getFontSizeToFitFrameOfLabel(label: UILabel) -> CGFloat
 {
     var initialSize : CGSize = label.text!.sizeWithAttributes([NSFontAttributeName : label.font])
     
-    if initialSize.width > label.frame.size.width
+    if initialSize.width > label.frame.size.width ||
+       initialSize.height > label.frame.size.height
     {
         while initialSize.width > label.frame.size.width ||
               initialSize.height > label.frame.size.height

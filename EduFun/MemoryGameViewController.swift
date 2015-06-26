@@ -542,9 +542,9 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         //completeLabel.font = UIFont(name: "Super Mario 256", size: (45.0/320.0)*self.view.frame.size.width)
         //frame.size.height*0.7
         //completeLabel.frame = CGRect(x: 0.0, y: containView.frame.size.height*(1.0/8.0), width: containView.frame.size.width, height: containView.frame.size.height*0.667)
-        completeLabel.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: 0.0)
+        completeLabel.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height)
         completeLabel.font = UIFont(name: "Super Mario 256", size: 45.0)
-        completeLabel.font = completeLabel.font.fontWithSize(getFontSizeToFitWidthOfLabel(completeLabel)-5.0)
+        completeLabel.font = completeLabel.font.fontWithSize(getFontSizeToFitFrameOfLabel(completeLabel)-5.0)
         completeLabel.frame.size.height = completeLabel.font.pointSize*1.3
         completeLabel.textAlignment = NSTextAlignment.Center
         completeLabel.textColor = UIColor.yellowColor()
@@ -559,9 +559,9 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         //println("completed font size is \(completeLabel.font.pointSize)")
 
         elapsedTimeLabel.text = NSString(format: "Time: %.0f seconds", elapsedTime) as? String
-        elapsedTimeLabel.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: 0.0)
+        elapsedTimeLabel.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height)
         elapsedTimeLabel.font = UIFont(name: "Super Mario 256", size: 25.0)
-        elapsedTimeLabel.font = elapsedTimeLabel.font.fontWithSize(getFontSizeToFitWidthOfLabel(elapsedTimeLabel)-5.0)
+        elapsedTimeLabel.font = elapsedTimeLabel.font.fontWithSize(getFontSizeToFitFrameOfLabel(elapsedTimeLabel)-5.0)
         elapsedTimeLabel.frame.size.height = elapsedTimeLabel.font.pointSize*1.3
         elapsedTimeLabel.frame.origin.y += completeLabel.frame.size.height
         elapsedTimeLabel.textAlignment = NSTextAlignment.Center
