@@ -27,6 +27,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     let kCellReuseId : String = "cell.reuse.id"
     var flippedCnt = 0
     
+    var completeView : UIView!
     var newGameButton : THButton?
     var quitButton    : THButton?
     
@@ -328,14 +329,14 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         
         // only process unmatched cards
         if (!card.matched) {
-            println("selectedCell at row:\(indexPath.section) column:\(indexPath.row) isFlipped:\(card.isFlipped)")
+            //println("selectedCell at row:\(indexPath.section) column:\(indexPath.row) isFlipped:\(card.isFlipped)")
             
             if (flippedCnt < 2)
             {
                 if !card.isFlipped
                 {
                     flippedCnt++
-                    println("flippedCnt=\(flippedCnt)")
+                    //println("flippedCnt=\(flippedCnt)")
                     
                     var newImgView : UIImageView?
                     newImgView = UIImageView(image: UIImage(named: card.imageName!)!)
@@ -383,7 +384,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                             self.flippedCnt = 0
                             if (compareArr[0].imageName == compareArr[1].imageName)
                             {
-                                println("You made a match! Yay!")
+                                //println("You made a match! Yay!")
                                 
                                 self.card2dArr[compareArr[0].row][compareArr[0].column].active = false
                                 self.card2dArr[compareArr[0].row][compareArr[0].column].matched = true
@@ -429,7 +430,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                                     self.roundCompleteMethod()
                                 }
                             } else {
-                                println("Nope, no match for you.")
+                                //println("Nope, no match for you.")
                                 
                                 var indexPath0 = NSIndexPath(forRow: compareArr[0].column, inSection: compareArr[0].row)
                                 var cell0 = collectionView.cellForItemAtIndexPath(indexPath0)!
@@ -454,8 +455,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                                 self.card2dArr[compareArr[1].row][compareArr[1].column].isFlipped = false
                             }
                             
-                            println("Card1 row:\(compareArr[0].row) col:\(compareArr[0].column)")
-                            println("Card2 row:\(compareArr[1].row) col:\(compareArr[1].column)")
+                            //println("Card1 row:\(compareArr[0].row) col:\(compareArr[0].column)")
+                            //println("Card2 row:\(compareArr[1].row) col:\(compareArr[1].column)")
                     })
                 }
             }
@@ -558,6 +559,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     
     func dismissRoundCompleteInfo()
     {
+        completeView.removeFromSuperview()
         newGameButton?.removeFromSuperview()
         quitButton?.removeFromSuperview()
     }
@@ -600,6 +602,10 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         elapsedTimeLabel.layer.shouldRasterize = true
         //elapsedTimeLabel.backgroundColor = UIColor.orangeColor()
         //println("completed elapsed time size is \(elapsedTimeLabel.font.pointSize)")
+        
+        completeView = UIView(frame: CGRect(x: 0.0, y: view.frame.size.height*(1.0/3.0), width: view.frame.size.width, height: completeLabel.frame.size.height+elapsedTimeLabel.frame.size.height))
+        completeView.addSubview(completeLabel)
+        completeView.addSubview(elapsedTimeLabel)
     }
     
     func roundCompleteMethod() {
@@ -611,15 +617,11 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         let elapsedTime: Double = endTime.timeIntervalSinceDate(self.startTime);
         println("Time: \(elapsedTime)")
         
-        var containView : UIView = UIView(frame: CGRect(x: 0.0, y: view.frame.size.height*(1.0/3.0), width: view.frame.size.width, height: completeLabel.frame.size.height+elapsedTimeLabel.frame.size.height))
-        containView.addSubview(completeLabel)
-        containView.addSubview(elapsedTimeLabel)
-        view.addSubview(containView)
+        view.addSubview(completeView)
         
         var confettiTime = Float(CGFloat(kConfetti4STime/480.0)*CGFloat(self.view.frame.size.height))
         
-        rotateAndScaleView(containView, duration:CGFloat(confettiTime*0.9))
-        //rotateAndScaleView(containView, duration:CGFloat(3.0))
+        rotateAndScaleView(completeView, duration:CGFloat(confettiTime*0.9))
         
         var confettiEmitterCell : CAEmitterCell = CAEmitterCell()
         var confettiCellUIImage : UIImage = UIImage(named:"ConfettiCell")!
