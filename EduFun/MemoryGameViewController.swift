@@ -522,30 +522,16 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                 )}
             )}
         )
-    }
-    
-    func getFontSizeToFitWidthOfLabel(label: UILabel) -> CGFloat
-    {
-        var initialSize : CGSize = label.text!.sizeWithAttributes([NSFontAttributeName : label.font])
-        
-        if (initialSize.width > label.frame.size.width)
-        {
-            while ( initialSize.width > label.frame.size.width)
-            {
-                label.font = label.font.fontWithSize(label.font.pointSize - 1)
-                initialSize = label.text!.sizeWithAttributes([NSFontAttributeName : label.font])
-            }
-        } else {
-            while ( initialSize.width < label.frame.size.width)
-            {
-                label.font = label.font.fontWithSize(label.font.pointSize + 1)
-                initialSize = label.text!.sizeWithAttributes([NSFontAttributeName : label.font])
-            }
-        }
-        return label.font.pointSize;
-    }
+    }        
     
     func roundCompleteMethod() {
+        var newGameButton : THButton = THButton(frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8, self.view.frame.width/2, self.view.frame.height/16.0), text: "New Game")
+        self.view.addSubview(newGameButton)
+        
+        var quitButton : THButton = THButton(frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8 + newGameButton.frame.size.height+20.0, self.view.frame.width/2, self.view.frame.height/16.0), text:
+            "Quit      ")
+        self.view.addSubview(quitButton)
+        
         println("Complete!")
         let endTime = NSDate();
         let elapsedTime: Double = endTime.timeIntervalSinceDate(self.startTime);
@@ -646,9 +632,9 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         {
             confettiEmitterLayer.lifetime = 0.0
             
-            self.makeButtonWithText("New Game", frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8, self.view.frame.width/2, self.view.frame.height/16.0))
+            //self.makeButtonWithText("New Game", frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8, self.view.frame.width/2, self.view.frame.height/16.0))
             
-            self.makeButtonWithText("Quit", frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*6/8, self.view.frame.width/2, self.view.frame.height/16.0))
+            //self.makeButtonWithText("Quit", frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*6/8, self.view.frame.width/2, self.view.frame.height/16.0))
         })
         
         dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(2*confettiTime)) * Double(NSEC_PER_SEC)))

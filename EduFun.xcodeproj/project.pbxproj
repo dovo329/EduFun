@@ -29,6 +29,8 @@
 		A5CA0F541B2F67FA008BD79D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F511B2F67FA008BD79D /* UIImage+Resize.m */; };
 		A5CA0F551B2F67FA008BD79D /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */; };
 		A5DB888F1B3B707D00B8CA08 /* THLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DB888E1B3B707D00B8CA08 /* THLabel.m */; };
+		A5EB8DF51B3CC765009A8A3A /* THButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB8DF41B3CC765009A8A3A /* THButton.swift */; };
+		A5EB8DF81B3CCF39009A8A3A /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB8DF71B3CCF39009A8A3A /* Global.swift */; };
 		A5EBCCC51B361F0E006E52D6 /* mtnHouse.svg in Resources */ = {isa = PBXBuildFile; fileRef = A5EBCCC41B361F0E006E52D6 /* mtnHouse.svg */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +116,8 @@
 		A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCorner.m"; path = "Art/UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		A5DB888D1B3B707D00B8CA08 /* THLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLabel.h; sourceTree = "<group>"; };
 		A5DB888E1B3B707D00B8CA08 /* THLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLabel.m; sourceTree = "<group>"; };
+		A5EB8DF41B3CC765009A8A3A /* THButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THButton.swift; sourceTree = "<group>"; };
+		A5EB8DF71B3CCF39009A8A3A /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		A5EBCCC41B361F0E006E52D6 /* mtnHouse.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = mtnHouse.svg; path = EduFun/mtnHouse.svg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -226,6 +230,8 @@
 				A5B85EB41B276636008012F7 /* AppDelegate.swift */,
 				A532ADE01B27959F00A46930 /* Card.swift */,
 				A5B85ED81B2767E3008012F7 /* MemoryGameViewController.swift */,
+				A5EB8DF71B3CCF39009A8A3A /* Global.swift */,
+				A5EB8DF41B3CC765009A8A3A /* THButton.swift */,
 				A595C3E21B3B0B53001C6040 /* EmitterTestViewController.h */,
 				A595C3E31B3B0B53001C6040 /* EmitterTestViewController.m */,
 				A5B85EBC1B276636008012F7 /* Main.storyboard */,
@@ -398,9 +404,11 @@
 				A536FE771B350D2C00443B93 /* ColoringBookViewController.m in Sources */,
 				A595C3E11B3B0A2E001C6040 /* PaletteViewController.m in Sources */,
 				A5CA0F551B2F67FA008BD79D /* UIImage+RoundedCorner.m in Sources */,
+				A5EB8DF81B3CCF39009A8A3A /* Global.swift in Sources */,
 				A5B85EB51B276636008012F7 /* AppDelegate.swift in Sources */,
 				A5112C081B2D019F00215DA2 /* OBShapedButton.m in Sources */,
 				A5CA0F541B2F67FA008BD79D /* UIImage+Resize.m in Sources */,
+				A5EB8DF51B3CC765009A8A3A /* THButton.swift in Sources */,
 				A5B85ED91B2767E3008012F7 /* MemoryGameViewController.swift in Sources */,
 				A595C3E41B3B0B53001C6040 /* EmitterTestViewController.m in Sources */,
 			);
