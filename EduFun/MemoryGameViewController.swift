@@ -523,9 +523,23 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         )
     }        
     
+    func newGameButtonMethod(sender : THButton, event : UIEvent) {
+        NSLog("new game button pressed method")
+        var viewCast : UIView = sender as UIView
+        var touch : UITouch = event.allTouches()!.first as! UITouch
+        var location : CGPoint = touch.locationInView(viewCast)
+        
+        if (!CGRectContainsPoint(sender.bounds, location)) {
+            NSLog("out of bounds")
+        } else {
+            NSLog("in bounds")
+        }
+    }
+    
     func roundCompleteMethod() {
         var newGameButton : THButton = THButton(frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8, self.view.frame.width/2, self.view.frame.height/16.0), text: "New Game")
         self.view.addSubview(newGameButton)
+        newGameButton.addTarget(self, action: Selector("newGameButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
         
         var quitButton : THButton = THButton(frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8 + newGameButton.frame.size.height+20.0, self.view.frame.width/2, self.view.frame.height/16.0), text:
             //"Quit      ")
