@@ -27,6 +27,9 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     let kCellReuseId : String = "cell.reuse.id"
     var flippedCnt = 0
     
+    var newGameButton : THButton?
+    var quitButton    : THButton?
+    
     var cardWidth : CGFloat!
     var cardHeight : CGFloat!
 
@@ -86,42 +89,22 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         view.addSubview(collectionView)
         collectionViewConstraints()
         
-        //collectionView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.Old, context: nil)
+        newGameButton = THButton(frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8, self.view.frame.width/2, self.view.frame.height/16.0), text: "New Game")
+        newGameButton!.addTarget(self, action: Selector("newGameButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
         
-        /*[self.collectionView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionOld context:NULL];
-        
-        - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary  *)change context:(void *)context
-        {
-            // You will get here when the reloadData finished
-            }
-            
-            - (void)dealloc
-                {
-                    [self.collectionView removeObserver:self forKeyPath:@"contentSize" context:NULL];
-        }*/
+        quitButton = THButton(frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8 + newGameButton!.frame.size.height+20.0, self.view.frame.width/2, self.view.frame.height/16.0), text:"Quit")
+        quitButton!.addTarget(self, action: Selector("quitButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
         
         setupMatchSparkles()
         
         setupCardArr()
         
-        //roundCompleteMethod()
+        initRoundCompleteLabels()
+        roundCompleteMethod()
     }
     
     override func viewDidAppear(animated: Bool) {
-        //collectionView.performBatchUpdates({Void -> Void in }, completion: {(Bool) -> Void in self.activateCardArr()})
         self.activateCardArr()
-    }
-    
-    /*override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
-        activateCardArr()
-    }
-    
-    deinit {
-        collectionView.removeObserver(self, forKeyPath: "contentSize", context: nil)
-    }*/
-    
-    override func viewWillDisappear(animated: Bool) {
-        collectionView.removeObserver(self, forKeyPath: "contentSize", context: nil)
     }
     
     func setupMatchSparkles() {
@@ -226,6 +209,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     }
     
     func setupCardArr() {
+        flippedCnt = 0
+        
         var cardCountDict = [String:Int]()
         for imageName in kImageNameArr
         {
@@ -251,7 +236,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             println("i=\(i) imageNameLtdArr=\(imageNameLtdArr)")
         }
         
-        card2dArr.removeAll(keepCapacity: true)
+        card2dArr.removeAll(keepCapacity: false)
         var row : Int = 0
         var column : Int = 0
         for row=0; row < kNumRows; row++
@@ -553,9 +538,14 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     func newGameButtonMethod(sender : THButton, event : UIEvent) {
         // touchupinside must have some built in apple determined finger fudge factor to account for finger fatness so I'll just use what they came up with even though technically the precise press can be somewhat outside the sender's frame and still call this
         setupCardArr()
-	activateCardArr()
-        /*NSLog("new game button pressed method")
-        var viewCast : UIView = sender as UIView
+        activateCardArr()
+        dismissRoundCompleteInfo()
+    }
+    
+    func quitButtonMethod(sender : THButton, event : UIEvent) {
+        NSLog("quit button pressed method")
+        
+        /*var viewCast : UIView = sender as UIView
         var touch : UITouch = event.allTouches()!.first as! UITouch
         var location : CGPoint = touch.locationInView(viewCast)
         
@@ -566,39 +556,15 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         }*/
     }
     
-    func quitButtonMethod(sender : THButton, event : UIEvent) {
-        NSLog("quit button pressed method")
-        var viewCast : UIView = sender as UIView
-        var touch : UITouch = event.allTouches()!.first as! UITouch
-        var location : CGPoint = touch.locationInView(viewCast)
-        
-        if (!CGRectContainsPoint(sender.bounds, location)) {
-            NSLog("out of bounds")
-        } else {
-            NSLog("in bounds")
-        }
+    func dismissRoundCompleteInfo()
+    {
+        newGameButton?.removeFromSuperview()
+        quitButton?.removeFromSuperview()
     }
     
-    func roundCompleteMethod() {
-        var newGameButton : THButton = THButton(frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8, self.view.frame.width/2, self.view.frame.height/16.0), text: "New Game")
-        self.view.addSubview(newGameButton)
-        newGameButton.addTarget(self, action: Selector("newGameButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
-        
-        var quitButton : THButton = THButton(frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8 + newGameButton.frame.size.height+20.0, self.view.frame.width/2, self.view.frame.height/16.0), text:
-            //"Quit      ")
-            "Quit")
-        self.view.addSubview(quitButton)
-        quitButton.addTarget(self, action: Selector("quitButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
-        
-        println("Complete!")
-        let endTime = NSDate();
-        let elapsedTime: Double = endTime.timeIntervalSinceDate(self.startTime);
-        println("Time: \(elapsedTime) seconds");
-        
+    func initRoundCompleteLabels()
+    {
         completeLabel.text = "Complete!"
-        //completeLabel.font = UIFont(name: "Super Mario 256", size: (45.0/320.0)*self.view.frame.size.width)
-        //frame.size.height*0.7
-        //completeLabel.frame = CGRect(x: 0.0, y: containView.frame.size.height*(1.0/8.0), width: containView.frame.size.width, height: containView.frame.size.height*0.667)
         completeLabel.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height)
         completeLabel.font = UIFont(name: "Super Mario 256", size: 45.0)
         completeLabel.font = completeLabel.font.fontWithSize(getFontSizeToFitFrameOfLabel(completeLabel)-5.0)
@@ -611,8 +577,9 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         completeLabel.shadowColor = UIColor.blackColor()
         completeLabel.shadowBlur = (1.0/320.0)*completeLabel.frame.size.width
         completeLabel.layer.shouldRasterize = true
-        //completeLabel.backgroundColor = UIColor.redColor()
         completeLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
+        completeLabel.layer.shouldRasterize = true
+        //completeLabel.backgroundColor = UIColor.redColor()
         //println("completed font size is \(completeLabel.font.pointSize)")
 
         elapsedTimeLabel.text = NSString(format: "Time: %.0f seconds", elapsedTime) as? String
@@ -629,10 +596,20 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         elapsedTimeLabel.shadowOffset = CGSizeMake(elapsedTimeLabel.strokeSize, elapsedTimeLabel.strokeSize)
         elapsedTimeLabel.shadowColor = UIColor.blackColor()
         elapsedTimeLabel.shadowBlur = (1.0/320.0)*elapsedTimeLabel.frame.size.width
-        //elapsedTimeLabel.backgroundColor = UIColor.orangeColor()
         elapsedTimeLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
         elapsedTimeLabel.layer.shouldRasterize = true
+        //elapsedTimeLabel.backgroundColor = UIColor.orangeColor()
         //println("completed elapsed time size is \(elapsedTimeLabel.font.pointSize)")
+    }
+    
+    func roundCompleteMethod() {
+        self.view.addSubview(newGameButton!)
+        self.view.addSubview(quitButton!)
+
+        println("Complete!")
+        let endTime = NSDate();
+        let elapsedTime: Double = endTime.timeIntervalSinceDate(self.startTime);
+        println("Time: \(elapsedTime)")
         
         var containView : UIView = UIView(frame: CGRect(x: 0.0, y: view.frame.size.height*(1.0/3.0), width: view.frame.size.width, height: completeLabel.frame.size.height+elapsedTimeLabel.frame.size.height))
         containView.addSubview(completeLabel)
