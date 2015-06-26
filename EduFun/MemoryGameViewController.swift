@@ -529,7 +529,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         self.view.addSubview(newGameButton)
         
         var quitButton : THButton = THButton(frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8 + newGameButton.frame.size.height+20.0, self.view.frame.width/2, self.view.frame.height/16.0), text:
-            "Quit      ")
+            //"Quit      ")
+            "Quit")
         self.view.addSubview(quitButton)
         
         println("Complete!")
