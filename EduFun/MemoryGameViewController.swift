@@ -26,6 +26,9 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     var card2dArr = Array<Array<Card>>()
     let kCellReuseId : String = "cell.reuse.id"
     var flippedCnt = 0
+    
+    var cardWidth : CGFloat!
+    var cardHeight : CGFloat!
 
     var completeLabel : THLabel = THLabel()
     //var elapsedTimeLabel : THLabel = THLabel()
@@ -67,9 +70,9 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         let kCardYMargin : CGFloat = (view.frame.size.height-20.0)*(1/69.0)
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: kCardYMargin, left: kCardXMargin, bottom: 0, right: kCardXMargin)
-        var width : CGFloat = (16.0/69.0)*view.frame.size.width
-        var height : CGFloat = (16.0/69.0)*(view.frame.size.height-20.0)
-        layout.itemSize = CGSize(width: width, height: height)
+        cardWidth = (16.0/69.0)*view.frame.size.width
+        cardHeight = (16.0/69.0)*(view.frame.size.height-20.0)
+        layout.itemSize = CGSize(width: cardWidth, height: cardHeight)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
 
@@ -83,11 +86,42 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         view.addSubview(collectionView)
         collectionViewConstraints()
         
+        //collectionView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.Old, context: nil)
+        
+        /*[self.collectionView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionOld context:NULL];
+        
+        - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary  *)change context:(void *)context
+        {
+            // You will get here when the reloadData finished
+            }
+            
+            - (void)dealloc
+                {
+                    [self.collectionView removeObserver:self forKeyPath:@"contentSize" context:NULL];
+        }*/
+        
         setupMatchSparkles()
         
-        genCardArr()
+        setupCardArr()
         
-        roundCompleteMethod()
+        //roundCompleteMethod()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        //collectionView.performBatchUpdates({Void -> Void in }, completion: {(Bool) -> Void in self.activateCardArr()})
+        self.activateCardArr()
+    }
+    
+    /*override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+        activateCardArr()
+    }
+    
+    deinit {
+        collectionView.removeObserver(self, forKeyPath: "contentSize", context: nil)
+    }*/
+    
+    override func viewWillDisappear(animated: Bool) {
+        collectionView.removeObserver(self, forKeyPath: "contentSize", context: nil)
     }
     
     func setupMatchSparkles() {
@@ -160,7 +194,38 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         }
     }
     
-    func genCardArr() {
+    func activateCardArr() {
+        for var row=0; row<kNumRows; row++
+        {
+            for var column=0; column<kNumColumns; column++
+            {
+                var indexPath = NSIndexPath(forRow: column, inSection: row)
+                var cell = collectionView.cellForItemAtIndexPath(indexPath)
+                var card : Card = card2dArr[row][column]
+                var toView = UIImageView(image: UIImage(named: "CardBack"))
+                toView.frame = cell!.backgroundView!.frame
+                
+                UIView.transitionFromView((cell!.backgroundView)!, toView:toView, duration: self.kMatchDisappearDuration, options: UIViewAnimationOptions.TransitionFlipFromBottom, completion:
+                    {(Bool) in
+                        cell!.backgroundView = UIImageView(image: UIImage(named: "CardBack"))
+                        toView.removeFromSuperview()
+                    }
+                )
+                card.active = true
+                card.isFlipped = false
+                card2dArr[row][column] = card
+            }
+        }
+        
+        var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(kMatchDisappearDuration)) * Double(NSEC_PER_SEC)))
+        dispatch_after(dispatchTime, dispatch_get_main_queue(),
+        {
+            self.collectionView.reloadData()
+        })
+        
+    }
+    
+    func setupCardArr() {
         var cardCountDict = [String:Int]()
         for imageName in kImageNameArr
         {
@@ -195,8 +260,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             for column=0; column < kNumColumns; column++
             {
                 var card : Card = Card()
-                //card.isFlipped = (arc4random_uniform(2) > 0)
                 card.isFlipped = false
+                card.active = false
                 
                 var imageName : String
                 var randIndex = Int(arc4random_uniform(UInt32(imageNameLtdArr.count)))
@@ -218,7 +283,6 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             }
             card2dArr.append(columnArr)
         }
-        collectionView.reloadData()
     }
     
     func collectionViewConstraints() {
@@ -245,30 +309,35 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-
+        
         var cell : UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellReuseId, forIndexPath: indexPath) as! UICollectionViewCell
         
-        //cell.backgroundColor = .redColor()
-        
         var card : Card = card2dArr[indexPath.section][indexPath.row]
-
-        if (card.isFlipped)
+        
+        if !card.active
         {
-            //cell.backgroundView = UIImageView(image:UIImage(named: card.imageName!)!)
-            cell.backgroundView = UIImageView(image: UIImage(named: card.imageName!)!)
-        } else
+            cell.backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: cardWidth, height: cardHeight))
+        }
+        else
         {
-            cell.backgroundView = UIImageView(image: UIImage(named: "CardBack")!)
+            if card.isFlipped
+            {
+                cell.backgroundView = UIImageView(image: UIImage(named: card.imageName!)!)
+            }
+            else
+            {
+                cell.backgroundView = UIImageView(image: UIImage(named: "CardBack")!)
+            }
         }
         
         //println("storedCell at row:\(indexPath.section) column:\(indexPath.row) isFlipped:\(card.isFlipped) imageNames:\(card.imageName)")
-
+        
         return cell as UICollectionViewCell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
-        var cell = collectionView.cellForItemAtIndexPath(indexPath)
+        var cell = collectionView.cellForItemAtIndexPath(indexPath)!
         
         var card : Card = card2dArr[indexPath.section][indexPath.row]
         
@@ -285,12 +354,14 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                     
                     var newImgView : UIImageView?
                     newImgView = UIImageView(image: UIImage(named: card.imageName!)!)
-                    newImgView!.frame = ((cell!.backgroundView)!).frame
-                    UIView.transitionFromView((cell!.backgroundView)!, toView:newImgView!, duration: kFlipDuration, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: {(Bool)  in
-                           // do nothing
+                    newImgView!.frame = ((cell.backgroundView)!).frame
+                    UIView.transitionFromView((cell.backgroundView)!, toView:newImgView!, duration: kFlipDuration, options: UIViewAnimationOptions.TransitionFlipFromRight,
+                        completion:
+                        {(Bool) in
+                            ((cell.backgroundView)!) = UIImageView(image: UIImage(named: card.imageName!)!)
+                            newImgView?.removeFromSuperview()
                         }
                     )
-                    ((cell!.backgroundView)!) = newImgView!
                     card2dArr[indexPath.section][indexPath.row].isFlipped = true
                 } else {
                     //fatalError("tried to flip a card that was already flipped")
@@ -327,29 +398,39 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                             self.flippedCnt = 0
                             if (compareArr[0].imageName == compareArr[1].imageName)
                             {
-                                //println("You made a match! Yay!")
+                                println("You made a match! Yay!")
                                 
+                                self.card2dArr[compareArr[0].row][compareArr[0].column].active = false
                                 self.card2dArr[compareArr[0].row][compareArr[0].column].matched = true
                                 self.card2dArr[compareArr[0].row][compareArr[0].column].isFlipped = false
                                 var indexPath0 = NSIndexPath(forRow: compareArr[0].column, inSection: compareArr[0].row)
+                                
+                                self.card2dArr[compareArr[1].row][compareArr[1].column].active = false
                                 self.card2dArr[compareArr[1].row][compareArr[1].column].matched = true
                                 self.card2dArr[compareArr[1].row][compareArr[1].column].isFlipped = false
                                 var indexPath1 = NSIndexPath(forRow: compareArr[1].column, inSection: compareArr[1].row)
                                 
-                                var cell0 = collectionView.cellForItemAtIndexPath(indexPath0)
-                                var cell1 = collectionView.cellForItemAtIndexPath(indexPath1)
+                                var cell0 = collectionView.cellForItemAtIndexPath(indexPath0)!
+                                var cell1 = collectionView.cellForItemAtIndexPath(indexPath1)!
                                 
-                                self.startMatchSparkles(frame1:cell0!.frame, frame2:cell1!.frame)
+                                self.startMatchSparkles(frame1:cell0.frame, frame2:cell1.frame)
                                 
-                                var blankView0 = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-                                UIView.transitionFromView((cell0!.backgroundView)!, toView:blankView0, duration: self.kMatchDisappearDuration, options: UIViewAnimationOptions.TransitionCurlUp, completion:
+                                var blankView0 = UIView(frame: CGRect(x: 0, y: 0, width: cell0.backgroundView!.frame.size.width, height: cell0.backgroundView!.frame.size.height))
+                                UIView.transitionFromView((cell0.backgroundView)!, toView:blankView0, duration: self.kMatchDisappearDuration, options: UIViewAnimationOptions.TransitionCurlUp,
+                                    completion:
                                     {(Bool) in
-                                        //
+                                        (cell0.backgroundView)! = UIView(frame: CGRect(x: 0, y: 0, width: cell0.backgroundView!.frame.size.width, height: cell0.backgroundView!.frame.size.height))
+                                        blankView0.removeFromSuperview()
                                     }
                                 )
                                 
                                 var blankView1 = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-                                UIView.transitionFromView((cell1!.backgroundView)!, toView:blankView1, duration: self.kMatchDisappearDuration, options: UIViewAnimationOptions.TransitionCurlUp, completion: nil)
+                                UIView.transitionFromView((cell1.backgroundView)!, toView:blankView1, duration: self.kMatchDisappearDuration, options: UIViewAnimationOptions.TransitionCurlUp,
+                                    completion:
+                                    {(Bool) in
+                                        (cell1.backgroundView)! = UIView(frame: CGRect(x: 0, y: 0, width: cell1.backgroundView!.frame.size.width, height: cell1.backgroundView!.frame.size.height))
+                                        blankView1.removeFromSuperview()
+                                    })
                                 
                                 var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(self.kMatchDisappearDuration*(1.0/2.0))) * Double(NSEC_PER_SEC)))
                                 dispatch_after(dispatchTime, dispatch_get_main_queue(),
@@ -366,19 +447,25 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                                 println("Nope, no match for you.")
                                 
                                 var indexPath0 = NSIndexPath(forRow: compareArr[0].column, inSection: compareArr[0].row)
-                                var cell0 = collectionView.cellForItemAtIndexPath(indexPath0)
+                                var cell0 = collectionView.cellForItemAtIndexPath(indexPath0)!
                                 var newImgView0 = UIImageView(image: UIImage(named: "CardBack")!)
-                                newImgView0.frame = ((cell0!.backgroundView)!).frame
-                                UIView.transitionFromView((cell0!.backgroundView)!, toView:newImgView0, duration: self.kFlipDuration, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
-                                ((cell0!.backgroundView)!) = newImgView0
+                                newImgView0.frame = ((cell0.backgroundView)!).frame
+                                UIView.transitionFromView((cell0.backgroundView)!, toView:newImgView0, duration: self.kFlipDuration, options: UIViewAnimationOptions.TransitionFlipFromRight, completion:
+                                    {(Bool) in
+                                        (cell0.backgroundView)! = UIImageView(image: UIImage(named: "CardBack")!)
+                                        newImgView0.removeFromSuperview()
+                                    })
                                 self.card2dArr[compareArr[0].row][compareArr[0].column].isFlipped = false
                                 
                                 var indexPath1 = NSIndexPath(forRow: compareArr[1].column, inSection: compareArr[1].row)
-                                var cell1 = collectionView.cellForItemAtIndexPath(indexPath1)
+                                var cell1 = collectionView.cellForItemAtIndexPath(indexPath1)!
                                 var newImgView1 = UIImageView(image: UIImage(named: "CardBack")!)
-                                newImgView1.frame = ((cell1!.backgroundView)!).frame
-                                UIView.transitionFromView((cell1!.backgroundView)!, toView:newImgView1, duration: self.kFlipDuration, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
-                                ((cell1!.backgroundView)!) = newImgView1
+                                newImgView1.frame = ((cell1.backgroundView)!).frame
+                                UIView.transitionFromView((cell1.backgroundView)!, toView:newImgView1, duration: self.kFlipDuration, options: UIViewAnimationOptions.TransitionFlipFromRight, completion:
+                                    {(Bool) in
+                                        (cell1.backgroundView)! = UIImageView(image: UIImage(named: "CardBack")!)
+                                        newImgView1.removeFromSuperview()
+                                    })
                                 self.card2dArr[compareArr[1].row][compareArr[1].column].isFlipped = false
                             }
                             
@@ -465,7 +552,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     
     func newGameButtonMethod(sender : THButton, event : UIEvent) {
         // touchupinside must have some built in apple determined finger fudge factor to account for finger fatness so I'll just use what they came up with even though technically the precise press can be somewhat outside the sender's frame and still call this
-        genCardArr()
+        setupCardArr()
         /*NSLog("new game button pressed method")
         var viewCast : UIView = sender as UIView
         var touch : UITouch = event.allTouches()!.first as! UITouch
