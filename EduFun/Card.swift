@@ -17,7 +17,7 @@ class Card {
     
     init () {
         self.isFlipped = false
-        self.imageName = "BearCard"
+        self.imageName = "CardBack"
         self.matched = false
         self.row = 0
         self.column = 0

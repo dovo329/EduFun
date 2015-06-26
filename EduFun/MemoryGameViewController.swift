@@ -19,53 +19,75 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     let kSparkleLifetimeVariance : Float = 0.5
     let kConfetti4STime : NSTimeInterval = 2.0
     
-    let numRows : Int = 4
-    let numColumns : Int = 4
-    let imageNameArr : [String] = ["BearCard", "CarCard", "FlowerCard", "IceCreamCard","RainbowCard", "StarCard", "CatCard", "PenguinCard"]
+    let kNumRows : Int = 4
+    let kNumColumns : Int = 4
+    let kImageNameArr : [String] = ["BearCard", "CarCard", "FlowerCard", "IceCreamCard","RainbowCard", "StarCard", "CatCard", "PenguinCard"]
     var collectionView: UICollectionView!
-    let cardImg : UIImage = UIImage(named: "IceCreamCard")!
     var card2dArr = Array<Array<Card>>()
     let kCellReuseId : String = "cell.reuse.id"
     var flippedCnt = 0
 
     var completeLabel : THLabel = THLabel()
-    var elapsedTimeLabel : THLabel = THLabel()
+    //var elapsedTimeLabel : THLabel = THLabel()
+    var elapsedTimeLabel : THLabel
     
     let startTime = NSDate()
-    
     var elapsedTime : Double = 0.0
     
     var emitterLayerArr : [CAEmitterLayer]! = Array()
     
-    func stopMatchSparkles() {
-        var emitterLayer : CAEmitterLayer
-        
-        for emitterLayer in emitterLayerArr {
-            emitterLayer.lifetime = 0.0
-            
-            var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(kSparkleLifetimeVariance+kSparkleLifetimeMean)) * Double(NSEC_PER_SEC)))
-            dispatch_after(dispatchTime, dispatch_get_main_queue(),
-            {
-                    emitterLayer.removeFromSuperlayer()
-            })
+    init(_ coder: NSCoder? = nil) {
+        elapsedTimeLabel = THLabel()
+        if let coder = coder {
+            super.init(coder: coder)
+        } else {
+            super.init(nibName: nil, bundle:nil)
         }
     }
     
-    func startMatchSparkles(#frame1: CGRect, frame2: CGRect) {
+    required convenience init(coder: NSCoder) {
+        self.init(coder)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        emitterLayerArr[0].emitterPosition = CGPointMake(frame1.origin.x + frame1.size.width/2, frame1.origin.y + frame1.size.height/2)
-        emitterLayerArr[0].emitterSize = frame1.size
-        emitterLayerArr[0].emitterShape = kCAEmitterLayerRectangle
-        emitterLayerArr[0].lifetime = kSparkleLifetimeMean
-        emitterLayerArr[0].beginTime = CACurrentMediaTime()
-        view.layer.addSublayer(emitterLayerArr[0])
+        var bgGradLayer = CAGradientLayer()
+        bgGradLayer.frame = view.bounds
+        bgGradLayer.colors = [
+            cgColorForRed(255.0, green:255.0, blue:255.0),
+            cgColorForRed(0.0, green:217.0, blue:240.0)
+        ]
+        bgGradLayer.startPoint = CGPoint(x:0.0, y:0.0)
+        bgGradLayer.endPoint = CGPoint(x:0.0, y:1.0)
+        bgGradLayer.shouldRasterize = true
+        view.layer.addSublayer(bgGradLayer)
         
-        emitterLayerArr[1].emitterPosition = CGPointMake(frame2.origin.x + frame2.size.width/2, frame2.origin.y + frame2.size.height/2)
-        emitterLayerArr[1].emitterSize = frame2.size
-        emitterLayerArr[1].emitterShape = kCAEmitterLayerRectangle
-        emitterLayerArr[1].lifetime = kSparkleLifetimeMean
-        emitterLayerArr[1].beginTime = CACurrentMediaTime()
-        view.layer.addSublayer(emitterLayerArr[1])
+        let kCardXMargin : CGFloat = view.frame.size.width*(1/69.0)
+        let kCardYMargin : CGFloat = (view.frame.size.height-20.0)*(1/69.0)
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: kCardYMargin, left: kCardXMargin, bottom: 0, right: kCardXMargin)
+        var width : CGFloat = (16.0/69.0)*view.frame.size.width
+        var height : CGFloat = (16.0/69.0)*(view.frame.size.height-20.0)
+        layout.itemSize = CGSize(width: width, height: height)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+
+        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: kCellReuseId)
+        collectionView.backgroundColor = UIColor.clearColor()
+        collectionView.scrollEnabled = false
+        
+        view.addSubview(collectionView)
+        collectionViewConstraints()
+        
+        setupMatchSparkles()
+        
+        genCardArr()
+        
+        roundCompleteMethod()
     }
     
     func setupMatchSparkles() {
@@ -107,109 +129,53 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         emitterLayerArr.append(emitterLayer1)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func startMatchSparkles(#frame1: CGRect, frame2: CGRect) {
         
-        /*view.addSubview(bgImgView)
+        emitterLayerArr[0].emitterPosition = CGPointMake(frame1.origin.x + frame1.size.width/2, frame1.origin.y + frame1.size.height/2)
+        emitterLayerArr[0].emitterSize = frame1.size
+        emitterLayerArr[0].emitterShape = kCAEmitterLayerRectangle
+        emitterLayerArr[0].lifetime = kSparkleLifetimeMean
+        emitterLayerArr[0].beginTime = CACurrentMediaTime()
+        view.layer.addSublayer(emitterLayerArr[0])
         
-        bgImgView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        emitterLayerArr[1].emitterPosition = CGPointMake(frame2.origin.x + frame2.size.width/2, frame2.origin.y + frame2.size.height/2)
+        emitterLayerArr[1].emitterSize = frame2.size
+        emitterLayerArr[1].emitterShape = kCAEmitterLayerRectangle
+        emitterLayerArr[1].lifetime = kSparkleLifetimeMean
+        emitterLayerArr[1].beginTime = CACurrentMediaTime()
+        view.layer.addSublayer(emitterLayerArr[1])
+    }
+    
+    func stopMatchSparkles() {
+        var emitterLayer : CAEmitterLayer
         
-        let viewsDictionary = ["bg": bgImgView]
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[bg]|",
-            options: NSLayoutFormatOptions.AlignAllBaseline,
-            metrics: nil,
-            views: viewsDictionary))
-        
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[bg]|",
-            options: NSLayoutFormatOptions.AlignAllBaseline,
-            metrics: nil,
-            views: viewsDictionary))*/
-        
-        /*view.addConstraint(
-            NSLayoutConstraint(
-                item: bgImgView,
-                attribute: .Top,
-                relatedBy: .Equal,
-                toItem: view,
-                attribute: .Top,
-                multiplier: 1.0,
-                constant: 0.0));
-        
-        view.addConstraint(
-            NSLayoutConstraint(
-                item: bgImgView,
-                attribute: .Bottom,
-                relatedBy: .Equal,
-                toItem: view,
-                attribute: .Bottom,
-                multiplier: 1.0,
-                constant: 0.0));
-        
-        view.addConstraint(
-            NSLayoutConstraint(
-                item: bgImgView,
-                attribute: .Left,
-                relatedBy: .Equal,
-                toItem: view,
-                attribute: .Left,
-                multiplier: 1.0,
-                constant: 0.0));
-        
-        view.addConstraint(
-            NSLayoutConstraint(
-                item: bgImgView,
-                attribute: .Right,
-                relatedBy: .Equal,
-                toItem: view,
-                attribute: .Right,
-                multiplier: 1.0,
-                constant: 0.0));*/
-        
-        var bgGradLayer = CAGradientLayer()
-        bgGradLayer.frame = view.bounds
-        bgGradLayer.colors = [
-            cgColorForRed(255.0, green:255.0, blue:255.0),
-            cgColorForRed(0.0, green:217.0, blue:240.0)
-        ]
-        bgGradLayer.startPoint = CGPoint(x:0.0, y:0.0)
-        bgGradLayer.endPoint = CGPoint(x:0.0, y:1.0)
-        bgGradLayer.shouldRasterize = true
-        view.layer.addSublayer(bgGradLayer)
-        
-        let kCardXMargin : CGFloat = view.frame.size.width*(1/69.0)
-        let kCardYMargin : CGFloat = (view.frame.size.height-20.0)*(1/69.0)
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: kCardYMargin, left: kCardXMargin, bottom: 0, right: kCardXMargin)
-        //var aspectRatio : CGFloat = cardImg.size.width/cardImg.size.height
-        var width : CGFloat = (16.0/69.0)*view.frame.size.width //(CGFloat(view.frame.size.width)-(CGFloat(numColumns+1)*kCardMinMargin))/CGFloat(numColumns)
-        //var height : CGFloat = width/aspectRatio
-        var height : CGFloat = (16.0/69.0)*(view.frame.size.height-20.0)
-        layout.itemSize = CGSize(width: width, height: height)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-
-        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: kCellReuseId)
-        collectionView.backgroundColor = UIColor.clearColor()
-        collectionView.scrollEnabled = false
-        
+        for emitterLayer in emitterLayerArr {
+            emitterLayer.lifetime = 0.0
+            
+            var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(kSparkleLifetimeVariance+kSparkleLifetimeMean)) * Double(NSEC_PER_SEC)))
+            dispatch_after(dispatchTime, dispatch_get_main_queue(),
+            {
+                    emitterLayer.removeFromSuperlayer()
+            })
+        }
+    }
+    
+    func genCardArr() {
         var cardCountDict = [String:Int]()
-        for imageName in imageNameArr
+        for imageName in kImageNameArr
         {
             cardCountDict[imageName] = 0
         }
         
-        var numCards = numRows*numColumns
+        var numCards = kNumRows*kNumColumns
         var numRequiredImages = Int(ceil(Double(numCards)/2.0))
         
-        if (numRequiredImages > imageNameArr.count)
+        if (numRequiredImages > kImageNameArr.count)
         {
             fatalError("Need more cards than have unique images")
         }
         
-        var imageNameSubArr = imageNameArr // swift copies arrays with assignment = operator
+        var imageNameSubArr = kImageNameArr // swift copies arrays with assignment = operator
         var imageNameLtdArr = [String]()
         
         for var i=0; i < numRequiredImages; i++
@@ -220,12 +186,13 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             println("i=\(i) imageNameLtdArr=\(imageNameLtdArr)")
         }
         
+        card2dArr.removeAll(keepCapacity: true)
         var row : Int = 0
         var column : Int = 0
-        for row=0; row < numRows; row++
+        for row=0; row < kNumRows; row++
         {
             var columnArr = Array<Card>()
-            for column=0; column < numColumns; column++
+            for column=0; column < kNumColumns; column++
             {
                 var card : Card = Card()
                 //card.isFlipped = (arc4random_uniform(2) > 0)
@@ -251,14 +218,9 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             }
             card2dArr.append(columnArr)
         }
-        view.addSubview(collectionView)
-        collectionViewConstraints()
-        
-        setupMatchSparkles()
-        
-        roundCompleteMethod()
+        collectionView.reloadData()
     }
-
+    
     func collectionViewConstraints() {
         collectionView.setTranslatesAutoresizingMaskIntoConstraints(false)
         
@@ -275,11 +237,11 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return numColumns
+        return kNumColumns
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return numRows
+        return kNumRows
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -343,7 +305,6 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                             var compareArr = [Card]()
                             // check for match if 2 cards have been flipped over
                             //println("checkForMatch called")
-                            
                             
                             // find all flipped over cards and add them to an array
                             for var row=0; row<self.card2dArr.count; row++
@@ -423,27 +384,6 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                             
                             println("Card1 row:\(compareArr[0].row) col:\(compareArr[0].column)")
                             println("Card2 row:\(compareArr[1].row) col:\(compareArr[1].column)")
-                            
-                            /*
-                            // unflip all cards
-                            self.flippedCnt = 0
-                            // find all flipped over cards and add them to an array
-                            for var row=0; row<self.card2dArr.count; row++
-                            {
-                            for var column=0; column<self.card2dArr[row].count; column++
-                            {
-                            if (self.card2dArr[row][column].isFlipped) {
-                            var indexPath = NSIndexPath(forRow: column, inSection: row)
-                            var cell = collectionView.cellForItemAtIndexPath(indexPath)
-                            
-                            var newImgView = UIImageView(image: UIImage(named: "CardBack")!)
-                            newImgView.frame = ((cell!.backgroundView)!).frame
-                            UIView.transitionFromView((cell!.backgroundView)!, toView:newImgView, duration: 1, options: UIViewAnimationOptions.TransitionFlipFromRight, completion: nil)
-                            ((cell!.backgroundView)!) = newImgView
-                            self.card2dArr[indexPath.section][indexPath.row].isFlipped = false
-                            }
-                            }
-                            }*/
                     })
                 }
             }
@@ -524,7 +464,9 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     }        
     
     func newGameButtonMethod(sender : THButton, event : UIEvent) {
-        NSLog("new game button pressed method")
+        // touchupinside must have some built in apple determined finger fudge factor to account for finger fatness so I'll just use what they came up with even though technically the precise press can be somewhat outside the sender's frame and still call this
+        genCardArr()
+        /*NSLog("new game button pressed method")
         var viewCast : UIView = sender as UIView
         var touch : UITouch = event.allTouches()!.first as! UITouch
         var location : CGPoint = touch.locationInView(viewCast)
@@ -533,7 +475,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             NSLog("out of bounds")
         } else {
             NSLog("in bounds")
-        }
+        }*/
     }
     
     func quitButtonMethod(sender : THButton, event : UIEvent) {
