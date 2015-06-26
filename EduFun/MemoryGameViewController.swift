@@ -513,7 +513,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         })
     }
     
-    func scaleView(view: UIView, duration: CGFloat, delay: CGFloat)
+    func bounceInView(view: UIView, duration: CGFloat, delay: CGFloat)
     {
         view.transform = CGAffineTransformMakeScale(0.01, 0.01)
         
@@ -538,7 +538,24 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         )
     }
     
-    func rotateAndScaleView(view: UIView, duration: CGFloat)
+    func scaleOutRemoveView(view: UIView, duration: CGFloat, delay: CGFloat)
+    {
+        view.transform = CGAffineTransformMakeScale(1.0, 1.0)
+        
+        UIView.animateWithDuration(
+            NSTimeInterval(duration), delay: NSTimeInterval(delay), options: UIViewAnimationOptions.CurveLinear,
+            animations:
+            {(_) -> (Void) in
+                view.transform = CGAffineTransformMakeScale(0.01, 0.01)
+            },
+            completion:
+            {(_) -> (Void) in
+                view.removeFromSuperview()
+            }
+        )
+    }
+    
+    func spin3BounceView(view: UIView, duration: CGFloat)
     {
         // start out at (nearly) zero size.  Can't be zero size since this will make the rotation matrix not work when scaling from 0
         view.transform = CGAffineTransformMakeScale(0.01, 0.01)
@@ -584,9 +601,9 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     
     func dismissRoundCompleteInfo()
     {
-        completeView.removeFromSuperview()
-        newGameButton?.removeFromSuperview()
-        quitButton?.removeFromSuperview()
+        scaleOutRemoveView(completeView, duration: 0.5, delay: 0.0)
+        scaleOutRemoveView(newGameButton!, duration: 0.5, delay: 0.25)
+        scaleOutRemoveView(quitButton!, duration: 0.5, delay: 0.5)
     }
     
     func initRoundCompleteLabels()
@@ -636,8 +653,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     func roundCompleteMethod() {
         self.view.addSubview(newGameButton!)
         self.view.addSubview(quitButton!)
-        scaleView(newGameButton!, duration:CGFloat(0.5), delay:CGFloat(1.7))
-        scaleView(quitButton!, duration:CGFloat(0.5), delay:CGFloat(1.7))
+        bounceInView(newGameButton!, duration:CGFloat(0.5), delay:CGFloat(1.7))
+        bounceInView(quitButton!, duration:CGFloat(0.5), delay:CGFloat(1.7))
 
         println("Complete!")
         let endTime = NSDate();
@@ -648,7 +665,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         
         var confettiTime = Float(CGFloat(kConfetti4STime/480.0)*CGFloat(self.view.frame.size.height))
         
-        rotateAndScaleView(completeView, duration:CGFloat(confettiTime*0.9))
+        spin3BounceView(completeView, duration:CGFloat(confettiTime*0.9))
         
         var confettiEmitterCell : CAEmitterCell = CAEmitterCell()
         var confettiCellUIImage : UIImage = UIImage(named:"ConfettiCell")!
