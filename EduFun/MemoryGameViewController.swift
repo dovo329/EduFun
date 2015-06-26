@@ -536,6 +536,19 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         }
     }
     
+    func quitButtonMethod(sender : THButton, event : UIEvent) {
+        NSLog("quit button pressed method")
+        var viewCast : UIView = sender as UIView
+        var touch : UITouch = event.allTouches()!.first as! UITouch
+        var location : CGPoint = touch.locationInView(viewCast)
+        
+        if (!CGRectContainsPoint(sender.bounds, location)) {
+            NSLog("out of bounds")
+        } else {
+            NSLog("in bounds")
+        }
+    }
+    
     func roundCompleteMethod() {
         var newGameButton : THButton = THButton(frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8, self.view.frame.width/2, self.view.frame.height/16.0), text: "New Game")
         self.view.addSubview(newGameButton)
@@ -545,6 +558,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             //"Quit      ")
             "Quit")
         self.view.addSubview(quitButton)
+        quitButton.addTarget(self, action: Selector("quitButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
         
         println("Complete!")
         let endTime = NSDate();
