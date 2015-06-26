@@ -192,7 +192,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: kCellReuseId)
-        collectionView.backgroundColor = UIColor.whiteColor()
+        collectionView.backgroundColor = UIColor.clearColor()
         collectionView.scrollEnabled = false
         
         var cardCountDict = [String:Int]()
@@ -251,7 +251,6 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             }
             card2dArr.append(columnArr)
         }
-        collectionView.backgroundColor = UIColor.clearColor()
         view.addSubview(collectionView)
         collectionViewConstraints()
         
@@ -264,7 +263,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         collectionView.setTranslatesAutoresizingMaskIntoConstraints(false)
         
         let viewsDictionary = ["cv": collectionView]
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[cv]|",
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-20.0-[cv]|",
         options: NSLayoutFormatOptions.AlignAllBaseline,
         metrics: nil,
         views: viewsDictionary))
