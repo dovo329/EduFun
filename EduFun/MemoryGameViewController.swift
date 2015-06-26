@@ -553,6 +553,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     func newGameButtonMethod(sender : THButton, event : UIEvent) {
         // touchupinside must have some built in apple determined finger fudge factor to account for finger fatness so I'll just use what they came up with even though technically the precise press can be somewhat outside the sender's frame and still call this
         setupCardArr()
+	activateCardArr()
         /*NSLog("new game button pressed method")
         var viewCast : UIView = sender as UIView
         var touch : UITouch = event.allTouches()!.first as! UITouch
