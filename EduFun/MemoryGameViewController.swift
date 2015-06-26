@@ -101,7 +101,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         setupCardArr()
         
         initRoundCompleteLabels()
-        roundCompleteMethod()
+        //roundCompleteMethod()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -621,7 +621,6 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         completeLabel.shadowOffset = CGSizeMake(completeLabel.strokeSize, completeLabel.strokeSize)
         completeLabel.shadowColor = UIColor.blackColor()
         completeLabel.shadowBlur = (1.0/320.0)*completeLabel.frame.size.width
-        completeLabel.layer.shouldRasterize = true
         completeLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
         completeLabel.layer.shouldRasterize = true
         //completeLabel.backgroundColor = UIColor.redColor()
@@ -725,10 +724,6 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             confettiEmitterLayer.removeFromSuperlayer()
             //self.dismissViewControllerAnimated(true, completion: nil)
         })
-    }
-    
-    func cgColorForRed(red: CGFloat, green: CGFloat, blue: CGFloat) -> AnyObject {
-        return UIColor(red: red/255.0, green: green/255.0, blue: blue/255.0, alpha: 1.0).CGColor as AnyObject
     }
     
     func makeButtonWithText(text : String, frame: CGRect)

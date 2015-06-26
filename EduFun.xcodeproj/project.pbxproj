@@ -10,6 +10,7 @@
 		A5112C081B2D019F00215DA2 /* OBShapedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C051B2D019F00215DA2 /* OBShapedButton.m */; };
 		A5112C091B2D019F00215DA2 /* UIImage+ColorAtPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C071B2D019F00215DA2 /* UIImage+ColorAtPixel.m */; };
 		A5112C161B2D0E7F00215DA2 /* OBShapedView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C151B2D0E7F00215DA2 /* OBShapedView.m */; };
+		A524752D1B3E0A26002E0B7B /* TitleScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A524752C1B3E0A26002E0B7B /* TitleScreenViewController.swift */; };
 		A532ADE11B27959F00A46930 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = A532ADE01B27959F00A46930 /* Card.swift */; };
 		A53600621B351EAC00443B93 /* SVGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A536005B1B351E0600443B93 /* SVGKit.framework */; };
 		A53600631B351EAC00443B93 /* SVGKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A536005B1B351E0600443B93 /* SVGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -87,6 +88,7 @@
 		A5112C0E1B2D030200215DA2 /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Header.h; path = ../Header.h; sourceTree = "<group>"; };
 		A5112C141B2D0E7F00215DA2 /* OBShapedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBShapedView.h; sourceTree = "<group>"; };
 		A5112C151B2D0E7F00215DA2 /* OBShapedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBShapedView.m; sourceTree = "<group>"; };
+		A524752C1B3E0A26002E0B7B /* TitleScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleScreenViewController.swift; sourceTree = "<group>"; };
 		A532ADE01B27959F00A46930 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		A53600551B351E0600443B93 /* SVGKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SVGKit.xcodeproj; path = SVGKit/SVGKit.xcodeproj; sourceTree = "<group>"; };
 		A536006B1B35394000443B93 /* MonkeySketch.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = MonkeySketch.svg; path = EduFun/MonkeySketch.svg; sourceTree = "<group>"; };
@@ -225,12 +227,13 @@
 			isa = PBXGroup;
 			children = (
 				A5112C0E1B2D030200215DA2 /* Header.h */,
+				A5EB8DF71B3CCF39009A8A3A /* Global.swift */,
+				A5B85EB41B276636008012F7 /* AppDelegate.swift */,
+				A524752C1B3E0A26002E0B7B /* TitleScreenViewController.swift */,
+				A5B85ED81B2767E3008012F7 /* MemoryGameViewController.swift */,
 				A536FE721B350D2C00443B93 /* ColoringBookViewController.h */,
 				A536FE731B350D2C00443B93 /* ColoringBookViewController.m */,
-				A5B85EB41B276636008012F7 /* AppDelegate.swift */,
 				A532ADE01B27959F00A46930 /* Card.swift */,
-				A5B85ED81B2767E3008012F7 /* MemoryGameViewController.swift */,
-				A5EB8DF71B3CCF39009A8A3A /* Global.swift */,
 				A5EB8DF41B3CC765009A8A3A /* THButton.swift */,
 				A595C3E21B3B0B53001C6040 /* EmitterTestViewController.h */,
 				A595C3E31B3B0B53001C6040 /* EmitterTestViewController.m */,
@@ -407,6 +410,7 @@
 				A5EB8DF81B3CCF39009A8A3A /* Global.swift in Sources */,
 				A5B85EB51B276636008012F7 /* AppDelegate.swift in Sources */,
 				A5112C081B2D019F00215DA2 /* OBShapedButton.m in Sources */,
+				A524752D1B3E0A26002E0B7B /* TitleScreenViewController.swift in Sources */,
 				A5CA0F541B2F67FA008BD79D /* UIImage+Resize.m in Sources */,
 				A5EB8DF51B3CC765009A8A3A /* THButton.swift in Sources */,
 				A5B85ED91B2767E3008012F7 /* MemoryGameViewController.swift in Sources */,
