@@ -9,8 +9,6 @@
 import UIKit
 import QuartzCore
 
-let π : CGFloat = CGFloat(M_PI)
-
 class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     let kFlipDuration : NSTimeInterval = 0.5
@@ -38,7 +36,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     //var elapsedTimeLabel : THLabel = THLabel()
     var elapsedTimeLabel : THLabel
     
-    let startTime = NSDate()
+    var startTime = NSDate()
     var elapsedTime : Double = 0.0
     
     var emitterLayerArr : [CAEmitterLayer]! = Array()
@@ -234,7 +232,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             var randIndex = Int(arc4random_uniform(UInt32(imageNameSubArr.count)))
             imageNameLtdArr.append(imageNameSubArr[randIndex])
             imageNameSubArr.removeAtIndex(randIndex)
-            println("i=\(i) imageNameLtdArr=\(imageNameLtdArr)")
+            //println("i=\(i) imageNameLtdArr=\(imageNameLtdArr)")
         }
         
         card2dArr.removeAll(keepCapacity: false)
@@ -478,105 +476,6 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             }
         }
         return allMatched
-    }
-    
-    func rotateViewRecurse(view: UIView, durationPerRotation: NSTimeInterval, numRotationsLeft: Int, scaleIncPerRotation: CGFloat, startScale: CGFloat, completionBlock: (Void) -> Void)
-    {
-        UIView.animateWithDuration(
-            durationPerRotation/2.0, delay: 0.0, options: UIViewAnimationOptions.CurveLinear,
-            animations:
-            {(_) -> (Void) in
-                var rotateTransform : CGAffineTransform = CGAffineTransformMakeRotation(π)
-                var scaleTransform : CGAffineTransform = CGAffineTransformMakeScale(startScale + (scaleIncPerRotation/2.0), startScale + (scaleIncPerRotation/2.0))
-                view.transform = CGAffineTransformConcat(scaleTransform, rotateTransform)
-            },
-            completion:
-            {(_) -> (Void) in
-                UIView.animateWithDuration(durationPerRotation/2.0, delay: 0.0, options: UIViewAnimationOptions.CurveLinear,
-                    animations:
-                    {(_) -> (Void) in
-                        var rotateTransform : CGAffineTransform = CGAffineTransformMakeRotation(0)
-                        var scaleTransform : CGAffineTransform = CGAffineTransformMakeScale(startScale + (scaleIncPerRotation), startScale + (scaleIncPerRotation))
-                        view.transform = CGAffineTransformConcat(scaleTransform, rotateTransform)
-                    },
-                    completion:
-                    {(_) -> (Void) in
-                        if (numRotationsLeft > 1)
-                        {
-                            self.rotateViewRecurse(view, durationPerRotation: durationPerRotation, numRotationsLeft: numRotationsLeft-1, scaleIncPerRotation:scaleIncPerRotation, startScale:(startScale + scaleIncPerRotation), completionBlock: completionBlock)
-                        }
-                        else
-                        {
-                            completionBlock()
-                        }
-                    }
-                )
-        })
-    }
-    
-    func bounceInView(view: UIView, duration: CGFloat, delay: CGFloat)
-    {
-        view.transform = CGAffineTransformMakeScale(0.01, 0.01)
-        
-        UIView.animateWithDuration(
-            NSTimeInterval(duration*(1.0/2.0)), delay: NSTimeInterval(delay), options: UIViewAnimationOptions.CurveLinear,
-            animations:
-            {(_) -> (Void) in
-                view.transform = CGAffineTransformMakeScale(1.5, 1.5)
-            },
-            completion:
-            {(_) -> (Void) in
-                UIView.animateWithDuration(
-                    NSTimeInterval(duration*(1.0/2.0)), delay: 0.0, options: UIViewAnimationOptions.CurveLinear,
-                    animations:
-                    {(_) -> (Void) in
-                        view.transform = CGAffineTransformMakeScale(1.0, 1.0)
-                    },
-                    completion:
-                    nil
-                )
-            }
-        )
-    }
-    
-    func scaleOutRemoveView(view: UIView, duration: CGFloat, delay: CGFloat)
-    {
-        view.transform = CGAffineTransformMakeScale(1.0, 1.0)
-        
-        UIView.animateWithDuration(
-            NSTimeInterval(duration), delay: NSTimeInterval(delay), options: UIViewAnimationOptions.CurveLinear,
-            animations:
-            {(_) -> (Void) in
-                view.transform = CGAffineTransformMakeScale(0.01, 0.01)
-            },
-            completion:
-            {(_) -> (Void) in
-                view.removeFromSuperview()
-            }
-        )
-    }
-    
-    func spin3BounceView(view: UIView, duration: CGFloat)
-    {
-        // start out at (nearly) zero size.  Can't be zero size since this will make the rotation matrix not work when scaling from 0
-        view.transform = CGAffineTransformMakeScale(0.01, 0.01)
-        // scale on first rotation from 0 to 1.0
-        rotateViewRecurse(view, durationPerRotation: NSTimeInterval(duration/3.0), numRotationsLeft:1, scaleIncPerRotation:1.0, startScale: 0.0,
-            
-            // scale on second rotation from 1.0 to 2.0
-            completionBlock:
-            {(_)->Void in self.rotateViewRecurse(view, durationPerRotation: NSTimeInterval(duration/3.0), numRotationsLeft:1, scaleIncPerRotation:1.0, startScale: 1.0,
-                
-                // scale on third rotation from 2.0 back down to 1.0
-                completionBlock:
-                {(_)->Void in self.rotateViewRecurse(view, durationPerRotation: NSTimeInterval(duration/3.0), numRotationsLeft:1, scaleIncPerRotation:-1.0, startScale: 2.0,
-                    completionBlock:
-                    {(_)->Void in
-                        //println("completion block called!")
-                    }
-                )}
-            )}
-        )
     }        
     
     func newGameButtonMethod(sender : THButton, event : UIEvent) {
@@ -584,6 +483,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         setupCardArr()
         activateCardArr()
         dismissRoundCompleteInfo()
+        startTime = NSDate()
     }
     
     func quitButtonMethod(sender : THButton, event : UIEvent) {
@@ -656,10 +556,10 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         bounceInView(newGameButton!, duration:CGFloat(0.5), delay:CGFloat(1.7))
         bounceInView(quitButton!, duration:CGFloat(0.5), delay:CGFloat(1.7))
 
-        println("Complete!")
-        let endTime = NSDate();
-        let elapsedTime: Double = endTime.timeIntervalSinceDate(self.startTime);
-        println("Time: \(elapsedTime)")
+        //println("Complete!")
+        var endTime = NSDate();
+        var elapsedTime: Double = endTime.timeIntervalSinceDate(self.startTime);
+        //println("Time: \(elapsedTime)")
         
         view.addSubview(completeView)
         
@@ -735,10 +635,6 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         button.layer.borderColor = UIColor.blackColor().CGColor
         button.layer.borderWidth = 2.0
         button.layer.cornerRadius = 10.0
-        button.layer.shadowColor = UIColor.blackColor().CGColor
-        button.layer.shadowRadius = 3.0
-        button.layer.shadowOpacity = 0.7
-        button.layer.shadowOffset = CGSizeMake(3.0, 3.0)
         button.layer.masksToBounds = true
         button.layer.backgroundColor = UIColor.greenColor().CGColor
         

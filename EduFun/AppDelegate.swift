@@ -14,14 +14,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.backgroundColor = UIColor.blueColor()
         
-        //var navigationController = UINavigationController(rootViewController: ColoringBookViewController())
-        //window!.rootViewController = navigationController
+        //window!.rootViewController = UINavigationController(rootViewController: ColoringBookViewController())
         //window!.rootViewController = EmitterTestViewController()
         //window!.rootViewController = MemoryGameViewController()
         window!.rootViewController = TitleScreenViewController()
