@@ -43,8 +43,16 @@
     self.scrollView = [[UIScrollView alloc] init];
     self.scrollView.contentSize = self.svgImageView.frame.size;
     self.scrollView.delegate = self;
-    self.scrollView.minimumZoomScale = 1.0;
-    self.scrollView.maximumZoomScale = 10.0;
+    
+    CGSize size = self.svgImageView.frame.size;
+    CGFloat scaleX = self.view.frame.size.width / size.width;
+    CGFloat scaleY = self.view.frame.size.height / size.height;
+    CGFloat scale = scaleX < scaleY ? scaleX : scaleY;
+    
+    self.scrollView.minimumZoomScale = scale;
+    self.scrollView.maximumZoomScale = scale*20.0;
+    
+    self.scrollView.zoomScale = scale;
     [self.scrollView addSubview:self.svgImageView];
     [self.scrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview: self.scrollView];
