@@ -10,7 +10,7 @@
 
 #define kMinMargin 15.0
 #define kReuseId @"palette.view.controller.collection.view.cell.reuse.id"
-#define kNumColumns 5
+#define kNumColumns 4
 
 @interface PaletteViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -29,21 +29,93 @@
     
     self.colorArr =
     @[
-      [UIColor blackColor],
-      [UIColor darkGrayColor],
-      [UIColor lightGrayColor],
-      [UIColor whiteColor],
-      [UIColor grayColor],
-      [UIColor redColor],
-      [UIColor greenColor],
-      [UIColor blueColor],
-      [UIColor cyanColor],
-      [UIColor yellowColor],
-      [UIColor magentaColor],
-      [UIColor orangeColor],
-      [UIColor purpleColor],
-      [UIColor brownColor]
+      [UIColor colorWithRed:64/255.0	green:0/255.0	blue:0/255.0 alpha:1.0],
+      [UIColor colorWithRed:128/255.0	green:0/255.0	blue:0/255.0 alpha:1.0],
+      [UIColor colorWithRed:192/255.0	green:0/255.0	blue:0/255.0 alpha:1.0],
+      [UIColor colorWithRed:255/255.0	green:0/255.0	blue:0/255.0 alpha:1.0],
+      [UIColor colorWithRed:0/255.0	green:64/255.0	blue:0/255.0 alpha:1.0],
+      [UIColor colorWithRed:0/255.0	green:128/255.0	blue:0/255.0 alpha:1.0],
+      [UIColor colorWithRed:0/255.0	green:192/255.0	blue:0/255.0 alpha:1.0],
+      [UIColor colorWithRed:0/255.0	green:255/255.0	blue:0/255.0 alpha:1.0],
+      [UIColor colorWithRed:0/255.0	green:0/255.0	blue:64/255.0 alpha:1.0],
+      [UIColor colorWithRed:0/255.0	green:0/255.0	blue:128/255.0 alpha:1.0],
+      [UIColor colorWithRed:0/255.0	green:0/255.0	blue:192/255.0 alpha:1.0],
+      [UIColor colorWithRed:0/255.0	green:0/255.0	blue:255/255.0 alpha:1.0],
+      [UIColor colorWithRed:64/255.0	green:64/255.0	blue:0/255.0 alpha:1.0],
+      [UIColor colorWithRed:128/255.0	green:128/255.0	blue:0/255.0 alpha:1.0],
+      [UIColor colorWithRed:192/255.0	green:192/255.0	blue:0/255.0 alpha:1.0],
+      [UIColor colorWithRed:255/255.0	green:255/255.0	blue:0/255.0 alpha:1.0],
+      [UIColor colorWithRed:64/255.0	green:0/255.0	blue:64/255.0 alpha:1.0],
+      [UIColor colorWithRed:128/255.0	green:0/255.0	blue:128/255.0 alpha:1.0],
+      [UIColor colorWithRed:192/255.0	green:0/255.0	blue:192/255.0 alpha:1.0],
+      [UIColor colorWithRed:255/255.0	green:0/255.0	blue:255/255.0 alpha:1.0],
+      [UIColor colorWithRed:0/255.0	green:64/255.0	blue:64/255.0 alpha:1.0],
+      [UIColor colorWithRed:0/255.0	green:128/255.0	blue:128/255.0 alpha:1.0],
+      [UIColor colorWithRed:0/255.0	green:192/255.0	blue:192/255.0 alpha:1.0],
+      [UIColor colorWithRed:0/255.0	green:255/255.0	blue:255/255.0 alpha:1.0],
+      [UIColor colorWithRed:64/255.0	green:32/255.0	blue:0/255.0 alpha:1.0],
+      [UIColor colorWithRed:128/255.0	green:64/255.0	blue:0/255.0 alpha:1.0],
+      [UIColor colorWithRed:192/255.0	green:96/255.0	blue:0/255.0 alpha:1.0],
+      [UIColor colorWithRed:255/255.0	green:128/255.0	blue:0/255.0 alpha:1.0],
+      [UIColor colorWithRed:64/255.0	green:0/255.0	blue:32/255.0 alpha:1.0],
+      [UIColor colorWithRed:128/255.0	green:0/255.0	blue:64/255.0 alpha:1.0],
+      [UIColor colorWithRed:192/255.0	green:0/255.0	blue:96/255.0 alpha:1.0],
+      [UIColor colorWithRed:255/255.0	green:0/255.0	blue:128/255.0 alpha:1.0],
+      [UIColor colorWithRed:32/255.0	green:64/255.0	blue:0/255.0 alpha:1.0],
+      [UIColor colorWithRed:64/255.0	green:128/255.0	blue:0/255.0 alpha:1.0],
+      [UIColor colorWithRed:96/255.0	green:192/255.0	blue:0/255.0 alpha:1.0],
+      [UIColor colorWithRed:128/255.0	green:255/255.0	blue:0/255.0 alpha:1.0],
+      [UIColor colorWithRed:0/255.0	green:64/255.0	blue:32/255.0 alpha:1.0],
+      [UIColor colorWithRed:0/255.0	green:128/255.0	blue:64/255.0 alpha:1.0],
+      [UIColor colorWithRed:0/255.0	green:192/255.0	blue:96/255.0 alpha:1.0],
+      [UIColor colorWithRed:0/255.0	green:255/255.0	blue:128/255.0 alpha:1.0],
+      [UIColor colorWithRed:32/255.0	green:0/255.0	blue:64/255.0 alpha:1.0],
+      [UIColor colorWithRed:64/255.0	green:0/255.0	blue:128/255.0 alpha:1.0],
+      [UIColor colorWithRed:96/255.0	green:0/255.0	blue:192/255.0 alpha:1.0],
+      [UIColor colorWithRed:128/255.0	green:0/255.0	blue:255/255.0 alpha:1.0],
+      [UIColor colorWithRed:0/255.0	green:32/255.0	blue:64/255.0 alpha:1.0],
+      [UIColor colorWithRed:0/255.0	green:64/255.0	blue:128/255.0 alpha:1.0],
+      [UIColor colorWithRed:0/255.0	green:96/255.0	blue:192/255.0 alpha:1.0],
+      [UIColor colorWithRed:0/255.0	green:128/255.0	blue:255/255.0 alpha:1.0],
+      [UIColor colorWithRed:64/255.0	green:32/255.0	blue:32/255.0 alpha:1.0],
+      [UIColor colorWithRed:128/255.0	green:64/255.0	blue:64/255.0 alpha:1.0],
+      [UIColor colorWithRed:192/255.0	green:96/255.0	blue:96/255.0 alpha:1.0],
+      [UIColor colorWithRed:255/255.0	green:128/255.0	blue:128/255.0 alpha:1.0],
+      [UIColor colorWithRed:32/255.0	green:64/255.0	blue:32/255.0 alpha:1.0],
+      [UIColor colorWithRed:64/255.0	green:128/255.0	blue:64/255.0 alpha:1.0],
+      [UIColor colorWithRed:96/255.0	green:192/255.0	blue:96/255.0 alpha:1.0],
+      [UIColor colorWithRed:128/255.0	green:255/255.0	blue:128/255.0 alpha:1.0],
+      [UIColor colorWithRed:32/255.0	green:32/255.0	blue:64/255.0 alpha:1.0],
+      [UIColor colorWithRed:64/255.0	green:64/255.0	blue:128/255.0 alpha:1.0],
+      [UIColor colorWithRed:96/255.0	green:96/255.0	blue:192/255.0 alpha:1.0],
+      [UIColor colorWithRed:128/255.0	green:128/255.0	blue:255/255.0 alpha:1.0],
+      [UIColor colorWithRed:0/255.0	green:0/255.0	blue:0/255.0 alpha:1.0],
+      [UIColor colorWithRed:37/255.0	green:37/255.0	blue:37/255.0 alpha:1.0],
+      [UIColor colorWithRed:73/255.0	green:73/255.0	blue:73/255.0 alpha:1.0],
+      [UIColor colorWithRed:110/255.0	green:110/255.0	blue:110/255.0 alpha:1.0],
+      [UIColor colorWithRed:146/255.0	green:146/255.0	blue:146/255.0 alpha:1.0],
+      [UIColor colorWithRed:183/255.0	green:183/255.0	blue:183/255.0 alpha:1.0],
+      [UIColor colorWithRed:219/255.0	green:219/255.0	blue:219/255.0 alpha:1.0],
+      [UIColor colorWithRed:255/255.0	green:255/255.0	blue:255/255.0 alpha:1.0]
       ];
+    
+    /*    self.colorArr =
+     @[
+     [UIColor blackColor],
+     [UIColor darkGrayColor],
+     [UIColor lightGrayColor],
+     [UIColor whiteColor],
+     [UIColor grayColor],
+     [UIColor redColor],
+     [UIColor greenColor],
+     [UIColor blueColor],
+     [UIColor cyanColor],
+     [UIColor yellowColor],
+     [UIColor magentaColor],
+     [UIColor orangeColor],
+     [UIColor purpleColor],
+     [UIColor brownColor]
+     ];*/
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.sectionInset = UIEdgeInsetsMake(kMinMargin, kMinMargin, kMinMargin, kMinMargin);
@@ -90,6 +162,8 @@
     
     int colorArrInd = ((indexPath.section*kNumColumns) + indexPath.row) % [self.colorArr count];
     cell.backgroundColor = self.colorArr[colorArrInd];
+    cell.layer.cornerRadius = 10.0;
+    cell.layer.masksToBounds = true;
     
     return cell;
 }
@@ -98,14 +172,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
- #pragma mark - Navigation
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

@@ -95,8 +95,8 @@
 		A536FE721B350D2C00443B93 /* ColoringBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColoringBookViewController.h; path = ../ColoringBookViewController.h; sourceTree = "<group>"; };
 		A536FE731B350D2C00443B93 /* ColoringBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColoringBookViewController.m; path = ../ColoringBookViewController.m; sourceTree = "<group>"; };
 		A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		A595C3DF1B3B0A2E001C6040 /* PaletteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaletteViewController.h; sourceTree = "<group>"; };
-		A595C3E01B3B0A2E001C6040 /* PaletteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaletteViewController.m; sourceTree = "<group>"; };
+		A595C3DF1B3B0A2E001C6040 /* PaletteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaletteViewController.h; path = ../PaletteViewController.h; sourceTree = "<group>"; };
+		A595C3E01B3B0A2E001C6040 /* PaletteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PaletteViewController.m; path = ../PaletteViewController.m; sourceTree = "<group>"; };
 		A595C3E21B3B0B53001C6040 /* EmitterTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmitterTestViewController.h; sourceTree = "<group>"; };
 		A595C3E31B3B0B53001C6040 /* EmitterTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmitterTestViewController.m; sourceTree = "<group>"; };
 		A595C3E91B3B4990001C6040 /* SuperMario256.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SuperMario256.ttf; sourceTree = "<group>"; };
@@ -190,8 +190,6 @@
 		A5B85EA61B276636008012F7 = {
 			isa = PBXGroup;
 			children = (
-				A595C3DF1B3B0A2E001C6040 /* PaletteViewController.h */,
-				A595C3E01B3B0A2E001C6040 /* PaletteViewController.m */,
 				A5CA0F4D1B2F64CA008BD79D /* UIImage+Resize.h */,
 				A5CA0F4E1B2F64CA008BD79D /* UIImage+Resize.m */,
 				A5CA0F501B2F67FA008BD79D /* UIImage+Resize.h */,
@@ -233,6 +231,8 @@
 				A5B85ED81B2767E3008012F7 /* MemoryGameViewController.swift */,
 				A536FE721B350D2C00443B93 /* ColoringBookViewController.h */,
 				A536FE731B350D2C00443B93 /* ColoringBookViewController.m */,
+				A595C3DF1B3B0A2E001C6040 /* PaletteViewController.h */,
+				A595C3E01B3B0A2E001C6040 /* PaletteViewController.m */,
 				A532ADE01B27959F00A46930 /* Card.swift */,
 				A5EB8DF41B3CC765009A8A3A /* THButton.swift */,
 				A595C3E21B3B0B53001C6040 /* EmitterTestViewController.h */,
