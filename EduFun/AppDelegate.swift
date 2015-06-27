@@ -22,7 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //window!.rootViewController = UINavigationController(rootViewController: ColoringBookViewController())
         //window!.rootViewController = EmitterTestViewController()
         //window!.rootViewController = MemoryGameViewController()
-        window!.rootViewController = TitleScreenViewController()
+        //window!.rootViewController = TitleScreenViewController()
+        var navigationController = UINavigationController(rootViewController: TitleScreenViewController())
+        navigationController.navigationBarHidden = true
+        window!.rootViewController = navigationController
         window!.makeKeyAndVisible()
         return true
     }

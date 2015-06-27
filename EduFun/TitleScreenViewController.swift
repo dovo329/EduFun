@@ -25,6 +25,10 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         setupTitleLabel()
         setupCollectionView()
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        navigationController!.navigationBarHidden = true
+    }
 
     func setupBackgroundGradient()
     {
@@ -53,7 +57,7 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         titleLabel.font = UIFont(name: "Super Mario 256", size: 45.0)
         titleLabel.font = titleLabel.font.fontWithSize(getFontSizeToFitFrameOfLabel(titleLabel)-6.0)
         //titleLabel.frame.origin.y -= titleLabel.font.pointSize
-        println("titleLabel.font.pointSize=\(titleLabel.font.pointSize)")
+        //println("titleLabel.font.pointSize=\(titleLabel.font.pointSize)")
         titleLabel.frame.size.height = titleLabel.font.pointSize*1.3
         titleLabel.textAlignment = NSTextAlignment.Center
         titleLabel.textColor = UIColor.yellowColor()
@@ -108,6 +112,41 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         var cell = collectionView.cellForItemAtIndexPath(indexPath)!
         cell.backgroundView!.alpha = 0.5
+        
+        if (indexPath.row == 0)
+        {
+            /*self.transitionFromViewController(
+                self,
+                toViewController: MemoryGameViewController(),
+                duration: NSTimeInterval(3.0),
+                options: UIViewAnimationOptions.TransitionCurlUp,
+                animations:
+                {(_) -> Void in
+                    
+                },
+                completion:
+                {(_) -> Void in
+                    
+                }
+            )*/
+            navigationController?.pushViewController(MemoryGameViewController(), animated: true)
+        }
+        else
+        {
+            /*self.transitionFromViewController(
+                self,
+                toViewController: UINavigationController(rootViewController: ColoringBookViewController()),
+                duration: NSTimeInterval(3.0), options: UIViewAnimationOptions.TransitionCurlUp, animations:
+                {(_) -> Void in
+                    
+                },
+                completion:
+                {(_) -> Void in
+                    
+                }
+            )*/
+            navigationController?.pushViewController(ColoringBookViewController(), animated: true)
+        }
     }
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
