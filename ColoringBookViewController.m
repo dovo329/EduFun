@@ -72,7 +72,11 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapMethod:)];
     [self.view addGestureRecognizer:tapGesture];
     
-    UIBarButtonItem *paletteSelButton = [[UIBarButtonItem alloc] initWithTitle:@"Colors" style:UIBarButtonItemStylePlain target:self action:@selector(paletteSelMethod)];
+    //UIBarButtonItem *paletteSelButton = [[UIBarButtonItem alloc] initWithTitle:@"Colors" style:UIBarButtonItemStylePlain target:self action:@selector(paletteSelMethod)];
+    UIImage *paintersPaletteImg = [UIImage imageNamed:@"PaintersPalette"];
+    paintersPaletteImg = [paintersPaletteImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    UIBarButtonItem *paletteSelButton = [[UIBarButtonItem alloc] initWithImage:paintersPaletteImg style:UIBarButtonItemStylePlain target:self action:@selector(paletteSelMethod)];
     self.navigationItem.rightBarButtonItem = paletteSelButton;
 }
 
@@ -83,11 +87,11 @@
 
 - (void)tapMethod:(UITapGestureRecognizer *)sender
 {
-    CGPoint p = [sender locationInView:self.scrollView];
-    NSLog(@"tap happen @x:%f y:%f", p.x, p.y);
+    CGPoint point = [sender locationInView:self.scrollView];
+    //NSLog(@"tap happen @x:%f y:%f", point.x, point.y);
     CALayer* layerForHitTesting;
     layerForHitTesting = self.svgImageView.layer;
-    CALayer* hitLayer = [layerForHitTesting hitTest:p];
+    CALayer* hitLayer = [layerForHitTesting hitTest:point];
     
     if( [hitLayer isKindOfClass:[CAShapeLayer class]]){
         CAShapeLayer* shapeLayer = (CAShapeLayer*)hitLayer;
