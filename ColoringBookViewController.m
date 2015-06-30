@@ -16,6 +16,7 @@
 @property (nonatomic, strong) SVGKLayeredImageView *svgImageView;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIColor *selColor;
+@property (nonatomic, assign) CGSize origSize;
 
 @end
 
@@ -24,16 +25,67 @@
 - (void)dealloc
 {
     //SVGKLayer *layer = (SVGKLayer *)self.svgImageView.layer;
-    //[layer removeObserver:self forKeyPath:@"showBorder"];    
+    //[layer removeObserver:self forKeyPath:@"showBorder"];
+}
+
+/*- (void)viewWillAppear:(BOOL)animated
+ {
+ [super viewWillAppear:animated];
+ }*/
+
+/*- (void)viewDidAppear:(BOOL)animated
+ {
+ [super viewDidAppear:animated];
+ NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+ [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+ NSLog(@"viewDidAppear");
+ 
+ CGSize size = self.svgImageView.frame.size;
+ CGFloat scaleX = self.view.frame.size.width / size.width;
+ CGFloat scaleY = self.view.frame.size.height / size.height;
+ CGFloat scale = scaleX < scaleY ? scaleX : scaleY;
+ 
+ self.scrollView.minimumZoomScale = scale;
+ self.scrollView.maximumZoomScale = scale*20.0;
+ 
+ self.scrollView.zoomScale = scale;
+ }*/
+
+- (void) orientationChanged:(NSNotification *)notification
+{
+    NSLog(@"orientationChanged");
+    if (self.svgImageView) {
+
+        CGFloat scaleX, scaleY, scale;
+        scaleX = self.view.frame.size.width / self.origSize.width;
+        scaleY = self.view.frame.size.height / self.origSize.height;
+        scale = scaleX < scaleY ? scaleX : scaleY;
+        
+        self.scrollView.minimumZoomScale = scale;
+        self.scrollView.maximumZoomScale = scale*20.0;
+        
+        self.scrollView.zoomScale = scale;
+        NSLog(@"min=%f max=%f cur=%f", self.scrollView.minimumZoomScale, self.scrollView.maximumZoomScale, self.scrollView.zoomScale);
+    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
+    
+    NSLog(@"viewDidLoad");
+    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+    
     // Do any additional setup after loading the view.
+    
+    /*NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+     [[UIDevice currentDevice] setValue:value forKey:@"orientation"];*/
     
     self.navigationController.navigationBarHidden = false;
     self.selColor = [UIColor blueColor];
-
+    
     //SVGKFastImageView *svgView = [[SVGKFastImageView alloc] initWithSVGKImage: [SVGKImage imageNamed:@"Monkey.svg"]];
     self.view.backgroundColor = [UIColor whiteColor];
     self.svgImageView = [[SVGKLayeredImageView alloc] initWithSVGKImage: [SVGKImage imageNamed:@"mtnHouse.svg"]];
@@ -44,9 +96,9 @@
     self.scrollView.contentSize = self.svgImageView.frame.size;
     self.scrollView.delegate = self;
     
-    CGSize size = self.svgImageView.frame.size;
-    CGFloat scaleX = self.view.frame.size.width / size.width;
-    CGFloat scaleY = self.view.frame.size.height / size.height;
+    self.origSize = self.svgImageView.frame.size;
+    CGFloat scaleX = self.view.frame.size.width / self.origSize.width;
+    CGFloat scaleY = self.view.frame.size.height / self.origSize.height;
     CGFloat scale = scaleX < scaleY ? scaleX : scaleY;
     
     self.scrollView.minimumZoomScale = scale;
@@ -64,7 +116,7 @@
       options: NSLayoutFormatAlignAllBaseline
       metrics: nil
       views: viewsDictionary
-     ]
+      ]
      ];
     
     [self.view addConstraints:
@@ -73,10 +125,10 @@
       options: NSLayoutFormatAlignAllBaseline
       metrics: nil
       views: viewsDictionary
-     ]
+      ]
      ];
     
-
+    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapMethod:)];
     [self.view addGestureRecognizer:tapGesture];
     
@@ -119,18 +171,14 @@
     self.selColor = color;
 }
 
-- (BOOL)shouldAutorotate {
-    return true;
+- (BOOL)shouldAutorotate
+{
+    return YES;
 }
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight;
-}
-
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-    return UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight;
+    return UIInterfaceOrientationMaskAll;
 }
 
 @end

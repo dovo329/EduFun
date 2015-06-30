@@ -29,6 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
     }
     
+    /*func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> Int {
+        return Int(UIInterfaceOrientationMask.All.rawValue)
+    }*/
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
@@ -38,6 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //window!.rootViewController = EmitterTestViewController()
         //window!.rootViewController = MemoryGameViewController()
         window!.rootViewController = TitleScreenViewController()
+        //window!.rootViewController = ColoringBookViewController()
+        //window!.rootViewController = KnockBlocksViewController()
         //var navigationController = UINavigationController(rootViewController: TitleScreenViewController())
         //var navigationController = OrientationNavigationController(rootViewController: TitleScreenViewController())
         //navigationController.navigationBarHidden = true
@@ -47,10 +53,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //window!.rootViewController = ContainerViewController()
         window!.makeKeyAndVisible()
         return true
-    }
-    
-    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> Int {
-        return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
     }
     
     /*- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
