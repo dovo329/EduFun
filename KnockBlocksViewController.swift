@@ -26,7 +26,27 @@ extension SKNode {
 }
 
 class KnockBlocksViewController: UIViewController {
+    
+    init(_ coder: NSCoder? = nil) {
+        /*let value = UIInterfaceOrientation.LandscapeLeft.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")*/
         
+        if let coder = coder {
+            super.init(coder: coder)
+        } else {
+            super.init(nibName: nil, bundle:nil)
+        }
+    }
+    
+    required convenience init(coder: NSCoder) {
+        self.init(coder)
+    }
+    
+    /*override func loadView() {
+        let value = UIInterfaceOrientation.LandscapeRight.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
+    }*/
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,11 +79,6 @@ class KnockBlocksViewController: UIViewController {
     override func supportedInterfaceOrientations() -> Int {
         return Int(UIInterfaceOrientationMask.Landscape.rawValue)
     }
-    
-    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
-        return UIInterfaceOrientation.LandscapeLeft
-    }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

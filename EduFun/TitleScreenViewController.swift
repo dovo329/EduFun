@@ -138,7 +138,7 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
                 //navigationController?.pushViewController(MemoryGameViewController(), animated: true)
                 //app.window??.rootViewController = MemoryGameViewController()
                 //app.viewController.animateToViewController(MemoryGameViewController())
-                app?.animateToViewController(MemoryGameViewController())
+                app?.animateToViewController(DestViewController.CardMatching)
             }
             else if (indexPath.row == 1)
             {
@@ -156,14 +156,16 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
                 )*/
                 //navigationController?.dismissViewControllerAnimated(false, completion: nil)
                 //navigationController?.pushViewController(ColoringBookViewController(), animated: true)
-                app?.animateToViewController(ColoringBookViewController())
+                app?.animateToViewController(DestViewController.ColoringBook)
+                //app?.animateToViewController(ColoringBookViewController())
             }
         }
         else
         {
             //navigationController?.dismissViewControllerAnimated(false, completion: nil)
             //navigationController?.pushViewController(KnockBlocksViewController(), animated: true)
-            app?.animateToViewController(KnockBlocksViewController())
+            //app?.animateToViewController(KnockBlocksViewController())
+            app?.animateToViewController(DestViewController.KnockBlocks)
         }
     }
     

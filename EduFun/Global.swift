@@ -8,6 +8,13 @@
 
 let π : CGFloat = CGFloat(M_PI)
 
+struct DestViewController {
+    static let CardMatching : UInt32 = 0b0001
+    static let ColoringBook : UInt32 = 0b0010
+    static let KnockBlocks  : UInt32 = 0b0100
+    static let TitleScreen  : UInt32 = 0b1000
+}
+
 public func getFontSizeToFitFrameOfLabel(label: UILabel) -> CGFloat
 {
     var initialSize : CGSize = label.text!.sizeWithAttributes([NSFontAttributeName : label.font])

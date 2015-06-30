@@ -13,20 +13,108 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-    func animateToViewController(vc: UIViewController)
+    
+    func animateToViewController(destVCEnum: UInt32)
     {
-        var fromView : UIView = window!.rootViewController!.view
-        var toView : UIView = vc.view
-        UIView.transitionFromView(fromView,
+        //var fromView : UIView = window!.rootViewController!.view
+        
+        /*UIView *overlayView = [[UIScreen mainScreen] snapshotViewAfterScreenUpdates:NO];
+        [self.destinationViewController.view addSubview:overlayView];
+        self.window.rootViewController = self.destinationViewController;
+        
+        [UIView animateWithDuration:0.4f delay:0.0f options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            overlayView.alpha = 0;
+            } completion:^(BOOL finished) {
+            [overlayView removeFromSuperview];
+            }];*/
+        /*  
+            transitionToViewController
+        */
+        
+        var destVC : UIViewController!
+        
+        var overlayView = UIScreen.mainScreen().snapshotViewAfterScreenUpdates(false)
+        
+        if destVCEnum == DestViewController.KnockBlocks
+        {
+            overlayView.transform = CGAffineTransformMakeRotation(-π/2)
+            overlayView.frame = CGRectMake(0, 0, 480, 320)
+            destVC = KnockBlocksViewController()
+        }
+        else if destVCEnum == DestViewController.CardMatching
+        {
+            destVC = MemoryGameViewController()
+        }
+        else if destVCEnum == DestViewController.ColoringBook
+        {
+            destVC = ColoringBookViewController()
+        }
+        else if destVCEnum == DestViewController.TitleScreen
+        {
+            destVC = TitleScreenViewController()
+        }
+        else
+        {
+            fatalError("unknown view controller enum passed")
+        }
+        
+        destVC.view.addSubview(overlayView)
+        window!.rootViewController = destVC;
+        
+        UIView.animateWithDuration(
+            1.0,
+            delay: 0.0,
+            options: UIViewAnimationOptions.CurveLinear,
+            animations:
+            { (_) -> Void in
+                overlayView.alpha = 0.0
+            },
+            completion:
+            { (_) -> Void in
+                overlayView.removeFromSuperview()
+            }
+        )
+        
+        /*UIView.animateWithDuration(
+            1.0,
+            delay: 0.0,
+            options: UIViewAnimationOptions.CurveLinear,
+            animations:
+            { (_) -> Void in
+                fromView.alpha = 0.0
+            },
+            completion:
+        { (_) -> Void in
+                vc.view.alpha = 0.0
+                self.window!.rootViewController = vc;
+                UIView.animateWithDuration(
+                    1.0,
+                    delay: 0.0,
+                    options: UIViewAnimationOptions.CurveLinear,
+                    animations:
+                    { (_) -> Void in
+                        vc.view.alpha = 1.0
+                    },
+                    completion:
+                    { (_) -> Void in
+                        
+                    }
+                )
+            }
+        )*/
+        
+        //var toView : UIView = vc.view
+        //self.window!.rootViewController = vc;
+        
+        /*UIView.transitionFromView(fromView,
             toView:toView,
-            duration: 1.0,
+            duration: 2.0,
             options: UIViewAnimationOptions.TransitionFlipFromBottom,
             completion:
             {(Bool) in
-                self.window!.rootViewController = vc;
+                //self.window!.rootViewController = vc;
             }
-        )
+        )*/
     }
     
     /*func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> Int {
@@ -36,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window!.backgroundColor = UIColor.blueColor()
+        window!.backgroundColor = UIColor.whiteColor()
         
         //window!.rootViewController = UINavigationController(rootViewController: ColoringBookViewController())
         //window!.rootViewController = EmitterTestViewController()

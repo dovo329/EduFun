@@ -513,7 +513,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         
         var app = UIApplication.sharedApplication().delegate as? AppDelegate
         
-        app?.animateToViewController(TitleScreenViewController())
+        //app?.animateToViewController(TitleScreenViewController())
+        app?.animateToViewController(DestViewController.TitleScreen)
         
         //navigationController?.popViewControllerAnimated(true)
         
