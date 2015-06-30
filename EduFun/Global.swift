@@ -145,3 +145,13 @@ func spin3BounceView(view: UIView, #duration: CGFloat)
             )}
     )
 }
+
+extension UINavigationController {
+    public override func shouldAutorotate() -> Bool {
+        return visibleViewController.shouldAutorotate()
+    }
+    
+    public override func supportedInterfaceOrientations() -> Int {
+        return visibleViewController.supportedInterfaceOrientations()
+    }
+}

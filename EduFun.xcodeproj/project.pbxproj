@@ -16,7 +16,11 @@
 		A53600631B351EAC00443B93 /* SVGKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A536005B1B351E0600443B93 /* SVGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A536006C1B35394000443B93 /* MonkeySketch.svg in Resources */ = {isa = PBXBuildFile; fileRef = A536006B1B35394000443B93 /* MonkeySketch.svg */; };
 		A536FE771B350D2C00443B93 /* ColoringBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A536FE731B350D2C00443B93 /* ColoringBookViewController.m */; };
+		A5472B4A1B43034400B9F49B /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5472B491B43034400B9F49B /* ContainerViewController.swift */; };
 		A5554D4C1B3239AE002B06E5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */; };
+		A5925F551B41CB42000E8FF8 /* KnockBlocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5925F541B41CB42000E8FF8 /* KnockBlocksViewController.swift */; };
+		A5925F571B41CDE2000E8FF8 /* KnockBlocksScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A5925F561B41CDE2000E8FF8 /* KnockBlocksScene.sks */; };
+		A5925F591B41CE7A000E8FF8 /* KnockBlocksScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5925F581B41CE7A000E8FF8 /* KnockBlocksScene.swift */; };
 		A595C3E11B3B0A2E001C6040 /* PaletteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A595C3E01B3B0A2E001C6040 /* PaletteViewController.m */; };
 		A595C3E41B3B0B53001C6040 /* EmitterTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A595C3E31B3B0B53001C6040 /* EmitterTestViewController.m */; };
 		A595C3EA1B3B4990001C6040 /* SuperMario256.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A595C3E91B3B4990001C6040 /* SuperMario256.ttf */; };
@@ -30,6 +34,7 @@
 		A5CA0F541B2F67FA008BD79D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F511B2F67FA008BD79D /* UIImage+Resize.m */; };
 		A5CA0F551B2F67FA008BD79D /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */; };
 		A5DB888F1B3B707D00B8CA08 /* THLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DB888E1B3B707D00B8CA08 /* THLabel.m */; };
+		A5E7E3291B42F5010068D5FE /* OrientationNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E7E3281B42F5010068D5FE /* OrientationNavigationController.swift */; };
 		A5EB8DF51B3CC765009A8A3A /* THButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB8DF41B3CC765009A8A3A /* THButton.swift */; };
 		A5EB8DF81B3CCF39009A8A3A /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB8DF71B3CCF39009A8A3A /* Global.swift */; };
 		A5EBCCC51B361F0E006E52D6 /* mtnHouse.svg in Resources */ = {isa = PBXBuildFile; fileRef = A5EBCCC41B361F0E006E52D6 /* mtnHouse.svg */; };
@@ -94,7 +99,11 @@
 		A536006B1B35394000443B93 /* MonkeySketch.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = MonkeySketch.svg; path = EduFun/MonkeySketch.svg; sourceTree = "<group>"; };
 		A536FE721B350D2C00443B93 /* ColoringBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColoringBookViewController.h; path = ../ColoringBookViewController.h; sourceTree = "<group>"; };
 		A536FE731B350D2C00443B93 /* ColoringBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColoringBookViewController.m; path = ../ColoringBookViewController.m; sourceTree = "<group>"; };
+		A5472B491B43034400B9F49B /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A5925F541B41CB42000E8FF8 /* KnockBlocksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KnockBlocksViewController.swift; path = ../KnockBlocksViewController.swift; sourceTree = "<group>"; };
+		A5925F561B41CDE2000E8FF8 /* KnockBlocksScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = KnockBlocksScene.sks; sourceTree = "<group>"; };
+		A5925F581B41CE7A000E8FF8 /* KnockBlocksScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnockBlocksScene.swift; sourceTree = "<group>"; };
 		A595C3DF1B3B0A2E001C6040 /* PaletteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaletteViewController.h; path = ../PaletteViewController.h; sourceTree = "<group>"; };
 		A595C3E01B3B0A2E001C6040 /* PaletteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PaletteViewController.m; path = ../PaletteViewController.m; sourceTree = "<group>"; };
 		A595C3E21B3B0B53001C6040 /* EmitterTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmitterTestViewController.h; sourceTree = "<group>"; };
@@ -118,6 +127,7 @@
 		A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCorner.m"; path = "Art/UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		A5DB888D1B3B707D00B8CA08 /* THLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLabel.h; sourceTree = "<group>"; };
 		A5DB888E1B3B707D00B8CA08 /* THLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLabel.m; sourceTree = "<group>"; };
+		A5E7E3281B42F5010068D5FE /* OrientationNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OrientationNavigationController.swift; path = ../OrientationNavigationController.swift; sourceTree = "<group>"; };
 		A5EB8DF41B3CC765009A8A3A /* THButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THButton.swift; sourceTree = "<group>"; };
 		A5EB8DF71B3CCF39009A8A3A /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		A5EBCCC41B361F0E006E52D6 /* mtnHouse.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = mtnHouse.svg; path = EduFun/mtnHouse.svg; sourceTree = "<group>"; };
@@ -225,10 +235,16 @@
 			isa = PBXGroup;
 			children = (
 				A5112C0E1B2D030200215DA2 /* Header.h */,
+				A5E7E3281B42F5010068D5FE /* OrientationNavigationController.swift */,
 				A5EB8DF71B3CCF39009A8A3A /* Global.swift */,
 				A5B85EB41B276636008012F7 /* AppDelegate.swift */,
+				A5472B491B43034400B9F49B /* ContainerViewController.swift */,
 				A524752C1B3E0A26002E0B7B /* TitleScreenViewController.swift */,
 				A5B85ED81B2767E3008012F7 /* MemoryGameViewController.swift */,
+				A5925F541B41CB42000E8FF8 /* KnockBlocksViewController.swift */,
+				A5925F581B41CE7A000E8FF8 /* KnockBlocksScene.swift */,
+				A5925F561B41CDE2000E8FF8 /* KnockBlocksScene.sks */,
+				A5B85EBF1B276636008012F7 /* Images.xcassets */,
 				A536FE721B350D2C00443B93 /* ColoringBookViewController.h */,
 				A536FE731B350D2C00443B93 /* ColoringBookViewController.m */,
 				A595C3DF1B3B0A2E001C6040 /* PaletteViewController.h */,
@@ -238,7 +254,6 @@
 				A595C3E21B3B0B53001C6040 /* EmitterTestViewController.h */,
 				A595C3E31B3B0B53001C6040 /* EmitterTestViewController.m */,
 				A5B85EBC1B276636008012F7 /* Main.storyboard */,
-				A5B85EBF1B276636008012F7 /* Images.xcassets */,
 				A5B85EC11B276636008012F7 /* LaunchScreen.xib */,
 				A5B85EB21B276636008012F7 /* Supporting Files */,
 			);
@@ -382,6 +397,7 @@
 				A5B85EC01B276636008012F7 /* Images.xcassets in Resources */,
 				A5B85EBE1B276636008012F7 /* Main.storyboard in Resources */,
 				A5EBCCC51B361F0E006E52D6 /* mtnHouse.svg in Resources */,
+				A5925F571B41CDE2000E8FF8 /* KnockBlocksScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,18 +417,22 @@
 			files = (
 				A5112C161B2D0E7F00215DA2 /* OBShapedView.m in Sources */,
 				A5DB888F1B3B707D00B8CA08 /* THLabel.m in Sources */,
+				A5472B4A1B43034400B9F49B /* ContainerViewController.swift in Sources */,
 				A532ADE11B27959F00A46930 /* Card.swift in Sources */,
 				A5112C091B2D019F00215DA2 /* UIImage+ColorAtPixel.m in Sources */,
 				A5CA0F4F1B2F64CA008BD79D /* UIImage+Resize.m in Sources */,
 				A536FE771B350D2C00443B93 /* ColoringBookViewController.m in Sources */,
 				A595C3E11B3B0A2E001C6040 /* PaletteViewController.m in Sources */,
+				A5925F551B41CB42000E8FF8 /* KnockBlocksViewController.swift in Sources */,
 				A5CA0F551B2F67FA008BD79D /* UIImage+RoundedCorner.m in Sources */,
+				A5E7E3291B42F5010068D5FE /* OrientationNavigationController.swift in Sources */,
 				A5EB8DF81B3CCF39009A8A3A /* Global.swift in Sources */,
 				A5B85EB51B276636008012F7 /* AppDelegate.swift in Sources */,
 				A5112C081B2D019F00215DA2 /* OBShapedButton.m in Sources */,
 				A524752D1B3E0A26002E0B7B /* TitleScreenViewController.swift in Sources */,
 				A5CA0F541B2F67FA008BD79D /* UIImage+Resize.m in Sources */,
 				A5EB8DF51B3CC765009A8A3A /* THButton.swift in Sources */,
+				A5925F591B41CE7A000E8FF8 /* KnockBlocksScene.swift in Sources */,
 				A5B85ED91B2767E3008012F7 /* MemoryGameViewController.swift in Sources */,
 				A595C3E41B3B0B53001C6040 /* EmitterTestViewController.m in Sources */,
 			);
@@ -560,6 +580,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SVGKit",
 				);
+				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Header.h;
 			};
@@ -581,6 +602,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SVGKit",
 				);
+				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Header.h;
 			};

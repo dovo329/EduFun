@@ -27,7 +27,7 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
     }
     
     override func viewDidAppear(animated: Bool) {
-        navigationController!.navigationBarHidden = true
+        //navigationController!.navigationBarHidden = true
     }
 
     func setupBackgroundGradient()
@@ -112,46 +112,65 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         var cell = collectionView.cellForItemAtIndexPath(indexPath)!
         cell.backgroundView!.alpha = 0.5
+        cell.layer.borderColor = cgColorForRed(120.0, green: 190.0, blue: 255.0)
         
-        if (indexPath.row == 0)
+        var app = UIApplication.sharedApplication().delegate as? AppDelegate
+        
+        if (indexPath.section == 0)
         {
-            /*self.transitionFromViewController(
-                self,
-                toViewController: MemoryGameViewController(),
-                duration: NSTimeInterval(3.0),
-                options: UIViewAnimationOptions.TransitionCurlUp,
-                animations:
-                {(_) -> Void in
-                    
-                },
-                completion:
-                {(_) -> Void in
-                    
-                }
-            )*/
-            navigationController?.pushViewController(MemoryGameViewController(), animated: true)
+            if (indexPath.row == 0)
+            {
+                /*self.transitionFromViewController(
+                    self,
+                    toViewController: MemoryGameViewController(),
+                    duration: NSTimeInterval(3.0),
+                    options: UIViewAnimationOptions.TransitionCurlUp,
+                    animations:
+                    {(_) -> Void in
+                        
+                    },
+                    completion:
+                    {(_) -> Void in
+                        
+                    }
+                )*/
+                //navigationController?.dismissViewControllerAnimated(false, completion: nil)
+                //navigationController?.pushViewController(MemoryGameViewController(), animated: true)
+                //app.window??.rootViewController = MemoryGameViewController()
+                //app.viewController.animateToViewController(MemoryGameViewController())
+                app?.animateToViewController(MemoryGameViewController())
+            }
+            else if (indexPath.row == 1)
+            {
+                /*self.transitionFromViewController(
+                    self,
+                    toViewController: UINavigationController(rootViewController: ColoringBookViewController()),
+                    duration: NSTimeInterval(3.0), options: UIViewAnimationOptions.TransitionCurlUp, animations:
+                    {(_) -> Void in
+                        
+                    },
+                    completion:
+                    {(_) -> Void in
+                        
+                    }
+                )*/
+                //navigationController?.dismissViewControllerAnimated(false, completion: nil)
+                //navigationController?.pushViewController(ColoringBookViewController(), animated: true)
+                app?.animateToViewController(ColoringBookViewController())
+            }
         }
         else
         {
-            /*self.transitionFromViewController(
-                self,
-                toViewController: UINavigationController(rootViewController: ColoringBookViewController()),
-                duration: NSTimeInterval(3.0), options: UIViewAnimationOptions.TransitionCurlUp, animations:
-                {(_) -> Void in
-                    
-                },
-                completion:
-                {(_) -> Void in
-                    
-                }
-            )*/
-            navigationController?.pushViewController(ColoringBookViewController(), animated: true)
+            //navigationController?.dismissViewControllerAnimated(false, completion: nil)
+            //navigationController?.pushViewController(KnockBlocksViewController(), animated: true)
+            app?.animateToViewController(KnockBlocksViewController())
         }
     }
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         var cell = collectionView.cellForItemAtIndexPath(indexPath)!
         cell.backgroundView!.alpha = 1.0
+        cell.layer.borderColor = cgColorForRed(70.0, green: 120.0, blue: 255.0)
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -184,5 +203,17 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         //cell.layer.shadowOffset = CGSizeMake(4.0*scale, 4.0*scale)
         
         return cell as UICollectionViewCell
+    }
+    
+    override func supportedInterfaceOrientations() -> Int {
+        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
+    }
+    
+    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
+        return UIInterfaceOrientation.Portrait
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return true
     }
 }

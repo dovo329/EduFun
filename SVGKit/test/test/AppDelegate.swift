@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  CollectionViewTest
+//  test
 //
-//  Created by Douglas Voss on 6/10/15.
-//  Copyright (c) 2015 DougsApps. All rights reserved.
+//  Created by Douglas Voss on 6/27/15.
+//  Copyright (c) 2015 test. All rights reserved.
 //
 
 import UIKit
@@ -14,48 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func animateToViewController(vc: UIViewController)
-    {
-        var fromView : UIView = window!.rootViewController!.view
-        var toView : UIView = vc.view
-        UIView.transitionFromView(fromView,
-            toView:toView,
-            duration: 1.0,
-            options: UIViewAnimationOptions.TransitionFlipFromBottom,
-            completion:
-            {(Bool) in
-                self.window!.rootViewController = vc;
-            }
-        )
-    }
-    
+
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window!.backgroundColor = UIColor.blueColor()
-        
-        //window!.rootViewController = UINavigationController(rootViewController: ColoringBookViewController())
-        //window!.rootViewController = EmitterTestViewController()
-        //window!.rootViewController = MemoryGameViewController()
-        window!.rootViewController = TitleScreenViewController()
-        //var navigationController = UINavigationController(rootViewController: TitleScreenViewController())
-        //var navigationController = OrientationNavigationController(rootViewController: TitleScreenViewController())
-        //navigationController.navigationBarHidden = true
-        //window!.rootViewController = navigationController
-        //var tabBarController = UITabBarController()
-        //window!.rootViewController = tabBarController
-        //window!.rootViewController = ContainerViewController()
-        window!.makeKeyAndVisible()
         return true
     }
-    
-    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> Int {
-        return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
-    }
-    
-    /*- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
-    return UIInterfaceOrientationMaskAllButUpsideDown;
-    }*/
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -84,14 +47,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Core Data stack
 
     lazy var applicationDocumentsDirectory: NSURL = {
-        // The directory the application uses to store the Core Data store file. This code uses a directory named "com.dougsapps.CollectionViewTest" in the application's documents Application Support directory.
+        // The directory the application uses to store the Core Data store file. This code uses a directory named "com.test.test" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         return urls[urls.count-1] as! NSURL
     }()
 
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = NSBundle.mainBundle().URLForResource("CollectionViewTest", withExtension: "momd")!
+        let modelURL = NSBundle.mainBundle().URLForResource("test", withExtension: "momd")!
         return NSManagedObjectModel(contentsOfURL: modelURL)!
     }()
 
@@ -99,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         // Create the coordinator and store
         var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("CollectionViewTest.sqlite")
+        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("test.sqlite")
         var error: NSError? = nil
         var failureReason = "There was an error creating or loading the application's saved data."
         if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
