@@ -153,12 +153,12 @@ func spin3BounceView(view: UIView, #duration: CGFloat)
     )
 }
 
-extension UINavigationController {
-    public override func shouldAutorotate() -> Bool {
-        return visibleViewController.shouldAutorotate()
-    }
+public func delay(#seconds: Double, #completion:()->())
+{
+    let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64( Double(NSEC_PER_SEC) * seconds ))
     
-    public override func supportedInterfaceOrientations() -> Int {
-        return visibleViewController.supportedInterfaceOrientations()
+    dispatch_after(popTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0))
+    {
+        completion()
     }
 }

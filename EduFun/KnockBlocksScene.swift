@@ -10,7 +10,7 @@ import SpriteKit
 
 class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
     struct PhysicsCategory {
-        static let None:        UInt32 = 0
+        static let None:        UInt32 = 0b0
         static let Wood:        UInt32 = 0b1
         static let StoneBall:   UInt32 = 0b10
         static let Rope:        UInt32 = 0b100
@@ -49,28 +49,46 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         physicsBody = SKPhysicsBody(edgeLoopFromRect: playableRect)
         physicsWorld.contactDelegate = self
         physicsBody!.categoryBitMask = PhysicsCategory.Edge
+        physicsWorld.gravity = CGVectorMake(0.0, 0.0)
+        //physicsWorld.gravity = CGVectorMake(0.0, -9.81)
         
-        //woodNode = childNodeWithName("wood") as! SKSpriteNode
-        //woodNode = SKSpriteNode(texture: SKTexture(imageNamed: "WoodBlock"))
         woodNode = SKSpriteNode(imageNamed: "WoodBlock")
         woodNode.physicsBody = SKPhysicsBody(rectangleOfSize: woodNode.frame.size)
         woodNode.position = CGPointMake(100, 250)
-        woodNode.zRotation = (π/180.0)*33
         woodNode.physicsBody!.categoryBitMask = PhysicsCategory.Wood
-        woodNode.physicsBody!.collisionBitMask = PhysicsCategory.Wood | PhysicsCategory.StoneBall | PhysicsCategory.Edge
+        woodNode.physicsBody!.collisionBitMask = PhysicsCategory.Wood | PhysicsCategory.StoneBall | PhysicsCategory.Edge | PhysicsCategory.Rope
         addChild(woodNode)
+        woodNode.zRotation = (π/180.0)*33
         
-        physicsWorld.gravity = CGVectorMake(0.7, -0.9)
-        
-        /*stoneBallNode = childNodeWithName("stoneBall") as! SKSpriteNode
+        stoneBallNode = SKSpriteNode(imageNamed: "Stone")
+        stoneBallNode.physicsBody = SKPhysicsBody(circleOfRadius: stoneBallNode.frame.size.width/2)
         stoneBallNode.physicsBody!.categoryBitMask = PhysicsCategory.StoneBall
-        stoneBallNode.physicsBody!.collisionBitMask = PhysicsCategory.Wood | PhysicsCategory.StoneBall | PhysicsCategory.Edge
+        stoneBallNode.physicsBody!.collisionBitMask = PhysicsCategory.Wood | PhysicsCategory.StoneBall | PhysicsCategory.Edge | PhysicsCategory.Rope
+        stoneBallNode.position = CGPointMake(100, 300)
+        stoneBallNode.zRotation = 0.0
+        stoneBallNode.xScale = 0.05
+        stoneBallNode.yScale = 0.05
+        addChild(stoneBallNode)
         
-        ropeNode = childNodeWithName("rope") as! SKSpriteNode
-        ropeNode.physicsBody!.categoryBitMask = PhysicsCategory.Rope
-        ropeNode.physicsBody!.collisionBitMask = PhysicsCategory.None*/
+        ropeNode = SKSpriteNode(imageNamed: "ropeAlpha")
+        var ropeNodeSize : CGSize = ropeNode.frame.size
+        //ropeNodeSize.height /= 2
+        ropeNode.physicsBody = SKPhysicsBody(rectangleOfSize: ropeNodeSize)
+        ropeNode.physicsBody?.restitution = 0.7
+        ropeNode.physicsBody!.categoryBitMask = PhysicsCategory.Wood
+        ropeNode.physicsBody!.collisionBitMask = PhysicsCategory.Wood | PhysicsCategory.StoneBall | PhysicsCategory.Edge | PhysicsCategory.Rope
+        ropeNode.xScale = 0.25
+        ropeNode.yScale = 0.25
+        ropeNode.position = CGPointMake(100, 200)
+        ropeNode.zRotation = (π/180.0)*74
+        addChild(ropeNode)
         
-        
+        delay(seconds: 4.0,
+            completion:
+            {(_) -> Void in
+                self.physicsWorld.gravity = CGVectorMake(0.0, -9.81)
+            }
+        )
     }
     
     override func update(currentTime: NSTimeInterval)
