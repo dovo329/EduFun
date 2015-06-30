@@ -16,21 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func animateToViewController(destVCEnum: UInt32)
     {
-        //var fromView : UIView = window!.rootViewController!.view
-        
-        /*UIView *overlayView = [[UIScreen mainScreen] snapshotViewAfterScreenUpdates:NO];
-        [self.destinationViewController.view addSubview:overlayView];
-        self.window.rootViewController = self.destinationViewController;
-        
-        [UIView animateWithDuration:0.4f delay:0.0f options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            overlayView.alpha = 0;
-            } completion:^(BOOL finished) {
-            [overlayView removeFromSuperview];
-            }];*/
-        /*  
-            transitionToViewController
-        */
-        
         var destVC : UIViewController!
         
         var overlayView = UIScreen.mainScreen().snapshotViewAfterScreenUpdates(false)
@@ -62,9 +47,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController = destVC;
         
         UIView.animateWithDuration(
-            1.0,
+            0.5,
             delay: 0.0,
-            options: UIViewAnimationOptions.CurveLinear,
+            options: UIViewAnimationOptions.CurveEaseInOut,
             animations:
             { (_) -> Void in
                 overlayView.alpha = 0.0
@@ -74,47 +59,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 overlayView.removeFromSuperview()
             }
         )
-        
-        /*UIView.animateWithDuration(
-            1.0,
-            delay: 0.0,
-            options: UIViewAnimationOptions.CurveLinear,
-            animations:
-            { (_) -> Void in
-                fromView.alpha = 0.0
-            },
-            completion:
-        { (_) -> Void in
-                vc.view.alpha = 0.0
-                self.window!.rootViewController = vc;
-                UIView.animateWithDuration(
-                    1.0,
-                    delay: 0.0,
-                    options: UIViewAnimationOptions.CurveLinear,
-                    animations:
-                    { (_) -> Void in
-                        vc.view.alpha = 1.0
-                    },
-                    completion:
-                    { (_) -> Void in
-                        
-                    }
-                )
-            }
-        )*/
-        
-        //var toView : UIView = vc.view
-        //self.window!.rootViewController = vc;
-        
-        /*UIView.transitionFromView(fromView,
-            toView:toView,
-            duration: 2.0,
-            options: UIViewAnimationOptions.TransitionFlipFromBottom,
-            completion:
-            {(Bool) in
-                //self.window!.rootViewController = vc;
-            }
-        )*/
     }
     
     /*func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> Int {
