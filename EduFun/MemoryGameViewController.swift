@@ -99,7 +99,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         setupCardArr()
         
         initRoundCompleteLabels()
-        //roundCompleteMethod()
+        roundCompleteMethod()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -511,7 +511,12 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     func quitButtonMethod(sender : THButton, event : UIEvent) {
         NSLog("quit button pressed method")
         
-        navigationController?.popViewControllerAnimated(true)
+        var app = UIApplication.sharedApplication().delegate as? AppDelegate
+        
+        app?.animateToViewController(TitleScreenViewController())
+        
+        //navigationController?.popViewControllerAnimated(true)
+        
         /*var viewCast : UIView = sender as UIView
         var touch : UITouch = event.allTouches()!.first as! UITouch
         var location : CGPoint = touch.locationInView(viewCast)
@@ -682,11 +687,15 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         //println("DeselectedCell at row:\(indexPath.section) column:\(indexPath.row)")
     }
     
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientation.Portrait.rawValue)
+    override func shouldAutorotate() -> Bool {
+        return true
     }
     
-    override func shouldAutorotate() -> Bool {
-        return false
+    override func supportedInterfaceOrientations() -> Int {
+        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
+    }
+    
+    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
+        return UIInterfaceOrientation.Portrait
     }
 }
