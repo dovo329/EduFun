@@ -50,12 +50,14 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         physicsBody = SKPhysicsBody(edgeLoopFromRect: playableRect)
         physicsWorld.contactDelegate = self
         physicsBody!.categoryBitMask = PhysicsCategory.Edge
-        physicsWorld.gravity = CGVectorMake(0.0, -1.0)
+        physicsWorld.gravity = CGVectorMake(0.0, -2.0)
         
         ropeNode = childNodeWithName("rope") as! SKSpriteNode
         stoneBallNode = childNodeWithName("stoneBall") as! SKSpriteNode
-        ropeNode.physicsBody!.applyAngularImpulse(30.0)
-        stoneBallNode.physicsBody!.applyAngularImpulse(-30.0)
+        stoneBallNode.physicsBody!.density = 2.0
+        //ropeNode.physicsBody!.applyAngularImpulse(30.0)
+        stoneBallNode.physicsBody!.applyAngularImpulse(-0.5)
+        stoneBallNode.physicsBody!.applyImpulse(CGVector(dx:500.0, dy:250.0))
         
         /*enumerateChildNodesWithName("wood") {node, _ in
             self.woodNodeArr.append(node)
