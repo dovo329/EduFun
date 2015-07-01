@@ -130,8 +130,8 @@
     self.colView.delegate = self;
     [self.colView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kReuseId];
     
-    //self.colView.backgroundColor = [UIColor colorWithRed:0.3 green:0.4 blue:0.5 alpha:1.0];
-    self.colView.backgroundColor = [UIColor clearColor];
+    self.colView.backgroundColor = [UIColor colorWithRed:0.3 green:0.4 blue:0.5 alpha:1.0];
+    //self.colView.backgroundColor = [UIColor clearColor];
     self.colView.scrollEnabled = true;
     
     [self.view addSubview:self.colView];

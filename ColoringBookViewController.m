@@ -220,6 +220,12 @@
 {
     PaletteViewController *pvc = [PaletteViewController new];
     pvc.delegate = self;
+    
+    //pvc.modalTransitionStyle = UIModalTransitionStylePartialCurl;
+    //pvc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    //pvc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    pvc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
     //[self.navigationController pushViewController:pvc animated:NO];
     [self presentViewController:pvc animated:YES completion:nil];
 }
