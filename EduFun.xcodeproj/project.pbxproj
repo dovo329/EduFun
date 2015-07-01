@@ -17,6 +17,7 @@
 		A536006C1B35394000443B93 /* MonkeySketch.svg in Resources */ = {isa = PBXBuildFile; fileRef = A536006B1B35394000443B93 /* MonkeySketch.svg */; };
 		A536FE771B350D2C00443B93 /* ColoringBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A536FE731B350D2C00443B93 /* ColoringBookViewController.m */; };
 		A5554D4C1B3239AE002B06E5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */; };
+		A58929F81B443D6400206DB6 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A58929F71B443D6400206DB6 /* sprites.atlas */; };
 		A5925F551B41CB42000E8FF8 /* KnockBlocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5925F541B41CB42000E8FF8 /* KnockBlocksViewController.swift */; };
 		A5925F571B41CDE2000E8FF8 /* KnockBlocksScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A5925F561B41CDE2000E8FF8 /* KnockBlocksScene.sks */; };
 		A5925F591B41CE7A000E8FF8 /* KnockBlocksScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5925F581B41CE7A000E8FF8 /* KnockBlocksScene.swift */; };
@@ -98,6 +99,7 @@
 		A536FE721B350D2C00443B93 /* ColoringBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColoringBookViewController.h; path = ../ColoringBookViewController.h; sourceTree = "<group>"; };
 		A536FE731B350D2C00443B93 /* ColoringBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColoringBookViewController.m; path = ../ColoringBookViewController.m; sourceTree = "<group>"; };
 		A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A58929F71B443D6400206DB6 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = sprites.atlas; path = Art/sprites.atlas; sourceTree = SOURCE_ROOT; };
 		A5925F541B41CB42000E8FF8 /* KnockBlocksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KnockBlocksViewController.swift; path = ../KnockBlocksViewController.swift; sourceTree = "<group>"; };
 		A5925F561B41CDE2000E8FF8 /* KnockBlocksScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = KnockBlocksScene.sks; sourceTree = "<group>"; };
 		A5925F581B41CE7A000E8FF8 /* KnockBlocksScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnockBlocksScene.swift; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				A5925F581B41CE7A000E8FF8 /* KnockBlocksScene.swift */,
 				A5925F561B41CDE2000E8FF8 /* KnockBlocksScene.sks */,
 				A5B85EBF1B276636008012F7 /* Images.xcassets */,
+				A58929F71B443D6400206DB6 /* sprites.atlas */,
 				A536FE721B350D2C00443B93 /* ColoringBookViewController.h */,
 				A536FE731B350D2C00443B93 /* ColoringBookViewController.m */,
 				A595C3DF1B3B0A2E001C6040 /* PaletteViewController.h */,
@@ -387,6 +390,7 @@
 			files = (
 				A536006C1B35394000443B93 /* MonkeySketch.svg in Resources */,
 				A595C3EA1B3B4990001C6040 /* SuperMario256.ttf in Resources */,
+				A58929F81B443D6400206DB6 /* sprites.atlas in Resources */,
 				A5B85EC31B276636008012F7 /* LaunchScreen.xib in Resources */,
 				A5B85EC01B276636008012F7 /* Images.xcassets in Resources */,
 				A5B85EBE1B276636008012F7 /* Main.storyboard in Resources */,

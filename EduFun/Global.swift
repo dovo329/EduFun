@@ -162,3 +162,8 @@ public func delay(#seconds: Double, #completion:()->())
         completion()
     }
 }
+
+func random(#min: CGFloat, #max: CGFloat) -> CGFloat
+{
+    return CGFloat(Float(arc4random()) / Float(0x7FFFFFFF)) * (max - min) + min
+}

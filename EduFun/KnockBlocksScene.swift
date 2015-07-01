@@ -17,11 +17,11 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         static let Edge:        UInt32 = 0b1000
     }
 
-    let playableRect: CGRect
+    var playableRect: CGRect
     var lastUpdateTime: NSTimeInterval = 0
     var dt : NSTimeInterval = 0
     
-    var woodNode : SKSpriteNode!
+    var woodNodeArr : [SKSpriteNode]!
     var stoneBallNode : SKSpriteNode!
     var ropeNode : SKSpriteNode!
     
@@ -34,7 +34,8 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("Not implemented")
+        playableRect = CGRect(x: 0, y: 0, width: 0, height: 0)
+        super.init(coder: aDecoder)
     }
       
     override func didMoveToView(view: SKView) {
@@ -49,9 +50,19 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         physicsBody = SKPhysicsBody(edgeLoopFromRect: playableRect)
         physicsWorld.contactDelegate = self
         physicsBody!.categoryBitMask = PhysicsCategory.Edge
-        physicsWorld.gravity = CGVectorMake(0.0, 0.0)
-        //physicsWorld.gravity = CGVectorMake(0.0, -9.81)
+        physicsWorld.gravity = CGVectorMake(0.0, -1.0)
         
+        ropeNode = childNodeWithName("rope") as! SKSpriteNode
+        stoneBallNode = childNodeWithName("stoneBall") as! SKSpriteNode
+        ropeNode.physicsBody!.applyAngularImpulse(30.0)
+        stoneBallNode.physicsBody!.applyAngularImpulse(-30.0)
+        
+        /*enumerateChildNodesWithName("wood") {node, _ in
+            self.woodNodeArr.append(node)
+        }*/
+        
+        //physicsWorld.gravity = CGVectorMake(0.0, -9.81)
+        /*
         woodNode = SKSpriteNode(imageNamed: "WoodBlock")
         woodNode.physicsBody = SKPhysicsBody(rectangleOfSize: woodNode.frame.size)
         woodNode.position = CGPointMake(100, 250)
@@ -88,7 +99,7 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
             {(_) -> Void in
                 self.physicsWorld.gravity = CGVectorMake(0.0, -9.81)
             }
-        )
+        )*/
     }
     
     override func update(currentTime: NSTimeInterval)
@@ -102,6 +113,8 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
             dt = 0
         }
         lastUpdateTime = currentTime
+        //ropeNode.physicsBody!.applyTorque(0.1)
+        //stoneBallNode.physicsBody!.applyTorque(-0.1)
         //println("\(dt*1000) milliseconds since the last update")
     }    
 }
