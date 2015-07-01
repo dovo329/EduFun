@@ -19,6 +19,7 @@
 @property (nonatomic, assign) CGSize origSize;
 @property (nonatomic, strong) CAGradientLayer *gradientLayer;
 @property (nonatomic, strong) UIToolbar *toolBar;
+@property (nonatomic, assign) UIInterfaceOrientation previousOrientation;
 
 @end
 
@@ -53,39 +54,19 @@
  self.scrollView.zoomScale = scale;
  }*/
 
-- (void) orientationChanged:(NSNotification *)notification
-{
-    NSLog(@"orientationChanged");
-    if (self.svgImageView) {
-
-        CGFloat scaleX, scaleY, scale;
-        scaleX = self.view.frame.size.width / self.origSize.width;
-        scaleY = self.view.frame.size.height / self.origSize.height;
-        scale = scaleX < scaleY ? scaleX : scaleY;
-        
-        self.scrollView.minimumZoomScale = scale;
-        self.scrollView.maximumZoomScale = scale*20.0;
-        
-        self.scrollView.zoomScale = scale;
-        NSLog(@"min=%f max=%f cur=%f", self.scrollView.minimumZoomScale, self.scrollView.maximumZoomScale, self.scrollView.zoomScale);
-    }
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setupBackgroundGradient];
     
+    //self.previousOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    self.previousOrientation = UIInterfaceOrientationPortrait;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
     
-    NSLog(@"viewDidLoad");
-    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
-    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+    //NSLog(@"viewDidLoad");
     
     // Do any additional setup after loading the view.
-    
-    //NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
-     [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
     
     self.navigationController.navigationBarHidden = false;
     self.selColor = [UIColor blueColor];
@@ -114,7 +95,7 @@
     [self.scrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview: self.scrollView];
     
-    NSDictionary *viewsDictionary = @{@"sv": self.scrollView};
+    /*NSDictionary *viewsDictionary = @{@"sv": self.scrollView};
     [self.view addConstraints:
      [NSLayoutConstraint
       constraintsWithVisualFormat:@"V:|[sv]|"
@@ -131,6 +112,46 @@
       metrics: nil
       views: viewsDictionary
       ]
+     ];*/
+    
+    [self.view addConstraint:
+     [NSLayoutConstraint constraintWithItem:self.scrollView
+                                 attribute:NSLayoutAttributeWidth
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.view
+                                 attribute:NSLayoutAttributeWidth
+                                multiplier:1.0
+                                  constant:0.0]
+     ];
+    
+    [self.view addConstraint:
+     [NSLayoutConstraint constraintWithItem:self.scrollView
+                                 attribute:NSLayoutAttributeHeight
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.view
+                                 attribute:NSLayoutAttributeHeight
+                                multiplier:1.0
+                                  constant:0.0]
+     ];
+    
+    [self.view addConstraint:
+     [NSLayoutConstraint constraintWithItem:self.scrollView
+                                 attribute:NSLayoutAttributeCenterX
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.view
+                                 attribute:NSLayoutAttributeCenterX
+                                multiplier:1.0
+                                  constant:0.0]
+     ];
+    
+    [self.view addConstraint:
+     [NSLayoutConstraint constraintWithItem:self.scrollView
+                                 attribute:NSLayoutAttributeCenterY
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.view
+                                 attribute:NSLayoutAttributeCenterY
+                                multiplier:1.0
+                                  constant:0.0]
      ];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapMethod:)];
@@ -243,6 +264,44 @@
 - (NSUInteger)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskLandscape | UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
+    //return UIInterfaceOrientationMaskAll;
+}
+
+- (NSString *)orientationToString:(UIInterfaceOrientation)orient
+{
+    if (orient == UIInterfaceOrientationPortrait ||
+        orient == UIInterfaceOrientationPortraitUpsideDown) {
+        return @"Portrait";
+    } else if (orient == UIInterfaceOrientationLandscapeLeft ||
+               orient == UIInterfaceOrientationLandscapeRight)
+    {
+        return @"Landscape";
+    } else {
+        return @"Other";
+    }
+}
+
+- (void) orientationChanged:(NSNotification *)notification
+{
+    UIInterfaceOrientation newOrient = [[UIDevice currentDevice] orientation];
+    
+    NSLog(@"orientationChanged from %@ to %@", [self orientationToString:self.previousOrientation], [self orientationToString:newOrient]);
+    if (self.previousOrientation != newOrient &&
+        self.svgImageView)
+    {
+        CGFloat scaleX, scaleY, scale;
+        // orientation changed but apparently frame.size hasn't swapped width and height yet so swap it ourselves
+        scaleX = self.view.frame.size.height / self.origSize.width;
+        scaleY = self.view.frame.size.width / self.origSize.height;
+        scale = scaleX < scaleY ? scaleX : scaleY;
+        
+        self.scrollView.minimumZoomScale = scale;
+        self.scrollView.maximumZoomScale = scale*20.0;
+        
+        self.scrollView.zoomScale = scale;
+        //NSLog(@"wid=%f height=%f min=%f max=%f cur=%f", self.view.frame.size.width, self.view.frame.size.height, self.scrollView.minimumZoomScale, self.scrollView.maximumZoomScale, self.scrollView.zoomScale);
+    }
+    self.previousOrientation = newOrient;
 }
 
 @end
