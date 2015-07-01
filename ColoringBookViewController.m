@@ -18,6 +18,7 @@
 @property (nonatomic, strong) UIColor *selColor;
 @property (nonatomic, assign) CGSize origSize;
 @property (nonatomic, strong) CAGradientLayer *gradientLayer;
+@property (nonatomic, strong) UIToolbar *toolBar;
 
 @end
 
@@ -140,12 +141,31 @@
     paintersPaletteImg = [paintersPaletteImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     UIBarButtonItem *paletteSelButton = [[UIBarButtonItem alloc] initWithImage:paintersPaletteImg style:UIBarButtonItemStylePlain target:self action:@selector(paletteSelMethod)];
-    self.navigationItem.rightBarButtonItem = paletteSelButton;
+    self.toolBar = [UIToolbar new];
+    self.toolBar.items = @[paletteSelButton];
+    self.toolBar.backgroundColor = [UIColor orangeColor];
     
-    /*CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = self.view.bounds;
-    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor whiteColor] CGColor], (id)[[UIColor blackColor] CGColor], nil];
-     [self.view.layer insertSublayer:gradient atIndex:0];*/
+    [self.toolBar setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.view addSubview:self.toolBar];
+
+    NSDictionary *viewsDictionary2 = @{@"tb": self.toolBar};
+    [self.view addConstraints:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"V:|-(>=0)-[tb(==30)]|"
+      options: NSLayoutFormatAlignAllBaseline
+      metrics: nil
+      views: viewsDictionary2
+      ]
+     ];
+    
+    [self.view addConstraints:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"H:|[tb]|"
+      options: NSLayoutFormatAlignAllBaseline
+      metrics: nil
+      views: viewsDictionary2
+      ]
+     ];
 }
 
 - (CGColorRef)cgColorForRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue
@@ -200,7 +220,8 @@
 {
     PaletteViewController *pvc = [PaletteViewController new];
     pvc.delegate = self;
-    [self.navigationController pushViewController:pvc animated:NO];
+    //[self.navigationController pushViewController:pvc animated:NO];
+    [self presentViewController:pvc animated:YES completion:nil];
 }
 
 - (void)updatePaintColor:(UIColor *)color
