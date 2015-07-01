@@ -9,7 +9,7 @@
 #import "ColoringBookViewController.h"
 #import <SVGKit/SVGKit.h>
 #import "PaletteViewController.h"
-
+#import "EduFun-Swift.h"
 
 @interface ColoringBookViewController () <UIScrollViewDelegate, PaletteViewControllerDelegate>
 
@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIColor *selColor;
 @property (nonatomic, assign) CGSize origSize;
+@property (nonatomic, strong) CAGradientLayer *gradientLayer;
 
 @end
 
@@ -72,6 +73,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setupBackgroundGradient];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
     
     NSLog(@"viewDidLoad");
@@ -80,14 +83,15 @@
     
     // Do any additional setup after loading the view.
     
-    /*NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
-     [[UIDevice currentDevice] setValue:value forKey:@"orientation"];*/
+    //NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+     [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
     
     self.navigationController.navigationBarHidden = false;
     self.selColor = [UIColor blueColor];
     
     //SVGKFastImageView *svgView = [[SVGKFastImageView alloc] initWithSVGKImage: [SVGKImage imageNamed:@"Monkey.svg"]];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor clearColor];
+    self.view.opaque = false;
     self.svgImageView = [[SVGKLayeredImageView alloc] initWithSVGKImage: [SVGKImage imageNamed:@"mtnHouse.svg"]];
     //self.svgImageView = [[SVGKLayeredImageView alloc] initWithSVGKImage: [SVGKImage imageNamed:@"mtnHouseInk.svg"]];
     
@@ -128,7 +132,6 @@
       ]
      ];
     
-    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapMethod:)];
     [self.view addGestureRecognizer:tapGesture];
     
@@ -138,6 +141,40 @@
     
     UIBarButtonItem *paletteSelButton = [[UIBarButtonItem alloc] initWithImage:paintersPaletteImg style:UIBarButtonItemStylePlain target:self action:@selector(paletteSelMethod)];
     self.navigationItem.rightBarButtonItem = paletteSelButton;
+    
+    /*CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = self.view.bounds;
+    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor whiteColor] CGColor], (id)[[UIColor blackColor] CGColor], nil];
+     [self.view.layer insertSublayer:gradient atIndex:0];*/
+}
+
+- (CGColorRef)cgColorForRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue
+{
+    return (CGColorRef)[[UIColor colorWithRed:red green:green blue:blue alpha:1.0] CGColor];
+}
+
+- (void)setupBackgroundGradient
+{
+    
+    UIColor *colorOne   = [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0];
+    UIColor *colorTwo   = [UIColor colorWithRed:255.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1.0];
+    UIColor *colorThree = [UIColor colorWithRed:255.0/255.0 green:216.0/255.0 blue:173.0/255.0 alpha:1.0];
+    UIColor *colorFour  = [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:152.0/255.0 alpha:1.0];
+    UIColor *colorFive  = [UIColor colorWithRed:152.0/255.0 green:255.0/255.0 blue:152.0/255.0 alpha:1.0];
+    UIColor *colorSix   = [UIColor colorWithRed:162.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0];
+    
+    NSArray *colors =  [NSArray arrayWithObjects:(id)[colorOne CGColor], (id)[colorTwo CGColor], (id)[colorThree CGColor], (id)[colorFour CGColor], (id)[colorFive CGColor], (id)[colorSix CGColor], nil];
+
+    self.gradientLayer = [CAGradientLayer layer];
+    self.gradientLayer.colors = colors;
+    self.gradientLayer.frame = self.view.bounds;
+    self.gradientLayer.shouldRasterize = true;
+    [self.view.layer addSublayer:self.gradientLayer];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    self.gradientLayer.frame = self.view.bounds;
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
@@ -178,7 +215,7 @@
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskAll;
+    return UIInterfaceOrientationMaskLandscape | UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
 }
 
 @end

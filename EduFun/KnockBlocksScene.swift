@@ -21,7 +21,7 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
     var lastUpdateTime: NSTimeInterval = 0
     var dt : NSTimeInterval = 0
     
-    var woodNodeArr : [SKSpriteNode]!
+    var woodNodeArr : [SKSpriteNode]! = [SKSpriteNode]()
     var stoneBallNode : SKSpriteNode!
     var ropeNode : SKSpriteNode!
     
@@ -49,15 +49,27 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         
         physicsBody = SKPhysicsBody(edgeLoopFromRect: playableRect)
         physicsWorld.contactDelegate = self
-        physicsBody!.categoryBitMask = PhysicsCategory.Edge
+        //physicsBody!.categoryBitMask = PhysicsCategory.Edge
         physicsWorld.gravity = CGVectorMake(0.0, -2.0)
         
         ropeNode = childNodeWithName("rope") as! SKSpriteNode
         stoneBallNode = childNodeWithName("stoneBall") as! SKSpriteNode
         stoneBallNode.physicsBody!.density = 2.0
         //ropeNode.physicsBody!.applyAngularImpulse(30.0)
-        stoneBallNode.physicsBody!.applyAngularImpulse(-0.5)
-        stoneBallNode.physicsBody!.applyImpulse(CGVector(dx:500.0, dy:250.0))
+        delay(seconds: 2.0) {
+            self.stoneBallNode.physicsBody!.applyAngularImpulse(1)
+            self.stoneBallNode.physicsBody!.applyImpulse(CGVector(dx:500.0, dy:250.0))
+        }
+        
+        
+        delay(seconds: 2.0) {
+            self.enumerateChildNodesWithName("wood", usingBlock: {
+                node, _ -> Void in
+                //NSLog("node=%@", node)
+                node.physicsBody!.applyImpulse(CGVector(dx:0.0, dy:-300.0))
+                node.physicsBody!.categoryBitMask = PhysicsCategory.Wood
+            })
+        }
         
         /*enumerateChildNodesWithName("wood") {node, _ in
             self.woodNodeArr.append(node)
@@ -118,5 +130,26 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         //ropeNode.physicsBody!.applyTorque(0.1)
         //stoneBallNode.physicsBody!.applyTorque(-0.1)
         //println("\(dt*1000) milliseconds since the last update")
-    }    
+    }
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        let touch: UITouch = touches.first as! UITouch
+        sceneTouched(touch.locationInNode(self))
+    }
+    
+    func sceneTouched(location: CGPoint)
+    {
+        let targetNode = self.nodeAtPoint(location)
+        
+        if targetNode.physicsBody == nil
+        {
+            return
+        }
+
+        if targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Wood
+        {
+            targetNode.removeFromParent()
+            return
+        }
+    }
 }
