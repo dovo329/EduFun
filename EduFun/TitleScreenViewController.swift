@@ -13,8 +13,8 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
 {
 
     var titleLabel : THLabel!
-    let kNumRows : Int = 2
-    let kNumColumns : Int = 2
+    let kNumRows : Int = 1
+    let kNumColumns : Int = 3
     let kCellReuseId : String = "title.screen.cell.reuse.id"
     var collectionView : UICollectionView!
     var bgGradLayer : CAGradientLayer = CAGradientLayer()
@@ -118,55 +118,16 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         
         var app = UIApplication.sharedApplication().delegate as? AppDelegate
         
-        if (indexPath.section == 0)
+        if (indexPath.row == 0)
         {
-            if (indexPath.row == 0)
-            {
-                /*self.transitionFromViewController(
-                    self,
-                    toViewController: MemoryGameViewController(),
-                    duration: NSTimeInterval(3.0),
-                    options: UIViewAnimationOptions.TransitionCurlUp,
-                    animations:
-                    {(_) -> Void in
-                        
-                    },
-                    completion:
-                    {(_) -> Void in
-                        
-                    }
-                )*/
-                //navigationController?.dismissViewControllerAnimated(false, completion: nil)
-                //navigationController?.pushViewController(MemoryGameViewController(), animated: true)
-                //app.window??.rootViewController = MemoryGameViewController()
-                //app.viewController.animateToViewController(MemoryGameViewController())
-                app?.animateToViewController(DestViewController.CardMatching)
-            }
-            else if (indexPath.row == 1)
-            {
-                /*self.transitionFromViewController(
-                    self,
-                    toViewController: UINavigationController(rootViewController: ColoringBookViewController()),
-                    duration: NSTimeInterval(3.0), options: UIViewAnimationOptions.TransitionCurlUp, animations:
-                    {(_) -> Void in
-                        
-                    },
-                    completion:
-                    {(_) -> Void in
-                        
-                    }
-                )*/
-                //navigationController?.dismissViewControllerAnimated(false, completion: nil)
-                //navigationController?.pushViewController(ColoringBookViewController(), animated: true)
-                app?.animateToViewController(DestViewController.ColoringBook)
-                //app?.animateToViewController(ColoringBookViewController())
-            }
+            app?.animateToViewController(DestViewController.CardMatching)
         }
-        else
+        else if (indexPath.row == 1)
         {
-            //navigationController?.dismissViewControllerAnimated(false, completion: nil)
-            //navigationController?.pushViewController(KnockBlocksViewController(), animated: true)
-            //app?.animateToViewController(KnockBlocksViewController())
+            app?.animateToViewController(DestViewController.ColoringBook)
+        }
+        else if (indexPath.row == 2)
+        {
             app?.animateToViewController(DestViewController.KnockBlocks)
         }
     }
@@ -223,9 +184,9 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         let kXMargin : CGFloat = view.frame.size.width*(1/16.0)
         let kYMargin : CGFloat = (view.frame.size.height-(titleLabel.frame.size.height+20.0))*(1/16.0)
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: kYMargin, left: kXMargin, bottom: 0, right: kXMargin)
-        let width = (13.0/32.0)*view.frame.size.width
-        let height = (13.0/32.0)*(view.frame.size.height-(titleLabel.frame.size.height+20.0))
+        layout.sectionInset = UIEdgeInsets(top: kYMargin, left: kXMargin, bottom:kYMargin, right: kXMargin)
+        let width = (1.0/4.0)*view.frame.size.width
+        let height = (0.8)*(view.frame.size.height-(titleLabel.frame.size.height+20.0))
         layout.itemSize = CGSize(width: width, height: height)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
@@ -235,11 +196,7 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
     }
     
     override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
-    }
-    
-    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
-        return UIInterfaceOrientation.Portrait
+        return Int(UIInterfaceOrientationMask.LandscapeLeft.rawValue)
     }
     
     override func shouldAutorotate() -> Bool {
