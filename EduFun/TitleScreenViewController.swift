@@ -17,6 +17,7 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
     let kNumColumns : Int = 2
     let kCellReuseId : String = "title.screen.cell.reuse.id"
     var collectionView : UICollectionView!
+    var bgGradLayer : CAGradientLayer = CAGradientLayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +33,9 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
 
     func setupBackgroundGradient()
     {
-        var bgGradLayer = CAGradientLayer()
-        bgGradLayer.frame = view.bounds
+        //var bgGradLayer = CAGradientLayer()
+        //bgGradLayer.frame = view.bounds
+        
         bgGradLayer.colors = [
             cgColorForRed(255.0, green:255.0, blue:255.0),
             cgColorForRed(255.0, green:224.0, blue:224.0),
@@ -45,7 +47,7 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         bgGradLayer.startPoint = CGPoint(x:0.0, y:0.0)
         bgGradLayer.endPoint = CGPoint(x:0.0, y:1.0)
         bgGradLayer.shouldRasterize = true
-        view.layer.addSublayer(bgGradLayer)
+        view.layer.addSublayer(bgGradLayer)                
     }
     
     func setupTitleLabel()
@@ -205,6 +207,31 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         //cell.layer.shadowOffset = CGSizeMake(4.0*scale, 4.0*scale)
         
         return cell as UICollectionViewCell
+    }
+    
+    override func viewDidLayoutSubviews() {
+        bgGradLayer.frame = self.view.bounds
+        
+        titleLabel.frame = CGRect(x: 0.0, y: 20.0, width: view.frame.size.width, height: view.frame.size.height)
+        //titleLabel.font = UIFont(name: "Super Mario 256", size: 300.0)
+        titleLabel.font = UIFont(name: "Super Mario 256", size: 45.0)
+        titleLabel.font = titleLabel.font.fontWithSize(getFontSizeToFitFrameOfLabel(titleLabel)-6.0)
+        //titleLabel.frame.origin.y -= titleLabel.font.pointSize
+        //println("titleLabel.font.pointSize=\(titleLabel.font.pointSize)")
+        titleLabel.frame.size.height = titleLabel.font.pointSize*1.3
+        
+        let kXMargin : CGFloat = view.frame.size.width*(1/16.0)
+        let kYMargin : CGFloat = (view.frame.size.height-(titleLabel.frame.size.height+20.0))*(1/16.0)
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: kYMargin, left: kXMargin, bottom: 0, right: kXMargin)
+        let width = (13.0/32.0)*view.frame.size.width
+        let height = (13.0/32.0)*(view.frame.size.height-(titleLabel.frame.size.height+20.0))
+        layout.itemSize = CGSize(width: width, height: height)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        
+        collectionView.setCollectionViewLayout(layout, animated: false)
+        collectionView.frame = CGRectMake(0, (titleLabel.frame.size.height+20.0), view.frame.size.width, view.frame.size.height)
     }
     
     override func supportedInterfaceOrientations() -> Int {
