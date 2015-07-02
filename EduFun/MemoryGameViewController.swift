@@ -127,7 +127,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.activateCardArr()
+        //self.activateCardArr()
     }
     
     func setupMatchSparkles() {
@@ -176,7 +176,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         emitterLayerArr[0].emitterShape = kCAEmitterLayerRectangle
         emitterLayerArr[0].lifetime = kSparkleLifetimeMean
         view.layer.addSublayer(emitterLayerArr[0])
-        emitterLayerArr[0].beginTime = CACurrentMediaTime()-0.2
+        emitterLayerArr[0].beginTime = CACurrentMediaTime()-0.5
         //println("currentMediaTime=\(CACurrentMediaTime())")
         
         emitterLayerArr[1].emitterPosition = CGPointMake(frame2.origin.x + frame2.size.width/2, frame2.origin.y + frame2.size.height/2)
@@ -184,8 +184,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         emitterLayerArr[1].emitterShape = kCAEmitterLayerRectangle
         view.layer.addSublayer(emitterLayerArr[1])
         emitterLayerArr[1].lifetime = kSparkleLifetimeMean
-        emitterLayerArr[1].beginTime = CACurrentMediaTime()-0.2
-        //println("currentMediaTime=\(CACurrentMediaTime()-0.2)")
+        emitterLayerArr[1].beginTime = CACurrentMediaTime()-0.5
     }
     
     func stopMatchSparkles() {
@@ -431,10 +430,6 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                             var cell0 = collectionView.cellForItemAtIndexPath(indexPath0)!
                             var cell1 = collectionView.cellForItemAtIndexPath(indexPath1)!
                             
-                            
-                            
-                            self.startMatchSparkles(frame1:cell0.frame, frame2:cell1.frame)
-                            
                             var blankView0 = UIView(frame: CGRect(x: 0, y: 0, width: cell0.backgroundView!.frame.size.width, height: cell0.backgroundView!.frame.size.height))
                             UIView.transitionFromView((cell0.backgroundView)!, toView:blankView0, duration: self.kMatchDisappearDuration, options: UIViewAnimationOptions.TransitionCurlUp,
                                 completion:
@@ -452,6 +447,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                                     blankView1.removeFromSuperview()
                                 }
                             )
+                            
+                            self.startMatchSparkles(frame1:cell0.frame, frame2:cell1.frame)
                             
                             var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(self.kMatchDisappearDuration*(1.0/2.0))) * Double(NSEC_PER_SEC)))
                             dispatch_after(dispatchTime, dispatch_get_main_queue(),
