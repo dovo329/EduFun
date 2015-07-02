@@ -16,6 +16,7 @@
 @property (nonatomic, strong) SVGKLayeredImageView *svgImageView;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIColor *selColor;
+@property (nonatomic, strong) NSIndexPath *selColorIndexPath;
 @property (nonatomic, assign) CGSize origSize;
 @property (nonatomic, strong) CAGradientLayer *gradientLayer;
 @property (nonatomic, strong) UIToolbar *toolBar;
@@ -27,46 +28,17 @@
 
 - (void)dealloc
 {
-    //SVGKLayer *layer = (SVGKLayer *)self.svgImageView.layer;
-    //[layer removeObserver:self forKeyPath:@"showBorder"];
+    NSLog(@"ColoringBookViewController dealloc");
 }
-
-/*- (void)viewWillAppear:(BOOL)animated
- {
- [super viewWillAppear:animated];
- }*/
-
-/*- (void)viewDidAppear:(BOOL)animated
- {
- [super viewDidAppear:animated];
- NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
- [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
- NSLog(@"viewDidAppear");
- 
- CGSize size = self.svgImageView.frame.size;
- CGFloat scaleX = self.view.frame.size.width / size.width;
- CGFloat scaleY = self.view.frame.size.height / size.height;
- CGFloat scale = scaleX < scaleY ? scaleX : scaleY;
- 
- self.scrollView.minimumZoomScale = scale;
- self.scrollView.maximumZoomScale = scale*20.0;
- 
- self.scrollView.zoomScale = scale;
- }*/
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setupBackgroundGradient];
     
-    //self.previousOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     self.previousOrientation = UIInterfaceOrientationPortrait;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
-    
-    //NSLog(@"viewDidLoad");
-    
-    // Do any additional setup after loading the view.
     
     self.navigationController.navigationBarHidden = false;
     self.selColor = [UIColor blueColor];
@@ -91,31 +63,10 @@
     self.scrollView.maximumZoomScale = scale*20.0;
     
     self.scrollView.zoomScale = scale;
-    //self.svgImageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5,
-    //                                       self.scrollView.contentSize.height * 0.5);
     
     [self.scrollView addSubview:self.svgImageView];
     [self.scrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview: self.scrollView];
-    
-    /*NSDictionary *viewsDictionary = @{@"sv": self.scrollView};
-    [self.view addConstraints:
-     [NSLayoutConstraint
-      constraintsWithVisualFormat:@"V:|[sv]|"
-      options: NSLayoutFormatAlignAllBaseline
-      metrics: nil
-      views: viewsDictionary
-      ]
-     ];
-    
-    [self.view addConstraints:
-     [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:|[sv]|"
-      options: NSLayoutFormatAlignAllBaseline
-      metrics: nil
-      views: viewsDictionary
-      ]
-     ];*/
     
     [self.view addConstraint:
      [NSLayoutConstraint constraintWithItem:self.scrollView
@@ -161,7 +112,7 @@
     CGFloat offsetY = MAX((self.view.frame.size.height - self.scrollView.contentSize.height) * 0.5, 0.0);
     self.svgImageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5 + offsetX,
                                            self.scrollView.contentSize.height * 0.5 + offsetY);
-    NSLog(@"bsw: %f; bsh: %f; offsetX:%f Y:%f, csw: %f csh: %f", self.scrollView.bounds.size.width, self.scrollView.bounds.size.height, offsetX, offsetY, self.scrollView.contentSize.width, self.scrollView.contentSize.height);
+    //NSLog(@"bsw: %f; bsh: %f; offsetX:%f Y:%f, csw: %f csh: %f", self.scrollView.bounds.size.width, self.scrollView.bounds.size.height, offsetX, offsetY, self.scrollView.contentSize.width, self.scrollView.contentSize.height);
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapMethod:)];
     [self.view addGestureRecognizer:tapGesture];
@@ -256,7 +207,7 @@
 {
     PaletteViewController *pvc = [PaletteViewController new];
     pvc.delegate = self;
-    
+    pvc.indexPath = self.selColorIndexPath;
     //pvc.modalTransitionStyle = UIModalTransitionStylePartialCurl;
     //pvc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     //pvc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
@@ -265,9 +216,10 @@
     [self presentViewController:pvc animated:YES completion:nil];
 }
 
-- (void)updatePaintColor:(UIColor *)color
+- (void)updatePaintColor:(UIColor *)color andSaveIndex:(NSIndexPath *)path
 {
     self.selColor = color;
+    self.selColorIndexPath = path;
 }
 
 - (BOOL)shouldAutorotate

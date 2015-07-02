@@ -245,4 +245,8 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
     override func shouldAutorotate() -> Bool {
         return true
     }
+    
+    deinit {
+        println("TitleScreen ViewController deinit")
+    }
 }

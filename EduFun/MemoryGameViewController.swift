@@ -664,4 +664,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
         return UIInterfaceOrientation.Portrait
     }
+    
+    deinit {
+        println("MemoryGame ViewController deinit")
+    }
 }

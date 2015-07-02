@@ -14,12 +14,20 @@
 
 @interface PaletteViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (nonatomic, strong) UICollectionView *colView;
+@property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray *colorArr;
 
 @end
 
 @implementation PaletteViewController
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    if (self.indexPath != nil)
+    {
+        [self.collectionView scrollToItemAtIndexPath:self.indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:NO];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -125,16 +133,16 @@
     layout.minimumInteritemSpacing = kMinMargin;
     layout.minimumLineSpacing = kMinMargin;
     
-    self.colView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:layout];
-    self.colView.dataSource = self;
-    self.colView.delegate = self;
-    [self.colView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kReuseId];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:layout];
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kReuseId];
     
-    self.colView.backgroundColor = [UIColor colorWithRed:0.3 green:0.4 blue:0.5 alpha:1.0];
-    //self.colView.backgroundColor = [UIColor clearColor];
-    self.colView.scrollEnabled = true;
+    self.collectionView.backgroundColor = [UIColor colorWithRed:0.3 green:0.4 blue:0.5 alpha:1.0];
+    //self.collectionView.backgroundColor = [UIColor clearColor];
+    self.collectionView.scrollEnabled = true;
     
-    [self.view addSubview:self.colView];
+    [self.view addSubview:self.collectionView];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -150,8 +158,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     int colorArrInd = ((indexPath.section*kNumColumns) + indexPath.row) % [self.colorArr count];
-    [self.delegate updatePaintColor:self.colorArr[colorArrInd]];
-    //[self.navigationController popViewControllerAnimated:NO];
+    [self.delegate updatePaintColor:self.colorArr[colorArrInd] andSaveIndex:indexPath];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -173,6 +180,21 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    NSLog(@"PaletteViewController dealloc");
+}
+
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskLandscape | UIInterfaceOrientationMaskPortrait;
 }
 
 @end

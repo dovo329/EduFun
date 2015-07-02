@@ -13,12 +13,13 @@
 @interface PaletteViewController : UIViewController
 
 @property (nonatomic, unsafe_unretained) id<PaletteViewControllerDelegate> delegate;
+@property (nonatomic, strong) NSIndexPath *indexPath;
 
 @end
 
 @protocol PaletteViewControllerDelegate <NSObject>
 
 @required
--(void)updatePaintColor:(UIColor *)color;
+-(void)updatePaintColor:(UIColor *)color andSaveIndex:(NSIndexPath *)path;
 
 @end
