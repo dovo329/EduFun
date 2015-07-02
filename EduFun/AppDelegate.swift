@@ -28,6 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         else if destVCEnum == DestViewController.CardMatching
         {
+            overlayView.transform = CGAffineTransformMakeRotation(π/2)
+            overlayView.frame = CGRectMake(0, 0, 320, 480)
             destVC = MemoryGameViewController()
         }
         else if destVCEnum == DestViewController.ColoringBook
