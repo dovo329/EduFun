@@ -56,9 +56,13 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // since titlescreen viewcontroller is landscape, and since apparently the view.frame never updates to be the new orientation (why?), need to swap width and height of frame
+        var width = view.frame.size.width
+        var height = view.frame.size.height
+        view.frame = CGRectMake(0,0,height, width)
+
         var bgGradLayer = CAGradientLayer()
-        bgGradLayer.frame = view.bounds
+        bgGradLayer.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height)
         bgGradLayer.colors = [
             cgColorForRed(255.0, green:255.0, blue:255.0),
             cgColorForRed(0.0, green:217.0, blue:240.0)
@@ -74,6 +78,21 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         layout.sectionInset = UIEdgeInsets(top: kCardYMargin, left: kCardXMargin, bottom: 0, right: kCardXMargin)
         cardWidth = (16.0/69.0)*view.frame.size.width
         cardHeight = (16.0/69.0)*(view.frame.size.height-20.0)
+        
+        /*let kCardXMargin : CGFloat = view.frame.size.width*(1/69.0)
+        let kCardYMargin : CGFloat = (view.frame.size.height-20.0)*(1/69.0)
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: kCardYMargin, left: kCardXMargin, bottom: 0, right: kCardXMargin)
+        cardWidth = (16.0/69.0)*view.frame.size.width
+        cardHeight = (16.0/69.0)*(view.frame.size.height-20.0)*/
+        
+        /*let kCardXMargin : CGFloat = view.frame.size.height*(1/69.0)
+        let kCardYMargin : CGFloat = (view.frame.size.width-20.0)*(1/69.0)
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: kCardYMargin, left: kCardXMargin, bottom: 0, right: kCardXMargin)
+        cardWidth = (16.0/69.0)*view.frame.size.height
+        cardHeight = (16.0/69.0)*(view.frame.size.width-20.0)*/
+        
         layout.itemSize = CGSize(width: cardWidth, height: cardHeight)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
@@ -99,7 +118,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         setupCardArr()
         
         initRoundCompleteLabels()
-        //roundCompleteMethod()
+        roundCompleteMethod()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -660,10 +679,6 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     
     override func supportedInterfaceOrientations() -> Int {
         return Int(UIInterfaceOrientationMask.Portrait.rawValue)
-    }
-    
-    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
-        return UIInterfaceOrientation.Portrait
     }
     
     deinit {

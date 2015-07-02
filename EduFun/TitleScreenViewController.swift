@@ -196,7 +196,9 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
     }
     
     override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.LandscapeLeft.rawValue)
+        //return Int(UIInterfaceOrientationMask.LandscapeLeft.rawValue)
+        return Int(UIInterfaceOrientationMask.LandscapeRight.rawValue)
+//        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
     }
     
     override func shouldAutorotate() -> Bool {

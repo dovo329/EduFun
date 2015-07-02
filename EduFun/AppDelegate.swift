@@ -22,8 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if destVCEnum == DestViewController.KnockBlocks
         {
-            overlayView.transform = CGAffineTransformMakeRotation(-π/2)
-            overlayView.frame = CGRectMake(0, 0, 480, 320)
+            //overlayView.transform = CGAffineTransformMakeRotation(-π/2)
+            //overlayView.frame = CGRectMake(0, 0, 480, 320)
             destVC = KnockBlocksViewController()
         }
         else if destVCEnum == DestViewController.CardMatching

@@ -34,6 +34,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // since titlescreen viewcontroller is landscape, and since apparently the view.frame never updates to be the new orientation (why?), need to swap width and height of frame
+    //CGFloat width = self.view.frame.size.width;
+    //CGFloat height = self.view.frame.size.height;
+    //self.view.frame = CGRectMake(0,0,height, width);
     
     [self setupBackgroundGradient];
     
@@ -321,14 +325,16 @@
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskLandscape | UIInterfaceOrientationMaskPortrait;
+    //return UIInterfaceOrientationMaskLandscape | UIInterfaceOrientationMaskPortrait;
+    return UIInterfaceOrientationMaskLandscape;
 }
 
 - (NSString *)orientationToString:(UIInterfaceOrientation)orient
 {
-    if (orient == UIInterfaceOrientationPortrait) {
-        return @"Portrait";
-    } else if (orient == UIInterfaceOrientationLandscapeLeft ||
+    //if (orient == UIInterfaceOrientationPortrait) {
+    //    return @"Portrait";
+    //} else
+    if (orient == UIInterfaceOrientationLandscapeLeft ||
                orient == UIInterfaceOrientationLandscapeRight)
     {
         return @"Landscape";
@@ -353,8 +359,10 @@
         
         CGFloat scaleX, scaleY, scale;
         // orientation changed but apparently frame.size hasn't swapped width and height yet so swap it ourselves
-        scaleX = self.view.frame.size.height / self.origSize.width;
-        scaleY = self.view.frame.size.width / self.origSize.height;
+        //scaleX = self.view.frame.size.height / self.origSize.width;
+        //scaleY = self.view.frame.size.width / self.origSize.height;
+        scaleX = self.view.frame.size.width / self.origSize.width;
+        scaleY = self.view.frame.size.height / self.origSize.height;
         scale = scaleX < scaleY ? scaleX : scaleY;
         
         self.scrollView.minimumZoomScale = scale;
@@ -362,11 +370,16 @@
         
         self.scrollView.zoomScale = scale;
         //NSLog(@"wid=%f height=%f min=%f max=%f cur=%f", self.view.frame.size.width, self.view.frame.size.height, self.scrollView.minimumZoomScale, self.scrollView.maximumZoomScale, self.scrollView.zoomScale);
-        CGFloat offsetX = MAX((self.scrollView.bounds.size.width - self.scrollView.contentSize.height) * 0.5, 0.0);
-        CGFloat offsetY = MAX((self.scrollView.bounds.size.height - self.scrollView.contentSize.width) * 0.5, 0.0);
+        //CGFloat offsetX = MAX((self.scrollView.bounds.size.width - self.scrollView.contentSize.height) * 0.5, 0.0);
+        //CGFloat offsetY = MAX((self.scrollView.bounds.size.height - self.scrollView.contentSize.width) * 0.5, 0.0);
         
-        self.svgImageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5 + offsetY,
-                                               self.scrollView.contentSize.height * 0.5 + offsetX);
+        CGFloat offsetX = MAX((self.scrollView.bounds.size.width - self.scrollView.contentSize.width) * 0.5, 0.0);
+        CGFloat offsetY = MAX((self.scrollView.bounds.size.height - self.scrollView.contentSize.height) * 0.5, 0.0);
+        
+        self.svgImageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5 + offsetX,
+                                               self.scrollView.contentSize.height * 0.5 + offsetY);
+        //self.svgImageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5 + offsetY,
+        //                                       self.scrollView.contentSize.height * 0.5 + offsetX);
         //self.svgImageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5,
         //                                       self.scrollView.contentSize.height * 0.5);
         //NSLog(@"offsetX:%f Y:%f, csw: %f csh: %f", offsetX, offsetY, self.scrollView.contentSize.width, self.scrollView.contentSize.height);
