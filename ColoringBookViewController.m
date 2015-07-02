@@ -238,7 +238,7 @@
 - (void)exitMethod
 {
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    [app animateToViewController:8];
+    [app animateToViewController:8 srcVCEnum:2];
 }
 
 - (void)emailMethod
@@ -335,7 +335,7 @@
     //    return @"Portrait";
     //} else
     if (orient == UIInterfaceOrientationLandscapeLeft ||
-               orient == UIInterfaceOrientationLandscapeRight)
+        orient == UIInterfaceOrientationLandscapeRight)
     {
         return @"Landscape";
     } else {

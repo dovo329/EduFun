@@ -8,7 +8,7 @@
 
 let π : CGFloat = CGFloat(M_PI)
 
-struct DestViewController {
+struct ViewControllerEnum {
     static let CardMatching : UInt32 = 0b0001
     static let ColoringBook : UInt32 = 0b0010
     static let KnockBlocks  : UInt32 = 0b0100

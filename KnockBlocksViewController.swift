@@ -97,7 +97,7 @@ class KnockBlocksViewController: UIViewController {
     
     func exitButtonMethod(sender : THButton, event : UIEvent) {
         var app = UIApplication.sharedApplication().delegate as? AppDelegate
-        app?.animateToViewController(DestViewController.TitleScreen)
+        app?.animateToViewController(ViewControllerEnum.TitleScreen, srcVCEnum: ViewControllerEnum.KnockBlocks)
     }
     
     override func shouldAutorotate() -> Bool {

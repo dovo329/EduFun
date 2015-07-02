@@ -120,15 +120,15 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         
         if (indexPath.row == 0)
         {
-            app?.animateToViewController(DestViewController.CardMatching)
+            app?.animateToViewController(ViewControllerEnum.CardMatching, srcVCEnum: ViewControllerEnum.TitleScreen)
         }
         else if (indexPath.row == 1)
         {
-            app?.animateToViewController(DestViewController.ColoringBook)
+            app?.animateToViewController(ViewControllerEnum.ColoringBook, srcVCEnum: ViewControllerEnum.TitleScreen)
         }
         else if (indexPath.row == 2)
         {
-            app?.animateToViewController(DestViewController.KnockBlocks)
+            app?.animateToViewController(ViewControllerEnum.KnockBlocks, srcVCEnum: ViewControllerEnum.TitleScreen)
         }
     }
     

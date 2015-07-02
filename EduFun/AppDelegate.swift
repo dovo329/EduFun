@@ -14,30 +14,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    func animateToViewController(destVCEnum: UInt32)
+    func animateToViewController(destVCEnum: UInt32, srcVCEnum: UInt32)
     {
         var destVC : UIViewController!
         
-        var overlayView = UIScreen.mainScreen().snapshotViewAfterScreenUpdates(false)
+        var overlayView = UIScreen.mainScreen().snapshotViewAfterScreenUpdates(true)
         
-        if destVCEnum == DestViewController.KnockBlocks
+        if destVCEnum == ViewControllerEnum.KnockBlocks
         {
             //overlayView.transform = CGAffineTransformMakeRotation(-π/2)
             //overlayView.frame = CGRectMake(0, 0, 480, 320)
             destVC = KnockBlocksViewController()
         }
-        else if destVCEnum == DestViewController.CardMatching
+        else if destVCEnum == ViewControllerEnum.CardMatching
         {
             overlayView.transform = CGAffineTransformMakeRotation(π/2)
             overlayView.frame = CGRectMake(0, 0, 320, 480)
             destVC = MemoryGameViewController()
         }
-        else if destVCEnum == DestViewController.ColoringBook
+        else if destVCEnum == ViewControllerEnum.ColoringBook
         {
             destVC = ColoringBookViewController()
         }
-        else if destVCEnum == DestViewController.TitleScreen
+        else if destVCEnum == ViewControllerEnum.TitleScreen
         {
+            if (srcVCEnum == ViewControllerEnum.CardMatching)
+            {
+                overlayView.transform = CGAffineTransformMakeRotation(-π/2)
+                overlayView.frame = CGRectMake(0, 0, 480, 320)
+            }
+            else if (srcVCEnum == ViewControllerEnum.ColoringBook)
+            {
+                overlayView.transform = CGAffineTransformMakeRotation(0)
+                overlayView.frame = CGRectMake(0, 0, 480, 320) // why?  but I must or else
+            }
             destVC = TitleScreenViewController()
         }
         else

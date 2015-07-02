@@ -531,7 +531,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         NSLog("exit button pressed method")
         
         var app = UIApplication.sharedApplication().delegate as? AppDelegate
-        app?.animateToViewController(DestViewController.TitleScreen)
+        app?.animateToViewController(ViewControllerEnum.TitleScreen, srcVCEnum: ViewControllerEnum.CardMatching)
         
         /*var viewCast : UIView = sender as UIView
         var touch : UITouch = event.allTouches()!.first as! UITouch
