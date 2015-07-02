@@ -10,8 +10,9 @@
 #import <SVGKit/SVGKit.h>
 #import "PaletteViewController.h"
 #import "EduFun-Swift.h"
+#import <MessageUI/MessageUI.h>
 
-@interface ColoringBookViewController () <UIScrollViewDelegate, PaletteViewControllerDelegate>
+@interface ColoringBookViewController () <UIScrollViewDelegate, PaletteViewControllerDelegate, MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) SVGKLayeredImageView *svgImageView;
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -80,12 +81,13 @@
     UIBarButtonItem *exitButton = [[UIBarButtonItem alloc] initWithTitle:@"Exit" style:UIBarButtonItemStylePlain target:self action:@selector(exitMethod)];
     UIImage *paintersPaletteImg = [UIImage imageNamed:@"PaintersPalette"];
     paintersPaletteImg = [paintersPaletteImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *emailButton = [[UIBarButtonItem alloc] initWithTitle:@"Email" style:UIBarButtonItemStylePlain target:self action:@selector(emailMethod)];
     
     UIBarButtonItem *paletteSelButton = [[UIBarButtonItem alloc] initWithImage:paintersPaletteImg style:UIBarButtonItemStylePlain target:self action:@selector(paletteSelMethod)];
     self.toolBar = [UIToolbar new];
-    self.toolBar.items = @[exitButton, paletteSelButton];
+    self.toolBar.items = @[exitButton, paletteSelButton, emailButton];
     self.toolBar.backgroundColor = [UIColor orangeColor];
-     
+    
     [self.view addSubview:self.toolBar];
     
     [self autoLayoutConstraints];
@@ -98,42 +100,42 @@
     
     [self.view addConstraint:
      [NSLayoutConstraint constraintWithItem:self.scrollView
-                                 attribute:NSLayoutAttributeLeft
-                                 relatedBy:NSLayoutRelationEqual
-                                    toItem:self.view
-                                 attribute:NSLayoutAttributeLeft
-                                multiplier:1.0
-                                  constant:0.0]
+                                  attribute:NSLayoutAttributeLeft
+                                  relatedBy:NSLayoutRelationEqual
+                                     toItem:self.view
+                                  attribute:NSLayoutAttributeLeft
+                                 multiplier:1.0
+                                   constant:0.0]
      ];
     
     [self.view addConstraint:
      [NSLayoutConstraint constraintWithItem:self.scrollView
-                                 attribute:NSLayoutAttributeRight
-                                 relatedBy:NSLayoutRelationEqual
-                                    toItem:self.view
-                                 attribute:NSLayoutAttributeRight
-                                multiplier:1.0
-                                  constant:0.0]
+                                  attribute:NSLayoutAttributeRight
+                                  relatedBy:NSLayoutRelationEqual
+                                     toItem:self.view
+                                  attribute:NSLayoutAttributeRight
+                                 multiplier:1.0
+                                   constant:0.0]
      ];
     
     [self.view addConstraint:
      [NSLayoutConstraint constraintWithItem:self.scrollView
-                                 attribute:NSLayoutAttributeTop
-                                 relatedBy:NSLayoutRelationEqual
-                                    toItem:self.view
-                                 attribute:NSLayoutAttributeTop
-                                multiplier:1.0
-                                  constant:0.0]
+                                  attribute:NSLayoutAttributeTop
+                                  relatedBy:NSLayoutRelationEqual
+                                     toItem:self.view
+                                  attribute:NSLayoutAttributeTop
+                                 multiplier:1.0
+                                   constant:0.0]
      ];
     
     [self.view addConstraint:
      [NSLayoutConstraint constraintWithItem:self.scrollView
-                                 attribute:NSLayoutAttributeBottom
-                                 relatedBy:NSLayoutRelationEqual
-                                    toItem:self.toolBar
-                                 attribute:NSLayoutAttributeTop
-                                multiplier:1.0
-                                  constant:0.0]
+                                  attribute:NSLayoutAttributeBottom
+                                  relatedBy:NSLayoutRelationEqual
+                                     toItem:self.toolBar
+                                  attribute:NSLayoutAttributeTop
+                                 multiplier:1.0
+                                   constant:0.0]
      ];
     
     [self.view addConstraint:
@@ -175,9 +177,9 @@
                                  multiplier:1.0
                                    constant:30.0]
      ];
-
-}
     
+}
+
 - (CGColorRef)cgColorForRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue
 {
     return (CGColorRef)[[UIColor colorWithRed:red green:green blue:blue alpha:1.0] CGColor];
@@ -194,7 +196,7 @@
     UIColor *colorSix   = [UIColor colorWithRed:162.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0];
     
     NSArray *colors =  [NSArray arrayWithObjects:(id)[colorOne CGColor], (id)[colorTwo CGColor], (id)[colorThree CGColor], (id)[colorFour CGColor], (id)[colorFive CGColor], (id)[colorSix CGColor], nil];
-
+    
     self.gradientLayer = [CAGradientLayer layer];
     self.gradientLayer.colors = colors;
     self.gradientLayer.frame = self.view.bounds;
@@ -230,6 +232,63 @@
 {
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
     [app animateToViewController:8];
+}
+
+- (void)emailMethod
+{
+    // Email Subject
+    NSString *emailTitle = @"Coloring Book Page Email";
+    // Email Content
+    NSString *messageBody = @"Check out what I colored!";
+    // To address
+    NSArray *toRecipents = [NSArray arrayWithObject:@"douglas.c.voss@gmail.com"];
+    
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    mc.mailComposeDelegate = self;
+    [mc setSubject:emailTitle];
+    [mc setMessageBody:messageBody isHTML:NO];
+    [mc setToRecipients:toRecipents];
+    
+    NSString *mimeType = @"image/jpeg";
+    
+    //UIView *screenShotView = [[UIScreen mainScreen] snapshotViewAfterScreenUpdates:NO];
+    UIGraphicsBeginImageContext(self.view.bounds.size);
+    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+    
+    // Add attachment
+    [mc addAttachmentData:imageData mimeType:mimeType fileName:@"screenShot.jpg"];
+    
+    // Present mail view controller on screen
+    [self presentViewController:mc animated:YES completion:NULL];
+    
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)paletteSelMethod
@@ -301,7 +360,7 @@
         //NSLog(@"wid=%f height=%f min=%f max=%f cur=%f", self.view.frame.size.width, self.view.frame.size.height, self.scrollView.minimumZoomScale, self.scrollView.maximumZoomScale, self.scrollView.zoomScale);
         CGFloat offsetX = MAX((self.scrollView.bounds.size.width - self.scrollView.contentSize.height) * 0.5, 0.0);
         CGFloat offsetY = MAX((self.scrollView.bounds.size.height - self.scrollView.contentSize.width) * 0.5, 0.0);
-    
+        
         self.svgImageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5 + offsetY,
                                                self.scrollView.contentSize.height * 0.5 + offsetX);
         //self.svgImageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5,
