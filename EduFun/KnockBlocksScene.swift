@@ -23,21 +23,24 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
     
     var woodNodeArr : [SKSpriteNode]! = [SKSpriteNode]()
     var stoneBallNode : SKSpriteNode!
-    var ropeNode : SKSpriteNode!
+    var ropeNode : SKSpriteNode!    
     
     override init(size: CGSize) {
         let maxAspectRatio: CGFloat = 16.0/9.0
         let playableHeight = size.width / maxAspectRatio
         let playableMargin = (size.height - playableHeight)/2.0
+        
         playableRect = CGRect(x:0, y: playableMargin, width: size.width, height: playableHeight)
+        
         super.init(size: size)
     }
     
     required init?(coder aDecoder: NSCoder) {
         playableRect = CGRect(x: 0, y: 0, width: 0, height: 0)
+        
         super.init(coder: aDecoder)
     }
-      
+    
     override func didMoveToView(view: SKView) {
         // Calculate playable margin
         let maxAspectRatio: CGFloat = 16.0/9.0 // iPhone 5

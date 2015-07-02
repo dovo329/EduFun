@@ -27,7 +27,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     
     var completeView : UIView!
     var newGameButton : THButton?
-    var quitButton    : THButton?
+    var exitButton    : THButton?
     
     var cardWidth : CGFloat!
     var cardHeight : CGFloat!
@@ -91,8 +91,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         newGameButton = THButton(frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8, self.view.frame.width/2, self.view.frame.height/10.0), text: "New Game")
         newGameButton!.addTarget(self, action: Selector("newGameButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
         
-        quitButton = THButton(frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8 + newGameButton!.frame.size.height+20.0, self.view.frame.width/2, self.view.frame.height/10.0), text:"Quit    ")
-        quitButton!.addTarget(self, action: Selector("quitButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
+        exitButton = THButton(frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8 + newGameButton!.frame.size.height+20.0, self.view.frame.width/2, self.view.frame.height/10.0), text:"Exit    ")
+        exitButton!.addTarget(self, action: Selector("exitButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
         
         setupMatchSparkles()
         
@@ -508,15 +508,11 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         startTime = NSDate()
     }
     
-    func quitButtonMethod(sender : THButton, event : UIEvent) {
-        NSLog("quit button pressed method")
+    func exitButtonMethod(sender : THButton, event : UIEvent) {
+        NSLog("exit button pressed method")
         
         var app = UIApplication.sharedApplication().delegate as? AppDelegate
-        
-        //app?.animateToViewController(TitleScreenViewController())
         app?.animateToViewController(DestViewController.TitleScreen)
-        
-        //navigationController?.popViewControllerAnimated(true)
         
         /*var viewCast : UIView = sender as UIView
         var touch : UITouch = event.allTouches()!.first as! UITouch
@@ -533,7 +529,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     {
         scaleOutRemoveView(completeView, duration: 0.5, delay: 0.0)
         scaleOutRemoveView(newGameButton!, duration: 0.5, delay: 0.25)
-        scaleOutRemoveView(quitButton!, duration: 0.5, delay: 0.5)
+        scaleOutRemoveView(exitButton!, duration: 0.5, delay: 0.5)
     }
     
     func initRoundCompleteLabels()
@@ -581,9 +577,9 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     
     func roundCompleteMethod() {
         self.view.addSubview(newGameButton!)
-        self.view.addSubview(quitButton!)
+        self.view.addSubview(exitButton!)
         bounceInView(newGameButton!, duration:CGFloat(0.5), delay:CGFloat(1.7))
-        bounceInView(quitButton!, duration:CGFloat(0.5), delay:CGFloat(1.7))
+        bounceInView(exitButton!, duration:CGFloat(0.5), delay:CGFloat(1.7))
         
         //println("Complete!")
         var endTime = NSDate();
@@ -642,46 +638,15 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             {
                 confettiEmitterLayer.lifetime = 0.0
                 
-                //self.makeButtonWithText("New Game", frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8, self.view.frame.width/2, self.view.frame.height/16.0))
-                
-                //self.makeButtonWithText("Quit", frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*6/8, self.view.frame.width/2, self.view.frame.height/16.0))
-        })
+            }
+        )
         
         dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(2*confettiTime)) * Double(NSEC_PER_SEC)))
         dispatch_after(dispatchTime, dispatch_get_main_queue(),
             {
                 confettiEmitterLayer.removeFromSuperlayer()
-                //self.dismissViewControllerAnimated(true, completion: nil)
-        })
-    }
-    
-    func makeButtonWithText(text : String, frame: CGRect)
-    {
-        //var button : UIButton = UIButton(frame: frame) as UIButton
-        var button : UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
-        button.frame = frame
-        
-        button.layer.borderColor = UIColor.blackColor().CGColor
-        button.layer.borderWidth = 2.0
-        button.layer.cornerRadius = 10.0
-        button.layer.masksToBounds = true
-        button.layer.backgroundColor = UIColor.greenColor().CGColor
-        
-        var buttonLabel : THLabel = THLabel()
-        buttonLabel.text = text
-        buttonLabel.font = UIFont(name: "Super Mario 256", size: frame.size.height*0.7)
-        buttonLabel.frame = button.bounds
-        buttonLabel.frame.origin.y += 2.5
-        buttonLabel.textAlignment = NSTextAlignment.Center
-        buttonLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
-        buttonLabel.textColor = UIColor.yellowColor()
-        buttonLabel.strokeSize = 1.5
-        buttonLabel.strokeColor = UIColor.blackColor()
-        buttonLabel.shadowOffset = CGSizeMake(1.5, 1.5)
-        buttonLabel.shadowColor = UIColor.blackColor()
-        buttonLabel.shadowBlur = 1.0
-        button.addSubview(buttonLabel)
-        self.view.addSubview(button)
+            }
+        )
     }
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {

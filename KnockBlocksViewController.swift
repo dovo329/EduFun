@@ -27,6 +27,8 @@ extension SKNode {
 
 class KnockBlocksViewController: UIViewController {
     
+    var exitButton : THButton!
+    
     init(_ coder: NSCoder? = nil) {
         if let coder = coder {
             super.init(coder: coder)
@@ -58,6 +60,11 @@ class KnockBlocksViewController: UIViewController {
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .AspectFill
             
+            exitButton = THButton(frame: CGRectMake(0.0, 0.0, 80.0, 40.0), text:"Exit")
+            exitButton!.addTarget(self, action: Selector("exitButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
+            
+            skView.addSubview(exitButton)
+            
             skView.presentScene(scene)
             
             /*var view : SKView = SKView(frame: UIScreen.mainScreen().applicationFrame)
@@ -80,6 +87,11 @@ class KnockBlocksViewController: UIViewController {
             
             //skView.presentScene(scene)
         }
+    }
+    
+    func exitButtonMethod(sender : THButton, event : UIEvent) {
+        var app = UIApplication.sharedApplication().delegate as? AppDelegate
+        app?.animateToViewController(DestViewController.TitleScreen)
     }
     
     override func shouldAutorotate() -> Bool {
