@@ -99,7 +99,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         setupCardArr()
         
         initRoundCompleteLabels()
-        roundCompleteMethod()
+        //roundCompleteMethod()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -584,6 +584,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         //println("Complete!")
         var endTime = NSDate();
         var elapsedTime: Double = endTime.timeIntervalSinceDate(self.startTime);
+        elapsedTimeLabel.text = NSString(format: "Time: %.0f seconds", elapsedTime) as? String
         //println("Time: \(elapsedTime)")
         
         view.addSubview(completeView)
