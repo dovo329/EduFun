@@ -24,7 +24,9 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     var card2dArr = Array<Array<Card>>()
     let kCellReuseId : String = "cell.reuse.id"
     var flippedCnt = 0
+    var numMoves = 0
     
+    var titleView : UIView!
     var completeView : UIView!
     var newGameButton : THButton?
     var exitButton    : THButton?
@@ -32,9 +34,11 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     var cardWidth : CGFloat!
     var cardHeight : CGFloat!
     
+    var title1Label : THLabel = THLabel()
+    var title2Label : THLabel = THLabel()
     var completeLabel : THLabel = THLabel()
-    //var elapsedTimeLabel : THLabel = THLabel()
     var elapsedTimeLabel : THLabel
+    var numMovesLabel : THLabel = THLabel()
     
     var startTime = NSDate()
     var elapsedTime : Double = 0.0
@@ -117,8 +121,10 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         
         setupCardArr()
         
+        initTitleLabels()
         initRoundCompleteLabels()
-        roundCompleteMethod()
+        //roundCompleteMethod()
+        titleMethod()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -196,6 +202,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     }
     
     func activateCardArr() {
+        numMoves = 0
         for var row=0; row<kNumRows; row++
         {
             for var column=0; column<kNumColumns; column++
@@ -344,10 +351,12 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         
         var card : Card = card2dArr[indexPath.section][indexPath.row]
         
+        println("numMoves=\(numMoves)")
+        
         // only flip over another card if there are < 2 cards already flipped over
         if (self.flippedCnt < 2 && !card.matched && !card.isFlipped)
         {
-            println("selectedCell at row:\(indexPath.section) column:\(indexPath.row) isFlipped:\(card.isFlipped) flippedCnt=\(flippedCnt) !card.matched !card.isFlipped")
+            //println("selectedCell at row:\(indexPath.section) column:\(indexPath.row) isFlipped:\(card.isFlipped) flippedCnt=\(flippedCnt) !card.matched !card.isFlipped")
             
             self.flippedCnt++
             card.isFlipped = true
@@ -370,6 +379,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             }
             else if (self.flippedCnt == 2)
             {
+                numMoves++
                 var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(self.kFlipDuration*(1.05))) * Double(NSEC_PER_SEC)))
                 dispatch_after(
                     dispatchTime, dispatch_get_main_queue(),
@@ -388,7 +398,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                                 if self.card2dArr[row][column].isFlipped
                                 {
                                     compareArr.append(self.card2dArr[row][column])
-                                    println("true isFlipped row=\(row) column=\(column)")
+                                    //println("true isFlipped row=\(row) column=\(column)")
                                 }
                             }
                         }
@@ -405,7 +415,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                         
                         if (compareArr[0].imageName == compareArr[1].imageName)
                         {
-                            println("You made a match! Yay!")
+                            //println("You made a match! Yay!")
                             
                             self.card2dArr[compareArr[0].row][compareArr[0].column].active = false
                             self.card2dArr[compareArr[0].row][compareArr[0].column].matched = true
@@ -455,7 +465,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                         }
                         else
                         {
-                            println("Nope, no match for you.")
+                            //println("Nope, no match for you.")
                             
                             var indexPath0 = NSIndexPath(forRow: compareArr[0].column, inSection: compareArr[0].row)
                             var cell0 = collectionView.cellForItemAtIndexPath(indexPath0)!
@@ -482,8 +492,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                             self.card2dArr[compareArr[1].row][compareArr[1].column].isFlipped = false
                         }
                         
-                        println("Card1 row:\(compareArr[0].row) col:\(compareArr[0].column)")
-                        println("Card2 row:\(compareArr[1].row) col:\(compareArr[1].column)")
+                        //println("Card1 row:\(compareArr[0].row) col:\(compareArr[0].column)")
+                        //println("Card2 row:\(compareArr[1].row) col:\(compareArr[1].column)")
                         /*var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(self.kMatchDisappearDuration*(1.1))) * Double(NSEC_PER_SEC)))
                         dispatch_after(
                             dispatchTime, dispatch_get_main_queue(),
@@ -499,7 +509,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         }
         else
         {
-            println("tried to flip too many flippedCnt=\(self.flippedCnt)")
+            //println("tried to flip too many flippedCnt=\(self.flippedCnt)")
         }
     }
     
@@ -523,12 +533,12 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         // touchupinside must have some built in apple determined finger fudge factor to account for finger fatness so I'll just use what they came up with even though technically the precise press can be somewhat outside the sender's frame and still call this
         setupCardArr()
         activateCardArr()
-        dismissRoundCompleteInfo()
+        dismissInfo()
         startTime = NSDate()
     }
     
     func exitButtonMethod(sender : THButton, event : UIEvent) {
-        NSLog("exit button pressed method")
+        //NSLog("exit button pressed method")
         
         var app = UIApplication.sharedApplication().delegate as? AppDelegate
         app?.animateToViewController(ViewControllerEnum.TitleScreen, srcVCEnum: ViewControllerEnum.CardMatching)
@@ -544,11 +554,52 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         }*/
     }
     
-    func dismissRoundCompleteInfo()
+    func dismissInfo()
     {
+        scaleOutRemoveView(titleView, duration: 0.5, delay: 0.0)
         scaleOutRemoveView(completeView, duration: 0.5, delay: 0.0)
         scaleOutRemoveView(newGameButton!, duration: 0.5, delay: 0.25)
         scaleOutRemoveView(exitButton!, duration: 0.5, delay: 0.5)
+    }
+    
+    func initTitleLabels()
+    {
+        title1Label.text = "Card Match"
+        title1Label.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height)
+        title1Label.font = UIFont(name: "Super Mario 256", size: 45.0)
+        title1Label.font = title1Label.font.fontWithSize(getFontSizeToFitFrameOfLabel(title1Label)-5.0)
+        title1Label.frame.size.height = title1Label.font.pointSize*1.3
+        title1Label.textAlignment = NSTextAlignment.Center
+        title1Label.textColor = UIColor.yellowColor()
+        title1Label.strokeSize = (3.0/320.0)*title1Label.frame.size.width
+        title1Label.strokeColor = UIColor.blackColor()
+        title1Label.shadowOffset = CGSizeMake(title1Label.strokeSize, title1Label.strokeSize)
+        title1Label.shadowColor = UIColor.blackColor()
+        title1Label.shadowBlur = (1.0/320.0)*title1Label.frame.size.width
+        title1Label.layer.anchorPoint = CGPointMake(0.5, 0.5)
+        title1Label.layer.shouldRasterize = true
+        
+        /*title2Label.text = "Match"
+        title2Label.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height)
+        title2Label.font = UIFont(name: "Super Mario 256", size: 45.0)
+        title2Label.font = title2Label.font.fontWithSize(getFontSizeToFitFrameOfLabel(title2Label)-5.0)
+        title2Label.frame.size.height = title2Label.font.pointSize*1.3
+        title2Label.frame.origin.y += title1Label.frame.size.height
+        title2Label.textAlignment = NSTextAlignment.Center
+        title2Label.textColor = UIColor.yellowColor()
+        title2Label.strokeSize = (3.0/320.0)*title2Label.frame.size.width
+        title2Label.strokeColor = UIColor.blackColor()
+        title2Label.shadowOffset = CGSizeMake(title2Label.strokeSize, title2Label.strokeSize)
+        title2Label.shadowColor = UIColor.blackColor()
+        title2Label.shadowBlur = (1.0/320.0)*title2Label.frame.size.width
+        title2Label.layer.anchorPoint = CGPointMake(0.5, 0.5)
+        title2Label.layer.shouldRasterize = true
+        
+        titleView = UIView(frame: CGRect(x: 0.0, y: view.frame.size.height*(1.0/4.0), width: view.frame.size.width, height: title1Label.frame.size.height+title2Label.frame.size.height))
+        titleView.addSubview(title1Label)
+        titleView.addSubview(title2Label)*/
+        titleView = UIView(frame: CGRect(x: 0.0, y: view.frame.size.height*(1.0/3.0), width: view.frame.size.width, height: title1Label.frame.size.height))
+        titleView.addSubview(title1Label)
     }
     
     func initRoundCompleteLabels()
@@ -589,9 +640,38 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         //elapsedTimeLabel.backgroundColor = UIColor.orangeColor()
         //println("completed elapsed time size is \(elapsedTimeLabel.font.pointSize)")
         
-        completeView = UIView(frame: CGRect(x: 0.0, y: view.frame.size.height*(1.0/3.0), width: view.frame.size.width, height: completeLabel.frame.size.height+elapsedTimeLabel.frame.size.height))
+        numMovesLabel.text = NSString(format: "%d moves         ", numMoves) as? String
+        numMovesLabel.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height)
+        numMovesLabel.font = UIFont(name: "Super Mario 256", size: 25.0)
+        numMovesLabel.font = numMovesLabel.font.fontWithSize(getFontSizeToFitFrameOfLabel(numMovesLabel)-5.0)
+        numMovesLabel.frame.size.height = numMovesLabel.font.pointSize*1.3
+        numMovesLabel.frame.origin.y += completeLabel.frame.size.height + elapsedTimeLabel.frame.size.height
+        numMovesLabel.textAlignment = NSTextAlignment.Center
+        numMovesLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
+        numMovesLabel.textColor = UIColor.yellowColor()
+        numMovesLabel.strokeSize = (1.5/320.0)*numMovesLabel.frame.size.width
+        numMovesLabel.strokeColor = UIColor.blackColor()
+        numMovesLabel.shadowOffset = CGSizeMake(numMovesLabel.strokeSize, numMovesLabel.strokeSize)
+        numMovesLabel.shadowColor = UIColor.blackColor()
+        numMovesLabel.shadowBlur = (1.0/320.0)*numMovesLabel.frame.size.width
+        numMovesLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
+        numMovesLabel.layer.shouldRasterize = true
+        
+        completeView = UIView(frame: CGRect(x: 0.0, y: view.frame.size.height*(1.0/4.0), width: view.frame.size.width, height: completeLabel.frame.size.height+elapsedTimeLabel.frame.size.height+numMovesLabel.frame.size.height))
         completeView.addSubview(completeLabel)
         completeView.addSubview(elapsedTimeLabel)
+        completeView.addSubview(numMovesLabel)
+    }
+    
+    func titleMethod()
+    {
+        view.addSubview(newGameButton!)
+        view.addSubview(exitButton!)
+        bounceInView(newGameButton!, duration:CGFloat(0.5), delay:CGFloat(0.5))
+        bounceInView(exitButton!, duration:CGFloat(0.5), delay:CGFloat(0.5))
+        
+        view.addSubview(titleView)
+        bounceInView(titleView!, duration:CGFloat(0.5), delay:CGFloat(0.5))
     }
     
     func roundCompleteMethod() {
@@ -605,6 +685,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         var elapsedTime: Double = endTime.timeIntervalSinceDate(self.startTime);
         elapsedTimeLabel.text = NSString(format: "Time: %.0f seconds", elapsedTime) as? String
         //println("Time: \(elapsedTime)")
+        numMovesLabel.text = NSString(format: "%d moves         ", numMoves) as? String
         
         view.addSubview(completeView)
         
