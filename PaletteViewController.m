@@ -143,6 +143,48 @@
     self.collectionView.scrollEnabled = true;
     
     [self.view addSubview:self.collectionView];
+    
+    [self.collectionView setTranslatesAutoresizingMaskIntoConstraints:NO];
+
+    [self.view addConstraint:
+     [NSLayoutConstraint constraintWithItem:self.collectionView
+                                 attribute:NSLayoutAttributeWidth
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.view
+                                 attribute:NSLayoutAttributeWidth
+                                multiplier:1.0
+                                  constant:0.0]
+     ];
+    
+    [self.view addConstraint:
+     [NSLayoutConstraint constraintWithItem:self.collectionView
+                                 attribute:NSLayoutAttributeHeight
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.view
+                                 attribute:NSLayoutAttributeHeight
+                                multiplier:1.0
+                                  constant:0.0]
+     ];
+    
+    [self.view addConstraint:
+     [NSLayoutConstraint constraintWithItem:self.collectionView
+                                 attribute:NSLayoutAttributeCenterX
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.view
+                                 attribute:NSLayoutAttributeCenterX
+                                multiplier:1.0
+                                  constant:0.0]
+     ];
+    
+    [self.view addConstraint:
+     [NSLayoutConstraint constraintWithItem:self.collectionView
+                                 attribute:NSLayoutAttributeCenterY
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.view
+                                 attribute:NSLayoutAttributeCenterY
+                                multiplier:1.0
+                                  constant:0.0]
+     ];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView

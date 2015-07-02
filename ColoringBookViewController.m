@@ -65,48 +65,8 @@
     self.scrollView.zoomScale = scale;
     
     [self.scrollView addSubview:self.svgImageView];
-    [self.scrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
     [self.view addSubview: self.scrollView];
-    
-    [self.view addConstraint:
-     [NSLayoutConstraint constraintWithItem:self.scrollView
-                                 attribute:NSLayoutAttributeWidth
-                                 relatedBy:NSLayoutRelationEqual
-                                    toItem:self.view
-                                 attribute:NSLayoutAttributeWidth
-                                multiplier:1.0
-                                  constant:0.0]
-     ];
-    
-    [self.view addConstraint:
-     [NSLayoutConstraint constraintWithItem:self.scrollView
-                                 attribute:NSLayoutAttributeHeight
-                                 relatedBy:NSLayoutRelationEqual
-                                    toItem:self.view
-                                 attribute:NSLayoutAttributeHeight
-                                multiplier:1.0
-                                  constant:0.0]
-     ];
-    
-    [self.view addConstraint:
-     [NSLayoutConstraint constraintWithItem:self.scrollView
-                                 attribute:NSLayoutAttributeCenterX
-                                 relatedBy:NSLayoutRelationEqual
-                                    toItem:self.view
-                                 attribute:NSLayoutAttributeCenterX
-                                multiplier:1.0
-                                  constant:0.0]
-     ];
-    
-    [self.view addConstraint:
-     [NSLayoutConstraint constraintWithItem:self.scrollView
-                                 attribute:NSLayoutAttributeCenterY
-                                 relatedBy:NSLayoutRelationEqual
-                                    toItem:self.view
-                                 attribute:NSLayoutAttributeCenterY
-                                multiplier:1.0
-                                  constant:0.0]
-     ];
     
     CGFloat offsetX = MAX((self.view.frame.size.width - self.scrollView.contentSize.width) * 0.5, 0.0);
     CGFloat offsetY = MAX((self.view.frame.size.height - self.scrollView.contentSize.height) * 0.5, 0.0);
@@ -125,30 +85,99 @@
     self.toolBar = [UIToolbar new];
     self.toolBar.items = @[exitButton, paletteSelButton];
     self.toolBar.backgroundColor = [UIColor orangeColor];
-    
-    [self.toolBar setTranslatesAutoresizingMaskIntoConstraints:NO];
+     
     [self.view addSubview:self.toolBar];
-
-    NSDictionary *viewsDictionary2 = @{@"tb": self.toolBar};
-    [self.view addConstraints:
-     [NSLayoutConstraint
-      constraintsWithVisualFormat:@"V:|-(>=0)-[tb(==30)]|"
-      options: NSLayoutFormatAlignAllBaseline
-      metrics: nil
-      views: viewsDictionary2
-      ]
-     ];
     
-    [self.view addConstraints:
-     [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:|[tb]|"
-      options: NSLayoutFormatAlignAllBaseline
-      metrics: nil
-      views: viewsDictionary2
-      ]
-     ];
+    [self autoLayoutConstraints];
 }
 
+- (void)autoLayoutConstraints
+{
+    [self.scrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.toolBar setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view addConstraint:
+     [NSLayoutConstraint constraintWithItem:self.scrollView
+                                 attribute:NSLayoutAttributeLeft
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.view
+                                 attribute:NSLayoutAttributeLeft
+                                multiplier:1.0
+                                  constant:0.0]
+     ];
+    
+    [self.view addConstraint:
+     [NSLayoutConstraint constraintWithItem:self.scrollView
+                                 attribute:NSLayoutAttributeRight
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.view
+                                 attribute:NSLayoutAttributeRight
+                                multiplier:1.0
+                                  constant:0.0]
+     ];
+    
+    [self.view addConstraint:
+     [NSLayoutConstraint constraintWithItem:self.scrollView
+                                 attribute:NSLayoutAttributeTop
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.view
+                                 attribute:NSLayoutAttributeTop
+                                multiplier:1.0
+                                  constant:0.0]
+     ];
+    
+    [self.view addConstraint:
+     [NSLayoutConstraint constraintWithItem:self.scrollView
+                                 attribute:NSLayoutAttributeBottom
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.toolBar
+                                 attribute:NSLayoutAttributeTop
+                                multiplier:1.0
+                                  constant:0.0]
+     ];
+    
+    [self.view addConstraint:
+     [NSLayoutConstraint constraintWithItem:self.toolBar
+                                  attribute:NSLayoutAttributeLeft
+                                  relatedBy:NSLayoutRelationEqual
+                                     toItem:self.view
+                                  attribute:NSLayoutAttributeLeft
+                                 multiplier:1.0
+                                   constant:0.0]
+     ];
+    
+    [self.view addConstraint:
+     [NSLayoutConstraint constraintWithItem:self.toolBar
+                                  attribute:NSLayoutAttributeRight
+                                  relatedBy:NSLayoutRelationEqual
+                                     toItem:self.view
+                                  attribute:NSLayoutAttributeRight
+                                 multiplier:1.0
+                                   constant:0.0]
+     ];
+    
+    [self.view addConstraint:
+     [NSLayoutConstraint constraintWithItem:self.toolBar
+                                  attribute:NSLayoutAttributeBottom
+                                  relatedBy:NSLayoutRelationEqual
+                                     toItem:self.view
+                                  attribute:NSLayoutAttributeBottom
+                                 multiplier:1.0
+                                   constant:0.0]
+     ];
+    
+    [self.view addConstraint:
+     [NSLayoutConstraint constraintWithItem:self.toolBar
+                                  attribute:NSLayoutAttributeHeight
+                                  relatedBy:NSLayoutRelationEqual
+                                     toItem:nil
+                                  attribute:NSLayoutAttributeNotAnAttribute
+                                 multiplier:1.0
+                                   constant:30.0]
+     ];
+
+}
+    
 - (CGColorRef)cgColorForRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue
 {
     return (CGColorRef)[[UIColor colorWithRed:red green:green blue:blue alpha:1.0] CGColor];
