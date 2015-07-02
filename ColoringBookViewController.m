@@ -252,12 +252,13 @@
     NSString *mimeType = @"image/jpeg";
     
     //UIView *screenShotView = [[UIScreen mainScreen] snapshotViewAfterScreenUpdates:NO];
-    UIGraphicsBeginImageContext(self.view.bounds.size);
+    /*UIGraphicsBeginImageContext(self.view.bounds.size);
     [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    UIGraphicsEndImageContext();*/
     
-    NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+    //NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+    NSData *imageData = UIImageJPEGRepresentation([self.svgImageView.image UIImage], 1.0);
     
     // Add attachment
     [mc addAttachmentData:imageData mimeType:mimeType fileName:@"screenShot.jpg"];
