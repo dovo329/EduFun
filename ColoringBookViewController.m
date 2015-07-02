@@ -166,13 +166,13 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapMethod:)];
     [self.view addGestureRecognizer:tapGesture];
     
-    //UIBarButtonItem *paletteSelButton = [[UIBarButtonItem alloc] initWithTitle:@"Colors" style:UIBarButtonItemStylePlain target:self action:@selector(paletteSelMethod)];
+    UIBarButtonItem *exitButton = [[UIBarButtonItem alloc] initWithTitle:@"Exit" style:UIBarButtonItemStylePlain target:self action:@selector(exitMethod)];
     UIImage *paintersPaletteImg = [UIImage imageNamed:@"PaintersPalette"];
     paintersPaletteImg = [paintersPaletteImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     UIBarButtonItem *paletteSelButton = [[UIBarButtonItem alloc] initWithImage:paintersPaletteImg style:UIBarButtonItemStylePlain target:self action:@selector(paletteSelMethod)];
     self.toolBar = [UIToolbar new];
-    self.toolBar.items = @[paletteSelButton];
+    self.toolBar.items = @[exitButton, paletteSelButton];
     self.toolBar.backgroundColor = [UIColor orangeColor];
     
     [self.toolBar setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -246,6 +246,12 @@
     }
 }
 
+- (void)exitMethod
+{
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app animateToViewController:8];
+}
+
 - (void)paletteSelMethod
 {
     PaletteViewController *pvc = [PaletteViewController new];
@@ -256,7 +262,6 @@
     //pvc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     pvc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     
-    //[self.navigationController pushViewController:pvc animated:NO];
     [self presentViewController:pvc animated:YES completion:nil];
 }
 
@@ -273,7 +278,6 @@
 - (NSUInteger)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskLandscape | UIInterfaceOrientationMaskPortrait;
-    //return UIInterfaceOrientationMaskAll;
 }
 
 - (NSString *)orientationToString:(UIInterfaceOrientation)orient
@@ -295,7 +299,7 @@
     
     NSString *prevOrientStr = [self orientationToString:self.previousOrientation];
     NSString *newOrientStr  = [self orientationToString:newOrient];
-    NSLog(@"orientationChanged from %@ to %@",prevOrientStr ,newOrientStr);
+    //NSLog(@"orientationChanged from %@ to %@",prevOrientStr ,newOrientStr);
     if ((![newOrientStr isEqualToString:prevOrientStr]) &&
         (![newOrientStr isEqualToString:@"Other"]) &&
         self.svgImageView != nil)
@@ -321,7 +325,7 @@
                                                self.scrollView.contentSize.height * 0.5 + offsetX);
         //self.svgImageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5,
         //                                       self.scrollView.contentSize.height * 0.5);
-        NSLog(@"offsetX:%f Y:%f, csw: %f csh: %f", offsetX, offsetY, self.scrollView.contentSize.width, self.scrollView.contentSize.height);
+        //NSLog(@"offsetX:%f Y:%f, csw: %f csh: %f", offsetX, offsetY, self.scrollView.contentSize.width, self.scrollView.contentSize.height);
     }
     
 }
@@ -333,7 +337,7 @@
     
     self.svgImageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5 + offsetX,
                                            self.scrollView.contentSize.height * 0.5 + offsetY);
-    NSLog(@"offsetX:%f Y:%f, csw: %f csh: %f", offsetX, offsetY, self.scrollView.contentSize.width, self.scrollView.contentSize.height);
+    //NSLog(@"offsetX:%f Y:%f, csw: %f csh: %f", offsetX, offsetY, self.scrollView.contentSize.width, self.scrollView.contentSize.height);
 }
 
 @end
