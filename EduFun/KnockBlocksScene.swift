@@ -21,7 +21,7 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
     var lastUpdateTime: NSTimeInterval = 0
     var dt : NSTimeInterval = 0
     
-    var woodNodeArr : [SKSpriteNode]! = [SKSpriteNode]()
+    var woodNodeArr : [SKSpriteNode]! = []
     var stoneBallNode : SKSpriteNode!
     var ropeNode : SKSpriteNode!    
     
@@ -58,6 +58,14 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         ropeNode = childNodeWithName("rope") as! SKSpriteNode
         stoneBallNode = childNodeWithName("stoneBall") as! SKSpriteNode
         stoneBallNode.physicsBody!.density = 2.0
+        
+        enumerateChildNodesWithName("wood", usingBlock: { (node, _) -> Void in
+            
+            if let spriteNode = node as? SKSpriteNode {
+                self.woodNodeArr.append(spriteNode)
+            }
+        })
+        
         //ropeNode.physicsBody!.applyAngularImpulse(30.0)
         delay(seconds: 2.0) {
             self.stoneBallNode.physicsBody!.applyAngularImpulse(1)
@@ -66,12 +74,11 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         
         
         delay(seconds: 2.0) {
-            self.enumerateChildNodesWithName("wood", usingBlock: {
-                node, _ -> Void in
-                //NSLog("node=%@", node)
+            
+            for node in self.woodNodeArr {
                 node.physicsBody!.applyImpulse(CGVector(dx:0.0, dy:-300.0))
                 node.physicsBody!.categoryBitMask = PhysicsCategory.Wood
-            })
+            }
         }
         
         /*enumerateChildNodesWithName("wood") {node, _ in
