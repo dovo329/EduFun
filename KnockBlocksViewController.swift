@@ -60,7 +60,13 @@ class KnockBlocksViewController: UIViewController {
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .AspectFill
             
-            exitButton = THButton(frame: CGRectMake(0.0, 0.0, 80.0, 40.0), text:"Exit")
+            let maxAspectRatio: CGFloat = 16.0/9.0
+            // know we are coming from title screen which is always portrait to this screen which is always landscape but it hasn't autorotated yet but that's why height and width are swapped below
+            let playableHeight = skView.frame.size.height / maxAspectRatio
+            let playableMargin = (skView.frame.size.width - playableHeight)/2.0
+            var playableRect = CGRect(x:0, y: playableMargin, width: skView.frame.size.width, height: playableHeight)
+            
+            exitButton = THButton(frame: CGRectMake(playableRect.origin.x, playableRect.origin.y, 80.0, 40.0), text:"Exit")
             exitButton!.addTarget(self, action: Selector("exitButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
             
             skView.addSubview(exitButton)
