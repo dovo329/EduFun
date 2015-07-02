@@ -91,6 +91,9 @@
     self.scrollView.maximumZoomScale = scale*20.0;
     
     self.scrollView.zoomScale = scale;
+    //self.svgImageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5,
+    //                                       self.scrollView.contentSize.height * 0.5);
+    
     [self.scrollView addSubview:self.svgImageView];
     [self.scrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview: self.scrollView];
@@ -153,6 +156,12 @@
                                 multiplier:1.0
                                   constant:0.0]
      ];
+    
+    CGFloat offsetX = MAX((self.view.frame.size.width - self.scrollView.contentSize.width) * 0.5, 0.0);
+    CGFloat offsetY = MAX((self.view.frame.size.height - self.scrollView.contentSize.height) * 0.5, 0.0);
+    self.svgImageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5 + offsetX,
+                                           self.scrollView.contentSize.height * 0.5 + offsetY);
+    NSLog(@"bsw: %f; bsh: %f; offsetX:%f Y:%f, csw: %f csh: %f", self.scrollView.bounds.size.width, self.scrollView.bounds.size.height, offsetX, offsetY, self.scrollView.contentSize.width, self.scrollView.contentSize.height);
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapMethod:)];
     [self.view addGestureRecognizer:tapGesture];
@@ -263,14 +272,13 @@
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskLandscape | UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
+    return UIInterfaceOrientationMaskLandscape | UIInterfaceOrientationMaskPortrait;
     //return UIInterfaceOrientationMaskAll;
 }
 
 - (NSString *)orientationToString:(UIInterfaceOrientation)orient
 {
-    if (orient == UIInterfaceOrientationPortrait ||
-        orient == UIInterfaceOrientationPortraitUpsideDown) {
+    if (orient == UIInterfaceOrientationPortrait) {
         return @"Portrait";
     } else if (orient == UIInterfaceOrientationLandscapeLeft ||
                orient == UIInterfaceOrientationLandscapeRight)
@@ -283,12 +291,18 @@
 
 - (void) orientationChanged:(NSNotification *)notification
 {
-    UIInterfaceOrientation newOrient = [[UIDevice currentDevice] orientation];
+    UIInterfaceOrientation newOrient = (UIInterfaceOrientation)[[UIDevice currentDevice] orientation];
     
-    NSLog(@"orientationChanged from %@ to %@", [self orientationToString:self.previousOrientation], [self orientationToString:newOrient]);
-    if (self.previousOrientation != newOrient &&
-        self.svgImageView)
+    NSString *prevOrientStr = [self orientationToString:self.previousOrientation];
+    NSString *newOrientStr  = [self orientationToString:newOrient];
+    NSLog(@"orientationChanged from %@ to %@",prevOrientStr ,newOrientStr);
+    if ((![newOrientStr isEqualToString:prevOrientStr]) &&
+        (![newOrientStr isEqualToString:@"Other"]) &&
+        self.svgImageView != nil)
     {
+        // only update previous orientation if it is new and not "Other"
+        self.previousOrientation = newOrient;
+        
         CGFloat scaleX, scaleY, scale;
         // orientation changed but apparently frame.size hasn't swapped width and height yet so swap it ourselves
         scaleX = self.view.frame.size.height / self.origSize.width;
@@ -300,8 +314,26 @@
         
         self.scrollView.zoomScale = scale;
         //NSLog(@"wid=%f height=%f min=%f max=%f cur=%f", self.view.frame.size.width, self.view.frame.size.height, self.scrollView.minimumZoomScale, self.scrollView.maximumZoomScale, self.scrollView.zoomScale);
+        CGFloat offsetX = MAX((self.scrollView.bounds.size.width - self.scrollView.contentSize.height) * 0.5, 0.0);
+        CGFloat offsetY = MAX((self.scrollView.bounds.size.height - self.scrollView.contentSize.width) * 0.5, 0.0);
+    
+        self.svgImageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5 + offsetY,
+                                               self.scrollView.contentSize.height * 0.5 + offsetX);
+        //self.svgImageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5,
+        //                                       self.scrollView.contentSize.height * 0.5);
+        NSLog(@"offsetX:%f Y:%f, csw: %f csh: %f", offsetX, offsetY, self.scrollView.contentSize.width, self.scrollView.contentSize.height);
     }
-    self.previousOrientation = newOrient;
+    
+}
+
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView
+{
+    CGFloat offsetX = MAX((self.scrollView.bounds.size.width - self.scrollView.contentSize.width) * 0.5, 0.0);
+    CGFloat offsetY = MAX((self.scrollView.bounds.size.height - self.scrollView.contentSize.height) * 0.5, 0.0);
+    
+    self.svgImageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5 + offsetX,
+                                           self.scrollView.contentSize.height * 0.5 + offsetY);
+    NSLog(@"offsetX:%f Y:%f, csw: %f csh: %f", offsetX, offsetY, self.scrollView.contentSize.width, self.scrollView.contentSize.height);
 }
 
 @end
