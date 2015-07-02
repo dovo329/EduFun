@@ -84,8 +84,11 @@
     UIBarButtonItem *emailButton = [[UIBarButtonItem alloc] initWithTitle:@"Email" style:UIBarButtonItemStylePlain target:self action:@selector(emailMethod)];
     
     UIBarButtonItem *paletteSelButton = [[UIBarButtonItem alloc] initWithImage:paintersPaletteImg style:UIBarButtonItemStylePlain target:self action:@selector(paletteSelMethod)];
+    
+    UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
     self.toolBar = [UIToolbar new];
-    self.toolBar.items = @[exitButton, paletteSelButton, emailButton];
+    self.toolBar.items = @[exitButton, flexibleItem, paletteSelButton, flexibleItem, emailButton];
     self.toolBar.backgroundColor = [UIColor orangeColor];
     
     [self.view addSubview:self.toolBar];
