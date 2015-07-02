@@ -14,7 +14,6 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     let kFlipDuration : NSTimeInterval = 0.5
     let kMatchDisappearDuration : NSTimeInterval = 2.0
     let kSparkleLifetimeMean : Float = 1.5
-    let kSparkleLifetimeVariance : Float = 0.5
     let kConfetti4STime : NSTimeInterval = 2.0
     
     let kNumRows : Int = 4
@@ -139,7 +138,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         
         emitterCell.birthRate = 40
         emitterCell.lifetime = kSparkleLifetimeMean
-        emitterCell.lifetimeRange = kSparkleLifetimeVariance
+        emitterCell.lifetimeRange = 0
         emitterCell.color = UIColor(red: 1.0, green: 1.0, blue: 0.0, alpha: 1.0).CGColor
         emitterCell.redRange = 0.0
         emitterCell.redSpeed = 0.0
@@ -176,15 +175,17 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         emitterLayerArr[0].emitterSize = frame1.size
         emitterLayerArr[0].emitterShape = kCAEmitterLayerRectangle
         emitterLayerArr[0].lifetime = kSparkleLifetimeMean
-        emitterLayerArr[0].beginTime = CACurrentMediaTime()
         view.layer.addSublayer(emitterLayerArr[0])
+        emitterLayerArr[0].beginTime = CACurrentMediaTime()-0.2
+        //println("currentMediaTime=\(CACurrentMediaTime())")
         
         emitterLayerArr[1].emitterPosition = CGPointMake(frame2.origin.x + frame2.size.width/2, frame2.origin.y + frame2.size.height/2)
         emitterLayerArr[1].emitterSize = frame2.size
         emitterLayerArr[1].emitterShape = kCAEmitterLayerRectangle
-        emitterLayerArr[1].lifetime = kSparkleLifetimeMean
-        emitterLayerArr[1].beginTime = CACurrentMediaTime()
         view.layer.addSublayer(emitterLayerArr[1])
+        emitterLayerArr[1].lifetime = kSparkleLifetimeMean
+        emitterLayerArr[1].beginTime = CACurrentMediaTime()-0.2
+        //println("currentMediaTime=\(CACurrentMediaTime()-0.2)")
     }
     
     func stopMatchSparkles() {
@@ -193,7 +194,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         for emitterLayer in emitterLayerArr {
             emitterLayer.lifetime = 0.0
             
-            var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(kSparkleLifetimeVariance+kSparkleLifetimeMean)) * Double(NSEC_PER_SEC)))
+            var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(kSparkleLifetimeMean)) * Double(NSEC_PER_SEC)))
             dispatch_after(dispatchTime, dispatch_get_main_queue(),
                 {
                     emitterLayer.removeFromSuperlayer()
@@ -416,7 +417,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                         if (compareArr[0].imageName == compareArr[1].imageName)
                         {
                             //println("You made a match! Yay!")
-                            
+
                             self.card2dArr[compareArr[0].row][compareArr[0].column].active = false
                             self.card2dArr[compareArr[0].row][compareArr[0].column].matched = true
                             self.card2dArr[compareArr[0].row][compareArr[0].column].isFlipped = false
@@ -429,6 +430,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                             
                             var cell0 = collectionView.cellForItemAtIndexPath(indexPath0)!
                             var cell1 = collectionView.cellForItemAtIndexPath(indexPath1)!
+                            
+                            
                             
                             self.startMatchSparkles(frame1:cell0.frame, frame2:cell1.frame)
                             
