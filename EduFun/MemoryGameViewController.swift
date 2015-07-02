@@ -43,6 +43,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     var elapsedTime : Double = 0.0
     
     var emitterLayerArr : [CAEmitterLayer]! = Array()
+    var emitterLayer0 : CAEmitterLayer!
+    var emitterLayer1 : CAEmitterLayer!
     
     init(_ coder: NSCoder? = nil) {
         elapsedTimeLabel = THLabel()
@@ -171,7 +173,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     
     func startMatchSparkles(#frame1: CGRect, frame2: CGRect) {
         
-        emitterLayerArr[0].emitterPosition = CGPointMake(frame1.origin.x + frame1.size.width/2, frame1.origin.y + frame1.size.height/2)
+        /*emitterLayerArr[0].emitterPosition = CGPointMake(frame1.origin.x + frame1.size.width/2, frame1.origin.y + frame1.size.height/2)
         emitterLayerArr[0].emitterSize = frame1.size
         emitterLayerArr[0].emitterShape = kCAEmitterLayerRectangle
         emitterLayerArr[0].lifetime = kSparkleLifetimeMean
@@ -184,21 +186,89 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         emitterLayerArr[1].emitterShape = kCAEmitterLayerRectangle
         view.layer.addSublayer(emitterLayerArr[1])
         emitterLayerArr[1].lifetime = kSparkleLifetimeMean
-        emitterLayerArr[1].beginTime = CACurrentMediaTime()-0.5
+        emitterLayerArr[1].beginTime = CACurrentMediaTime()-0.5*/
+        
+        var emitterCell : CAEmitterCell = CAEmitterCell()
+        emitterCell.contents = UIImage(named: "StarCell")!.CGImage
+        emitterCell.name = "StarCell" // 🌟
+        
+        emitterCell.birthRate = 40
+        emitterCell.lifetime = kSparkleLifetimeMean
+        emitterCell.lifetimeRange = 0
+        emitterCell.color = UIColor(red: 1.0, green: 1.0, blue: 0.0, alpha: 1.0).CGColor
+        emitterCell.redRange = 0.0
+        emitterCell.redSpeed = 0.0
+        emitterCell.blueRange = 0.0
+        emitterCell.blueSpeed = 1.0
+        emitterCell.greenRange = 0.0
+        emitterCell.greenSpeed = -1.0
+        emitterCell.alphaSpeed = 0.0
+        
+        emitterCell.velocity = 200
+        emitterCell.velocityRange = 50
+        emitterCell.yAcceleration = 400
+        emitterCell.emissionLongitude = -π / 2
+        emitterCell.emissionRange = π / 6
+        
+        //emitterCell.scale = 0.25
+        emitterCell.scale = view.frame.size.width*(0.25/320.0)
+        emitterCell.scaleSpeed = -0.125
+        emitterCell.scaleRange = 0.0
+        
+        emitterLayer0 = nil
+        emitterLayer0 = CAEmitterLayer()
+        emitterLayer0.emitterCells = [emitterCell]
+        emitterLayer0.emitterPosition = CGPointMake(frame1.origin.x + frame1.size.width/2, frame1.origin.y + frame1.size.height/2)
+        emitterLayer0.emitterSize = frame1.size
+        emitterLayer0.emitterShape = kCAEmitterLayerRectangle
+        emitterLayer0.lifetime = kSparkleLifetimeMean
+        view.layer.addSublayer(emitterLayer0)
+        emitterLayer0.beginTime = CACurrentMediaTime()
+        //println("currentMediaTime=\(CACurrentMediaTime())")
+        
+        emitterLayer1 = nil
+        emitterLayer1 = CAEmitterLayer()
+        emitterLayer1.emitterCells = [emitterCell]
+        emitterLayer1.emitterPosition = CGPointMake(frame2.origin.x + frame2.size.width/2, frame2.origin.y + frame2.size.height/2)
+        emitterLayer1.emitterSize = frame1.size
+        emitterLayer1.emitterShape = kCAEmitterLayerRectangle
+        emitterLayer1.lifetime = kSparkleLifetimeMean
+        view.layer.addSublayer(emitterLayer1)
+        emitterLayer1.beginTime = CACurrentMediaTime()
     }
     
     func stopMatchSparkles() {
-        var emitterLayer : CAEmitterLayer
+        //var emitterLayer : CAEmitterLayer
+        emitterLayer0.lifetime = 0
+        emitterLayer1.lifetime = 0
         
-        for emitterLayer in emitterLayerArr {
+        var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(kSparkleLifetimeMean)) * Double(NSEC_PER_SEC)))
+        dispatch_after(dispatchTime, dispatch_get_main_queue(),
+            {
+                self.emitterLayer0.removeFromSuperlayer()
+                self.emitterLayer1.removeFromSuperlayer()
+                //self.emitterLayer0 = nil
+                //self.emitterLayer1 = nil
+        })
+
+        /*for var layer in self.view.sublayers
+        {
+                if layer.isKindOfClass(CAEmitterLayer.class)
+                {
+                    layer.removeFromSuperview()
+                    layer = nil
+                }
+            }*/
+
+        /*for emitterLayer in emitterLayerArr {
             emitterLayer.lifetime = 0.0
             
             var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(kSparkleLifetimeMean)) * Double(NSEC_PER_SEC)))
             dispatch_after(dispatchTime, dispatch_get_main_queue(),
                 {
                     emitterLayer.removeFromSuperlayer()
-            })
-        }
+        })
+        }*/
     }
     
     func activateCardArr() {
