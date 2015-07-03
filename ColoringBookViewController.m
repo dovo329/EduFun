@@ -44,7 +44,7 @@
     
     [self setupBackgroundGradient];
     
-    self.previousOrientation = UIInterfaceOrientationPortrait;
+    self.previousOrientation = UIInterfaceOrientationLandscapeRight;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
     
@@ -86,27 +86,34 @@
     
     UIBarButtonItem *exitButton = [[UIBarButtonItem alloc] initWithTitle:@"Exit" style:UIBarButtonItemStylePlain target:self action:@selector(exitMethod)];
 
-    UIImage *paintersPaletteImg = [UIImage imageNamed:@"PaintersPalette"];
-    paintersPaletteImg = [paintersPaletteImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIBarButtonItem *paletteSelButton = [[UIBarButtonItem alloc] initWithImage:paintersPaletteImg style:UIBarButtonItemStylePlain target:self action:@selector(paletteSelMethod)];
+    UIImage *previousArrowImg = [UIImage imageNamed:@"Previous"];
+    previousArrowImg = [previousArrowImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *previousArrowButton = [[UIBarButtonItem alloc] initWithImage:previousArrowImg style:UIBarButtonItemStylePlain target:self action:@selector(previousArrowMethod)];
     
-    /*UIImage *emailImg = [UIImage imageNamed:@"Mail"];
-    emailImg = [emailImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIBarButtonItem *emailButton = [[UIBarButtonItem alloc] initWithImage:emailImg style:UIBarButtonItemStylePlain target:self action:@selector(emailMethod)];*/
+    UIImage *nextArrowImg = [UIImage imageNamed:@"Next"];
+    nextArrowImg = [nextArrowImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *nextArrowButton = [[UIBarButtonItem alloc] initWithImage:nextArrowImg style:UIBarButtonItemStylePlain target:self action:@selector(nextArrowMethod)];
     
     UIImage *zoomImg = [UIImage imageNamed:@"Zoom"];
     zoomImg = [zoomImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIBarButtonItem *zoomButton = [[UIBarButtonItem alloc] initWithImage:zoomImg style:UIBarButtonItemStylePlain target:self action:@selector(zoomMethod)];
     
+    UIImage *paintersPaletteImg = [UIImage imageNamed:@"PaintersPalette"];
+    paintersPaletteImg = [paintersPaletteImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *paletteSelButton = [[UIBarButtonItem alloc] initWithImage:paintersPaletteImg style:UIBarButtonItemStylePlain target:self action:@selector(paletteSelMethod)];
+    
     UIImage *cameraImg = [UIImage imageNamed:@"Camera"];
     cameraImg = [cameraImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     self.cameraButton = [[UIBarButtonItem alloc] initWithImage:cameraImg style:UIBarButtonItemStylePlain target:self action:@selector(cameraMethod)];
+    
+    /*UIImage *emailImg = [UIImage imageNamed:@"Mail"];
+    emailImg = [emailImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+     UIBarButtonItem *emailButton = [[UIBarButtonItem alloc] initWithImage:emailImg style:UIBarButtonItemStylePlain target:self action:@selector(emailMethod)];*/
 
     UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
     self.toolBar = [UIToolbar new];
-    //self.toolBar.items = @[exitButton, flexibleItem, zoomButton, flexibleItem, paletteSelButton, flexibleItem, cameraButton, flexibleItem, emailButton];
-    self.toolBar.items = @[exitButton, flexibleItem, zoomButton, flexibleItem, paletteSelButton, flexibleItem, self.cameraButton];
+    self.toolBar.items = @[exitButton, flexibleItem, previousArrowButton, flexibleItem, nextArrowButton, flexibleItem, zoomButton, flexibleItem, paletteSelButton, flexibleItem, self.cameraButton];
     self.toolBar.backgroundColor = [UIColor orangeColor];
     
     [self.view addSubview:self.toolBar];
@@ -255,18 +262,39 @@
     [app animateToViewController:8 srcVCEnum:2];
 }
 
+- (void)previousArrowMethod
+{
+    NSLog(@"Previous Arrow Method");
+}
+
+- (void)nextArrowMethod
+{
+    NSLog(@"Next Arrow Method");
+}
+
+- (void)thisImage:(UIImage *)image hasBeenSavedInPhotoAlbumWithError:(NSError *)error usingContextInfo:(void*)ctxInfo {
+    if (error) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error saving picture" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *option = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        }];
+        [alertController addAction:option];
+        [self presentViewController:alertController animated:YES completion:nil];
+    } else {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Picture saved to Photos Album" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *option = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        }];
+        [alertController addAction:option];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    self.cameraButton.enabled = YES;
+}
+
 - (void)cameraMethod
 {
     //self.view.window.userInteractionEnabled = NO;
     self.cameraButton.enabled = NO;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        UIImageWriteToSavedPhotosAlbum([self.svgImageView.image UIImage], nil, nil, nil);
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Picture saved to Photos" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *option = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        }];
-        [alertController addAction:option];
-        [self presentViewController:alertController animated:YES completion:nil];
-        self.cameraButton.enabled = YES;
+        UIImageWriteToSavedPhotosAlbum([self.svgImageView.image UIImage], self, @selector(thisImage:hasBeenSavedInPhotoAlbumWithError:usingContextInfo:), NULL);
     });
 }
 
