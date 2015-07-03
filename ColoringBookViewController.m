@@ -12,6 +12,8 @@
 #import "EduFun-Swift.h"
 #import <MessageUI/MessageUI.h>
 
+#define kMaxZoom 16.0
+
 @interface ColoringBookViewController () <UIScrollViewDelegate, PaletteViewControllerDelegate, MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) SVGKLayeredImageView *svgImageView;
@@ -22,6 +24,7 @@
 @property (nonatomic, strong) CAGradientLayer *gradientLayer;
 @property (nonatomic, strong) UIToolbar *toolBar;
 @property (nonatomic, assign) UIInterfaceOrientation previousOrientation;
+@property (nonatomic, strong) UIBarButtonItem *cameraButton;
 
 @end
 
@@ -64,7 +67,7 @@
     CGFloat scale = scaleX < scaleY ? scaleX : scaleY;
     
     self.scrollView.minimumZoomScale = scale;
-    self.scrollView.maximumZoomScale = scale*20.0;
+    self.scrollView.maximumZoomScale = scale*kMaxZoom;
     
     self.scrollView.zoomScale = scale;
     
@@ -87,9 +90,9 @@
     paintersPaletteImg = [paintersPaletteImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIBarButtonItem *paletteSelButton = [[UIBarButtonItem alloc] initWithImage:paintersPaletteImg style:UIBarButtonItemStylePlain target:self action:@selector(paletteSelMethod)];
     
-    UIImage *emailImg = [UIImage imageNamed:@"Mail"];
+    /*UIImage *emailImg = [UIImage imageNamed:@"Mail"];
     emailImg = [emailImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIBarButtonItem *emailButton = [[UIBarButtonItem alloc] initWithImage:emailImg style:UIBarButtonItemStylePlain target:self action:@selector(emailMethod)];
+    UIBarButtonItem *emailButton = [[UIBarButtonItem alloc] initWithImage:emailImg style:UIBarButtonItemStylePlain target:self action:@selector(emailMethod)];*/
     
     UIImage *zoomImg = [UIImage imageNamed:@"Zoom"];
     zoomImg = [zoomImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -97,12 +100,13 @@
     
     UIImage *cameraImg = [UIImage imageNamed:@"Camera"];
     cameraImg = [cameraImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc] initWithImage:cameraImg style:UIBarButtonItemStylePlain target:self action:@selector(cameraMethod)];
+    self.cameraButton = [[UIBarButtonItem alloc] initWithImage:cameraImg style:UIBarButtonItemStylePlain target:self action:@selector(cameraMethod)];
 
     UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
     self.toolBar = [UIToolbar new];
-    self.toolBar.items = @[exitButton, flexibleItem, zoomButton, flexibleItem, paletteSelButton, flexibleItem, cameraButton, flexibleItem, emailButton];
+    //self.toolBar.items = @[exitButton, flexibleItem, zoomButton, flexibleItem, paletteSelButton, flexibleItem, cameraButton, flexibleItem, emailButton];
+    self.toolBar.items = @[exitButton, flexibleItem, zoomButton, flexibleItem, paletteSelButton, flexibleItem, self.cameraButton];
     self.toolBar.backgroundColor = [UIColor orangeColor];
     
     [self.view addSubview:self.toolBar];
@@ -253,19 +257,27 @@
 
 - (void)cameraMethod
 {
+    //self.view.window.userInteractionEnabled = NO;
+    self.cameraButton.enabled = NO;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         UIImageWriteToSavedPhotosAlbum([self.svgImageView.image UIImage], nil, nil, nil);
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Picture saved to Photos" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *option = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        }];
+        [alertController addAction:option];
+        [self presentViewController:alertController animated:YES completion:nil];
+        self.cameraButton.enabled = YES;
     });
 }
 
-- (void)emailMethod
+/*- (void)emailMethod
 {
     // Email Subject
     NSString *emailTitle = @"Coloring Book Page Email";
     // Email Content
     NSString *messageBody = @"Check out what I colored!";
     // To address
-    NSArray *toRecipents = [NSArray arrayWithObject:@"douglas.c.voss@gmail.com"];
+    NSArray *toRecipents = [NSArray arrayWithObject:@""];
     
     MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
     mc.mailComposeDelegate = self;
@@ -276,10 +288,10 @@
     NSString *mimeType = @"image/jpeg";
     
     //UIView *screenShotView = [[UIScreen mainScreen] snapshotViewAfterScreenUpdates:NO];
-    /*UIGraphicsBeginImageContext(self.view.bounds.size);
-    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();*/
+    //UIGraphicsBeginImageContext(self.view.bounds.size);
+    //[self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    //UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    //UIGraphicsEndImageContext();
     
     //NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
     NSData *imageData = UIImageJPEGRepresentation([self.svgImageView.image UIImage], 1.0);
@@ -290,7 +302,7 @@
     // Present mail view controller on screen
     [self presentViewController:mc animated:YES completion:NULL];
     
-}
+}*/
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
@@ -383,7 +395,7 @@
         scale = scaleX < scaleY ? scaleX : scaleY;
         
         self.scrollView.minimumZoomScale = scale;
-        self.scrollView.maximumZoomScale = scale*20.0;
+        self.scrollView.maximumZoomScale = scale*kMaxZoom;
         
         self.scrollView.zoomScale = scale;
         //NSLog(@"wid=%f height=%f min=%f max=%f cur=%f", self.view.frame.size.width, self.view.frame.size.height, self.scrollView.minimumZoomScale, self.scrollView.maximumZoomScale, self.scrollView.zoomScale);
@@ -416,7 +428,7 @@
 
 - (void)zoomMethod
 {
-    CGFloat newScale = self.scrollView.zoomScale * 2.0;
+    CGFloat newScale = self.scrollView.zoomScale * 3.0;
     
     if (newScale > self.scrollView.maximumZoomScale)
     {
