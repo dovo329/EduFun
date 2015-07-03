@@ -104,6 +104,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         layout.minimumLineSpacing = 0
         
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
+        self.collectionView.userInteractionEnabled = false
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: kCellReuseId)
@@ -274,7 +275,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     
     func activateCardArr() {
         numMoves = 0
-        println("collectionView.userInteractionEnabled=\(collectionView.userInteractionEnabled)")
+        //println("collectionView.userInteractionEnabled=\(collectionView.userInteractionEnabled)")
         for var row=0; row<kNumRows; row++
         {
             for var column=0; column<kNumColumns; column++
