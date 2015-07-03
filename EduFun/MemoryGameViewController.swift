@@ -11,6 +11,7 @@ import QuartzCore
 
 class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
+    let kPeekDuration : NSTimeInterval = 1.5
     let kFlipDuration : NSTimeInterval = 0.5
     let kMatchDisappearDuration : NSTimeInterval = 2.0
     let kSparkleLifetimeMean : Float = 1.5
@@ -280,26 +281,53 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                 var indexPath = NSIndexPath(forRow: column, inSection: row)
                 var cell = collectionView.cellForItemAtIndexPath(indexPath)
                 var card : Card = card2dArr[row][column]
-                var toView = UIImageView(image: UIImage(named: "CardBack"))
+                //var toView = UIImageView(image: UIImage(named: "CardBack"))
+                var toView = UIImageView(image: UIImage(named: card.imageName!))
                 toView.frame = cell!.backgroundView!.frame
                 
-                UIView.transitionFromView((cell!.backgroundView)!, toView:toView, duration: self.kMatchDisappearDuration, options: UIViewAnimationOptions.TransitionFlipFromBottom, completion:
+                UIView.transitionFromView((cell!.backgroundView)!, toView:toView, duration: self.kFlipDuration, options: UIViewAnimationOptions.TransitionFlipFromBottom, completion:
                     {(Bool) in
-                        cell!.backgroundView = UIImageView(image: UIImage(named: "CardBack"))
+                        cell!.backgroundView = UIImageView(image: UIImage(named: card.imageName!))
                         toView.removeFromSuperview()
                     }
                 )
+                
                 card.active = true
                 card.isFlipped = false
                 card2dArr[row][column] = card
             }
         }
         
-        var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(kMatchDisappearDuration)) * Double(NSEC_PER_SEC)))
+        var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(kFlipDuration+kPeekDuration)) * Double(NSEC_PER_SEC)))
+        dispatch_after(dispatchTime, dispatch_get_main_queue(),
+            {
+                for var row=0; row<self.kNumRows; row++
+                {
+                    for var column=0; column<self.kNumColumns; column++
+                    {
+                        var indexPath = NSIndexPath(forRow: column, inSection: row)
+                        var cell = self.collectionView.cellForItemAtIndexPath(indexPath)
+                        var card : Card = self.card2dArr[row][column]
+                        var toView = UIImageView(image: UIImage(named: "CardBack"))
+                        //var toView = UIImageView(image: UIImage(named: card.imageName!))
+                        toView.frame = cell!.backgroundView!.frame
+                        
+                        UIView.transitionFromView((cell!.backgroundView)!, toView:toView, duration: self.kFlipDuration, options: UIViewAnimationOptions.TransitionFlipFromBottom, completion:
+                            {(Bool) in
+                                cell!.backgroundView = UIImageView(image: UIImage(named: "CardBack"))
+                                toView.removeFromSuperview()
+                            }
+                        )
+                    }
+                }
+            }
+        )
+        /*var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(kMatchDisappearDuration)) * Double(NSEC_PER_SEC)))
         dispatch_after(dispatchTime, dispatch_get_main_queue(),
             {
                 self.collectionView.reloadData()
-        })
+            }
+        )*/
         
     }
     
