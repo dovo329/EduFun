@@ -11,7 +11,7 @@ import QuartzCore
 
 class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
-    let kPeekDuration : NSTimeInterval = 1.5
+    let kPeekDuration : NSTimeInterval = 2.0
     let kFlipDuration : NSTimeInterval = 0.5
     let kMatchDisappearDuration : NSTimeInterval = 2.0
     let kSparkleLifetimeMean : Float = 1.5
