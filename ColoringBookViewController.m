@@ -83,16 +83,24 @@
     [self.view addGestureRecognizer:tapGesture];
     
     UIBarButtonItem *exitButton = [[UIBarButtonItem alloc] initWithTitle:@"Exit" style:UIBarButtonItemStylePlain target:self action:@selector(exitMethod)];
+
     UIImage *paintersPaletteImg = [UIImage imageNamed:@"PaintersPalette"];
     paintersPaletteImg = [paintersPaletteImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIBarButtonItem *emailButton = [[UIBarButtonItem alloc] initWithTitle:@"Email" style:UIBarButtonItemStylePlain target:self action:@selector(emailMethod)];
-    
     UIBarButtonItem *paletteSelButton = [[UIBarButtonItem alloc] initWithImage:paintersPaletteImg style:UIBarButtonItemStylePlain target:self action:@selector(paletteSelMethod)];
+    
+    
+    //UIBarButtonItem *emailButton = [[UIBarButtonItem alloc] initWithTitle:@"Email" style:UIBarButtonItemStylePlain target:self action:@selector(emailMethod)];
+    UIImage *emailImg = [UIImage imageNamed:@"Mail"];
+    emailImg = [emailImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *emailButton = [[UIBarButtonItem alloc] initWithImage:emailImg style:UIBarButtonItemStylePlain target:self action:@selector(emailMethod)];
+    
+    UIBarButtonItem *zoomButton = [[UIBarButtonItem alloc] initWithTitle:@"Zoom" style:UIBarButtonItemStylePlain target:self action:@selector(zoomMethod)];
+    UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc] initWithTitle:@"Camera" style:UIBarButtonItemStylePlain target:self action:@selector(cameraMethod)];
     
     UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
     self.toolBar = [UIToolbar new];
-    self.toolBar.items = @[exitButton, flexibleItem, paletteSelButton, flexibleItem, emailButton];
+    self.toolBar.items = @[exitButton, flexibleItem, zoomButton, flexibleItem, paletteSelButton, flexibleItem, cameraButton, flexibleItem, emailButton];
     self.toolBar.backgroundColor = [UIColor orangeColor];
     
     [self.view addSubview:self.toolBar];
@@ -395,6 +403,20 @@
     self.svgImageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5 + offsetX,
                                            self.scrollView.contentSize.height * 0.5 + offsetY);
     //NSLog(@"offsetX:%f Y:%f, csw: %f csh: %f", offsetX, offsetY, self.scrollView.contentSize.width, self.scrollView.contentSize.height);
+}
+
+- (void)zoomMethod
+{
+    CGFloat newScale = self.scrollView.zoomScale * 2.0;
+    
+    if (newScale > self.scrollView.maximumZoomScale)
+    {
+        self.scrollView.zoomScale = self.scrollView.minimumZoomScale;
+    }
+    else
+    {
+        self.scrollView.zoomScale = newScale;
+    }
 }
 
 @end
