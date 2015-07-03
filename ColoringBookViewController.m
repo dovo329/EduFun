@@ -13,6 +13,7 @@
 #import <MessageUI/MessageUI.h>
 
 #define kMaxZoom 16.0
+#define kSvgPageIndexKey @"svg.page.index.key"
 
 @interface ColoringBookViewController () <UIScrollViewDelegate, PaletteViewControllerDelegate, MFMailComposeViewControllerDelegate>
 
@@ -25,6 +26,8 @@
 @property (nonatomic, strong) UIToolbar *toolBar;
 @property (nonatomic, assign) UIInterfaceOrientation previousOrientation;
 @property (nonatomic, strong) UIBarButtonItem *cameraButton;
+@property (nonatomic, strong) NSArray *svgPageNameArr;
+@property (nonatomic, assign) int svgPageIndex;
 
 @end
 
@@ -42,6 +45,11 @@
     //CGFloat height = self.view.frame.size.height;
     //self.view.frame = CGRectMake(0,0,height, width);
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.svgPageIndex = [defaults integerForKey:kSvgPageIndexKey];
+    
+    self.svgPageNameArr = @[@"mtnHouse.svg", @"Unicorn.svg"];
+    
     [self setupBackgroundGradient];
     
     self.previousOrientation = UIInterfaceOrientationLandscapeRight;
@@ -55,8 +63,9 @@
     self.view.backgroundColor = [UIColor clearColor];
     self.view.opaque = false;
     //self.svgImageView = [[SVGKLayeredImageView alloc] initWithSVGKImage: [SVGKImage imageNamed:@"mtnHouse.svg"]];
-    self.svgImageView = [[SVGKLayeredImageView alloc] initWithSVGKImage: [SVGKImage imageNamed:@"Unicorn.svg"]];
-
+    //self.svgImageView = [[SVGKLayeredImageView alloc] initWithSVGKImage: [SVGKImage imageNamed:@"Unicorn.svg"]];
+    self.svgImageView = [[SVGKLayeredImageView alloc] initWithSVGKImage: [SVGKImage imageNamed:self.svgPageNameArr[self.svgPageIndex]]];
+    
     self.scrollView = [[UIScrollView alloc] init];
     self.scrollView.contentSize = self.svgImageView.frame.size;
     self.scrollView.delegate = self;
@@ -256,6 +265,14 @@
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    // save what svg coloring page we are on when leaving this view controller
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:self.svgPageIndex forKey:kSvgPageIndexKey];
+    [defaults synchronize];
+}
+
 - (void)exitMethod
 {
     AppDelegate *app = [[UIApplication sharedApplication] delegate];
@@ -264,12 +281,49 @@
 
 - (void)previousArrowMethod
 {
-    NSLog(@"Previous Arrow Method");
+    self.svgPageIndex--;
+    if (self.svgPageIndex < 0) {
+        self.svgPageIndex = [self.svgPageNameArr count]-1;
+    }
+    self.svgImageView.image = [SVGKImage imageNamed:self.svgPageNameArr[self.svgPageIndex]];
+    self.scrollView.contentSize = self.svgImageView.frame.size;
+    NSLog(@"Previous Arrow Method %@ [%d]", self.svgPageNameArr[self.svgPageIndex], self.svgPageIndex);
+    
+    /*self.svgImageView = [[SVGKLayeredImageView alloc] initWithSVGKImage: [SVGKImage imageNamed:self.svgPageNameArr[self.svgPageIndex]]];
+    
+    self.scrollView = [[UIScrollView alloc] init];
+    self.scrollView.contentSize = self.svgImageView.frame.size;
+    self.scrollView.delegate = self;
+    
+    self.origSize = self.svgImageView.frame.size;
+    CGFloat scaleX = self.view.frame.size.width / self.origSize.width;
+    CGFloat scaleY = self.view.frame.size.height / self.origSize.height;
+    CGFloat scale = scaleX < scaleY ? scaleX : scaleY;
+    
+    self.scrollView.minimumZoomScale = scale;
+    self.scrollView.maximumZoomScale = scale*kMaxZoom;
+    
+    self.scrollView.zoomScale = scale;
+    
+    [self.scrollView addSubview:self.svgImageView];
+    
+    [self.view addSubview: self.scrollView];
+    
+    CGFloat offsetX = MAX((self.view.frame.size.width - self.scrollView.contentSize.width) * 0.5, 0.0);
+    CGFloat offsetY = MAX((self.view.frame.size.height - self.scrollView.contentSize.height) * 0.5, 0.0);
+    self.svgImageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5 + offsetX,
+                                           self.scrollView.contentSize.height * 0.5 + offsetY);*/
 }
 
 - (void)nextArrowMethod
 {
-    NSLog(@"Next Arrow Method");
+    self.svgPageIndex++;
+    if (self.svgPageIndex >= [self.svgPageNameArr count]) {
+        self.svgPageIndex = 0;
+    }
+    self.svgImageView.image = [SVGKImage imageNamed:self.svgPageNameArr[self.svgPageIndex]];
+    self.scrollView.contentSize = self.svgImageView.frame.size;
+    NSLog(@"Next Arrow Method %@ [%d]", self.svgPageNameArr[self.svgPageIndex], self.svgPageIndex);
 }
 
 - (void)thisImage:(UIImage *)image hasBeenSavedInPhotoAlbumWithError:(NSError *)error usingContextInfo:(void*)ctxInfo {
