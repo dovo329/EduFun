@@ -316,6 +316,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                             {(Bool) in
                                 cell!.backgroundView = UIImageView(image: UIImage(named: "CardBack"))
                                 toView.removeFromSuperview()
+                                self.startTime = NSDate()
                             }
                         )
                     }
@@ -632,7 +633,6 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         setupCardArr()
         activateCardArr()
         dismissInfo()
-        startTime = NSDate()
     }
     
     func exitButtonMethod(sender : THButton, event : UIEvent) {
@@ -738,7 +738,14 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         //elapsedTimeLabel.backgroundColor = UIColor.orangeColor()
         //println("completed elapsed time size is \(elapsedTimeLabel.font.pointSize)")
         
-        numMovesLabel.text = NSString(format: "%d moves         ", numMoves) as? String
+        if (numMoves == 8)
+        {
+            numMovesLabel.text = NSString(format: "Perfect! %d moves", numMoves) as? String
+        }
+        else
+        {
+            numMovesLabel.text = NSString(format: "%d moves         ", numMoves) as? String
+        }
         numMovesLabel.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height)
         numMovesLabel.font = UIFont(name: "Super Mario 256", size: 25.0)
         numMovesLabel.font = numMovesLabel.font.fontWithSize(getFontSizeToFitFrameOfLabel(numMovesLabel)-5.0)
