@@ -274,6 +274,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     
     func activateCardArr() {
         numMoves = 0
+        println("collectionView.userInteractionEnabled=\(collectionView.userInteractionEnabled)")
         for var row=0; row<kNumRows; row++
         {
             for var column=0; column<kNumColumns; column++
@@ -317,6 +318,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                                 cell!.backgroundView = UIImageView(image: UIImage(named: "CardBack"))
                                 toView.removeFromSuperview()
                                 self.startTime = NSDate()
+                                self.collectionView.userInteractionEnabled = true
                             }
                         )
                     }
@@ -449,8 +451,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         var cell = collectionView.cellForItemAtIndexPath(indexPath)!
         
         var card : Card = card2dArr[indexPath.section][indexPath.row]
-        
-        println("numMoves=\(numMoves)")
+        //println("numMoves=\(numMoves)")
         
         // only flip over another card if there are < 2 cards already flipped over
         if (self.flippedCnt < 2 && !card.matched && !card.isFlipped)
@@ -630,6 +631,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     
     func newGameButtonMethod(sender : THButton, event : UIEvent) {
         // touchupinside must have some built in apple determined finger fudge factor to account for finger fatness so I'll just use what they came up with even though technically the precise press can be somewhat outside the sender's frame and still call this
+        collectionView.userInteractionEnabled = false
+        // activateCardArr completion of peek reenabled collectionView
         setupCardArr()
         activateCardArr()
         dismissInfo()
