@@ -94,7 +94,11 @@
     emailImg = [emailImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIBarButtonItem *emailButton = [[UIBarButtonItem alloc] initWithImage:emailImg style:UIBarButtonItemStylePlain target:self action:@selector(emailMethod)];
     
-    UIBarButtonItem *zoomButton = [[UIBarButtonItem alloc] initWithTitle:@"Zoom" style:UIBarButtonItemStylePlain target:self action:@selector(zoomMethod)];
+    //UIBarButtonItem *zoomButton = [[UIBarButtonItem alloc] initWithTitle:@"Zoom" style:UIBarButtonItemStylePlain target:self action:@selector(zoomMethod)];
+    UIImage *zoomImg = [UIImage imageNamed:@"Zoom"];
+    zoomImg = [zoomImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *zoomButton = [[UIBarButtonItem alloc] initWithImage:zoomImg style:UIBarButtonItemStylePlain target:self action:@selector(zoomMethod)];
+    
     UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc] initWithTitle:@"Camera" style:UIBarButtonItemStylePlain target:self action:@selector(cameraMethod)];
     
     UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
