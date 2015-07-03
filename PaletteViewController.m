@@ -139,6 +139,7 @@
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kReuseId];
     
     self.collectionView.backgroundColor = [UIColor colorWithRed:0.3 green:0.4 blue:0.5 alpha:1.0];
+    //self.collectionView.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:204.0/255.0 alpha:1.0];
     //self.collectionView.backgroundColor = [UIColor clearColor];
     self.collectionView.scrollEnabled = true;
     
@@ -214,6 +215,8 @@
     int colorArrInd = ((indexPath.section*kNumColumns) + indexPath.row) % [self.colorArr count];
     cell.backgroundColor = self.colorArr[colorArrInd];
     cell.layer.cornerRadius = 10.0;
+    cell.layer.borderColor = [UIColor blackColor].CGColor;
+    cell.layer.borderWidth = 3.0;
     cell.layer.masksToBounds = true;
     
     return cell;
