@@ -10,7 +10,7 @@
 
 #define kMinMargin 15.0
 #define kReuseId @"palette.view.controller.collection.view.cell.reuse.id"
-#define kNumColumns 4
+#define kNumColumns 8
 
 @interface PaletteViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -239,7 +239,8 @@
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskLandscape | UIInterfaceOrientationMaskPortrait;
+    //return UIInterfaceOrientationMaskLandscape | UIInterfaceOrientationMaskPortrait;
+    return UIInterfaceOrientationMaskLandscape;
 }
 
 @end

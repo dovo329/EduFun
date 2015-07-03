@@ -72,7 +72,7 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         titleLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
         view.addSubview(titleLabel)
         
-        bounceInView(titleLabel, duration: 0.5, delay: 0.0)
+        //bounceInView(titleLabel, duration: 0.5, delay: 0.0)
         
         /*UIView.animateWithDuration(NSTimeInterval(3.0), delay: NSTimeInterval(0.0),
             usingSpringWithDamping: CGFloat(0.4),

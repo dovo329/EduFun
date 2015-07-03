@@ -16,7 +16,7 @@
 		A53600631B351EAC00443B93 /* SVGKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A536005B1B351E0600443B93 /* SVGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A536FE771B350D2C00443B93 /* ColoringBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A536FE731B350D2C00443B93 /* ColoringBookViewController.m */; };
 		A5554D4C1B3239AE002B06E5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */; };
-		A558C3DE1B46FC8900FDBB8B /* Unicorn.svg in Resources */ = {isa = PBXBuildFile; fileRef = A558C3DD1B46FC8900FDBB8B /* Unicorn.svg */; };
+		A558C3E11B47047900FDBB8B /* Unicorn.svg in Resources */ = {isa = PBXBuildFile; fileRef = A558C3E01B47047900FDBB8B /* Unicorn.svg */; };
 		A58929F81B443D6400206DB6 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A58929F71B443D6400206DB6 /* sprites.atlas */; };
 		A5925F551B41CB42000E8FF8 /* KnockBlocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5925F541B41CB42000E8FF8 /* KnockBlocksViewController.swift */; };
 		A5925F571B41CDE2000E8FF8 /* KnockBlocksScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A5925F561B41CDE2000E8FF8 /* KnockBlocksScene.sks */; };
@@ -98,7 +98,7 @@
 		A536FE721B350D2C00443B93 /* ColoringBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColoringBookViewController.h; path = ../ColoringBookViewController.h; sourceTree = "<group>"; };
 		A536FE731B350D2C00443B93 /* ColoringBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColoringBookViewController.m; path = ../ColoringBookViewController.m; sourceTree = "<group>"; };
 		A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		A558C3DD1B46FC8900FDBB8B /* Unicorn.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Unicorn.svg; path = Art/Unicorn.svg; sourceTree = "<group>"; };
+		A558C3E01B47047900FDBB8B /* Unicorn.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Unicorn.svg; path = Art/Unicorn.svg; sourceTree = "<group>"; };
 		A58929F71B443D6400206DB6 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = sprites.atlas; path = Art/sprites.atlas; sourceTree = SOURCE_ROOT; };
 		A5925F541B41CB42000E8FF8 /* KnockBlocksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KnockBlocksViewController.swift; path = ../KnockBlocksViewController.swift; sourceTree = "<group>"; };
 		A5925F561B41CDE2000E8FF8 /* KnockBlocksScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = KnockBlocksScene.sks; sourceTree = "<group>"; };
@@ -190,7 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				A5EBCCC41B361F0E006E52D6 /* mtnHouse.svg */,
-				A558C3DD1B46FC8900FDBB8B /* Unicorn.svg */,
+				A558C3E01B47047900FDBB8B /* Unicorn.svg */,
 			);
 			name = Vector;
 			sourceTree = "<group>";
@@ -388,7 +388,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A558C3DE1B46FC8900FDBB8B /* Unicorn.svg in Resources */,
 				A595C3EA1B3B4990001C6040 /* SuperMario256.ttf in Resources */,
 				A58929F81B443D6400206DB6 /* sprites.atlas in Resources */,
 				A5B85EC31B276636008012F7 /* LaunchScreen.xib in Resources */,
@@ -396,6 +395,7 @@
 				A5B85EBE1B276636008012F7 /* Main.storyboard in Resources */,
 				A5EBCCC51B361F0E006E52D6 /* mtnHouse.svg in Resources */,
 				A5925F571B41CDE2000E8FF8 /* KnockBlocksScene.sks in Resources */,
+				A558C3E11B47047900FDBB8B /* Unicorn.svg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
