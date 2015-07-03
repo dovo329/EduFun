@@ -437,7 +437,8 @@
 - (NSUInteger)supportedInterfaceOrientations
 {
     //return UIInterfaceOrientationMaskLandscape | UIInterfaceOrientationMaskPortrait;
-    return UIInterfaceOrientationMaskLandscape;
+    //return UIInterfaceOrientationMaskLandscape;
+    return  UIInterfaceOrientationMaskLandscapeRight;
 }
 
 - (NSString *)orientationToString:(UIInterfaceOrientation)orient

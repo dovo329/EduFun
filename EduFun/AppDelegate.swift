@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var destVC : UIViewController!
         
         var overlayView = UIScreen.mainScreen().snapshotViewAfterScreenUpdates(true)
+        var bounds = UIScreen.mainScreen().bounds
+        println("bounds.width=\(bounds.width) height=\(bounds.height)")
         
         if destVCEnum == ViewControllerEnum.KnockBlocks
         {
@@ -29,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         else if destVCEnum == ViewControllerEnum.CardMatching
         {
             overlayView.transform = CGAffineTransformMakeRotation(π/2)
-            overlayView.frame = CGRectMake(0, 0, 320, 480)
+            overlayView.frame = CGRectMake(0, 0, bounds.height, bounds.width)
             destVC = MemoryGameViewController()
         }
         else if destVCEnum == ViewControllerEnum.ColoringBook
@@ -41,12 +43,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if (srcVCEnum == ViewControllerEnum.CardMatching)
             {
                 overlayView.transform = CGAffineTransformMakeRotation(-π/2)
-                overlayView.frame = CGRectMake(0, 0, 480, 320)
+                overlayView.frame = CGRectMake(0, 0, bounds.height, bounds.width)
             }
             else if (srcVCEnum == ViewControllerEnum.ColoringBook)
             {
                 overlayView.transform = CGAffineTransformMakeRotation(0)
-                overlayView.frame = CGRectMake(0, 0, 480, 320) // why?  but I must or else
+                overlayView.frame = CGRectMake(0, 0, bounds.width, bounds.height) // why?  but I must or else
             }
             destVC = TitleScreenViewController()
         }
