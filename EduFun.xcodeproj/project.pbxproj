@@ -19,13 +19,14 @@
 		A558C3E11B47047900FDBB8B /* Unicorn.svg in Resources */ = {isa = PBXBuildFile; fileRef = A558C3E01B47047900FDBB8B /* Unicorn.svg */; };
 		A558C3E31B473FEC00FDBB8B /* RocketShip.svg in Resources */ = {isa = PBXBuildFile; fileRef = A558C3E21B473FEC00FDBB8B /* RocketShip.svg */; };
 		A558C3E91B47527100FDBB8B /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A558C3E81B47527100FDBB8B /* AboutViewController.swift */; };
-		A58929F81B443D6400206DB6 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A58929F71B443D6400206DB6 /* sprites.atlas */; };
 		A5925F551B41CB42000E8FF8 /* KnockBlocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5925F541B41CB42000E8FF8 /* KnockBlocksViewController.swift */; };
-		A5925F571B41CDE2000E8FF8 /* KnockBlocksScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A5925F561B41CDE2000E8FF8 /* KnockBlocksScene.sks */; };
 		A5925F591B41CE7A000E8FF8 /* KnockBlocksScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5925F581B41CE7A000E8FF8 /* KnockBlocksScene.swift */; };
 		A595C3E11B3B0A2E001C6040 /* PaletteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A595C3E01B3B0A2E001C6040 /* PaletteViewController.m */; };
 		A595C3E41B3B0B53001C6040 /* EmitterTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A595C3E31B3B0B53001C6040 /* EmitterTestViewController.m */; };
 		A595C3EA1B3B4990001C6040 /* SuperMario256.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A595C3E91B3B4990001C6040 /* SuperMario256.ttf */; };
+		A5A633D41B4836A900728E65 /* MrSkunk.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A5A633D31B4836A900728E65 /* MrSkunk.atlas */; };
+		A5A633D71B4842DD00728E65 /* Level1Back.png in Resources */ = {isa = PBXBuildFile; fileRef = A5A633D61B4842DD00728E65 /* Level1Back.png */; };
+		A5A633D91B48438C00728E65 /* MrSkunkLevel1.sks in Resources */ = {isa = PBXBuildFile; fileRef = A5A633D81B48438C00728E65 /* MrSkunkLevel1.sks */; };
 		A5B85EB51B276636008012F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85EB41B276636008012F7 /* AppDelegate.swift */; };
 		A5B85EBE1B276636008012F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B85EBC1B276636008012F7 /* Main.storyboard */; };
 		A5B85EC01B276636008012F7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5B85EBF1B276636008012F7 /* Images.xcassets */; };
@@ -103,16 +104,17 @@
 		A558C3E01B47047900FDBB8B /* Unicorn.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Unicorn.svg; path = Art/Unicorn.svg; sourceTree = "<group>"; };
 		A558C3E21B473FEC00FDBB8B /* RocketShip.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = RocketShip.svg; path = Art/RocketShip.svg; sourceTree = "<group>"; };
 		A558C3E81B47527100FDBB8B /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
-		A58929F71B443D6400206DB6 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = sprites.atlas; path = Art/sprites.atlas; sourceTree = SOURCE_ROOT; };
 		A5925F541B41CB42000E8FF8 /* KnockBlocksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KnockBlocksViewController.swift; path = ../KnockBlocksViewController.swift; sourceTree = "<group>"; };
-		A5925F561B41CDE2000E8FF8 /* KnockBlocksScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = KnockBlocksScene.sks; sourceTree = "<group>"; };
 		A5925F581B41CE7A000E8FF8 /* KnockBlocksScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnockBlocksScene.swift; sourceTree = "<group>"; };
 		A595C3DF1B3B0A2E001C6040 /* PaletteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaletteViewController.h; path = ../PaletteViewController.h; sourceTree = "<group>"; };
 		A595C3E01B3B0A2E001C6040 /* PaletteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PaletteViewController.m; path = ../PaletteViewController.m; sourceTree = "<group>"; };
 		A595C3E21B3B0B53001C6040 /* EmitterTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmitterTestViewController.h; sourceTree = "<group>"; };
 		A595C3E31B3B0B53001C6040 /* EmitterTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmitterTestViewController.m; sourceTree = "<group>"; };
 		A595C3E91B3B4990001C6040 /* SuperMario256.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SuperMario256.ttf; sourceTree = "<group>"; };
-		A5B85EAF1B276636008012F7 /* EduFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EduFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5A633D31B4836A900728E65 /* MrSkunk.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = MrSkunk.atlas; path = Art/MrSkunk.atlas; sourceTree = SOURCE_ROOT; };
+		A5A633D61B4842DD00728E65 /* Level1Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Level1Back.png; path = Art/Level1Back.png; sourceTree = "<group>"; };
+		A5A633D81B48438C00728E65 /* MrSkunkLevel1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = MrSkunkLevel1.sks; path = ../MrSkunkLevel1.sks; sourceTree = "<group>"; };
+		A5B85EAF1B276636008012F7 /* KidsFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KidsFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B85EB31B276636008012F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5B85EB41B276636008012F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5B85EBD1B276636008012F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 		A595C3E61B3B4902001C6040 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A5A633D51B4842CC00728E65 /* MrSkunkLevels */,
 				A595C3E81B3B4924001C6040 /* Vector */,
 				A595C3E71B3B490B001C6040 /* Fonts */,
 			);
@@ -198,6 +201,14 @@
 				A558C3E01B47047900FDBB8B /* Unicorn.svg */,
 			);
 			name = Vector;
+			sourceTree = "<group>";
+		};
+		A5A633D51B4842CC00728E65 /* MrSkunkLevels */ = {
+			isa = PBXGroup;
+			children = (
+				A5A633D61B4842DD00728E65 /* Level1Back.png */,
+			);
+			name = MrSkunkLevels;
 			sourceTree = "<group>";
 		};
 		A5B85EA61B276636008012F7 = {
@@ -228,7 +239,7 @@
 		A5B85EB01B276636008012F7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A5B85EAF1B276636008012F7 /* EduFun.app */,
+				A5B85EAF1B276636008012F7 /* KidsFun.app */,
 				A5B85EC81B276636008012F7 /* EduFunTests.xctest */,
 			);
 			name = Products;
@@ -244,10 +255,10 @@
 				A5B85ED81B2767E3008012F7 /* MemoryGameViewController.swift */,
 				A5925F541B41CB42000E8FF8 /* KnockBlocksViewController.swift */,
 				A5925F581B41CE7A000E8FF8 /* KnockBlocksScene.swift */,
-				A5925F561B41CDE2000E8FF8 /* KnockBlocksScene.sks */,
+				A5A633D81B48438C00728E65 /* MrSkunkLevel1.sks */,
 				A558C3E81B47527100FDBB8B /* AboutViewController.swift */,
+				A5A633D31B4836A900728E65 /* MrSkunk.atlas */,
 				A5B85EBF1B276636008012F7 /* Images.xcassets */,
-				A58929F71B443D6400206DB6 /* sprites.atlas */,
 				A536FE721B350D2C00443B93 /* ColoringBookViewController.h */,
 				A536FE731B350D2C00443B93 /* ColoringBookViewController.m */,
 				A595C3DF1B3B0A2E001C6040 /* PaletteViewController.h */,
@@ -307,7 +318,7 @@
 			);
 			name = KidsFun;
 			productName = EduFun;
-			productReference = A5B85EAF1B276636008012F7 /* EduFun.app */;
+			productReference = A5B85EAF1B276636008012F7 /* KidsFun.app */;
 			productType = "com.apple.product-type.application";
 		};
 		A5B85EC71B276636008012F7 /* EduFunTests */ = {
@@ -395,14 +406,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				A595C3EA1B3B4990001C6040 /* SuperMario256.ttf in Resources */,
-				A58929F81B443D6400206DB6 /* sprites.atlas in Resources */,
+				A5A633D71B4842DD00728E65 /* Level1Back.png in Resources */,
 				A5B85EC31B276636008012F7 /* LaunchScreen.xib in Resources */,
 				A5B85EC01B276636008012F7 /* Images.xcassets in Resources */,
+				A5A633D91B48438C00728E65 /* MrSkunkLevel1.sks in Resources */,
 				A5B85EBE1B276636008012F7 /* Main.storyboard in Resources */,
 				A5EBCCC51B361F0E006E52D6 /* mtnHouse.svg in Resources */,
 				A558C3E31B473FEC00FDBB8B /* RocketShip.svg in Resources */,
-				A5925F571B41CDE2000E8FF8 /* KnockBlocksScene.sks in Resources */,
 				A558C3E11B47047900FDBB8B /* Unicorn.svg in Resources */,
+				A5A633D41B4836A900728E65 /* MrSkunk.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

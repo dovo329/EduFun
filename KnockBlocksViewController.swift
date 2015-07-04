@@ -44,7 +44,7 @@ class KnockBlocksViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let scene = KnockBlocksScene.unarchiveFromFile("KnockBlocksScene") as? KnockBlocksScene {
+        if let scene = KnockBlocksScene.unarchiveFromFile("MrSkunkLevel1") as? KnockBlocksScene {
             // Configure the view.
             //let skView = self.view as! SKView
             var view : SKView = SKView(frame: UIScreen.mainScreen().applicationFrame)

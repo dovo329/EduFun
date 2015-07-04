@@ -21,9 +21,12 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
     var lastUpdateTime: NSTimeInterval = 0
     var dt : NSTimeInterval = 0
     
-    var woodNodeArr : [SKSpriteNode]! = []
+    /*var woodNodeArr : [SKSpriteNode]! = []
     var stoneBallNode : SKSpriteNode!
-    var ropeNode : SKSpriteNode!    
+    var ropeNode : SKSpriteNode!    */
+    var skunkNode : SKSpriteNode!
+    var garbageCanNode : SKSpriteNode!
+    var backgroundNodeArr : [SKSpriteNode!]! = []
     
     override init(size: CGSize) {
         let maxAspectRatio: CGFloat = 16.0/9.0
@@ -55,19 +58,31 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         //physicsBody!.categoryBitMask = PhysicsCategory.Edge
         physicsWorld.gravity = CGVectorMake(0.0, -2.0)
         
-        ropeNode = childNodeWithName("rope") as! SKSpriteNode
-        stoneBallNode = childNodeWithName("stoneBall") as! SKSpriteNode
-        stoneBallNode.physicsBody!.density = 2.0
+        skunkNode = childNodeWithName("skunk") as! SKSpriteNode
+        garbageCanNode = childNodeWithName("garbageCan") as! SKSpriteNode
+        //ropeNode = childNodeWithName("rope") as! SKSpriteNode
+        //stoneBallNode = childNodeWithName("stoneBall") as! SKSpriteNode
+        //stoneBallNode.physicsBody!.density = 2.0
         
-        enumerateChildNodesWithName("wood", usingBlock: { (node, _) -> Void in
-            
+        enumerateChildNodesWithName("background", usingBlock: { (node, _) -> Void in
             if let spriteNode = node as? SKSpriteNode {
-                self.woodNodeArr.append(spriteNode)
+                self.backgroundNodeArr.append(spriteNode)
             }
         })
         
+        for spriteNode in backgroundNodeArr
+        {
+            spriteNode.physicsBody?.friction = 0.5
+        }
+        
+        /*enumerateChildNodesWithName("wood", usingBlock: { (node, _) -> Void in
+            if let spriteNode = node as? SKSpriteNode {
+                self.woodNodeArr.append(spriteNode)
+            }
+        })*/
+        
         //ropeNode.physicsBody!.applyAngularImpulse(30.0)
-        delay(seconds: 2.0) {
+        /*delay(seconds: 2.0) {
             self.stoneBallNode.physicsBody!.applyAngularImpulse(1)
             self.stoneBallNode.physicsBody!.applyImpulse(CGVector(dx:500.0, dy:250.0))
         }
@@ -79,7 +94,7 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
                 node.physicsBody!.applyImpulse(CGVector(dx:0.0, dy:-300.0))
                 node.physicsBody!.categoryBitMask = PhysicsCategory.Wood
             }
-        }
+        }*/
         
         /*enumerateChildNodesWithName("wood") {node, _ in
             self.woodNodeArr.append(node)
@@ -156,10 +171,10 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
             return
         }
 
-        if targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Wood
-        {
-            targetNode.removeFromParent()
-            return
-        }
+        //if targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Wood
+        //{
+        //    targetNode.removeFromParent()
+        //    return
+        //}
     }
 }
