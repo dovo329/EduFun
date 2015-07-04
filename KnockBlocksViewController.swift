@@ -27,7 +27,10 @@ extension SKNode {
 
 class KnockBlocksViewController: UIViewController {
     
-    var exitButton : THButton!
+    //var exitButton : THButton!
+    var toolbar = UIToolbar()
+    let kToolbarHeight = CGFloat(30.0)
+    var exitBarButton : UIBarButtonItem!
     
     init(_ coder: NSCoder? = nil) {
         if let coder = coder {
@@ -66,10 +69,15 @@ class KnockBlocksViewController: UIViewController {
             let playableMargin = (skView.frame.size.width - playableHeight)/2.0
             var playableRect = CGRect(x:0, y: playableMargin, width: skView.frame.size.width, height: playableHeight)
             
-            exitButton = THButton(frame: CGRectMake(playableRect.origin.x, playableRect.origin.y, 80.0, 40.0), text:"Exit")
-            exitButton!.addTarget(self, action: Selector("exitButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
+            //exitButton = THButton(frame: CGRectMake(playableRect.origin.x, playableRect.origin.y, 80.0, 40.0), text:"Exit")
+            //exitButton!.addTarget(self, action: Selector("exitButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
             
-            skView.addSubview(exitButton)
+            exitBarButton = UIBarButtonItem(title: "Exit", style: UIBarButtonItemStyle.Plain, target: self, action: "exitButtonMethod")
+            toolbar.frame = CGRectMake(0.0, skView.frame.size.height-kToolbarHeight, skView.frame.size.width, kToolbarHeight)
+            
+            toolbar.items = [exitBarButton]
+            //skView.addSubview(exitButton)
+            skView.addSubview(toolbar)
             
             skView.presentScene(scene)
             
@@ -81,7 +89,7 @@ class KnockBlocksViewController: UIViewController {
             let scene = KnockBlocksScene(size: view.frame.size)
             
             let skView = self.view as! SKView*/
-            skView.showsPhysics = true
+            //skView.showsPhysics = true
             //skView.showsFPS = true
             //skView.showsNodeCount = true
             
@@ -95,7 +103,13 @@ class KnockBlocksViewController: UIViewController {
         }
     }
     
-    func exitButtonMethod(sender : THButton, event : UIEvent) {
+    /*func exitButtonMethod(sender : THButton, event : UIEvent) {
+        var app = UIApplication.sharedApplication().delegate as? AppDelegate
+        app?.animateToViewController(ViewControllerEnum.TitleScreen, srcVCEnum: ViewControllerEnum.KnockBlocks)
+    }*/
+    
+    func exitButtonMethod()
+    {
         var app = UIApplication.sharedApplication().delegate as? AppDelegate
         app?.animateToViewController(ViewControllerEnum.TitleScreen, srcVCEnum: ViewControllerEnum.KnockBlocks)
     }
