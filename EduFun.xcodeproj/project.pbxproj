@@ -15,6 +15,7 @@
 		A53600621B351EAC00443B93 /* SVGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A536005B1B351E0600443B93 /* SVGKit.framework */; };
 		A53600631B351EAC00443B93 /* SVGKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A536005B1B351E0600443B93 /* SVGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A536FE771B350D2C00443B93 /* ColoringBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A536FE731B350D2C00443B93 /* ColoringBookViewController.m */; };
+		A53E67D51B488EFF0026281F /* Level1Back.png in Resources */ = {isa = PBXBuildFile; fileRef = A53E67D41B488EFF0026281F /* Level1Back.png */; };
 		A5554D4C1B3239AE002B06E5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */; };
 		A558C3E11B47047900FDBB8B /* Unicorn.svg in Resources */ = {isa = PBXBuildFile; fileRef = A558C3E01B47047900FDBB8B /* Unicorn.svg */; };
 		A558C3E31B473FEC00FDBB8B /* RocketShip.svg in Resources */ = {isa = PBXBuildFile; fileRef = A558C3E21B473FEC00FDBB8B /* RocketShip.svg */; };
@@ -25,7 +26,6 @@
 		A595C3E41B3B0B53001C6040 /* EmitterTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A595C3E31B3B0B53001C6040 /* EmitterTestViewController.m */; };
 		A595C3EA1B3B4990001C6040 /* SuperMario256.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A595C3E91B3B4990001C6040 /* SuperMario256.ttf */; };
 		A5A633D41B4836A900728E65 /* MrSkunk.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A5A633D31B4836A900728E65 /* MrSkunk.atlas */; };
-		A5A633D71B4842DD00728E65 /* Level1Back.png in Resources */ = {isa = PBXBuildFile; fileRef = A5A633D61B4842DD00728E65 /* Level1Back.png */; };
 		A5A633D91B48438C00728E65 /* MrSkunkLevel1.sks in Resources */ = {isa = PBXBuildFile; fileRef = A5A633D81B48438C00728E65 /* MrSkunkLevel1.sks */; };
 		A5B85EB51B276636008012F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85EB41B276636008012F7 /* AppDelegate.swift */; };
 		A5B85EBE1B276636008012F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B85EBC1B276636008012F7 /* Main.storyboard */; };
@@ -100,6 +100,7 @@
 		A53600551B351E0600443B93 /* SVGKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SVGKit.xcodeproj; path = SVGKit/SVGKit.xcodeproj; sourceTree = "<group>"; };
 		A536FE721B350D2C00443B93 /* ColoringBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColoringBookViewController.h; path = ../ColoringBookViewController.h; sourceTree = "<group>"; };
 		A536FE731B350D2C00443B93 /* ColoringBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColoringBookViewController.m; path = ../ColoringBookViewController.m; sourceTree = "<group>"; };
+		A53E67D41B488EFF0026281F /* Level1Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Level1Back.png; path = Art/Level1Back.png; sourceTree = "<group>"; };
 		A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A558C3E01B47047900FDBB8B /* Unicorn.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Unicorn.svg; path = Art/Unicorn.svg; sourceTree = "<group>"; };
 		A558C3E21B473FEC00FDBB8B /* RocketShip.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = RocketShip.svg; path = Art/RocketShip.svg; sourceTree = "<group>"; };
@@ -112,7 +113,6 @@
 		A595C3E31B3B0B53001C6040 /* EmitterTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmitterTestViewController.m; sourceTree = "<group>"; };
 		A595C3E91B3B4990001C6040 /* SuperMario256.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SuperMario256.ttf; sourceTree = "<group>"; };
 		A5A633D31B4836A900728E65 /* MrSkunk.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = MrSkunk.atlas; path = Art/MrSkunk.atlas; sourceTree = SOURCE_ROOT; };
-		A5A633D61B4842DD00728E65 /* Level1Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Level1Back.png; path = Art/Level1Back.png; sourceTree = "<group>"; };
 		A5A633D81B48438C00728E65 /* MrSkunkLevel1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = MrSkunkLevel1.sks; path = ../MrSkunkLevel1.sks; sourceTree = "<group>"; };
 		A5B85EAF1B276636008012F7 /* KidsFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KidsFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B85EB31B276636008012F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -206,7 +206,7 @@
 		A5A633D51B4842CC00728E65 /* MrSkunkLevels */ = {
 			isa = PBXGroup;
 			children = (
-				A5A633D61B4842DD00728E65 /* Level1Back.png */,
+				A53E67D41B488EFF0026281F /* Level1Back.png */,
 			);
 			name = MrSkunkLevels;
 			sourceTree = "<group>";
@@ -406,7 +406,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A595C3EA1B3B4990001C6040 /* SuperMario256.ttf in Resources */,
-				A5A633D71B4842DD00728E65 /* Level1Back.png in Resources */,
+				A53E67D51B488EFF0026281F /* Level1Back.png in Resources */,
 				A5B85EC31B276636008012F7 /* LaunchScreen.xib in Resources */,
 				A5B85EC01B276636008012F7 /* Images.xcassets in Resources */,
 				A5A633D91B48438C00728E65 /* MrSkunkLevel1.sks in Resources */,

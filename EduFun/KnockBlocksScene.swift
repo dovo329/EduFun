@@ -8,14 +8,21 @@
 
 import SpriteKit
 
+let kContactAll : UInt32 = 0xffffffff
+
 class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
+    
     struct PhysicsCategory {
-        static let None:        UInt32 = 0b0
-        static let Wood:        UInt32 = 0b1
-        static let StoneBall:   UInt32 = 0b10
-        static let Rope:        UInt32 = 0b100
-        static let Edge:        UInt32 = 0b1000
+        static let None:       UInt32 = 0b0
+        static let Wood:       UInt32 = 0b1
+        static let Skunk:      UInt32 = 0b10
+        static let Rope:       UInt32 = 0b100
+        static let Edge:       UInt32 = 0b1000
+        static let GarbageCan: UInt32 = 0b10000
+        static let Background: UInt32 = 0b100000
     }
+    
+    let kContactAllExceptCan : UInt32 = kContactAll & ~PhysicsCategory.GarbageCan
 
     var playableRect: CGRect
     var lastUpdateTime: NSTimeInterval = 0
@@ -27,6 +34,11 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
     var skunkNode : SKSpriteNode!
     var garbageCanNode : SKSpriteNode!
     var backgroundNodeArr : [SKSpriteNode!]! = []
+    var ropeNode : SKSpriteNode!
+    var woodNode : SKSpriteNode!
+    
+    var levelCompleted : Bool = false
+    var victoryLabel : SKLabelNode!
     
     override init(size: CGSize) {
         let maxAspectRatio: CGFloat = 16.0/9.0
@@ -55,11 +67,25 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         
         physicsBody = SKPhysicsBody(edgeLoopFromRect: playableRect)
         physicsWorld.contactDelegate = self
-        //physicsBody!.categoryBitMask = PhysicsCategory.Edge
-        physicsWorld.gravity = CGVectorMake(0.0, -2.0)
+        physicsBody!.categoryBitMask = PhysicsCategory.Edge
+        physicsWorld.gravity = CGVectorMake(0.0, -4.0)
         
         skunkNode = childNodeWithName("skunk") as! SKSpriteNode
+        skunkNode.physicsBody!.categoryBitMask = PhysicsCategory.Skunk
+        skunkNode.physicsBody!.contactTestBitMask = kContactAll
+        
         garbageCanNode = childNodeWithName("garbageCan") as! SKSpriteNode
+        garbageCanNode.physicsBody!.categoryBitMask = PhysicsCategory.GarbageCan
+        garbageCanNode.physicsBody!.contactTestBitMask = kContactAll
+        
+        ropeNode = childNodeWithName("rope") as! SKSpriteNode
+        ropeNode.physicsBody!.categoryBitMask = PhysicsCategory.Rope
+        ropeNode.physicsBody!.contactTestBitMask = kContactAll
+        
+        woodNode = childNodeWithName("wood") as! SKSpriteNode
+        woodNode.physicsBody!.categoryBitMask = PhysicsCategory.Wood
+        woodNode.physicsBody!.contactTestBitMask = kContactAll
+        
         //ropeNode = childNodeWithName("rope") as! SKSpriteNode
         //stoneBallNode = childNodeWithName("stoneBall") as! SKSpriteNode
         //stoneBallNode.physicsBody!.density = 2.0
@@ -70,9 +96,11 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
             }
         })
         
-        for spriteNode in backgroundNodeArr
+        for backgroundNode in backgroundNodeArr
         {
-            spriteNode.physicsBody?.friction = 0.5
+            //backgroundNode.physicsBody?.friction = 0.5
+            backgroundNode.physicsBody!.categoryBitMask = PhysicsCategory.Background
+            backgroundNode.physicsBody!.contactTestBitMask = kContactAll
         }
         
         /*enumerateChildNodesWithName("wood", usingBlock: { (node, _) -> Void in
@@ -176,5 +204,40 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         //    targetNode.removeFromParent()
         //    return
         //}
+    }
+    
+    func didBeginContact(contact: SKPhysicsContact) {
+        let collision: UInt32 = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+        
+        if collision == PhysicsCategory.Skunk | PhysicsCategory.GarbageCan
+        {
+            if !levelCompleted
+            {
+                victoryLabel = SKLabelNode(fontNamed: "Super Mario 256")
+                victoryLabel.text = "Victory!"
+                victoryLabel.position = CGPointMake(size.width/2.0, size.height/2.0)
+                victoryLabel.fontSize = size.height/8
+                //victoryLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
+                //victoryLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
+                victoryLabel.color = SKColor.yellowColor()
+                victoryLabel.xScale = 0.0
+                victoryLabel.yScale = 0.0
+                addChild(victoryLabel)
+                var victoryAction = SKAction.sequence(
+                    [
+                        SKAction.scaleTo(2.0, duration: 0.25),
+                        SKAction.scaleTo(1.0, duration: 0.25)
+                    ])
+                
+                victoryLabel.runAction(victoryAction)
+                
+                println("You got the foods!")
+            }
+            levelCompleted = true
+        }
+        else
+        {
+            println("collision is some other collision")
+        }
     }
 }

@@ -78,7 +78,7 @@ class KnockBlocksViewController: UIViewController {
             toolbar.items = [exitBarButton]
             //skView.addSubview(exitButton)
             skView.addSubview(toolbar)
-            
+            skView.showsPhysics = true
             skView.presentScene(scene)
             
             /*var view : SKView = SKView(frame: UIScreen.mainScreen().applicationFrame)
