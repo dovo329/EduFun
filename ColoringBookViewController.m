@@ -46,9 +46,9 @@
     //self.view.frame = CGRectMake(0,0,height, width);
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    self.svgPageIndex = [defaults integerForKey:kSvgPageIndexKey];
+    self.svgPageIndex = (int)[defaults integerForKey:kSvgPageIndexKey];
     
-    self.svgPageNameArr = @[@"mtnHouse.svg", @"Unicorn.svg"];
+    self.svgPageNameArr = @[@"mtnHouse.svg", @"Unicorn.svg", @"RocketShip.svg"];
     
     [self setupBackgroundGradient];
     

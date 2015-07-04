@@ -52,6 +52,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             destVC = TitleScreenViewController()
         }
+        else if destVCEnum == ViewControllerEnum.About
+        {
+            destVC = AboutViewController()
+        }
         else
         {
             fatalError("unknown view controller enum passed")
