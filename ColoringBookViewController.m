@@ -283,7 +283,7 @@
 {
     self.svgPageIndex--;
     if (self.svgPageIndex < 0) {
-        self.svgPageIndex = [self.svgPageNameArr count]-1;
+        self.svgPageIndex = (int)[self.svgPageNameArr count]-1;
     }
     self.svgImageView.image = [SVGKImage imageNamed:self.svgPageNameArr[self.svgPageIndex]];
     self.scrollView.contentSize = self.svgImageView.frame.size;

@@ -40,6 +40,26 @@
     // taken from https://en.wikipedia.org/wiki/List_of_Crayola_crayon_colors
     self.colorArr =
     @[
+     UICOLOR(255, 0, 0),
+     UICOLOR(0,255,0),
+     UICOLOR(0,0,255),
+     UICOLOR(255,255,0),
+     UICOLOR(255,0,255),
+     UICOLOR(0,255,255),
+     UICOLOR(255,128,0),
+     UICOLOR(255,0,128),
+     UICOLOR(128,255,0),
+     UICOLOR(0,255,128),
+     UICOLOR(128,0,255),
+     UICOLOR(0,128,255),
+     UICOLOR(255,128,128),
+     UICOLOR(128,255,128),
+     UICOLOR(128,128,255),
+     UICOLOR(255,255,255),
+     UICOLOR(255,128,64),
+     UICOLOR(128,255,64),
+     UICOLOR(64,128,255),
+     UICOLOR(64,255,128),
       UICOLOR(238,	32,	77),
       UICOLOR(195,	33,	72),
       UICOLOR(253,	14,	53),
@@ -243,27 +263,7 @@
       	UICOLOR(143, 212, 0),
       	UICOLOR(217, 134, 149),
       	UICOLOR(117, 117, 117),
-        UICOLOR(0, 129, 171),
-     UICOLOR(255, 0, 0),
-     UICOLOR(0,255,0),
-     UICOLOR(0,0,255),
-     UICOLOR(255,255,0),
-     UICOLOR(255,0,255),
-     UICOLOR(0,255,255),
-     UICOLOR(255,128,0),
-     UICOLOR(255,0,128),
-     UICOLOR(128,255,0),
-     UICOLOR(0,255,128),
-     UICOLOR(128,0,255),
-     UICOLOR(0,128,255),
-     UICOLOR(255,128,128),
-     UICOLOR(128,255,128),
-     UICOLOR(128,128,255),
-     UICOLOR(255,255,255),
-     UICOLOR(255,128,64),
-     UICOLOR(128,255,64),
-     UICOLOR(64,128,255),
-     UICOLOR(64,255,128)
+        UICOLOR(0, 129, 171)
       ];
     
     /*   
@@ -501,7 +501,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    int colorArrInd = ((indexPath.section*kNumColumns) + indexPath.row) % [self.colorArr count];
+    int colorArrInd = ((indexPath.section*kNumColumns) + indexPath.row) % ((int)[self.colorArr count]);
     [self.delegate updatePaintColor:self.colorArr[colorArrInd] andSaveIndex:indexPath];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -513,7 +513,7 @@
         cell = [[UICollectionViewCell alloc] init];
     }
     
-    int colorArrInd = ((indexPath.section*kNumColumns) + indexPath.row) % [self.colorArr count];
+    int colorArrInd = ((indexPath.section*kNumColumns) + indexPath.row) % ((int)[self.colorArr count]);
     cell.backgroundColor = self.colorArr[colorArrInd];
     cell.layer.cornerRadius = 10.0;
     cell.layer.borderColor = [UIColor blackColor].CGColor;

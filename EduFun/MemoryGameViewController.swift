@@ -126,8 +126,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         
         initTitleLabels()
         initRoundCompleteLabels()
-        //roundCompleteMethod()
-        titleMethod()
+        roundCompleteMethod()
+        //titleMethod()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -735,7 +735,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         elapsedTimeLabel.text = NSString(format: "Time: %.0f seconds", elapsedTime) as? String
         elapsedTimeLabel.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height)
         elapsedTimeLabel.font = UIFont(name: "Super Mario 256", size: 25.0)
-        elapsedTimeLabel.font = elapsedTimeLabel.font.fontWithSize(getFontSizeToFitFrameOfLabel(elapsedTimeLabel)-5.0)
+        elapsedTimeLabel.font = elapsedTimeLabel.font.fontWithSize(getFontSizeToFitFrameOfLabel(elapsedTimeLabel)-10.0)
         elapsedTimeLabel.frame.size.height = elapsedTimeLabel.font.pointSize*1.3
         elapsedTimeLabel.frame.origin.y += completeLabel.frame.size.height
         elapsedTimeLabel.textAlignment = NSTextAlignment.Center
