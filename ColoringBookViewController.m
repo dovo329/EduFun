@@ -14,6 +14,7 @@
 
 #define kMaxZoom 16.0
 #define kSvgPageIndexKey @"svg.page.index.key"
+#define kToolbarHeight 35.0
 
 @interface ColoringBookViewController () <UIScrollViewDelegate, PaletteViewControllerDelegate, MFMailComposeViewControllerDelegate>
 
@@ -71,8 +72,9 @@
     self.scrollView.delegate = self;
     
     self.origSize = self.svgImageView.frame.size;
+    
     CGFloat scaleX = self.view.frame.size.width / self.origSize.width;
-    CGFloat scaleY = self.view.frame.size.height / self.origSize.height;
+    CGFloat scaleY = (self.view.frame.size.height-kToolbarHeight) / self.origSize.height;
     CGFloat scale = scaleX < scaleY ? scaleX : scaleY;
     
     self.scrollView.minimumZoomScale = scale;
@@ -83,12 +85,6 @@
     [self.scrollView addSubview:self.svgImageView];
     
     [self.view addSubview: self.scrollView];
-    
-    CGFloat offsetX = MAX((self.view.frame.size.width - self.scrollView.contentSize.width) * 0.5, 0.0);
-    CGFloat offsetY = MAX((self.view.frame.size.height - self.scrollView.contentSize.height) * 0.5, 0.0);
-    self.svgImageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5 + offsetX,
-                                           self.scrollView.contentSize.height * 0.5 + offsetY);
-    //NSLog(@"bsw: %f; bsh: %f; offsetX:%f Y:%f, csw: %f csh: %f", self.scrollView.bounds.size.width, self.scrollView.bounds.size.height, offsetX, offsetY, self.scrollView.contentSize.width, self.scrollView.contentSize.height);
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapMethod:)];
     [self.view addGestureRecognizer:tapGesture];
@@ -212,7 +208,7 @@
                                      toItem:nil
                                   attribute:NSLayoutAttributeNotAnAttribute
                                  multiplier:1.0
-                                   constant:30.0]
+                                   constant:kToolbarHeight]
      ];
     
 }
@@ -244,6 +240,12 @@
 - (void)viewDidLayoutSubviews
 {
     self.gradientLayer.frame = self.view.bounds;
+    
+    CGFloat offsetX = MAX((self.scrollView.bounds.size.width - self.scrollView.contentSize.width) * 0.5, 0.0);
+    CGFloat offsetY = MAX((self.scrollView.bounds.size.height - self.scrollView.contentSize.height) * 0.5, 0.0);
+    
+    self.svgImageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5 + offsetX,
+                                           self.scrollView.contentSize.height * 0.5 + offsetY);
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
@@ -474,7 +476,7 @@
         //scaleX = self.view.frame.size.height / self.origSize.width;
         //scaleY = self.view.frame.size.width / self.origSize.height;
         scaleX = self.view.frame.size.width / self.origSize.width;
-        scaleY = self.view.frame.size.height / self.origSize.height;
+        scaleY = (self.view.frame.size.height-kToolbarHeight) / self.origSize.height;
         scale = scaleX < scaleY ? scaleX : scaleY;
         
         self.scrollView.minimumZoomScale = scale;
