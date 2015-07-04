@@ -11,7 +11,7 @@ import QuartzCore
 
 class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
 {
-    var aboutButton : UIButton?
+    var aboutButton : UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     var titleLabel : THLabel!
     let kNumRows : Int = 1
     let kNumColumns : Int = 3
@@ -25,17 +25,16 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         setupBackgroundGradient()
         setupTitleLabel()
         setupCollectionView()
-        if let aboutButton = UIButton.buttonWithType(UIButtonType.Custom) as? UIButton
-        {
-            aboutButton.setTitle("About", forState: UIControlState.Normal)
-            aboutButton.setTitle("About", forState: UIControlState.Highlighted)
-            aboutButton.backgroundColor = UIColor.blueColor()
-            //aboutButton.layer.backgroundColor = UIColor.blueColor().CGColor
-            aboutButton.layer.cornerRadius = 4.0
-            aboutButton.frame = CGRectMake(self.view.frame.width-60.0, self.view.frame.height-20.0, 60.0, 20.0)
-            view.addSubview(aboutButton)
-            aboutButton.addTarget(self, action: Selector("aboutButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
-        }
+        
+        aboutButton.setTitle("About", forState: UIControlState.Normal)
+        aboutButton.setTitle("About", forState: UIControlState.Highlighted)
+        aboutButton.backgroundColor = UIColor.blueColor()
+        //aboutButton.layer.backgroundColor = UIColor.blueColor().CGColor
+        aboutButton.layer.cornerRadius = 4.0
+        aboutButton.frame = CGRectMake(self.view.frame.width-60.0, self.view.frame.height-20.0, 60.0, 20.0)
+        view.addSubview(aboutButton)
+        aboutButton.addTarget(self, action: Selector("aboutButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
+        
         /*aboutButton?.setTranslatesAutoresizingMaskIntoConstraints(false)
         view.addConstraint(
             NSLayoutConstraint(
@@ -223,7 +222,7 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
     
     override func viewDidLayoutSubviews() {
         bgGradLayer.frame = self.view.bounds
-        
+        aboutButton.frame = CGRectMake(self.view.frame.width-60.0, self.view.frame.height-20.0, 60.0, 20.0)
         titleLabel.frame = CGRect(x: 0.0, y: 20.0, width: view.frame.size.width, height: view.frame.size.height)
         //titleLabel.font = UIFont(name: "Super Mario 256", size: 300.0)
         titleLabel.font = UIFont(name: "Super Mario 256", size: 45.0)
