@@ -126,8 +126,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         
         initTitleLabels()
         initRoundCompleteLabels()
-        roundCompleteMethod()
-        //titleMethod()
+        //roundCompleteMethod()
+        titleMethod()
     }
     
     override func viewDidAppear(animated: Bool) {
