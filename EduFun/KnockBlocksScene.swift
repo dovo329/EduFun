@@ -219,7 +219,7 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
                 victoryLabel.fontSize = size.height/8
                 //victoryLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
                 //victoryLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
-                victoryLabel.color = SKColor.yellowColor()
+                victoryLabel.fontColor = SKColor.yellowColor()
                 victoryLabel.xScale = 0.0
                 victoryLabel.yScale = 0.0
                 addChild(victoryLabel)

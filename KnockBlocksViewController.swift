@@ -31,6 +31,8 @@ class KnockBlocksViewController: UIViewController {
     var toolbar = UIToolbar()
     let kToolbarHeight = CGFloat(30.0)
     var exitBarButton : UIBarButtonItem!
+    var restartBarButton : UIBarButtonItem!
+    var flexibleSpace : UIBarButtonItem!
     
     init(_ coder: NSCoder? = nil) {
         if let coder = coder {
@@ -47,7 +49,13 @@ class KnockBlocksViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let scene = KnockBlocksScene.unarchiveFromFile("MrSkunkLevel1") as? KnockBlocksScene {
+        startup()
+    }
+    
+    func startup()
+    {
+        if let scene = KnockBlocksScene.unarchiveFromFile("MrSkunkLevel1") as? KnockBlocksScene
+        {
             // Configure the view.
             //let skView = self.view as! SKView
             var view : SKView = SKView(frame: UIScreen.mainScreen().applicationFrame)
@@ -73,9 +81,19 @@ class KnockBlocksViewController: UIViewController {
             //exitButton!.addTarget(self, action: Selector("exitButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
             
             exitBarButton = UIBarButtonItem(title: "Exit", style: UIBarButtonItemStyle.Plain, target: self, action: "exitButtonMethod")
+            
+            //UIImage *cameraImg = [UIImage imageNamed:@"Camera"];
+            //cameraImg = [cameraImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            
+            var restartImg = UIImage(named: "Restart")
+            restartImg?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+            restartBarButton = UIBarButtonItem(image: restartImg, style: UIBarButtonItemStyle.Plain, target: self, action: "restartMethod")
+            
+            flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+            
             toolbar.frame = CGRectMake(0.0, skView.frame.size.height-kToolbarHeight, skView.frame.size.width, kToolbarHeight)
             
-            toolbar.items = [exitBarButton]
+            toolbar.items = [exitBarButton, flexibleSpace, restartBarButton]
             //skView.addSubview(exitButton)
             skView.addSubview(toolbar)
             skView.showsPhysics = true
@@ -112,6 +130,11 @@ class KnockBlocksViewController: UIViewController {
     {
         var app = UIApplication.sharedApplication().delegate as? AppDelegate
         app?.animateToViewController(ViewControllerEnum.TitleScreen, srcVCEnum: ViewControllerEnum.KnockBlocks)
+    }
+    
+    func restartMethod()
+    {
+        startup()
     }
     
     override func shouldAutorotate() -> Bool {
