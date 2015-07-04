@@ -185,7 +185,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         emitterLayerArr[0].emitterShape = kCAEmitterLayerRectangle
         emitterLayerArr[0].lifetime = kSparkleLifetimeMean
         view.layer.addSublayer(emitterLayerArr[0])
-        emitterLayerArr[0].beginTime = CACurrentMediaTime()-0.5
+        //emitterLayerArr[0].beginTime = CACurrentMediaTime()-0.5
         //emitterLayerArr[0].beginTime = CACurrentMediaTime()
         //println("currentMediaTime=\(CACurrentMediaTime())")
         
@@ -194,7 +194,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         emitterLayerArr[1].emitterShape = kCAEmitterLayerRectangle
         view.layer.addSublayer(emitterLayerArr[1])
         emitterLayerArr[1].lifetime = kSparkleLifetimeMean
-        emitterLayerArr[1].beginTime = CACurrentMediaTime()-0.5
+        //emitterLayerArr[1].beginTime = CACurrentMediaTime()-0.5
         //emitterLayerArr[1].beginTime = CACurrentMediaTime()
         
         /*var emitterCell : CAEmitterCell = CAEmitterCell()
