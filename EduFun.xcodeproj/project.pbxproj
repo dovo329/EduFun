@@ -291,9 +291,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A5B85EAE1B276636008012F7 /* EduFun */ = {
+		A5B85EAE1B276636008012F7 /* KidsFun */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A5B85ED21B276636008012F7 /* Build configuration list for PBXNativeTarget "EduFun" */;
+			buildConfigurationList = A5B85ED21B276636008012F7 /* Build configuration list for PBXNativeTarget "KidsFun" */;
 			buildPhases = (
 				A5B85EAB1B276636008012F7 /* Sources */,
 				A5B85EAC1B276636008012F7 /* Frameworks */,
@@ -305,7 +305,7 @@
 			dependencies = (
 				A53600651B351EAC00443B93 /* PBXTargetDependency */,
 			);
-			name = EduFun;
+			name = KidsFun;
 			productName = EduFun;
 			productReference = A5B85EAF1B276636008012F7 /* EduFun.app */;
 			productType = "com.apple.product-type.application";
@@ -366,7 +366,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				A5B85EAE1B276636008012F7 /* EduFun */,
+				A5B85EAE1B276636008012F7 /* KidsFun */,
 				A5B85EC71B276636008012F7 /* EduFunTests */,
 			);
 		};
@@ -460,7 +460,7 @@
 		};
 		A5B85ECA1B276636008012F7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A5B85EAE1B276636008012F7 /* EduFun */;
+			target = A5B85EAE1B276636008012F7 /* KidsFun */;
 			targetProxy = A5B85EC91B276636008012F7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -658,7 +658,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A5B85ED21B276636008012F7 /* Build configuration list for PBXNativeTarget "EduFun" */ = {
+		A5B85ED21B276636008012F7 /* Build configuration list for PBXNativeTarget "KidsFun" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A5B85ED31B276636008012F7 /* Debug */,

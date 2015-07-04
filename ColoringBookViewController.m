@@ -9,7 +9,7 @@
 #import "ColoringBookViewController.h"
 #import <SVGKit/SVGKit.h>
 #import "PaletteViewController.h"
-#import "EduFun-Swift.h"
+#import "KidsFun-Swift.h"
 #import <MessageUI/MessageUI.h>
 
 #define kMaxZoom 16.0
