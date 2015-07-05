@@ -80,19 +80,31 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         
         ropeNode = childNodeWithName("rope") as! SKSpriteNode
         ropeNode.physicsBody!.categoryBitMask = PhysicsCategory.Rope
-        ropeNode.physicsBody!.contactTestBitMask = kContactAll
+        ropeNode.physicsBody!.collisionBitMask = PhysicsCategory.None
         
         var ropeEdgeAnchorNode = childNodeWithName("ropeEdgeAnchor") as! SKSpriteNode
 
         woodNode = childNodeWithName("wood") as! SKSpriteNode
         woodNode.physicsBody!.categoryBitMask = PhysicsCategory.Wood
-        woodNode.physicsBody!.contactTestBitMask = kContactAll
         
-        let ropeToWorldJoint = SKPhysicsJointSpring.jointWithBodyA(ropeEdgeAnchorNode.physicsBody, bodyB: ropeNode.physicsBody, anchorA: ropeEdgeAnchorNode.position, anchorB: CGPointMake(ropeNode.position.x-ropeNode.size.width/2, ropeNode.position.y))
+        //let ropeToWorldJoint = SKPhysicsJointSpring.jointWithBodyA(ropeEdgeAnchorNode.physicsBody, bodyB: ropeNode.physicsBody, anchorA: ropeEdgeAnchorNode.position, anchorB: CGPointMake(ropeNode.position.x-ropeNode.size.width/2, ropeNode.position.y))
         
-        //let ropeToWorldJoint = SKPhysicsJointPin.jointWithBodyA(ropeEdgeAnchorNode.physicsBody, bodyB: ropeNode.physicsBody, anchor: ropeEdgeAnchorNode.position)
+        var woodEndPt = CGPointMake(0.0, woodNode.size.height/2)
+            
+        //var woodEndTranslatePt = CGPointMake( woodNode.position.x,            woodNode.position.y-woodNode.size.height/2)
         
-        //let ropeToWorldJoint = SKPhysicsJointPin.jointWithBodyA(ropeNode.physicsBody, bodyB: woodNode.physicsBody, anchor: ropeNode.position)
+        //var rotatedPt = CGPointApplyAffineTransform(woodEndPt, CGAffineTransformMakeRotation(90*(π/180)))
+        var woodNodeRotation = woodNode.zRotation
+        var rotatedPt = CGPointApplyAffineTransform(woodEndPt, CGAffineTransformMakeRotation(-woodNode.zRotation))
+        // spriteNode local coordinates have inverted y axis
+        // how confusing
+        rotatedPt.y = -rotatedPt.y
+        
+        var woodNodePt = woodNode.position
+        var finalPt = rotatedPt + woodNodePt
+        
+        let ropeToWorldJoint = SKPhysicsJointSpring.jointWithBodyA(ropeEdgeAnchorNode.physicsBody, bodyB: woodNode.physicsBody, anchorA: ropeEdgeAnchorNode.position, anchorB: finalPt)
+
         physicsWorld.addJoint(ropeToWorldJoint)
         
         //ropeNode = childNodeWithName("rope") as! SKSpriteNode
@@ -109,7 +121,6 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         {
             //backgroundNode.physicsBody?.friction = 0.5
             backgroundNode.physicsBody!.categoryBitMask = PhysicsCategory.Background
-            backgroundNode.physicsBody!.contactTestBitMask = kContactAll
         }
         
         /*enumerateChildNodesWithName("wood", usingBlock: { (node, _) -> Void in
