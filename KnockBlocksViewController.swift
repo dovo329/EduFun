@@ -31,6 +31,7 @@ class KnockBlocksViewController: UIViewController {
     var toolbar = UIToolbar()
     let kToolbarHeight = CGFloat(30.0)
     var exitBarButton : UIBarButtonItem!
+    var mapButton : UIBarButtonItem!
     var restartBarButton : UIBarButtonItem!
     var flexibleSpace : UIBarButtonItem!
     
@@ -86,14 +87,28 @@ class KnockBlocksViewController: UIViewController {
             //cameraImg = [cameraImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
             
             var restartImg = UIImage(named: "Restart")
-            restartImg?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+            restartImg = restartImg?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
             restartBarButton = UIBarButtonItem(image: restartImg, style: UIBarButtonItemStyle.Plain, target: self, action: "restartMethod")
+            
+            var mapImg = UIImage(named: "SkunkMap")
+            mapImg = mapImg?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+            mapButton = UIBarButtonItem(image: mapImg, style: UIBarButtonItemStyle.Plain, target: self, action: "mapMethod")
+            
+            /*
+            UIImage *previousArrowImg = [UIImage imageNamed:@"Previous"];
+            previousArrowImg = [previousArrowImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            UIBarButtonItem *previousArrowButton = [[UIBarButtonItem alloc] initWithImage:previousArrowImg style:UIBarButtonItemStylePlain target:self action:@selector(previousArrowMethod)];
+            
+            UIImage *nextArrowImg = [UIImage imageNamed:@"Next"];
+            nextArrowImg = [nextArrowImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            UIBarButtonItem *nextArrowButton = [[UIBarButtonItem alloc] initWithImage:nextArrowImg style:UIBarButtonItemStylePlain target:self action:@selector(nextArrowMethod)];
+            */
             
             flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
             
             toolbar.frame = CGRectMake(0.0, skView.frame.size.height-kToolbarHeight, skView.frame.size.width, kToolbarHeight)
             
-            toolbar.items = [exitBarButton, flexibleSpace, restartBarButton]
+            toolbar.items = [exitBarButton, flexibleSpace, restartBarButton, flexibleSpace, mapButton]
             //skView.addSubview(exitButton)
             skView.addSubview(toolbar)
             skView.showsPhysics = true
@@ -135,6 +150,11 @@ class KnockBlocksViewController: UIViewController {
     func restartMethod()
     {
         startup()
+    }
+    
+    func mapMethod()
+    {
+        println("Put in Map here")
     }
     
     override func shouldAutorotate() -> Bool {
