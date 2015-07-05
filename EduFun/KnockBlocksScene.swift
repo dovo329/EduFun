@@ -82,9 +82,18 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         ropeNode.physicsBody!.categoryBitMask = PhysicsCategory.Rope
         ropeNode.physicsBody!.contactTestBitMask = kContactAll
         
+        var ropeEdgeAnchorNode = childNodeWithName("ropeEdgeAnchor") as! SKSpriteNode
+
         woodNode = childNodeWithName("wood") as! SKSpriteNode
         woodNode.physicsBody!.categoryBitMask = PhysicsCategory.Wood
         woodNode.physicsBody!.contactTestBitMask = kContactAll
+        
+        let ropeToWorldJoint = SKPhysicsJointSpring.jointWithBodyA(ropeEdgeAnchorNode.physicsBody, bodyB: ropeNode.physicsBody, anchorA: ropeEdgeAnchorNode.position, anchorB: CGPointMake(ropeNode.position.x-ropeNode.size.width/2, ropeNode.position.y))
+        
+        //let ropeToWorldJoint = SKPhysicsJointPin.jointWithBodyA(ropeEdgeAnchorNode.physicsBody, bodyB: ropeNode.physicsBody, anchor: ropeEdgeAnchorNode.position)
+        
+        //let ropeToWorldJoint = SKPhysicsJointPin.jointWithBodyA(ropeNode.physicsBody, bodyB: woodNode.physicsBody, anchor: ropeNode.position)
+        physicsWorld.addJoint(ropeToWorldJoint)
         
         //ropeNode = childNodeWithName("rope") as! SKSpriteNode
         //stoneBallNode = childNodeWithName("stoneBall") as! SKSpriteNode
