@@ -268,43 +268,30 @@ extension CGFloat {
 public func getPointTop(node: SKSpriteNode) -> CGPoint
 {
     var nodeEndPt = CGPointMake(0.0, -node.size.height/2)
-    var rotatedPt = CGPointApplyAffineTransform(nodeEndPt, CGAffineTransformMakeRotation(-node.zRotation))
-    // spriteNode local coordinates have inverted y axis
-    // how confusing
-    rotatedPt.y = -rotatedPt.y
-    
-    var finalPt = rotatedPt + node.position
-    return finalPt
+    return nodeToSceneCoordinatesTransform(point: nodeEndPt, node: node)
 }
 
 public func getPointBottom(node: SKSpriteNode) -> CGPoint
 {
     var nodeEndPt = CGPointMake(0.0, node.size.height/2)
-    var rotatedPt = CGPointApplyAffineTransform(nodeEndPt, CGAffineTransformMakeRotation(-node.zRotation))
-    // spriteNode local coordinates have inverted y axis
-    // how confusing
-    rotatedPt.y = -rotatedPt.y
-    
-    var finalPt = rotatedPt + node.position
-    return finalPt
+    return nodeToSceneCoordinatesTransform(point: nodeEndPt, node: node)
 }
 
 public func getPointLeft(node: SKSpriteNode) -> CGPoint
 {
     var nodeEndPt = CGPointMake(-node.size.width/2, 0.0)
-    var rotatedPt = CGPointApplyAffineTransform(nodeEndPt, CGAffineTransformMakeRotation(-node.zRotation))
-    // spriteNode local coordinates have inverted y axis
-    // how confusing
-    rotatedPt.y = -rotatedPt.y
-    
-    var finalPt = rotatedPt + node.position
-    return finalPt
+    return nodeToSceneCoordinatesTransform(point: nodeEndPt, node: node)
 }
 
 public func getPointRight(node: SKSpriteNode) -> CGPoint
 {
     var nodeEndPt = CGPointMake(node.size.width/2, 0.0)
-    var rotatedPt = CGPointApplyAffineTransform(nodeEndPt, CGAffineTransformMakeRotation(-node.zRotation))
+    return nodeToSceneCoordinatesTransform(point: nodeEndPt, node: node)
+}
+
+public func nodeToSceneCoordinatesTransform(#point: CGPoint, #node: SKSpriteNode) -> CGPoint
+{
+    var rotatedPt = CGPointApplyAffineTransform(point, CGAffineTransformMakeRotation(-node.zRotation))
     // spriteNode local coordinates have inverted y axis
     // how confusing
     rotatedPt.y = -rotatedPt.y

@@ -90,7 +90,7 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         
         //let ropeToWorldJoint = SKPhysicsJointSpring.jointWithBodyA(ropeEdgeAnchorNode.physicsBody, bodyB: ropeNode.physicsBody, anchorA: ropeEdgeAnchorNode.position, anchorB: CGPointMake(ropeNode.position.x-ropeNode.size.width/2, ropeNode.position.y))
         
-        let ropeToWorldJoint = SKPhysicsJointSpring.jointWithBodyA(ropeEdgeAnchorNode.physicsBody, bodyB: woodNode.physicsBody, anchorA: ropeEdgeAnchorNode.position, anchorB: getPointRight(woodNode))
+        let ropeToWorldJoint = SKPhysicsJointSpring.jointWithBodyA(ropeEdgeAnchorNode.physicsBody, bodyB: woodNode.physicsBody, anchorA: ropeEdgeAnchorNode.position, anchorB: getPointTop(woodNode))
 
         physicsWorld.addJoint(ropeToWorldJoint)
         
