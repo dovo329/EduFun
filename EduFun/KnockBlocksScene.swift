@@ -24,9 +24,10 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
     
     let kToolbarHeight = CGFloat(30.0)
     let kHintZPosition = CGFloat(100.0)
+    let kVictoryZPosition = CGFloat(101.0)
     
     let kContactAllExceptCan : UInt32 = kContactAll & ~PhysicsCategory.GarbageCan
-
+    
     var playableRect: CGRect
     var lastUpdateTime: NSTimeInterval = 0
     var dt : NSTimeInterval = 0
@@ -114,14 +115,14 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.addJoint(woodRopeJoint)
         
         /*delay(seconds: 2.0,
-            completion:
-            {
-                self.physicsWorld.removeJoint(woodRopeJoint)
-            }
+        completion:
+        {
+        self.physicsWorld.removeJoint(woodRopeJoint)
+        }
         )*/
         
         var woodEdgeAnchorNode = childNodeWithName("woodEdgeAnchor") as! SKSpriteNode
-
+        
         //let woodJoint = SKPhysicsJointSpring.jointWithBodyA(woodEdgeAnchorNode.physicsBody, bodyB: woodNode.physicsBody, anchorA: woodEdgeAnchorNode.position, anchorB: getPointBottom(woodNode))
         let woodJoint = SKPhysicsJointPin.jointWithBodyA(woodEdgeAnchorNode.physicsBody, bodyB: woodNode.physicsBody, anchor: getPointBottom(woodNode))
         physicsWorld.addJoint(woodJoint)
@@ -147,28 +148,28 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         }
         
         /*enumerateChildNodesWithName("wood", usingBlock: { (node, _) -> Void in
-            if let spriteNode = node as? SKSpriteNode {
-                self.woodNodeArr.append(spriteNode)
-            }
+        if let spriteNode = node as? SKSpriteNode {
+        self.woodNodeArr.append(spriteNode)
+        }
         })*/
         
         //ropeNode.physicsBody!.applyAngularImpulse(30.0)
         /*delay(seconds: 2.0) {
-            self.stoneBallNode.physicsBody!.applyAngularImpulse(1)
-            self.stoneBallNode.physicsBody!.applyImpulse(CGVector(dx:500.0, dy:250.0))
+        self.stoneBallNode.physicsBody!.applyAngularImpulse(1)
+        self.stoneBallNode.physicsBody!.applyImpulse(CGVector(dx:500.0, dy:250.0))
         }
         
         
         delay(seconds: 2.0) {
-            
-            for node in self.woodNodeArr {
-                node.physicsBody!.applyImpulse(CGVector(dx:0.0, dy:-300.0))
-                node.physicsBody!.categoryBitMask = PhysicsCategory.Wood
-            }
+        
+        for node in self.woodNodeArr {
+        node.physicsBody!.applyImpulse(CGVector(dx:0.0, dy:-300.0))
+        node.physicsBody!.categoryBitMask = PhysicsCategory.Wood
+        }
         }*/
         
         /*enumerateChildNodesWithName("wood") {node, _ in
-            self.woodNodeArr.append(node)
+        self.woodNodeArr.append(node)
         }*/
         
         //physicsWorld.gravity = CGVectorMake(0.0, -9.81)
@@ -205,10 +206,10 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         addChild(ropeNode)
         
         delay(seconds: 4.0,
-            completion:
-            {(_) -> Void in
-                self.physicsWorld.gravity = CGVectorMake(0.0, -9.81)
-            }
+        completion:
+        {(_) -> Void in
+        self.physicsWorld.gravity = CGVectorMake(0.0, -9.81)
+        }
         )*/
     }
     
@@ -242,7 +243,7 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         {
             return
         }
-
+        
         if (targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Rope) {
             self.physicsWorld.removeJoint(woodRopeJoint)
         }
@@ -274,13 +275,35 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
     }
     
     /*override func didSimulatePhysics() { if let body = catNode.physicsBody {
-        if body.contactTestBitMask != PhysicsCategory.None && fabs(catNode.zRotation) > CGFloat(45).degreesToRadians() { lose()
-        } }
+    if body.contactTestBitMask != PhysicsCategory.None && fabs(catNode.zRotation) > CGFloat(45).degreesToRadians() { lose()
+    } }
     }*/
     
     func doVictory()
     {
-        victoryLabel = SKLabelNode(fontNamed: "Super Mario 256")
+        let victorySize = CGFloat(size.height/5.0)
+        let victoryLabel = ASAttributedLabelNode(size:CGSizeMake(playableRect.size.width*0.8, victorySize))
+        
+        victoryLabel.attributedString = outlinedCenteredString("Victory", size: victorySize)
+        
+        victoryLabel.position =
+            CGPointMake(
+                size.width/2.0,
+                (size.height/2.0) + victorySize/2.0
+        )
+
+        victoryLabel.zPosition = kVictoryZPosition
+        addChild(victoryLabel)
+        
+        var victoryAction = SKAction.sequence(
+            [
+                SKAction.scaleTo(2.0, duration: 0.25),
+                SKAction.scaleTo(1.0, duration: 0.25)
+            ])
+        
+        victoryLabel.runAction(victoryAction)
+        
+        /*victoryLabel = SKLabelNode(fontNamed: "Super Mario 256")
         victoryLabel.text = "Victory!"
         victoryLabel.position = CGPointMake(size.width/2.0, size.height/2.0)
         victoryLabel.fontSize = size.height/8
@@ -296,98 +319,56 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
                 SKAction.scaleTo(1.0, duration: 0.25)
             ])
         
-        victoryLabel.runAction(victoryAction)
+        victoryLabel.runAction(victoryAction)*/
+    }
+    
+    func outlinedCenteredString(string : String, size: CGFloat) -> NSAttributedString
+    {
+        var myMutableString : NSMutableAttributedString
+        var font =  UIFont(name: "Super Mario 256", size: size)!
+        var alignment : CTTextAlignment = CTTextAlignment.TextAlignmentCenter
+        let alignmentSetting = [CTParagraphStyleSetting(spec: .Alignment, valueSize: Int(sizeofValue(alignment)), value: &alignment)]
+        var paragraphRef = CTParagraphStyleCreate(alignmentSetting, 1)
+        
+        let textFontAttributes = [
+            NSFontAttributeName : font,
+            // Note: SKColor.whiteColor().CGColor breaks this
+            NSForegroundColorAttributeName: UIColor.yellowColor(),
+            NSStrokeColorAttributeName: UIColor.blackColor(),
+            // Note: Use negative value here if you want foreground color to show
+            NSStrokeWidthAttributeName:-3
+            //,NSParagraphStyleAttributeName: paragraphRef
+        ]
+        
+        myMutableString = NSMutableAttributedString(string: string, attributes: textFontAttributes as [NSObject : AnyObject])
+        
+        let para = NSMutableParagraphStyle()
+        para.headIndent = 00
+        para.firstLineHeadIndent = 00
+        para.tailIndent = 0
+        para.lineBreakMode = .ByWordWrapping
+        para.alignment = .Center
+        para.paragraphSpacing = 0
+        myMutableString.addAttribute(
+            NSParagraphStyleAttributeName,
+            value:para, range:NSMakeRange(0,1))
+        return myMutableString
     }
     
     func doHint()
     {
+        let hintSize = CGFloat(80.0)
+        let hintLabel = ASAttributedLabelNode(size:CGSizeMake(playableRect.size.width*0.9, hintSize))
         
-        var myMutableString : NSMutableAttributedString
-        if let font =  UIFont(name: "Super Mario 256", size: 80) {
-        //if let font =  UIFont(name: "Super Mario 256", size: 80) ?? UIFont.systemFontOfSize(80) {
-//            
-            /*CTTextAlignment alignment = kCTCenterTextAlignment;
-            
-            CTParagraphStyleSetting alignmentSetting;
-            alignmentSetting.spec = kCTParagraphStyleSpecifierAlignment;
-            alignmentSetting.valueSize = sizeof(CTTextAlignment);
-            alignmentSetting.value = &alignment;
-            
-            CTParagraphStyleSetting settings[1] = {alignmentSetting};
-            
-            size_t settingsCount = 1;
-            CTParagraphStyleRef paragraphRef = CTParagraphStyleCreate(settings, settingsCount);
-            NSDictionary *attributes = @{(__bridge id)kCTParagraphStyleAttributeName : (__bridge id)paragraphRef};
-            NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:@"Hello World" attributes:attributes];*/
-            
-            var alignment : CTTextAlignment = CTTextAlignment.TextAlignmentCenter
-            let alignmentSetting = [CTParagraphStyleSetting(spec: .Alignment, valueSize: Int(sizeofValue(alignment)), value: &alignment)]
-            var paragraphRef = CTParagraphStyleCreate(alignmentSetting, 1)
-                        
-            
-            let textFontAttributes : NSDictionary = [
-                NSFontAttributeName : font,
-                // Note: SKColor.whiteColor().CGColor breaks this
-                NSForegroundColorAttributeName: UIColor.yellowColor(),
-                NSStrokeColorAttributeName: UIColor.blackColor(),
-                // Note: Use negative value here if you want foreground color to show
-                NSStrokeWidthAttributeName:-3
-                //,NSParagraphStyleAttributeName: paragraphRef
-            ]
-            
-            myMutableString = NSMutableAttributedString(string: "abcdefghijklmn", attributes: textFontAttributes as [NSObject : AnyObject])
-            
-            let para = NSMutableParagraphStyle()
-            para.headIndent = 00
-            para.firstLineHeadIndent = 00
-            para.tailIndent = 0
-            para.lineBreakMode = .ByWordWrapping
-            para.alignment = .Center
-            para.paragraphSpacing = 0
-            myMutableString.addAttribute(
-                NSParagraphStyleAttributeName,
-                value:para, range:NSMakeRange(0,1))
-            
-//            myMutableString = NSMutableAttributedString(string: "Touch the rope to free the wood", attributes: textFontAttributes as? NSDictionary)
-            
-            /*let label = UILabel(frame: CGRect(origin: CGPoint(x:500, y:500), size: CGSize(width: 200, height: 100)))
-            label.attributedText = myMutableString
-            self.view?.addSubview(label)*/
-            /*let myLabel = ASAttributedLabelNode(size: self.size)
-            myLabel.attributedString = myMutableString
-            myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
-            self.addChild(myLabel)*/
-            
-            //let hintLabel = SKLabelNode(fontNamed: "Super Mario 256")
-            //let hintLabel = ASAttributedLabelNode(size:CGSizeMake(200.0, 100.0))
-            let hintLabel = ASAttributedLabelNode(size:CGSizeMake(playableRect.size.width*0.9, 150.0))
-            hintLabel.attributedString = myMutableString
-            //hintLabel.position = CGPointMake(size.width/2, size.height-kToolbarHeight)
-            println("playableRect x=\(playableRect.origin.x) y=\(playableRect.origin.y) w=\(playableRect.size.width) h=\(playableRect.size.height)")
-            //hintLabel.position = CGPointMake(size.width/2.0, playableRect.size.height/2.0)
-            hintLabel.position =
-                CGPointMake(
-                    size.width/2.0,
-                    (size.height - playableRect.size.height)/2.0
-            )
-            
-            //hintLabel.fontSize = size.height/20
-            //hintLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
-            //hintLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
-            //hintLabel.fontColor = SKColor.yellowColor()
-            hintLabel.zPosition = kHintZPosition
-            addChild(hintLabel)
-            
-            /*hintLabel.xScale = 0.0
-            hintLabel.yScale = 0.0
-            
-            var hintAction = SKAction.sequence(
-            [
-            SKAction.scaleTo(2.0, duration: 0.25),
-            SKAction.scaleTo(1.0, duration: 0.25)
-            ])
-            
-            hintLabel.runAction(hintAction)*/
-        }
+        hintLabel.attributedString = outlinedCenteredString("Touch the Rope to Release the Wood", size: hintSize)
+        
+        hintLabel.position =
+            CGPointMake(
+                size.width/2.0,
+                ((size.height - playableRect.size.height)/2.0) + hintSize/2.0
+        )
+
+        hintLabel.zPosition = kHintZPosition
+        addChild(hintLabel)
     }
 }
