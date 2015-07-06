@@ -37,6 +37,8 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
     var ropeNode : SKSpriteNode!
     var woodNode : SKSpriteNode!
     
+    var woodRopeJoint : SKPhysicsJoint!
+    
     var levelCompleted : Bool = false
     var victoryLabel : SKLabelNode!
     
@@ -99,15 +101,15 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         /*let woodRopeJoint = SKPhysicsJointSpring.jointWithBodyA(ropeEdgeAnchorNode.physicsBody, bodyB: woodNode.physicsBody, anchorA: ropeEdgeAnchorNode.position, anchorB: getPointTop(woodNode))
         physicsWorld.addJoint(woodRopeJoint)*/
         
-        let woodRopeJoint = SKPhysicsJointPin.jointWithBodyA(woodNode.physicsBody, bodyB: ropeNode.physicsBody, anchor: getPointTop(woodNode))
+        woodRopeJoint = SKPhysicsJointPin.jointWithBodyA(woodNode.physicsBody, bodyB: ropeNode.physicsBody, anchor: getPointTop(woodNode))
         physicsWorld.addJoint(woodRopeJoint)
         
-        delay(seconds: 2.0,
+        /*delay(seconds: 2.0,
             completion:
             {
                 self.physicsWorld.removeJoint(woodRopeJoint)
             }
-        )
+        )*/
         
         var woodEdgeAnchorNode = childNodeWithName("woodEdgeAnchor") as! SKSpriteNode
 
@@ -231,6 +233,10 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
             return
         }
 
+        if (targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Rope) {
+            self.physicsWorld.removeJoint(woodRopeJoint)
+        }
+        
         //if targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Wood
         //{
         //    targetNode.removeFromParent()
