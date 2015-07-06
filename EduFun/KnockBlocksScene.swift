@@ -23,6 +23,7 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
     }
     
     let kToolbarHeight = CGFloat(30.0)
+    let kHintZPosition = CGFloat(100.0)
     
     let kContactAllExceptCan : UInt32 = kContactAll & ~PhysicsCategory.GarbageCan
 
@@ -66,7 +67,7 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         let maxAspectRatioHeight = size.width / maxAspectRatio
         let playableMargin: CGFloat =
         (size.height - maxAspectRatioHeight)/2
-        let playableRect = CGRect(x: 0, y: playableMargin,
+        playableRect = CGRect(x: 0, y: playableMargin,
             width: size.width, height: size.height-playableMargin*2)
         
         doHint()
@@ -302,20 +303,31 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
     {
         let hintLabel = SKLabelNode(fontNamed: "Super Mario 256")
         hintLabel.text = "Touch the rope to free the wood"
-        hintLabel.position = CGPointMake(size.width/2, size.height-kToolbarHeight)
-        hintLabel.fontSize = size.height/32
+        //hintLabel.position = CGPointMake(size.width/2, size.height-kToolbarHeight)
+        println("playableRect x=\(playableRect.origin.x) y=\(playableRect.origin.y) w=\(playableRect.size.width) h=\(playableRect.size.height)")
+        //hintLabel.position = CGPointMake(size.width/2.0, playableRect.size.height/2.0)
+        hintLabel.position =
+            CGPointMake(
+                size.width/2.0,
+                (size.height - playableRect.size.height)/2.0
+        )
+        
+        hintLabel.fontSize = size.height/20
         //hintLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
         //hintLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
         hintLabel.fontColor = SKColor.yellowColor()
-        hintLabel.xScale = 0.0
-        hintLabel.yScale = 0.0
+        hintLabel.zPosition = kHintZPosition
         addChild(hintLabel)
+        
+        /*hintLabel.xScale = 0.0
+        hintLabel.yScale = 0.0
+        
         var hintAction = SKAction.sequence(
             [
                 SKAction.scaleTo(2.0, duration: 0.25),
                 SKAction.scaleTo(1.0, duration: 0.25)
             ])
         
-        hintLabel.runAction(hintAction)
+        hintLabel.runAction(hintAction)*/
     }
 }
