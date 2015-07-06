@@ -293,6 +293,8 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         )
 
         victoryLabel.zPosition = kVictoryZPosition
+        victoryLabel.xScale = 0.0
+        victoryLabel.yScale = 0.0
         addChild(victoryLabel)
         
         var victoryAction = SKAction.sequence(
