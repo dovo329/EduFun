@@ -301,33 +301,93 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
     
     func doHint()
     {
-        let hintLabel = SKLabelNode(fontNamed: "Super Mario 256")
-        hintLabel.text = "Touch the rope to free the wood"
-        //hintLabel.position = CGPointMake(size.width/2, size.height-kToolbarHeight)
-        println("playableRect x=\(playableRect.origin.x) y=\(playableRect.origin.y) w=\(playableRect.size.width) h=\(playableRect.size.height)")
-        //hintLabel.position = CGPointMake(size.width/2.0, playableRect.size.height/2.0)
-        hintLabel.position =
-            CGPointMake(
-                size.width/2.0,
-                (size.height - playableRect.size.height)/2.0
-        )
         
-        hintLabel.fontSize = size.height/20
-        //hintLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
-        //hintLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
-        hintLabel.fontColor = SKColor.yellowColor()
-        hintLabel.zPosition = kHintZPosition
-        addChild(hintLabel)
-        
-        /*hintLabel.xScale = 0.0
-        hintLabel.yScale = 0.0
-        
-        var hintAction = SKAction.sequence(
+        var myMutableString : NSMutableAttributedString
+        if let font =  UIFont(name: "Super Mario 256", size: 80) {
+        //if let font =  UIFont(name: "Super Mario 256", size: 80) ?? UIFont.systemFontOfSize(80) {
+//            
+            /*CTTextAlignment alignment = kCTCenterTextAlignment;
+            
+            CTParagraphStyleSetting alignmentSetting;
+            alignmentSetting.spec = kCTParagraphStyleSpecifierAlignment;
+            alignmentSetting.valueSize = sizeof(CTTextAlignment);
+            alignmentSetting.value = &alignment;
+            
+            CTParagraphStyleSetting settings[1] = {alignmentSetting};
+            
+            size_t settingsCount = 1;
+            CTParagraphStyleRef paragraphRef = CTParagraphStyleCreate(settings, settingsCount);
+            NSDictionary *attributes = @{(__bridge id)kCTParagraphStyleAttributeName : (__bridge id)paragraphRef};
+            NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:@"Hello World" attributes:attributes];*/
+            
+            var alignment : CTTextAlignment = CTTextAlignment.TextAlignmentCenter
+            let alignmentSetting = [CTParagraphStyleSetting(spec: .Alignment, valueSize: Int(sizeofValue(alignment)), value: &alignment)]
+            var paragraphRef = CTParagraphStyleCreate(alignmentSetting, 1)
+                        
+            
+            let textFontAttributes : NSDictionary = [
+                NSFontAttributeName : font,
+                // Note: SKColor.whiteColor().CGColor breaks this
+                NSForegroundColorAttributeName: UIColor.yellowColor(),
+                NSStrokeColorAttributeName: UIColor.blackColor(),
+                // Note: Use negative value here if you want foreground color to show
+                NSStrokeWidthAttributeName:-3
+                //,NSParagraphStyleAttributeName: paragraphRef
+            ]
+            
+            myMutableString = NSMutableAttributedString(string: "abcdefghijklmn", attributes: textFontAttributes as [NSObject : AnyObject])
+            
+            let para = NSMutableParagraphStyle()
+            para.headIndent = 00
+            para.firstLineHeadIndent = 00
+            para.tailIndent = 0
+            para.lineBreakMode = .ByWordWrapping
+            para.alignment = .Center
+            para.paragraphSpacing = 0
+            myMutableString.addAttribute(
+                NSParagraphStyleAttributeName,
+                value:para, range:NSMakeRange(0,1))
+            
+//            myMutableString = NSMutableAttributedString(string: "Touch the rope to free the wood", attributes: textFontAttributes as? NSDictionary)
+            
+            /*let label = UILabel(frame: CGRect(origin: CGPoint(x:500, y:500), size: CGSize(width: 200, height: 100)))
+            label.attributedText = myMutableString
+            self.view?.addSubview(label)*/
+            /*let myLabel = ASAttributedLabelNode(size: self.size)
+            myLabel.attributedString = myMutableString
+            myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
+            self.addChild(myLabel)*/
+            
+            //let hintLabel = SKLabelNode(fontNamed: "Super Mario 256")
+            //let hintLabel = ASAttributedLabelNode(size:CGSizeMake(200.0, 100.0))
+            let hintLabel = ASAttributedLabelNode(size:CGSizeMake(playableRect.size.width*0.9, 150.0))
+            hintLabel.attributedString = myMutableString
+            //hintLabel.position = CGPointMake(size.width/2, size.height-kToolbarHeight)
+            println("playableRect x=\(playableRect.origin.x) y=\(playableRect.origin.y) w=\(playableRect.size.width) h=\(playableRect.size.height)")
+            //hintLabel.position = CGPointMake(size.width/2.0, playableRect.size.height/2.0)
+            hintLabel.position =
+                CGPointMake(
+                    size.width/2.0,
+                    (size.height - playableRect.size.height)/2.0
+            )
+            
+            //hintLabel.fontSize = size.height/20
+            //hintLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
+            //hintLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
+            //hintLabel.fontColor = SKColor.yellowColor()
+            hintLabel.zPosition = kHintZPosition
+            addChild(hintLabel)
+            
+            /*hintLabel.xScale = 0.0
+            hintLabel.yScale = 0.0
+            
+            var hintAction = SKAction.sequence(
             [
-                SKAction.scaleTo(2.0, duration: 0.25),
-                SKAction.scaleTo(1.0, duration: 0.25)
+            SKAction.scaleTo(2.0, duration: 0.25),
+            SKAction.scaleTo(1.0, duration: 0.25)
             ])
-        
-        hintLabel.runAction(hintAction)*/
+            
+            hintLabel.runAction(hintAction)*/
+        }
     }
 }

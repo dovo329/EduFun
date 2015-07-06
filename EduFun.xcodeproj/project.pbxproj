@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A509E26D1B4ADD77009ACAB5 /* Unicorn.svg in Resources */ = {isa = PBXBuildFile; fileRef = A509E26C1B4ADD77009ACAB5 /* Unicorn.svg */; };
+		A50CFA2E1B4AF74F00B5F419 /* Level1Back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A50CFA2D1B4AF74F00B5F419 /* Level1Back.jpg */; };
 		A5112C081B2D019F00215DA2 /* OBShapedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C051B2D019F00215DA2 /* OBShapedButton.m */; };
 		A5112C091B2D019F00215DA2 /* UIImage+ColorAtPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C071B2D019F00215DA2 /* UIImage+ColorAtPixel.m */; };
 		A5112C161B2D0E7F00215DA2 /* OBShapedView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C151B2D0E7F00215DA2 /* OBShapedView.m */; };
@@ -16,7 +17,6 @@
 		A53600621B351EAC00443B93 /* SVGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A536005B1B351E0600443B93 /* SVGKit.framework */; };
 		A53600631B351EAC00443B93 /* SVGKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A536005B1B351E0600443B93 /* SVGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A536FE771B350D2C00443B93 /* ColoringBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A536FE731B350D2C00443B93 /* ColoringBookViewController.m */; };
-		A53E67D51B488EFF0026281F /* Level1Back.png in Resources */ = {isa = PBXBuildFile; fileRef = A53E67D41B488EFF0026281F /* Level1Back.png */; };
 		A5554D4C1B3239AE002B06E5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */; };
 		A558C3E31B473FEC00FDBB8B /* RocketShip.svg in Resources */ = {isa = PBXBuildFile; fileRef = A558C3E21B473FEC00FDBB8B /* RocketShip.svg */; };
 		A558C3E91B47527100FDBB8B /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A558C3E81B47527100FDBB8B /* AboutViewController.swift */; };
@@ -37,6 +37,7 @@
 		A5CA0F541B2F67FA008BD79D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F511B2F67FA008BD79D /* UIImage+Resize.m */; };
 		A5CA0F551B2F67FA008BD79D /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */; };
 		A5DB888F1B3B707D00B8CA08 /* THLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DB888E1B3B707D00B8CA08 /* THLabel.m */; };
+		A5E3C5A01B4AF9E5000D023F /* ASAttributedLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E3C59F1B4AF9E5000D023F /* ASAttributedLabelNode.swift */; };
 		A5EB8DF51B3CC765009A8A3A /* THButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB8DF41B3CC765009A8A3A /* THButton.swift */; };
 		A5EB8DF81B3CCF39009A8A3A /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB8DF71B3CCF39009A8A3A /* Global.swift */; };
 		A5EBCCC51B361F0E006E52D6 /* mtnHouse.svg in Resources */ = {isa = PBXBuildFile; fileRef = A5EBCCC41B361F0E006E52D6 /* mtnHouse.svg */; };
@@ -89,6 +90,7 @@
 
 /* Begin PBXFileReference section */
 		A509E26C1B4ADD77009ACAB5 /* Unicorn.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Unicorn.svg; path = Art/Unicorn.svg; sourceTree = "<group>"; };
+		A50CFA2D1B4AF74F00B5F419 /* Level1Back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Level1Back.jpg; path = Art/Level1Back.jpg; sourceTree = "<group>"; };
 		A5112C041B2D018D00215DA2 /* OBShapedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBShapedButton.h; sourceTree = "<group>"; };
 		A5112C051B2D019F00215DA2 /* OBShapedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBShapedButton.m; sourceTree = "<group>"; };
 		A5112C061B2D019F00215DA2 /* UIImage+ColorAtPixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ColorAtPixel.h"; sourceTree = "<group>"; };
@@ -101,7 +103,6 @@
 		A53600551B351E0600443B93 /* SVGKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SVGKit.xcodeproj; path = SVGKit/SVGKit.xcodeproj; sourceTree = "<group>"; };
 		A536FE721B350D2C00443B93 /* ColoringBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColoringBookViewController.h; path = ../ColoringBookViewController.h; sourceTree = "<group>"; };
 		A536FE731B350D2C00443B93 /* ColoringBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColoringBookViewController.m; path = ../ColoringBookViewController.m; sourceTree = "<group>"; };
-		A53E67D41B488EFF0026281F /* Level1Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Level1Back.png; path = Art/Level1Back.png; sourceTree = "<group>"; };
 		A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A558C3E21B473FEC00FDBB8B /* RocketShip.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = RocketShip.svg; path = Art/RocketShip.svg; sourceTree = "<group>"; };
 		A558C3E81B47527100FDBB8B /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +133,7 @@
 		A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCorner.m"; path = "Art/UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		A5DB888D1B3B707D00B8CA08 /* THLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLabel.h; sourceTree = "<group>"; };
 		A5DB888E1B3B707D00B8CA08 /* THLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLabel.m; sourceTree = "<group>"; };
+		A5E3C59F1B4AF9E5000D023F /* ASAttributedLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ASAttributedLabelNode.swift; path = ../ASAttributedLabelNode/ASAttributedLabelNode.swift; sourceTree = "<group>"; };
 		A5EB8DF41B3CC765009A8A3A /* THButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THButton.swift; sourceTree = "<group>"; };
 		A5EB8DF71B3CCF39009A8A3A /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		A5EBCCC41B361F0E006E52D6 /* mtnHouse.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = mtnHouse.svg; path = EduFun/mtnHouse.svg; sourceTree = "<group>"; };
@@ -206,7 +208,7 @@
 		A5A633D51B4842CC00728E65 /* MrSkunkLevels */ = {
 			isa = PBXGroup;
 			children = (
-				A53E67D41B488EFF0026281F /* Level1Back.png */,
+				A50CFA2D1B4AF74F00B5F419 /* Level1Back.jpg */,
 			);
 			name = MrSkunkLevels;
 			sourceTree = "<group>";
@@ -214,21 +216,8 @@
 		A5B85EA61B276636008012F7 = {
 			isa = PBXGroup;
 			children = (
-				A5DB888D1B3B707D00B8CA08 /* THLabel.h */,
-				A5DB888E1B3B707D00B8CA08 /* THLabel.m */,
 				A595C3E61B3B4902001C6040 /* Resources */,
-				A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */,
-				A5CA0F4D1B2F64CA008BD79D /* UIImage+Resize.h */,
-				A5CA0F4E1B2F64CA008BD79D /* UIImage+Resize.m */,
-				A5CA0F501B2F67FA008BD79D /* UIImage+Resize.h */,
-				A5CA0F511B2F67FA008BD79D /* UIImage+Resize.m */,
-				A5CA0F521B2F67FA008BD79D /* UIImage+RoundedCorner.h */,
-				A5112C141B2D0E7F00215DA2 /* OBShapedView.h */,
-				A5112C151B2D0E7F00215DA2 /* OBShapedView.m */,
-				A5112C041B2D018D00215DA2 /* OBShapedButton.h */,
-				A5112C051B2D019F00215DA2 /* OBShapedButton.m */,
-				A5112C061B2D019F00215DA2 /* UIImage+ColorAtPixel.h */,
-				A5112C071B2D019F00215DA2 /* UIImage+ColorAtPixel.m */,
+				A5E3C5A21B4AF9F0000D023F /* ThirdParty */,
 				A5B85EB11B276636008012F7 /* EduFun */,
 				A536FDFD1B35071500443B93 /* Frameworks */,
 				A5B85ECB1B276636008012F7 /* EduFunTests */,
@@ -297,6 +286,28 @@
 				A5B85ECD1B276636008012F7 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A5E3C5A21B4AF9F0000D023F /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				A5DB888D1B3B707D00B8CA08 /* THLabel.h */,
+				A5DB888E1B3B707D00B8CA08 /* THLabel.m */,
+				A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */,
+				A5CA0F4D1B2F64CA008BD79D /* UIImage+Resize.h */,
+				A5CA0F4E1B2F64CA008BD79D /* UIImage+Resize.m */,
+				A5CA0F501B2F67FA008BD79D /* UIImage+Resize.h */,
+				A5CA0F511B2F67FA008BD79D /* UIImage+Resize.m */,
+				A5CA0F521B2F67FA008BD79D /* UIImage+RoundedCorner.h */,
+				A5112C141B2D0E7F00215DA2 /* OBShapedView.h */,
+				A5112C151B2D0E7F00215DA2 /* OBShapedView.m */,
+				A5112C041B2D018D00215DA2 /* OBShapedButton.h */,
+				A5112C051B2D019F00215DA2 /* OBShapedButton.m */,
+				A5112C061B2D019F00215DA2 /* UIImage+ColorAtPixel.h */,
+				A5112C071B2D019F00215DA2 /* UIImage+ColorAtPixel.m */,
+				A5E3C59F1B4AF9E5000D023F /* ASAttributedLabelNode.swift */,
+			);
+			name = ThirdParty;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -406,9 +417,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A595C3EA1B3B4990001C6040 /* SuperMario256.ttf in Resources */,
-				A53E67D51B488EFF0026281F /* Level1Back.png in Resources */,
 				A5B85EC31B276636008012F7 /* LaunchScreen.xib in Resources */,
 				A5B85EC01B276636008012F7 /* Images.xcassets in Resources */,
+				A50CFA2E1B4AF74F00B5F419 /* Level1Back.jpg in Resources */,
 				A5A633D91B48438C00728E65 /* MrSkunkLevel1.sks in Resources */,
 				A509E26D1B4ADD77009ACAB5 /* Unicorn.svg in Resources */,
 				A5B85EBE1B276636008012F7 /* Main.storyboard in Resources */,
@@ -432,6 +443,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5E3C5A01B4AF9E5000D023F /* ASAttributedLabelNode.swift in Sources */,
 				A5112C161B2D0E7F00215DA2 /* OBShapedView.m in Sources */,
 				A5DB888F1B3B707D00B8CA08 /* THLabel.m in Sources */,
 				A532ADE11B27959F00A46930 /* Card.swift in Sources */,
