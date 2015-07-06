@@ -14,13 +14,15 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
     
     struct PhysicsCategory {
         static let None:       UInt32 = 0b0
-        static let Wood:       UInt32 = 0b1
-        static let Skunk:      UInt32 = 0b10
+        static let Edge:       UInt32 = 0b1
+        static let Background: UInt32 = 0b10
         static let Rope:       UInt32 = 0b100
-        static let Edge:       UInt32 = 0b1000
+        static let Wood:       UInt32 = 0b1000
         static let GarbageCan: UInt32 = 0b10000
-        static let Background: UInt32 = 0b100000
+        static let Skunk:      UInt32 = 0b100000
     }
+    
+    let kToolbarHeight = CGFloat(30.0)
     
     let kContactAllExceptCan : UInt32 = kContactAll & ~PhysicsCategory.GarbageCan
 
@@ -67,6 +69,8 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         let playableRect = CGRect(x: 0, y: playableMargin,
             width: size.width, height: size.height-playableMargin*2)
         
+        doHint()
+        
         physicsBody = SKPhysicsBody(edgeLoopFromRect: playableRect)
         physicsWorld.contactDelegate = self
         physicsBody!.categoryBitMask = PhysicsCategory.Edge
@@ -76,21 +80,25 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         skunkNode.physicsBody!.categoryBitMask = PhysicsCategory.Skunk
         skunkNode.physicsBody!.contactTestBitMask = PhysicsCategory.GarbageCan
         skunkNode.physicsBody!.collisionBitMask = kContactAll & ~(PhysicsCategory.Rope)
+        // physics categories arranged in Z order so just use that
+        skunkNode.zPosition = CGFloat(PhysicsCategory.Skunk)
         
         garbageCanNode = childNodeWithName("garbageCan") as! SKSpriteNode
         garbageCanNode.physicsBody!.categoryBitMask = PhysicsCategory.GarbageCan
         garbageCanNode.physicsBody!.contactTestBitMask = PhysicsCategory.Skunk
+        garbageCanNode.zPosition = CGFloat(PhysicsCategory.GarbageCan)
         
         ropeNode = childNodeWithName("rope") as! SKSpriteNode
         ropeNode.physicsBody!.categoryBitMask = PhysicsCategory.Rope
-        ropeNode.physicsBody!.collisionBitMask = PhysicsCategory.None
-        //ropeNode.anchorPoint = CGPointMake(0, 0.5) // left end of rope
+        ropeNode.physicsBody!.collisionBitMask = PhysicsCategory.Background
+        ropeNode.zPosition = CGFloat(PhysicsCategory.Rope)
         
         var ropeEdgeAnchorNode = childNodeWithName("ropeEdgeAnchor") as! SKSpriteNode
         
         woodNode = childNodeWithName("wood") as! SKSpriteNode
         woodNode.physicsBody!.categoryBitMask = PhysicsCategory.Wood
         woodNode.physicsBody!.collisionBitMask = kContactAll & ~(PhysicsCategory.GarbageCan | PhysicsCategory.Rope)
+        woodNode.zPosition = CGFloat(PhysicsCategory.Wood)
         
         /*let range = SKRange(lowerLimit: 0.0, upperLimit: 0.0)
         let orientConstraint = SKConstraint.orientToNode(woodNode, offset: range)
@@ -134,6 +142,7 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         {
             //backgroundNode.physicsBody?.friction = 0.5
             backgroundNode.physicsBody!.categoryBitMask = PhysicsCategory.Background
+            backgroundNode.zPosition = -2 // behind background image layer
         }
         
         /*enumerateChildNodesWithName("wood", usingBlock: { (node, _) -> Void in
@@ -251,23 +260,7 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         {
             if !levelCompleted
             {
-                victoryLabel = SKLabelNode(fontNamed: "Super Mario 256")
-                victoryLabel.text = "Victory!"
-                victoryLabel.position = CGPointMake(size.width/2.0, size.height/2.0)
-                victoryLabel.fontSize = size.height/8
-                //victoryLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
-                //victoryLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
-                victoryLabel.fontColor = SKColor.yellowColor()
-                victoryLabel.xScale = 0.0
-                victoryLabel.yScale = 0.0
-                addChild(victoryLabel)
-                var victoryAction = SKAction.sequence(
-                    [
-                        SKAction.scaleTo(2.0, duration: 0.25),
-                        SKAction.scaleTo(1.0, duration: 0.25)
-                    ])
-                
-                victoryLabel.runAction(victoryAction)
+                doVictory()
                 
                 println("You got the foods!")
             }
@@ -283,4 +276,46 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         if body.contactTestBitMask != PhysicsCategory.None && fabs(catNode.zRotation) > CGFloat(45).degreesToRadians() { lose()
         } }
     }*/
+    
+    func doVictory()
+    {
+        victoryLabel = SKLabelNode(fontNamed: "Super Mario 256")
+        victoryLabel.text = "Victory!"
+        victoryLabel.position = CGPointMake(size.width/2.0, size.height/2.0)
+        victoryLabel.fontSize = size.height/8
+        //victoryLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
+        //victoryLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
+        victoryLabel.fontColor = SKColor.yellowColor()
+        victoryLabel.xScale = 0.0
+        victoryLabel.yScale = 0.0
+        addChild(victoryLabel)
+        var victoryAction = SKAction.sequence(
+            [
+                SKAction.scaleTo(2.0, duration: 0.25),
+                SKAction.scaleTo(1.0, duration: 0.25)
+            ])
+        
+        victoryLabel.runAction(victoryAction)
+    }
+    
+    func doHint()
+    {
+        let hintLabel = SKLabelNode(fontNamed: "Super Mario 256")
+        hintLabel.text = "Touch the rope to free the wood"
+        hintLabel.position = CGPointMake(size.width/2, size.height-kToolbarHeight)
+        hintLabel.fontSize = size.height/32
+        //hintLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
+        //hintLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
+        hintLabel.fontColor = SKColor.yellowColor()
+        hintLabel.xScale = 0.0
+        hintLabel.yScale = 0.0
+        addChild(hintLabel)
+        var hintAction = SKAction.sequence(
+            [
+                SKAction.scaleTo(2.0, duration: 0.25),
+                SKAction.scaleTo(1.0, duration: 0.25)
+            ])
+        
+        hintLabel.runAction(hintAction)
+    }
 }
