@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A509E26D1B4ADD77009ACAB5 /* Unicorn.svg in Resources */ = {isa = PBXBuildFile; fileRef = A509E26C1B4ADD77009ACAB5 /* Unicorn.svg */; };
 		A5112C081B2D019F00215DA2 /* OBShapedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C051B2D019F00215DA2 /* OBShapedButton.m */; };
 		A5112C091B2D019F00215DA2 /* UIImage+ColorAtPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C071B2D019F00215DA2 /* UIImage+ColorAtPixel.m */; };
 		A5112C161B2D0E7F00215DA2 /* OBShapedView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C151B2D0E7F00215DA2 /* OBShapedView.m */; };
@@ -17,7 +18,6 @@
 		A536FE771B350D2C00443B93 /* ColoringBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A536FE731B350D2C00443B93 /* ColoringBookViewController.m */; };
 		A53E67D51B488EFF0026281F /* Level1Back.png in Resources */ = {isa = PBXBuildFile; fileRef = A53E67D41B488EFF0026281F /* Level1Back.png */; };
 		A5554D4C1B3239AE002B06E5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */; };
-		A558C3E11B47047900FDBB8B /* Unicorn.svg in Resources */ = {isa = PBXBuildFile; fileRef = A558C3E01B47047900FDBB8B /* Unicorn.svg */; };
 		A558C3E31B473FEC00FDBB8B /* RocketShip.svg in Resources */ = {isa = PBXBuildFile; fileRef = A558C3E21B473FEC00FDBB8B /* RocketShip.svg */; };
 		A558C3E91B47527100FDBB8B /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A558C3E81B47527100FDBB8B /* AboutViewController.swift */; };
 		A5925F551B41CB42000E8FF8 /* KnockBlocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5925F541B41CB42000E8FF8 /* KnockBlocksViewController.swift */; };
@@ -88,6 +88,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A509E26C1B4ADD77009ACAB5 /* Unicorn.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Unicorn.svg; path = Art/Unicorn.svg; sourceTree = "<group>"; };
 		A5112C041B2D018D00215DA2 /* OBShapedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBShapedButton.h; sourceTree = "<group>"; };
 		A5112C051B2D019F00215DA2 /* OBShapedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBShapedButton.m; sourceTree = "<group>"; };
 		A5112C061B2D019F00215DA2 /* UIImage+ColorAtPixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ColorAtPixel.h"; sourceTree = "<group>"; };
@@ -102,7 +103,6 @@
 		A536FE731B350D2C00443B93 /* ColoringBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColoringBookViewController.m; path = ../ColoringBookViewController.m; sourceTree = "<group>"; };
 		A53E67D41B488EFF0026281F /* Level1Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Level1Back.png; path = Art/Level1Back.png; sourceTree = "<group>"; };
 		A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		A558C3E01B47047900FDBB8B /* Unicorn.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Unicorn.svg; path = Art/Unicorn.svg; sourceTree = "<group>"; };
 		A558C3E21B473FEC00FDBB8B /* RocketShip.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = RocketShip.svg; path = Art/RocketShip.svg; sourceTree = "<group>"; };
 		A558C3E81B47527100FDBB8B /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		A5925F541B41CB42000E8FF8 /* KnockBlocksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KnockBlocksViewController.swift; path = ../KnockBlocksViewController.swift; sourceTree = "<group>"; };
@@ -198,7 +198,7 @@
 			children = (
 				A558C3E21B473FEC00FDBB8B /* RocketShip.svg */,
 				A5EBCCC41B361F0E006E52D6 /* mtnHouse.svg */,
-				A558C3E01B47047900FDBB8B /* Unicorn.svg */,
+				A509E26C1B4ADD77009ACAB5 /* Unicorn.svg */,
 			);
 			name = Vector;
 			sourceTree = "<group>";
@@ -410,10 +410,10 @@
 				A5B85EC31B276636008012F7 /* LaunchScreen.xib in Resources */,
 				A5B85EC01B276636008012F7 /* Images.xcassets in Resources */,
 				A5A633D91B48438C00728E65 /* MrSkunkLevel1.sks in Resources */,
+				A509E26D1B4ADD77009ACAB5 /* Unicorn.svg in Resources */,
 				A5B85EBE1B276636008012F7 /* Main.storyboard in Resources */,
 				A5EBCCC51B361F0E006E52D6 /* mtnHouse.svg in Resources */,
 				A558C3E31B473FEC00FDBB8B /* RocketShip.svg in Resources */,
-				A558C3E11B47047900FDBB8B /* Unicorn.svg in Resources */,
 				A5A633D41B4836A900728E65 /* MrSkunk.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
