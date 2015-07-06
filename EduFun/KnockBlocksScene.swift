@@ -73,6 +73,7 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         skunkNode = childNodeWithName("skunk") as! SKSpriteNode
         skunkNode.physicsBody!.categoryBitMask = PhysicsCategory.Skunk
         skunkNode.physicsBody!.contactTestBitMask = PhysicsCategory.GarbageCan
+        skunkNode.physicsBody!.collisionBitMask = kContactAll & ~(PhysicsCategory.Rope)
         
         garbageCanNode = childNodeWithName("garbageCan") as! SKSpriteNode
         garbageCanNode.physicsBody!.categoryBitMask = PhysicsCategory.GarbageCan
@@ -84,7 +85,7 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         //ropeNode.anchorPoint = CGPointMake(0, 0.5) // left end of rope
         
         var ropeEdgeAnchorNode = childNodeWithName("ropeEdgeAnchor") as! SKSpriteNode
-
+        
         woodNode = childNodeWithName("wood") as! SKSpriteNode
         woodNode.physicsBody!.categoryBitMask = PhysicsCategory.Wood
         woodNode.physicsBody!.collisionBitMask = kContactAll & ~(PhysicsCategory.GarbageCan | PhysicsCategory.Rope)
@@ -93,26 +94,29 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         let orientConstraint = SKConstraint.orientToNode(woodNode, offset: range)
         ropeNode.constraints = [orientConstraint]*/
         
-        //let ropeToWorldJoint = SKPhysicsJointSpring.jointWithBodyA(ropeEdgeAnchorNode.physicsBody, bodyB: ropeNode.physicsBody, anchorA: ropeEdgeAnchorNode.position, anchorB: CGPointMake(ropeNode.position.x-ropeNode.size.width/2, ropeNode.position.y))
+        //let woodRopeJoint = SKPhysicsJointSpring.jointWithBodyA(ropeEdgeAnchorNode.physicsBody, bodyB: ropeNode.physicsBody, anchorA: ropeEdgeAnchorNode.position, anchorB: CGPointMake(ropeNode.position.x-ropeNode.size.width/2, ropeNode.position.y))
         
-        let ropeToWorldJoint = SKPhysicsJointSpring.jointWithBodyA(ropeEdgeAnchorNode.physicsBody, bodyB: woodNode.physicsBody, anchorA: ropeEdgeAnchorNode.position, anchorB: getPointTop(woodNode))
-        physicsWorld.addJoint(ropeToWorldJoint)
+        /*let woodRopeJoint = SKPhysicsJointSpring.jointWithBodyA(ropeEdgeAnchorNode.physicsBody, bodyB: woodNode.physicsBody, anchorA: ropeEdgeAnchorNode.position, anchorB: getPointTop(woodNode))
+        physicsWorld.addJoint(woodRopeJoint)*/
+        
+        let woodRopeJoint = SKPhysicsJointPin.jointWithBodyA(woodNode.physicsBody, bodyB: ropeNode.physicsBody, anchor: getPointTop(woodNode))
+        physicsWorld.addJoint(woodRopeJoint)
         
         delay(seconds: 2.0,
             completion:
             {
-                self.physicsWorld.removeJoint(ropeToWorldJoint)
+                self.physicsWorld.removeJoint(woodRopeJoint)
             }
         )
-        
-        let ropeJoint = SKPhysicsJointSpring.jointWithBodyA(ropeEdgeAnchorNode.physicsBody, bodyB: ropeNode.physicsBody, anchorA: ropeEdgeAnchorNode.position, anchorB: getPointLeft(ropeNode))
-        physicsWorld.addJoint(ropeJoint)
         
         var woodEdgeAnchorNode = childNodeWithName("woodEdgeAnchor") as! SKSpriteNode
 
         //let woodJoint = SKPhysicsJointSpring.jointWithBodyA(woodEdgeAnchorNode.physicsBody, bodyB: woodNode.physicsBody, anchorA: woodEdgeAnchorNode.position, anchorB: getPointBottom(woodNode))
         let woodJoint = SKPhysicsJointPin.jointWithBodyA(woodEdgeAnchorNode.physicsBody, bodyB: woodNode.physicsBody, anchor: getPointBottom(woodNode))
         physicsWorld.addJoint(woodJoint)
+        
+        let ropeScreenJoint = SKPhysicsJointPin.jointWithBodyA(ropeEdgeAnchorNode.physicsBody, bodyB: ropeNode.physicsBody, anchor: getPointLeft(ropeNode))
+        physicsWorld.addJoint(ropeScreenJoint)
         
         //ropeNode = childNodeWithName("rope") as! SKSpriteNode
         //stoneBallNode = childNodeWithName("stoneBall") as! SKSpriteNode
