@@ -106,7 +106,7 @@ class KnockBlocksViewController: UIViewController {
             
             flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
             
-            toolbar.frame = CGRectMake(0.0, skView.frame.size.height-kToolbarHeight, skView.frame.size.width, kToolbarHeight)
+            toolbar.frame = CGRectMake(0.0, 0.0, skView.frame.size.width, kToolbarHeight)
             
             toolbar.items = [exitBarButton, flexibleSpace, restartBarButton, flexibleSpace, mapButton]
             //skView.addSubview(exitButton)

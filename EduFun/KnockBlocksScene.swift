@@ -108,6 +108,12 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         let ropeJoint = SKPhysicsJointSpring.jointWithBodyA(ropeEdgeAnchorNode.physicsBody, bodyB: ropeNode.physicsBody, anchorA: ropeEdgeAnchorNode.position, anchorB: getPointLeft(ropeNode))
         physicsWorld.addJoint(ropeJoint)
         
+        var woodEdgeAnchorNode = childNodeWithName("woodEdgeAnchor") as! SKSpriteNode
+
+        //let woodJoint = SKPhysicsJointSpring.jointWithBodyA(woodEdgeAnchorNode.physicsBody, bodyB: woodNode.physicsBody, anchorA: woodEdgeAnchorNode.position, anchorB: getPointBottom(woodNode))
+        let woodJoint = SKPhysicsJointPin.jointWithBodyA(woodEdgeAnchorNode.physicsBody, bodyB: woodNode.physicsBody, anchor: getPointBottom(woodNode))
+        physicsWorld.addJoint(woodJoint)
+        
         //ropeNode = childNodeWithName("rope") as! SKSpriteNode
         //stoneBallNode = childNodeWithName("stoneBall") as! SKSpriteNode
         //stoneBallNode.physicsBody!.density = 2.0
