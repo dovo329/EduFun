@@ -1,5 +1,5 @@
 //
-//  KnockBlocksViewController.swift
+//  MrSkunkViewController.swift
 //  EduFun
 //
 //  Created by Douglas Voss on 6/29/15.
@@ -16,7 +16,7 @@ extension SKNode {
             var archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
             
             archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
-            let scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! KnockBlocksScene
+            let scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! MrSkunkLevel1Scene
             archiver.finishDecoding()
             return scene
         } else {
@@ -25,7 +25,7 @@ extension SKNode {
     }
 }
 
-class KnockBlocksViewController: UIViewController {
+class MrSkunkViewController: UIViewController {
     
     //var exitButton : THButton!
     var toolbar = UIToolbar()
@@ -55,7 +55,7 @@ class KnockBlocksViewController: UIViewController {
     
     func startup()
     {
-        if let scene = KnockBlocksScene.unarchiveFromFile("MrSkunkLevel1") as? KnockBlocksScene
+        if let scene = MrSkunkLevel1Scene.unarchiveFromFile("MrSkunkLevel1") as? MrSkunkLevel1Scene
         {
             // Configure the view.
             //let skView = self.view as! SKView
@@ -119,7 +119,7 @@ class KnockBlocksViewController: UIViewController {
             
             view.backgroundColor = UIColor.magentaColor()
             
-            let scene = KnockBlocksScene(size: view.frame.size)
+            let scene = MrSkunkLevel1sScene(size: view.frame.size)
             
             let skView = self.view as! SKView*/
             //skView.showsPhysics = true
@@ -138,13 +138,13 @@ class KnockBlocksViewController: UIViewController {
     
     /*func exitButtonMethod(sender : THButton, event : UIEvent) {
         var app = UIApplication.sharedApplication().delegate as? AppDelegate
-        app?.animateToViewController(ViewControllerEnum.TitleScreen, srcVCEnum: ViewControllerEnum.KnockBlocks)
+        app?.animateToViewController(ViewControllerEnum.TitleScreen, srcVCEnum: ViewControllerEnum.MrSkunk)
     }*/
     
     func exitButtonMethod()
     {
         var app = UIApplication.sharedApplication().delegate as? AppDelegate
-        app?.animateToViewController(ViewControllerEnum.TitleScreen, srcVCEnum: ViewControllerEnum.KnockBlocks)
+        app?.animateToViewController(ViewControllerEnum.TitleScreen, srcVCEnum: ViewControllerEnum.MrSkunk)
     }
     
     func restartMethod()

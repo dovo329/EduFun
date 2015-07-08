@@ -1,5 +1,5 @@
 //
-//  KnockBlocksScene.swift
+//  MrSkunkLevel1Scene.swift
 //  EduFun
 //
 //  Created by Douglas Voss on 6/29/15.
@@ -10,7 +10,7 @@ import SpriteKit
 
 let kContactAll : UInt32 = 0xffffffff
 
-class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
+class MrSkunkLevel1Scene: SKScene, SKPhysicsContactDelegate {
     
     struct PhysicsCategory {
         static let None:       UInt32 = 0b0
@@ -246,6 +246,7 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
         
         if (targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Rope) {
             self.physicsWorld.removeJoint(woodRopeJoint)
+            self.ropeNode.removeFromParent()
         }
         
         //if targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Wood
@@ -283,8 +284,11 @@ class KnockBlocksScene: SKScene, SKPhysicsContactDelegate {
     {
         let victorySize = CGFloat(size.height/5.0)
         let victoryLabel = ASAttributedLabelNode(size:CGSizeMake(playableRect.size.width*0.8, victorySize))
+        let buttonFrame : CGRect = CGRectMake(victoryLabel.position.x, victoryLabel.position.y+victoryLabel.size.height, victoryLabel.size.width, victoryLabel.size.height*2.0/3.0)
+        let nextButton : THButton = THButton(frame: buttonFrame, text: "Next")
+        view!.addSubview(nextButton)
         
-        victoryLabel.attributedString = outlinedCenteredString("Victory", size: victorySize)
+        victoryLabel.attributedString = outlinedCenteredString("Yum", size: victorySize)
         
         victoryLabel.position =
             CGPointMake(

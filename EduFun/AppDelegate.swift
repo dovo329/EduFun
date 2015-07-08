@@ -22,11 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var bounds = UIScreen.mainScreen().bounds
         println("bounds.width=\(bounds.width) height=\(bounds.height)")
         
-        if destVCEnum == ViewControllerEnum.KnockBlocks
+        if destVCEnum == ViewControllerEnum.MrSkunk
         {
             //overlayView.transform = CGAffineTransformMakeRotation(-π/2)
             //overlayView.frame = CGRectMake(0, 0, 480, 320)
-            destVC = KnockBlocksViewController()
+            destVC = MrSkunkViewController()
         }
         else if destVCEnum == ViewControllerEnum.CardMatching
         {
@@ -93,7 +93,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //window!.rootViewController = MemoryGameViewController()
         window!.rootViewController = TitleScreenViewController()
         //window!.rootViewController = ColoringBookViewController()
-        //window!.rootViewController = KnockBlocksViewController()
         //var navigationController = UINavigationController(rootViewController: TitleScreenViewController())
         //var navigationController = OrientationNavigationController(rootViewController: TitleScreenViewController())
         //navigationController.navigationBarHidden = true

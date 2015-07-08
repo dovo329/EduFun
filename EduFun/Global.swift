@@ -15,7 +15,7 @@ let π : CGFloat = CGFloat(M_PI)
 struct ViewControllerEnum {
     static let CardMatching : UInt32 = 0b00001
     static let ColoringBook : UInt32 = 0b00010
-    static let KnockBlocks  : UInt32 = 0b00100
+    static let MrSkunk  : UInt32 = 0b00100
     static let TitleScreen  : UInt32 = 0b01000
     static let About        : UInt32 = 0b10000
 }

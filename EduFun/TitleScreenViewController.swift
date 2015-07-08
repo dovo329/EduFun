@@ -178,7 +178,7 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         }
         else if (indexPath.row == 2)
         {
-            app?.animateToViewController(ViewControllerEnum.KnockBlocks, srcVCEnum: ViewControllerEnum.TitleScreen)
+            app?.animateToViewController(ViewControllerEnum.MrSkunk, srcVCEnum: ViewControllerEnum.TitleScreen)
         }
     }
     

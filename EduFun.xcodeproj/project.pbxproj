@@ -20,15 +20,14 @@
 		A5554D4C1B3239AE002B06E5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */; };
 		A558C3E31B473FEC00FDBB8B /* RocketShip.svg in Resources */ = {isa = PBXBuildFile; fileRef = A558C3E21B473FEC00FDBB8B /* RocketShip.svg */; };
 		A558C3E91B47527100FDBB8B /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A558C3E81B47527100FDBB8B /* AboutViewController.swift */; };
-		A5925F551B41CB42000E8FF8 /* KnockBlocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5925F541B41CB42000E8FF8 /* KnockBlocksViewController.swift */; };
-		A5925F591B41CE7A000E8FF8 /* KnockBlocksScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5925F581B41CE7A000E8FF8 /* KnockBlocksScene.swift */; };
+		A5925F551B41CB42000E8FF8 /* MrSkunkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5925F541B41CB42000E8FF8 /* MrSkunkViewController.swift */; };
+		A5925F591B41CE7A000E8FF8 /* MrSkunkLevel1.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5925F581B41CE7A000E8FF8 /* MrSkunkLevel1.swift */; };
 		A595C3E11B3B0A2E001C6040 /* PaletteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A595C3E01B3B0A2E001C6040 /* PaletteViewController.m */; };
 		A595C3E41B3B0B53001C6040 /* EmitterTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A595C3E31B3B0B53001C6040 /* EmitterTestViewController.m */; };
 		A595C3EA1B3B4990001C6040 /* SuperMario256.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A595C3E91B3B4990001C6040 /* SuperMario256.ttf */; };
 		A5A633D41B4836A900728E65 /* MrSkunk.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A5A633D31B4836A900728E65 /* MrSkunk.atlas */; };
 		A5A633D91B48438C00728E65 /* MrSkunkLevel1.sks in Resources */ = {isa = PBXBuildFile; fileRef = A5A633D81B48438C00728E65 /* MrSkunkLevel1.sks */; };
 		A5B85EB51B276636008012F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85EB41B276636008012F7 /* AppDelegate.swift */; };
-		A5B85EBE1B276636008012F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B85EBC1B276636008012F7 /* Main.storyboard */; };
 		A5B85EC01B276636008012F7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5B85EBF1B276636008012F7 /* Images.xcassets */; };
 		A5B85EC31B276636008012F7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5B85EC11B276636008012F7 /* LaunchScreen.xib */; };
 		A5B85ECF1B276636008012F7 /* EduFunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85ECE1B276636008012F7 /* EduFunTests.swift */; };
@@ -106,8 +105,8 @@
 		A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A558C3E21B473FEC00FDBB8B /* RocketShip.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = RocketShip.svg; path = Art/RocketShip.svg; sourceTree = "<group>"; };
 		A558C3E81B47527100FDBB8B /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
-		A5925F541B41CB42000E8FF8 /* KnockBlocksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KnockBlocksViewController.swift; path = ../KnockBlocksViewController.swift; sourceTree = "<group>"; };
-		A5925F581B41CE7A000E8FF8 /* KnockBlocksScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnockBlocksScene.swift; sourceTree = "<group>"; };
+		A5925F541B41CB42000E8FF8 /* MrSkunkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MrSkunkViewController.swift; path = ../MrSkunkViewController.swift; sourceTree = "<group>"; };
+		A5925F581B41CE7A000E8FF8 /* MrSkunkLevel1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MrSkunkLevel1.swift; sourceTree = "<group>"; };
 		A595C3DF1B3B0A2E001C6040 /* PaletteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaletteViewController.h; path = ../PaletteViewController.h; sourceTree = "<group>"; };
 		A595C3E01B3B0A2E001C6040 /* PaletteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PaletteViewController.m; path = ../PaletteViewController.m; sourceTree = "<group>"; };
 		A595C3E21B3B0B53001C6040 /* EmitterTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmitterTestViewController.h; sourceTree = "<group>"; };
@@ -118,7 +117,6 @@
 		A5B85EAF1B276636008012F7 /* KidsFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KidsFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B85EB31B276636008012F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5B85EB41B276636008012F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A5B85EBD1B276636008012F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A5B85EBF1B276636008012F7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A5B85EC21B276636008012F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		A5B85EC81B276636008012F7 /* EduFunTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EduFunTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -242,8 +240,8 @@
 				A5B85EB41B276636008012F7 /* AppDelegate.swift */,
 				A524752C1B3E0A26002E0B7B /* TitleScreenViewController.swift */,
 				A5B85ED81B2767E3008012F7 /* MemoryGameViewController.swift */,
-				A5925F541B41CB42000E8FF8 /* KnockBlocksViewController.swift */,
-				A5925F581B41CE7A000E8FF8 /* KnockBlocksScene.swift */,
+				A5925F541B41CB42000E8FF8 /* MrSkunkViewController.swift */,
+				A5925F581B41CE7A000E8FF8 /* MrSkunkLevel1.swift */,
 				A5A633D81B48438C00728E65 /* MrSkunkLevel1.sks */,
 				A558C3E81B47527100FDBB8B /* AboutViewController.swift */,
 				A5A633D31B4836A900728E65 /* MrSkunk.atlas */,
@@ -256,7 +254,6 @@
 				A5EB8DF41B3CC765009A8A3A /* THButton.swift */,
 				A595C3E21B3B0B53001C6040 /* EmitterTestViewController.h */,
 				A595C3E31B3B0B53001C6040 /* EmitterTestViewController.m */,
-				A5B85EBC1B276636008012F7 /* Main.storyboard */,
 				A5B85EC11B276636008012F7 /* LaunchScreen.xib */,
 				A5B85EB21B276636008012F7 /* Supporting Files */,
 			);
@@ -422,7 +419,6 @@
 				A50CFA2E1B4AF74F00B5F419 /* Level1Back.jpg in Resources */,
 				A5A633D91B48438C00728E65 /* MrSkunkLevel1.sks in Resources */,
 				A509E26D1B4ADD77009ACAB5 /* Unicorn.svg in Resources */,
-				A5B85EBE1B276636008012F7 /* Main.storyboard in Resources */,
 				A5EBCCC51B361F0E006E52D6 /* mtnHouse.svg in Resources */,
 				A558C3E31B473FEC00FDBB8B /* RocketShip.svg in Resources */,
 				A5A633D41B4836A900728E65 /* MrSkunk.atlas in Resources */,
@@ -451,7 +447,7 @@
 				A5CA0F4F1B2F64CA008BD79D /* UIImage+Resize.m in Sources */,
 				A536FE771B350D2C00443B93 /* ColoringBookViewController.m in Sources */,
 				A595C3E11B3B0A2E001C6040 /* PaletteViewController.m in Sources */,
-				A5925F551B41CB42000E8FF8 /* KnockBlocksViewController.swift in Sources */,
+				A5925F551B41CB42000E8FF8 /* MrSkunkViewController.swift in Sources */,
 				A5CA0F551B2F67FA008BD79D /* UIImage+RoundedCorner.m in Sources */,
 				A558C3E91B47527100FDBB8B /* AboutViewController.swift in Sources */,
 				A5EB8DF81B3CCF39009A8A3A /* Global.swift in Sources */,
@@ -460,7 +456,7 @@
 				A524752D1B3E0A26002E0B7B /* TitleScreenViewController.swift in Sources */,
 				A5CA0F541B2F67FA008BD79D /* UIImage+Resize.m in Sources */,
 				A5EB8DF51B3CC765009A8A3A /* THButton.swift in Sources */,
-				A5925F591B41CE7A000E8FF8 /* KnockBlocksScene.swift in Sources */,
+				A5925F591B41CE7A000E8FF8 /* MrSkunkLevel1.swift in Sources */,
 				A5B85ED91B2767E3008012F7 /* MemoryGameViewController.swift in Sources */,
 				A595C3E41B3B0B53001C6040 /* EmitterTestViewController.m in Sources */,
 			);
@@ -490,14 +486,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A5B85EBC1B276636008012F7 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A5B85EBD1B276636008012F7 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A5B85EC11B276636008012F7 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
