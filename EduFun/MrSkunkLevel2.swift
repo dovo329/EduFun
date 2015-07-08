@@ -14,11 +14,13 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
         static let None:       UInt32 = 0b0
         static let Edge:       UInt32 = 0b1
         static let Background: UInt32 = 0b10
-        static let Wheel:      UInt32 = 0b100
+        static let Skunk:      UInt32 = 0b100
         static let Cannon:     UInt32 = 0b1000
         static let Goal:       UInt32 = 0b10000
-        static let Skunk:      UInt32 = 0b100000
+        static let Wheel:      UInt32 = 0b100000
     }
+    
+    var lastTouchedPoint : CGPoint!
     
     let kToolbarHeight = CGFloat(30.0)
     let kHintZPosition = CGFloat(100.0)
@@ -62,6 +64,8 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
         (size.height - maxAspectRatioHeight)/2
         playableRect = CGRect(x: 0, y: playableMargin,
             width: size.width, height: size.height-playableMargin*2)
+        
+        lastTouchedPoint = CGPointMake(size.width/2, size.height/2)
         
         doHint()
         
@@ -108,6 +112,10 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
         // physics categories arranged in Z order so just use that
         cannonNode.zPosition = CGFloat(PhysicsCategory.Cannon)
         
+        let orientConstraint = SKConstraint.orientToPoint(lastTouchedPoint, offset: SKRange(lowerLimit: 0.0, upperLimit: 0.0))
+        
+        cannonNode.constraints = [orientConstraint]
+        
         enumerateChildNodesWithName("background", usingBlock: { (node, _) -> Void in
             if let spriteNode = node as? SKSpriteNode {
                 self.backgroundNodeArr.append(spriteNode)
@@ -140,6 +148,27 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
         //println("\(dt*1000) milliseconds since the last update")
     }
     
+    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+        let touch: UITouch = touches.first as! UITouch
+        let location = touch.locationInNode(self)
+        let targetNode = self.nodeAtPoint(location)
+        
+        if targetNode.physicsBody == nil
+        {
+            lastTouchedPoint = location
+            let orientConstraint = SKConstraint.orientToPoint(lastTouchedPoint, offset: SKRange(lowerLimit: 0.0, upperLimit: 0.0))
+            cannonNode.constraints = [orientConstraint]
+            return
+        }
+        
+        if (targetNode.physicsBody!.categoryBitMask != PhysicsCategory.Cannon)
+        {
+            lastTouchedPoint = location
+            let orientConstraint = SKConstraint.orientToPoint(lastTouchedPoint, offset: SKRange(lowerLimit: 0.0, upperLimit: 0.0))
+            cannonNode.constraints = [orientConstraint]
+        }
+    }
+    
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         let touch: UITouch = touches.first as! UITouch
         sceneTouched(touch.locationInNode(self))
@@ -147,12 +176,23 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
     
     func sceneTouched(location: CGPoint)
     {
+        println("lastTouchedPoint=\(lastTouchedPoint)")
         //enumerateBodiesInRect(usingBlock:)
         let targetNode = self.nodeAtPoint(location)
         
         if targetNode.physicsBody == nil
         {
+            lastTouchedPoint = location
+            let orientConstraint = SKConstraint.orientToPoint(lastTouchedPoint, offset: SKRange(lowerLimit: 0.0, upperLimit: 0.0))
+            cannonNode.constraints = [orientConstraint]
             return
+        }
+        
+        if (targetNode.physicsBody!.categoryBitMask != PhysicsCategory.Cannon)
+        {
+            lastTouchedPoint = location
+            let orientConstraint = SKConstraint.orientToPoint(lastTouchedPoint, offset: SKRange(lowerLimit: 0.0, upperLimit: 0.0))
+            cannonNode.constraints = [orientConstraint]
         }
         
         if !skunkNodeShot && targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Cannon
