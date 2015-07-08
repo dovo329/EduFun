@@ -28,6 +28,7 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
     var lastUpdateTime: NSTimeInterval = 0
     var dt : NSTimeInterval = 0
     
+    var skunkNodeShot : Bool = false
     var skunkNode : SKSpriteNode!
     var goalNode : SKSpriteNode!
     var wheelNode : SKSpriteNode!
@@ -72,10 +73,10 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
         skunkNode = childNodeWithName("skunk") as! SKSpriteNode
         skunkNode.physicsBody = SKPhysicsBody(circleOfRadius: skunkNode.size.width/2.0)
         skunkNode.physicsBody!.dynamic = true
-        skunkNode.physicsBody!.affectedByGravity = true
+        skunkNode.physicsBody!.affectedByGravity = false
         skunkNode.physicsBody!.categoryBitMask = PhysicsCategory.Skunk
         skunkNode.physicsBody!.contactTestBitMask = PhysicsCategory.Goal
-        skunkNode.physicsBody!.collisionBitMask = kContactAll & ~(PhysicsCategory.Cannon | PhysicsCategory.Wheel)
+        skunkNode.physicsBody!.collisionBitMask = kContactAll & ~(PhysicsCategory.Cannon | PhysicsCategory.Wheel | PhysicsCategory.Goal)
         // physics categories arranged in Z order so just use that
         skunkNode.zPosition = CGFloat(PhysicsCategory.Skunk)
         
@@ -136,8 +137,6 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
             dt = 0
         }
         lastUpdateTime = currentTime
-        //ropeNode.physicsBody!.applyTorque(0.1)
-        //stoneBallNode.physicsBody!.applyTorque(-0.1)
         //println("\(dt*1000) milliseconds since the last update")
     }
     
@@ -156,11 +155,13 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
             return
         }
         
-        //if targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Wood
-        //{
-        //    targetNode.removeFromParent()
-        //    return
-        //}
+        if !skunkNodeShot && targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Cannon
+        {
+            skunkNodeShot = true
+            skunkNode.physicsBody!.affectedByGravity = true
+            skunkNode.physicsBody!.applyAngularImpulse(0.5)
+            skunkNode.physicsBody!.applyImpulse(CGVector(dx:375.0, dy:600.0))
+        }
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
@@ -192,10 +193,8 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
         let victorySize = CGFloat(size.height/5.0)
         let victoryLabel = ASAttributedLabelNode(size:CGSizeMake(playableRect.size.width*0.8, victorySize))
         let buttonFrame : CGRect = CGRectMake(victoryLabel.position.x, victoryLabel.position.y+victoryLabel.size.height, victoryLabel.size.width, victoryLabel.size.height*2.0/3.0)
-        let nextButton : THButton = THButton(frame: buttonFrame, text: "Next")
-        view!.addSubview(nextButton)
         
-        victoryLabel.attributedString = outlinedCenteredString("Yum", size: victorySize)
+        victoryLabel.attributedString = outlinedCenteredString("Goal", size: victorySize)
         
         victoryLabel.position =
             CGPointMake(
