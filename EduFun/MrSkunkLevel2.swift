@@ -272,7 +272,7 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
         let hintSize = CGFloat(80.0)
         let hintLabel = ASAttributedLabelNode(size:CGSizeMake(playableRect.size.width*0.9, hintSize))
         
-        hintLabel.attributedString = outlinedCenteredString("Touch the Rope to Release the Wood", size: hintSize)
+        hintLabel.attributedString = outlinedCenteredString("Touch Cannon to Shoot", size: hintSize)
         
         hintLabel.position =
             CGPointMake(
@@ -282,5 +282,19 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
 
         hintLabel.zPosition = kHintZPosition
         addChild(hintLabel)
+        
+        let hintSize2 = CGFloat(80.0)
+        let hintLabel2 = ASAttributedLabelNode(size:CGSizeMake(playableRect.size.width*0.9, hintSize2))
+        
+        hintLabel2.attributedString = outlinedCenteredString("Touch Screen to Aim", size: hintSize2)
+        
+        hintLabel2.position =
+            CGPointMake(
+                size.width/2.0,
+                ((size.height - playableRect.size.height)/2.0) + (hintSize2/2.0) + (hintSize)
+        )
+
+        hintLabel2.zPosition = kHintZPosition
+        addChild(hintLabel2)
     }
 }
