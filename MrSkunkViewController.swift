@@ -161,6 +161,24 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
     
     func levelComplete() {
         println("mr skunk delegate method called!")
+        var completeLabel : THLabel = THLabel()
+        completeLabel.text = "Complete!"
+        completeLabel.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height)
+        completeLabel.font = UIFont(name: "Super Mario 256", size: 45.0)
+        completeLabel.font = completeLabel.font.fontWithSize(getFontSizeToFitFrameOfLabel(completeLabel)-5.0)
+        completeLabel.frame.size.height = completeLabel.font.pointSize*1.3
+        completeLabel.frame.origin.y = (view.frame.size.height/2.0) - completeLabel.frame.size.height
+        completeLabel.textAlignment = NSTextAlignment.Center
+        completeLabel.textColor = UIColor.yellowColor()
+        completeLabel.strokeSize = (3.0/320.0)*completeLabel.frame.size.width
+        completeLabel.strokeColor = UIColor.blackColor()
+        completeLabel.shadowOffset = CGSizeMake(completeLabel.strokeSize, completeLabel.strokeSize)
+        completeLabel.shadowColor = UIColor.blackColor()
+        completeLabel.shadowBlur = (1.0/320.0)*completeLabel.frame.size.width
+        completeLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
+        completeLabel.layer.shouldRasterize = true
+        view.addSubview(completeLabel)
+        spin3BounceView(completeLabel, duration:1.0)
     }
     
     override func shouldAutorotate() -> Bool {
