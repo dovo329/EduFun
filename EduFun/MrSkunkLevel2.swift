@@ -8,7 +8,13 @@
 
 import SpriteKit
 
+protocol MrSkunkLevelDelegate {
+    func levelComplete()
+}
+
 class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
+
+    var mrSkunkDelegate : MrSkunkLevelDelegate! = nil
     
     struct PhysicsCategory {
         static let None:       UInt32 = 0b0
@@ -40,7 +46,6 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
     var backgroundNodeArr : [SKSpriteNode!]! = []
     
     var levelCompleted : Bool = false
-    var victoryLabel : SKLabelNode!
     
     override init(size: CGSize) {
         let maxAspectRatio: CGFloat = 16.0/9.0
@@ -248,7 +253,8 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
     
     func doVictory()
     {
-        let victorySize = CGFloat(size.height/5.0)
+        mrSkunkDelegate.levelComplete()
+        /*let victorySize = CGFloat(size.height/5.0)
         let victoryLabel = ASAttributedLabelNode(size:CGSizeMake(playableRect.size.width*0.8, victorySize))
         let buttonFrame : CGRect = CGRectMake(victoryLabel.position.x, victoryLabel.position.y+victoryLabel.size.height, victoryLabel.size.width, victoryLabel.size.height*2.0/3.0)
         
@@ -265,24 +271,6 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
         victoryLabel.yScale = 0.0
         addChild(victoryLabel)
         
-        var victoryAction = SKAction.sequence(
-            [
-                SKAction.scaleTo(2.0, duration: 0.25),
-                SKAction.scaleTo(1.0, duration: 0.25)
-            ])
-        
-        victoryLabel.runAction(victoryAction)
-        
-        /*victoryLabel = SKLabelNode(fontNamed: "Super Mario 256")
-        victoryLabel.text = "Victory!"
-        victoryLabel.position = CGPointMake(size.width/2.0, size.height/2.0)
-        victoryLabel.fontSize = size.height/8
-        //victoryLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
-        //victoryLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
-        victoryLabel.fontColor = SKColor.yellowColor()
-        victoryLabel.xScale = 0.0
-        victoryLabel.yScale = 0.0
-        addChild(victoryLabel)
         var victoryAction = SKAction.sequence(
             [
                 SKAction.scaleTo(2.0, duration: 0.25),

@@ -25,7 +25,7 @@ extension SKNode {
     }
 }
 
-class MrSkunkViewController: UIViewController {
+class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
     
     //var exitButton : THButton!
     var toolbar = UIToolbar()
@@ -72,6 +72,7 @@ class MrSkunkViewController: UIViewController {
             
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .AspectFill
+            scene.mrSkunkDelegate = self
             
             let maxAspectRatio: CGFloat = 16.0/9.0
             // know we are coming from title screen which is always portrait to this screen which is always landscape but it hasn't autorotated yet but that's why height and width are swapped below
@@ -156,6 +157,10 @@ class MrSkunkViewController: UIViewController {
     func mapMethod()
     {
         println("Put in Map here")
+    }
+    
+    func levelComplete() {
+        println("mr skunk delegate method called!")
     }
     
     override func shouldAutorotate() -> Bool {
