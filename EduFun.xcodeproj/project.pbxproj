@@ -20,6 +20,9 @@
 		A5554D4C1B3239AE002B06E5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */; };
 		A558C3E31B473FEC00FDBB8B /* RocketShip.svg in Resources */ = {isa = PBXBuildFile; fileRef = A558C3E21B473FEC00FDBB8B /* RocketShip.svg */; };
 		A558C3E91B47527100FDBB8B /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A558C3E81B47527100FDBB8B /* AboutViewController.swift */; };
+		A56E0ECF1B4DA6D2006F819F /* MrSkunkLevel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E0ECE1B4DA6D2006F819F /* MrSkunkLevel2.swift */; };
+		A56E0ED11B4DA72A006F819F /* MrSkunkLevel2.sks in Resources */ = {isa = PBXBuildFile; fileRef = A56E0ED01B4DA72A006F819F /* MrSkunkLevel2.sks */; };
+		A58960811B4D8EBE00555C83 /* Level2Back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A58960801B4D8EBE00555C83 /* Level2Back.jpg */; };
 		A5925F551B41CB42000E8FF8 /* MrSkunkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5925F541B41CB42000E8FF8 /* MrSkunkViewController.swift */; };
 		A5925F591B41CE7A000E8FF8 /* MrSkunkLevel1.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5925F581B41CE7A000E8FF8 /* MrSkunkLevel1.swift */; };
 		A595C3E11B3B0A2E001C6040 /* PaletteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A595C3E01B3B0A2E001C6040 /* PaletteViewController.m */; };
@@ -105,6 +108,9 @@
 		A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A558C3E21B473FEC00FDBB8B /* RocketShip.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = RocketShip.svg; path = Art/RocketShip.svg; sourceTree = "<group>"; };
 		A558C3E81B47527100FDBB8B /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		A56E0ECE1B4DA6D2006F819F /* MrSkunkLevel2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MrSkunkLevel2.swift; sourceTree = "<group>"; };
+		A56E0ED01B4DA72A006F819F /* MrSkunkLevel2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MrSkunkLevel2.sks; sourceTree = SOURCE_ROOT; };
+		A58960801B4D8EBE00555C83 /* Level2Back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Level2Back.jpg; path = Art/Level2/Level2Back.jpg; sourceTree = "<group>"; };
 		A5925F541B41CB42000E8FF8 /* MrSkunkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MrSkunkViewController.swift; path = ../MrSkunkViewController.swift; sourceTree = "<group>"; };
 		A5925F581B41CE7A000E8FF8 /* MrSkunkLevel1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MrSkunkLevel1.swift; sourceTree = "<group>"; };
 		A595C3DF1B3B0A2E001C6040 /* PaletteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaletteViewController.h; path = ../PaletteViewController.h; sourceTree = "<group>"; };
@@ -207,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				A50CFA2D1B4AF74F00B5F419 /* Level1Back.jpg */,
+				A58960801B4D8EBE00555C83 /* Level2Back.jpg */,
 			);
 			name = MrSkunkLevels;
 			sourceTree = "<group>";
@@ -243,6 +250,8 @@
 				A5925F541B41CB42000E8FF8 /* MrSkunkViewController.swift */,
 				A5925F581B41CE7A000E8FF8 /* MrSkunkLevel1.swift */,
 				A5A633D81B48438C00728E65 /* MrSkunkLevel1.sks */,
+				A56E0ECE1B4DA6D2006F819F /* MrSkunkLevel2.swift */,
+				A56E0ED01B4DA72A006F819F /* MrSkunkLevel2.sks */,
 				A558C3E81B47527100FDBB8B /* AboutViewController.swift */,
 				A5A633D31B4836A900728E65 /* MrSkunk.atlas */,
 				A5B85EBF1B276636008012F7 /* Images.xcassets */,
@@ -414,6 +423,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A595C3EA1B3B4990001C6040 /* SuperMario256.ttf in Resources */,
+				A56E0ED11B4DA72A006F819F /* MrSkunkLevel2.sks in Resources */,
+				A58960811B4D8EBE00555C83 /* Level2Back.jpg in Resources */,
 				A5B85EC31B276636008012F7 /* LaunchScreen.xib in Resources */,
 				A5B85EC01B276636008012F7 /* Images.xcassets in Resources */,
 				A50CFA2E1B4AF74F00B5F419 /* Level1Back.jpg in Resources */,
@@ -445,6 +456,7 @@
 				A532ADE11B27959F00A46930 /* Card.swift in Sources */,
 				A5112C091B2D019F00215DA2 /* UIImage+ColorAtPixel.m in Sources */,
 				A5CA0F4F1B2F64CA008BD79D /* UIImage+Resize.m in Sources */,
+				A56E0ECF1B4DA6D2006F819F /* MrSkunkLevel2.swift in Sources */,
 				A536FE771B350D2C00443B93 /* ColoringBookViewController.m in Sources */,
 				A595C3E11B3B0A2E001C6040 /* PaletteViewController.m in Sources */,
 				A5925F551B41CB42000E8FF8 /* MrSkunkViewController.swift in Sources */,

@@ -16,7 +16,7 @@ extension SKNode {
             var archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
             
             archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
-            let scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! MrSkunkLevel1Scene
+            let scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! SKScene
             archiver.finishDecoding()
             return scene
         } else {
@@ -29,7 +29,7 @@ class MrSkunkViewController: UIViewController {
     
     //var exitButton : THButton!
     var toolbar = UIToolbar()
-    let kToolbarHeight = CGFloat(30.0)
+    let kToolbarHeight = CGFloat(25.0)
     var exitBarButton : UIBarButtonItem!
     var mapButton : UIBarButtonItem!
     var restartBarButton : UIBarButtonItem!
@@ -55,7 +55,8 @@ class MrSkunkViewController: UIViewController {
     
     func startup()
     {
-        if let scene = MrSkunkLevel1Scene.unarchiveFromFile("MrSkunkLevel1") as? MrSkunkLevel1Scene
+        //if let scene = MrSkunkLevel1Scene.unarchiveFromFile("MrSkunkLevel1") as? MrSkunkLevel1Scene
+        if let scene = MrSkunkLevel2Scene.unarchiveFromFile("MrSkunkLevel2") as? MrSkunkLevel2Scene
         {
             // Configure the view.
             //let skView = self.view as! SKView
@@ -175,6 +176,6 @@ class MrSkunkViewController: UIViewController {
     }
     
     deinit {
-        println("Knock Blocks ViewController deinit")
+        println("Mr Skunk ViewController deinit")
     }
 }
