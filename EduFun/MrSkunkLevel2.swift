@@ -26,7 +26,7 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
         static let Wheel:      UInt32 = 0b100000
     }
     
-    let kCannonImpulseStrength : CGFloat = 700.0
+    let kCannonImpulseStrength : CGFloat = 1050.0
     
     var lastTouchedPoint : CGPoint!
     
@@ -41,6 +41,7 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
     var skunkNodeShot : Bool = false
     var skunkNode : SKSpriteNode!
     var goalNode : SKSpriteNode!
+    var hoopNode : SKSpriteNode!
     var wheelNode : SKSpriteNode!
     var cannonNode : SKSpriteNode!
     var backgroundNodeArr : [SKSpriteNode!]! = []
@@ -79,7 +80,7 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
         physicsBody = SKPhysicsBody(edgeLoopFromRect: playableRect)
         physicsWorld.contactDelegate = self
         physicsBody!.categoryBitMask = PhysicsCategory.Edge
-        physicsWorld.gravity = CGVectorMake(0.0, -4.0)
+        physicsWorld.gravity = CGVectorMake(0.0, -9.8)
         
         skunkNode = childNodeWithName("skunk") as! SKSpriteNode
         skunkNode.physicsBody = SKPhysicsBody(circleOfRadius: skunkNode.size.width/2.0)
@@ -89,10 +90,11 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
         skunkNode.physicsBody!.contactTestBitMask = PhysicsCategory.Goal
         skunkNode.physicsBody!.collisionBitMask = kContactAll & ~(PhysicsCategory.Cannon | PhysicsCategory.Wheel | PhysicsCategory.Goal)
         // physics categories arranged in Z order so just use that
+        skunkNode.physicsBody!.restitution = 0.8
         skunkNode.zPosition = CGFloat(PhysicsCategory.Skunk)
         
         goalNode = childNodeWithName("goal") as! SKSpriteNode
-        goalNode.physicsBody = SKPhysicsBody(circleOfRadius: goalNode.size.width/2.0)
+        goalNode.physicsBody = SKPhysicsBody(rectangleOfSize:goalNode.size)
         goalNode.physicsBody!.dynamic = false
         goalNode.physicsBody!.affectedByGravity = false
         goalNode.physicsBody!.categoryBitMask = PhysicsCategory.Goal
@@ -100,6 +102,17 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
         goalNode.physicsBody!.collisionBitMask = kContactAll
         // physics categories arranged in Z order so just use that
         goalNode.zPosition = CGFloat(-101)
+        
+        hoopNode = childNodeWithName("hoop") as! SKSpriteNode
+        hoopNode.physicsBody = SKPhysicsBody(circleOfRadius: hoopNode.size.width/2.0)
+        hoopNode.physicsBody!.dynamic = false
+        hoopNode.physicsBody!.affectedByGravity = false
+        hoopNode.physicsBody!.categoryBitMask = PhysicsCategory.None
+        hoopNode.physicsBody!.contactTestBitMask = PhysicsCategory.None
+        hoopNode.physicsBody!.collisionBitMask = PhysicsCategory.None
+        // physics categories arranged in Z order so just use that
+        // always in front of skunk
+        hoopNode.zPosition = CGFloat(PhysicsCategory.Skunk+1)
         
         wheelNode = childNodeWithName("wheel") as! SKSpriteNode
         wheelNode.physicsBody = SKPhysicsBody(circleOfRadius: wheelNode.size.width/2.0)
@@ -156,7 +169,7 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
-        /*let touch: UITouch = touches.first as! UITouch
+        let touch: UITouch = touches.first as! UITouch
         let location = touch.locationInNode(self)
         let targetNode = self.nodeAtPoint(location)
         
@@ -173,7 +186,7 @@ class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
             lastTouchedPoint = location
             let orientConstraint = SKConstraint.orientToPoint(lastTouchedPoint, offset: SKRange(lowerLimit: 0.0, upperLimit: 0.0))
             cannonNode.constraints = [orientConstraint]
-        }*/
+        }
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
