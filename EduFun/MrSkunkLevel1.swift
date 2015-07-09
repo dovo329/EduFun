@@ -10,7 +10,13 @@ import SpriteKit
 
 let kContactAll : UInt32 = 0xffffffff
 
+protocol MrSkunkLevelDelegate {
+    func levelComplete()
+}
+
 class MrSkunkLevel1Scene: SKScene, SKPhysicsContactDelegate {
+    
+    var mrSkunkDelegate : MrSkunkLevelDelegate! = nil
     
     struct PhysicsCategory {
         static let None:       UInt32 = 0b0
@@ -282,6 +288,8 @@ class MrSkunkLevel1Scene: SKScene, SKPhysicsContactDelegate {
     
     func doVictory()
     {
+        mrSkunkDelegate.levelComplete()
+        /*
         let victorySize = CGFloat(size.height/5.0)
         let victoryLabel = ASAttributedLabelNode(size:CGSizeMake(playableRect.size.width*0.8, victorySize))
         let buttonFrame : CGRect = CGRectMake(victoryLabel.position.x, victoryLabel.position.y+victoryLabel.size.height, victoryLabel.size.width, victoryLabel.size.height*2.0/3.0)
@@ -308,7 +316,7 @@ class MrSkunkLevel1Scene: SKScene, SKPhysicsContactDelegate {
             ])
         
         victoryLabel.runAction(victoryAction)
-        
+        */
         /*victoryLabel = SKLabelNode(fontNamed: "Super Mario 256")
         victoryLabel.text = "Victory!"
         victoryLabel.position = CGPointMake(size.width/2.0, size.height/2.0)

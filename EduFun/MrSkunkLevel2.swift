@@ -8,10 +8,6 @@
 
 import SpriteKit
 
-protocol MrSkunkLevelDelegate {
-    func levelComplete()
-}
-
 class MrSkunkLevel2Scene: SKScene, SKPhysicsContactDelegate {
 
     var mrSkunkDelegate : MrSkunkLevelDelegate! = nil

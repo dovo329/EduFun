@@ -60,7 +60,8 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
     func startup()
     {
         //if let scene = MrSkunkLevel1Scene.unarchiveFromFile("MrSkunkLevel1") as? MrSkunkLevel1Scene
-        if let scene = MrSkunkLevel2Scene.unarchiveFromFile("MrSkunkLevel2") as? MrSkunkLevel2Scene
+        //if let scene = MrSkunkLevel2Scene.unarchiveFromFile("MrSkunkLevel2") as? MrSkunkLevel2Scene
+        if let scene = MrSkunkLevel3Scene.unarchiveFromFile("MrSkunkLevel3") as? MrSkunkLevel3Scene
         {
             //scaleOutRemoveView(completeLabel, duration: 0.5, delay: 0.0)
             // Configure the view.

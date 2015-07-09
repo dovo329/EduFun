@@ -22,7 +22,6 @@
 		A558C3E91B47527100FDBB8B /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A558C3E81B47527100FDBB8B /* AboutViewController.swift */; };
 		A56E0ECF1B4DA6D2006F819F /* MrSkunkLevel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E0ECE1B4DA6D2006F819F /* MrSkunkLevel2.swift */; };
 		A56E0ED11B4DA72A006F819F /* MrSkunkLevel2.sks in Resources */ = {isa = PBXBuildFile; fileRef = A56E0ED01B4DA72A006F819F /* MrSkunkLevel2.sks */; };
-		A58960811B4D8EBE00555C83 /* Level2Back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A58960801B4D8EBE00555C83 /* Level2Back.jpg */; };
 		A5925F551B41CB42000E8FF8 /* MrSkunkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5925F541B41CB42000E8FF8 /* MrSkunkViewController.swift */; };
 		A5925F591B41CE7A000E8FF8 /* MrSkunkLevel1.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5925F581B41CE7A000E8FF8 /* MrSkunkLevel1.swift */; };
 		A595C3E11B3B0A2E001C6040 /* PaletteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A595C3E01B3B0A2E001C6040 /* PaletteViewController.m */; };
@@ -38,6 +37,10 @@
 		A5CA0F4F1B2F64CA008BD79D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F4E1B2F64CA008BD79D /* UIImage+Resize.m */; };
 		A5CA0F541B2F67FA008BD79D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F511B2F67FA008BD79D /* UIImage+Resize.m */; };
 		A5CA0F551B2F67FA008BD79D /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */; };
+		A5CBB8FC1B4DF17500A446FE /* MrSkunkLevel3.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CBB8FB1B4DF17500A446FE /* MrSkunkLevel3.swift */; };
+		A5CBB8FF1B4DF18A00A446FE /* MrSkunkLevel3.sks in Resources */ = {isa = PBXBuildFile; fileRef = A5CBB8FE1B4DF18A00A446FE /* MrSkunkLevel3.sks */; };
+		A5CBB9011B4DFC0500A446FE /* Level3Back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5CBB9001B4DFC0500A446FE /* Level3Back.jpg */; };
+		A5CBB9031B4E001800A446FE /* Level2Back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5CBB9021B4E001800A446FE /* Level2Back.jpg */; };
 		A5DB888F1B3B707D00B8CA08 /* THLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DB888E1B3B707D00B8CA08 /* THLabel.m */; };
 		A5E3C5A01B4AF9E5000D023F /* ASAttributedLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E3C59F1B4AF9E5000D023F /* ASAttributedLabelNode.swift */; };
 		A5EB8DF51B3CC765009A8A3A /* THButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB8DF41B3CC765009A8A3A /* THButton.swift */; };
@@ -110,7 +113,6 @@
 		A558C3E81B47527100FDBB8B /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		A56E0ECE1B4DA6D2006F819F /* MrSkunkLevel2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MrSkunkLevel2.swift; sourceTree = "<group>"; };
 		A56E0ED01B4DA72A006F819F /* MrSkunkLevel2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MrSkunkLevel2.sks; sourceTree = SOURCE_ROOT; };
-		A58960801B4D8EBE00555C83 /* Level2Back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Level2Back.jpg; path = Art/Level2/Level2Back.jpg; sourceTree = "<group>"; };
 		A5925F541B41CB42000E8FF8 /* MrSkunkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MrSkunkViewController.swift; path = ../MrSkunkViewController.swift; sourceTree = "<group>"; };
 		A5925F581B41CE7A000E8FF8 /* MrSkunkLevel1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MrSkunkLevel1.swift; sourceTree = "<group>"; };
 		A595C3DF1B3B0A2E001C6040 /* PaletteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaletteViewController.h; path = ../PaletteViewController.h; sourceTree = "<group>"; };
@@ -135,6 +137,10 @@
 		A5CA0F511B2F67FA008BD79D /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Art/UIImage+Resize.m"; sourceTree = "<group>"; };
 		A5CA0F521B2F67FA008BD79D /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RoundedCorner.h"; path = "Art/UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCorner.m"; path = "Art/UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		A5CBB8FB1B4DF17500A446FE /* MrSkunkLevel3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MrSkunkLevel3.swift; sourceTree = "<group>"; };
+		A5CBB8FE1B4DF18A00A446FE /* MrSkunkLevel3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MrSkunkLevel3.sks; sourceTree = "<group>"; };
+		A5CBB9001B4DFC0500A446FE /* Level3Back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Level3Back.jpg; path = Art/Level3/Level3Back.jpg; sourceTree = "<group>"; };
+		A5CBB9021B4E001800A446FE /* Level2Back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Level2Back.jpg; path = Art/Level2/Level2Back.jpg; sourceTree = "<group>"; };
 		A5DB888D1B3B707D00B8CA08 /* THLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLabel.h; sourceTree = "<group>"; };
 		A5DB888E1B3B707D00B8CA08 /* THLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLabel.m; sourceTree = "<group>"; };
 		A5E3C59F1B4AF9E5000D023F /* ASAttributedLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ASAttributedLabelNode.swift; path = ../ASAttributedLabelNode/ASAttributedLabelNode.swift; sourceTree = "<group>"; };
@@ -212,8 +218,9 @@
 		A5A633D51B4842CC00728E65 /* MrSkunkLevels */ = {
 			isa = PBXGroup;
 			children = (
+				A5CBB9001B4DFC0500A446FE /* Level3Back.jpg */,
 				A50CFA2D1B4AF74F00B5F419 /* Level1Back.jpg */,
-				A58960801B4D8EBE00555C83 /* Level2Back.jpg */,
+				A5CBB9021B4E001800A446FE /* Level2Back.jpg */,
 			);
 			name = MrSkunkLevels;
 			sourceTree = "<group>";
@@ -252,6 +259,8 @@
 				A5A633D81B48438C00728E65 /* MrSkunkLevel1.sks */,
 				A56E0ECE1B4DA6D2006F819F /* MrSkunkLevel2.swift */,
 				A56E0ED01B4DA72A006F819F /* MrSkunkLevel2.sks */,
+				A5CBB8FB1B4DF17500A446FE /* MrSkunkLevel3.swift */,
+				A5CBB8FE1B4DF18A00A446FE /* MrSkunkLevel3.sks */,
 				A558C3E81B47527100FDBB8B /* AboutViewController.swift */,
 				A5A633D31B4836A900728E65 /* MrSkunk.atlas */,
 				A5B85EBF1B276636008012F7 /* Images.xcassets */,
@@ -424,14 +433,16 @@
 			files = (
 				A595C3EA1B3B4990001C6040 /* SuperMario256.ttf in Resources */,
 				A56E0ED11B4DA72A006F819F /* MrSkunkLevel2.sks in Resources */,
-				A58960811B4D8EBE00555C83 /* Level2Back.jpg in Resources */,
+				A5CBB8FF1B4DF18A00A446FE /* MrSkunkLevel3.sks in Resources */,
 				A5B85EC31B276636008012F7 /* LaunchScreen.xib in Resources */,
 				A5B85EC01B276636008012F7 /* Images.xcassets in Resources */,
+				A5CBB9011B4DFC0500A446FE /* Level3Back.jpg in Resources */,
 				A50CFA2E1B4AF74F00B5F419 /* Level1Back.jpg in Resources */,
 				A5A633D91B48438C00728E65 /* MrSkunkLevel1.sks in Resources */,
 				A509E26D1B4ADD77009ACAB5 /* Unicorn.svg in Resources */,
 				A5EBCCC51B361F0E006E52D6 /* mtnHouse.svg in Resources */,
 				A558C3E31B473FEC00FDBB8B /* RocketShip.svg in Resources */,
+				A5CBB9031B4E001800A446FE /* Level2Back.jpg in Resources */,
 				A5A633D41B4836A900728E65 /* MrSkunk.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,6 +467,7 @@
 				A532ADE11B27959F00A46930 /* Card.swift in Sources */,
 				A5112C091B2D019F00215DA2 /* UIImage+ColorAtPixel.m in Sources */,
 				A5CA0F4F1B2F64CA008BD79D /* UIImage+Resize.m in Sources */,
+				A5CBB8FC1B4DF17500A446FE /* MrSkunkLevel3.swift in Sources */,
 				A56E0ECF1B4DA6D2006F819F /* MrSkunkLevel2.swift in Sources */,
 				A536FE771B350D2C00443B93 /* ColoringBookViewController.m in Sources */,
 				A595C3E11B3B0A2E001C6040 /* PaletteViewController.m in Sources */,
