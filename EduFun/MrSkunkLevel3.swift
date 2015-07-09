@@ -75,7 +75,7 @@ class MrSkunkLevel3Scene: SKScene, SKPhysicsContactDelegate {
         physicsBody = SKPhysicsBody(edgeLoopFromRect: playableRect)
         physicsWorld.contactDelegate = self
         physicsBody!.categoryBitMask = PhysicsCategory.Edge
-        physicsWorld.gravity = CGVectorMake(0.0, -4.0)
+        physicsWorld.gravity = CGVectorMake(0.0, -9.8)
         
         skunkNode = childNodeWithName("skunk") as! SKSpriteNode
         skunkNode.physicsBody = SKPhysicsBody(circleOfRadius: skunkNode.size.width/2)
@@ -128,10 +128,10 @@ class MrSkunkLevel3Scene: SKScene, SKPhysicsContactDelegate {
         let orbPlankJoint = SKPhysicsJointPin.jointWithBodyA(orbNode.physicsBody, bodyB: plankNode.physicsBody, anchor: orbNode.position)
         physicsWorld.addJoint(orbPlankJoint)
         
-        let plankRopeJoint = SKPhysicsJointPin.jointWithBodyA(plankNode.physicsBody, bodyB: ropeNode.physicsBody, anchor: getPointLeft(ropeNode))
+        let plankRopeJoint = SKPhysicsJointPin.jointWithBodyA(plankNode.physicsBody, bodyB: ropeNode.physicsBody, anchor: getPointRight(ropeNode))
         physicsWorld.addJoint(plankRopeJoint)
         
-        let ropeWeightJoint = SKPhysicsJointPin.jointWithBodyA(ropeNode.physicsBody, bodyB: weightNode.physicsBody, anchor: getPointRight(ropeNode))
+        let ropeWeightJoint = SKPhysicsJointPin.jointWithBodyA(ropeNode.physicsBody, bodyB: weightNode.physicsBody, anchor: getPointLeft(ropeNode))
         physicsWorld.addJoint(ropeWeightJoint)
         
         enumerateChildNodesWithName("floor", usingBlock: { (node, _) -> Void in

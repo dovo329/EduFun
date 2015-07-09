@@ -119,7 +119,8 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
             toolbar.items = [exitBarButton, flexibleSpace, restartBarButton, flexibleSpace, mapButton]
             //skView.addSubview(exitButton)
             skView.addSubview(toolbar)
-            level2Hint()
+            //level2Hint()
+            level3Hint()
             //skView.showsPhysics = true
             skView.presentScene(scene)
             
@@ -178,9 +179,6 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
         hint.textColor = UIColor.yellowColor()
         hint.strokeSize = (0.8/320.0)*hint.frame.size.width
         hint.strokeColor = UIColor.blackColor()
-        //hint.shadowOffset = CGSizeMake(hint.strokeSize, hint.strokeSize)
-        //hint.shadowColor = UIColor.blackColor()
-        //hint.shadowBlur = (1.0/320.0)*hint.frame.size.width
         hint.layer.anchorPoint = CGPointMake(0.5, 0.5)
         hint.layer.shouldRasterize = true
         view.addSubview(hint)
@@ -195,12 +193,26 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
         hint2.textColor = UIColor.yellowColor()
         hint2.strokeSize = (0.8/320.0)*hint2.frame.size.width
         hint2.strokeColor = UIColor.blackColor()
-        //hint2.shadowOffset = CGSizeMake(hint2.strokeSize, hint2.strokeSize)
-        //hint2.shadowColor = UIColor.blackColor()
-        //hint2.shadowBlur = (1.0/320.0)*hint2.frame.size.width
         hint2.layer.anchorPoint = CGPointMake(0.5, 0.5)
         hint2.layer.shouldRasterize = true
         view.addSubview(hint2)
+    }
+    
+    func level3Hint() {
+        let textHeight = CGFloat(15.0)
+        var hint = THLabel()
+        hint.text = "Touch Orange Wedge to Start"
+        hint.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: textHeight)
+        hint.font = UIFont(name: "Super Mario 256", size: textHeight)
+        hint.frame.size.height = hint.font.pointSize*1.3
+        hint.frame.origin.y = view.frame.size.height-(playableMargin+hint.frame.size.height)
+        hint.textAlignment = NSTextAlignment.Center
+        hint.textColor = UIColor.yellowColor()
+        hint.strokeSize = (0.8/320.0)*hint.frame.size.width
+        hint.strokeColor = UIColor.blackColor()
+        hint.layer.anchorPoint = CGPointMake(0.5, 0.5)
+        hint.layer.shouldRasterize = true
+        view.addSubview(hint)
     }
     
     func levelComplete() {
