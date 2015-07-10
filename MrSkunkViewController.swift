@@ -63,7 +63,14 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
         }
         println("highestCompletedLevelNum = \(highestCompletedLevelNum)")
         
-        currentLevel = highestCompletedLevelNum + 1
+        if (highestCompletedLevelNum >= kNumLevels)
+        {
+            currentLevel = 1
+        }
+        else
+        {
+            currentLevel = highestCompletedLevelNum + 1
+        }
         
         if let coder = coder {
             super.init(coder: coder)
@@ -370,19 +377,32 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
             
             bounceInView(nextButton, duration:CGFloat(0.5), delay:CGFloat(0.0))
         }
-    }
-    
-    func nextButtonMethod(sender : THButton, event : UIEvent)
-    {
-        currentLevel++
-        highestCompletedLevelNum++
         
+        if (currentLevel > highestCompletedLevelNum)
+        {
+            highestCompletedLevelNum = currentLevel
+        }
+        
+        currentLevel++
         if currentLevel > (kNumLevels + 1) // +1 because of youwin scene
         {
             currentLevel=1
             highestCompletedLevelNum=kNumLevels
         }
         
+        saveHighestCompletedLevelNum()
+    }
+    
+    func saveHighestCompletedLevelNum()
+    {
+        // save highest completed level
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(highestCompletedLevelNum, forKey: kHighestCompletedLevelKey)
+        println("saving highest completed level \(highestCompletedLevelNum)")
+    }
+    
+    func nextButtonMethod(sender : THButton, event : UIEvent)
+    {
         scaleOutRemoveView(completeLabel, duration: 0.5, delay: 0.0)
         scaleOutRemoveView(nextButton, duration: 0.5, delay: 0.0)
         
@@ -404,12 +424,5 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
     
     override func prefersStatusBarHidden() -> Bool {
         return true
-    }
-    
-    deinit {
-        // save highest completed level
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(highestCompletedLevelNum, forKey: kHighestCompletedLevelKey)
-        println("Mr Skunk ViewController deinit")
     }
 }

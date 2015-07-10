@@ -92,7 +92,7 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
                 levelNumLabel.frame = makeCenteredRectWithScale(0.7, ofFrame: cell!.frame)
                 levelNumLabel.frame.origin.x -= levelNumLabel.frame.size.width*0.08 // shift left a bit since map is curled to the left to make it look centered on the curled map
                 levelNumLabel.frame.origin.y += levelNumLabel.frame.size.height*0.08 // offset due to space under font due to the way font is made it's vertically top oriented not vertically centered so all the space is at the bottom so get rid of this offset
-                levelNumLabel.text = String(format:"%d", totIndex)
+                levelNumLabel.text = String(format:"%d", totIndex+1)
                 //levelNumLabel.text = "15"
                 levelNumLabel.font = UIFont(name: "Super Mario 256", size: 25.0)
                 levelNumLabel.font = levelNumLabel.font.fontWithSize(getFontSizeToFitFrameOfLabel(levelNumLabel)-5.0)
