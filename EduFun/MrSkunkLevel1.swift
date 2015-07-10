@@ -21,8 +21,6 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
     }
     
     let kToolbarHeight = CGFloat(30.0)
-    let kHintZPosition = CGFloat(100.0)
-    let kVictoryZPosition = CGFloat(101.0)
     
     let kContactAllExceptCan : UInt32 = kContactAll & ~PhysicsCategory.GarbageCan
     
@@ -68,8 +66,6 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
         (size.height - maxAspectRatioHeight)/2
         playableRect = CGRect(x: 0, y: playableMargin,
             width: size.width, height: size.height-playableMargin*2)
-        
-        doHint()
         
         physicsBody = SKPhysicsBody(edgeLoopFromRect: playableRect)
         physicsWorld.contactDelegate = self
@@ -359,22 +355,5 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
             NSParagraphStyleAttributeName,
             value:para, range:NSMakeRange(0,1))
         return myMutableString
-    }
-    
-    func doHint()
-    {
-        let hintSize = CGFloat(80.0)
-        let hintLabel = ASAttributedLabelNode(size:CGSizeMake(playableRect.size.width*0.9, hintSize))
-        
-        hintLabel.attributedString = outlinedCenteredString("Touch the Rope to Release the Wood", size: hintSize)
-        
-        hintLabel.position =
-            CGPointMake(
-                size.width/2.0,
-                ((size.height - playableRect.size.height)/2.0) + hintSize/2.0
-        )
-
-        hintLabel.zPosition = kHintZPosition
-        addChild(hintLabel)
     }
 }

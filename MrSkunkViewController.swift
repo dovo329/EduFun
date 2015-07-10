@@ -26,7 +26,9 @@ extension SKNode {
 }
 
 class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
-    
+
+    var skView : SKView!
+    let kNewLevelAnimationDuration = 2.0
     var playableRect : CGRect = CGRectMake(0,0,0,0)
     var playableHeight : CGFloat = 0.0
     var playableMargin : CGFloat = 0.0
@@ -38,11 +40,14 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
     var restartBarButton : UIBarButtonItem!
     var flexibleSpace : UIBarButtonItem!
     var completeLabel : THLabel = THLabel()
+    var nextButton : THButton!
     var highestCompletedLevelNum : Int = 0
     let kHighestCompletedLevelKey = "highest.completed.level.key"
     var mapView : MrSkunkMapView!
     var mapVisible : Bool = false
     var currentLevel : Int = 0
+    var hint = THLabel()
+    var hint2 = THLabel()
     
     init(_ coder: NSCoder? = nil) {
         
@@ -57,16 +62,13 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
         }
         println("highestCompletedLevelNum = \(highestCompletedLevelNum)")
         
-        currentLevel = highestCompletedLevelNum+1
+        currentLevel = highestCompletedLevelNum + 1
         
         if let coder = coder {
             super.init(coder: coder)
         } else {
             super.init(nibName: nil, bundle:nil)
         }
-        
-        mapView = MrSkunkMapView(frame: makeCenteredRectWithScale(0.7, ofFrame:view.frame), highestCompletedLevelNum: highestCompletedLevelNum)
-        println("view.frame=\(view.frame) mapView.frame=\(mapView.frame)")
     }
     
     required convenience init(coder: NSCoder) {
@@ -76,7 +78,41 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        skView = SKView(frame: UIScreen.mainScreen().applicationFrame)
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        
+        // Sprite Kit applies additional optimizations to improve rendering performance
+        skView.ignoresSiblingOrder = true
+        
+        self.view.addSubview(skView)
+        mapView = MrSkunkMapView(frame: makeCenteredRectWithScale(0.7, ofFrame:self.view.frame), highestCompletedLevelNum: highestCompletedLevelNum)
+        //println("view.frame=\(view.frame) mapView.frame=\(mapView.frame)")
+        
+        let maxAspectRatio: CGFloat = 16.0/9.0
+        // know we are coming from title screen which is always portrait to this screen which is always landscape but it hasn't autorotated yet but that's why height and width are swapped below
+        playableHeight = self.view.frame.size.width / maxAspectRatio
+        playableMargin = (self.view.frame.size.height-playableHeight)/2.0
+        playableRect = CGRect(x:0, y: playableMargin, width: self.view.frame.size.width, height: playableHeight)
+        
+        exitBarButton = UIBarButtonItem(title: "Exit", style: UIBarButtonItemStyle.Plain, target: self, action: "exitButtonMethod")
+        
+        var restartImg = UIImage(named: "Restart")
+        restartImg = restartImg?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        restartBarButton = UIBarButtonItem(image: restartImg, style: UIBarButtonItemStyle.Plain, target: self, action: "restartMethod")
+        
+        var mapImg = UIImage(named: "SkunkMap")
+        mapImg = mapImg?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        mapButton = UIBarButtonItem(image: mapImg, style: UIBarButtonItemStyle.Plain, target: self, action: "mapMethod")
+        
+        flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        
+        toolbar.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, kToolbarHeight)
+        
+        toolbar.items = [exitBarButton, flexibleSpace, restartBarButton, flexibleSpace, mapButton]
+        
         startup(level: currentLevel)
+        self.view.addSubview(toolbar)
     }
     
     func startup(#level : Int)
@@ -114,54 +150,30 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
                 fatalError("level3 failed to load")
             }
             
+        case 4:
+            println("You Win!")
+            
         default:
             fatalError("Invalid Level")
         }
         
-        //scaleOutRemoveView(completeLabel, duration: 0.5, delay: 0.0)
-        // Configure the view.
-        // let skView = self.view as! SKView
-        var view : SKView = SKView(frame: UIScreen.mainScreen().applicationFrame)
-        self.view = view
-        let skView = self.view as! SKView
-        
-        skView.showsFPS = true
-        skView.showsNodeCount = true
-        
-        // Sprite Kit applies additional optimizations to improve rendering performance
-        skView.ignoresSiblingOrder = true
+        if skView.scene == nil
+        {
+            levelHint(level: currentLevel)
+        }
         
         // Set the scale mode to scale to fit the window
         scene.scaleMode = .AspectFill
         scene.mrSkunkDelegate = self
-        
-        let maxAspectRatio: CGFloat = 16.0/9.0
-        // know we are coming from title screen which is always portrait to this screen which is always landscape but it hasn't autorotated yet but that's why height and width are swapped below
-        playableHeight = skView.frame.size.width / maxAspectRatio
-        playableMargin = (skView.frame.size.height-playableHeight)/2.0
-        playableRect = CGRect(x:0, y: playableMargin, width: skView.frame.size.width, height: playableHeight)
-        
-        exitBarButton = UIBarButtonItem(title: "Exit", style: UIBarButtonItemStyle.Plain, target: self, action: "exitButtonMethod")
-        
-        var restartImg = UIImage(named: "Restart")
-        restartImg = restartImg?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        restartBarButton = UIBarButtonItem(image: restartImg, style: UIBarButtonItemStyle.Plain, target: self, action: "restartMethod")
-        
-        var mapImg = UIImage(named: "SkunkMap")
-        mapImg = mapImg?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        mapButton = UIBarButtonItem(image: mapImg, style: UIBarButtonItemStyle.Plain, target: self, action: "mapMethod")
-        
-        flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
-        
-        toolbar.frame = CGRectMake(0.0, 0.0, skView.frame.size.width, kToolbarHeight)
-        
-        toolbar.items = [exitBarButton, flexibleSpace, restartBarButton, flexibleSpace, mapButton]
-        skView.addSubview(toolbar)
-        
-        levelHint(level: level)
-        
         //skView.showsPhysics = true
-        skView.presentScene(scene)
+        let reveal = SKTransition.flipHorizontalWithDuration(kNewLevelAnimationDuration)
+        skView.presentScene(scene, transition: reveal)
+    }
+    
+    func willMoveFromView() {
+        // skView scene transition complete
+        println("What happen?")
+        levelHint(level: currentLevel)
     }
     
     func exitButtonMethod()
@@ -172,6 +184,10 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
     
     func restartMethod()
     {
+        scaleOutRemoveView(hint, duration: 0.5, delay: 0.0)
+        scaleOutRemoveView(hint2, duration: 0.5, delay: 0.0)
+        //hint.removeFromSuperview()
+        //hint2.removeFromSuperview()
         startup(level: currentLevel)
     }
     
@@ -181,10 +197,12 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
         if (mapVisible)
         {
             scaleOutRemoveView(mapView, duration: 0.25, delay: 0.0)
+            //mapView.removeFromSuperview()
         }
         else
         {
             scaleInAddView(mapView, parentView:view, duration: 0.25, delay: 0.0)
+            //skView.addSubview(mapView)
         }
         mapVisible = !mapVisible
         //only apply the blur if the user hasn't disabled transparency effects
@@ -211,11 +229,9 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
         switch (level)
         {
         case 1:
-            break
-        case 2:
             let textHeight = CGFloat(15.0)
-            var hint = THLabel()
-            hint.text = "Touch Cannon to Shoot"
+            hint = THLabel()
+            hint.text = "Touch Rope To Free Wood"
             hint.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: textHeight)
             hint.font = UIFont(name: "Super Mario 256", size: textHeight)
             hint.frame.size.height = hint.font.pointSize*1.3
@@ -226,11 +242,27 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
             hint.strokeColor = UIColor.blackColor()
             hint.layer.anchorPoint = CGPointMake(0.5, 0.5)
             hint.layer.shouldRasterize = true
-            view.addSubview(hint)
+            scaleInAddView(hint, parentView: view, duration: 0.5, delay: 0.0)
+            skView.addSubview(hint)
             
-            var hint2 = THLabel()
+        case 2:
+            let textHeight = CGFloat(15.0)
+            hint = THLabel()
+            hint.text = "Touch Cannon to Shoot"
+            hint.frame = CGRect(x: 0.0, y: 0.0, width: skView.frame.size.width, height: textHeight)
+            hint.font = UIFont(name: "Super Mario 256", size: textHeight)
+            hint.frame.size.height = hint.font.pointSize*1.3
+            hint.frame.origin.y = view.frame.size.height-(playableMargin+hint.frame.size.height)
+            hint.textAlignment = NSTextAlignment.Center
+            hint.textColor = UIColor.yellowColor()
+            hint.strokeSize = (0.8/320.0)*hint.frame.size.width
+            hint.strokeColor = UIColor.blackColor()
+            hint.layer.anchorPoint = CGPointMake(0.5, 0.5)
+            hint.layer.shouldRasterize = true
+            
+            hint2 = THLabel()
             hint2.text = "Touch Screen To Aim"
-            hint2.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: textHeight)
+            hint2.frame = CGRect(x: 0.0, y: 0.0, width: skView.frame.size.width, height: textHeight)
             hint2.font = UIFont(name: "Super Mario 256", size: textHeight)
             hint2.frame.size.height = hint2.font.pointSize*1.3
             hint2.frame.origin.y = view.frame.size.height-(playableMargin+hint2.frame.size.height+hint.frame.size.height)
@@ -240,11 +272,16 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
             hint2.strokeColor = UIColor.blackColor()
             hint2.layer.anchorPoint = CGPointMake(0.5, 0.5)
             hint2.layer.shouldRasterize = true
-            view.addSubview(hint2)
+            
+            //view.addSubview(hint)
+            //view.addSubview(hint2)
+            
+            scaleInAddView(hint, parentView: view, duration: 0.5, delay: 0.0)
+            scaleInAddView(hint2, parentView: view, duration: 0.5, delay: 0.0)
             
         case 3:
             let textHeight = CGFloat(15.0)
-            var hint = THLabel()
+            hint = THLabel()
             hint.text = "Touch Orange Wedge to Start"
             hint.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: textHeight)
             hint.font = UIFont(name: "Super Mario 256", size: textHeight)
@@ -256,7 +293,8 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
             hint.strokeColor = UIColor.blackColor()
             hint.layer.anchorPoint = CGPointMake(0.5, 0.5)
             hint.layer.shouldRasterize = true
-            view.addSubview(hint)
+            //scaleInAddView(hint, parentView: view, duration: 0.5, delay: 0.0)
+            skView.addSubview(hint)
         
         default:
             fatalError("Invalid Level")
@@ -265,6 +303,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
     
     func levelComplete() {
         //println("mr skunk delegate method called!")
+        completeLabel = THLabel()
         completeLabel.text = "Complete!"
         completeLabel.frame = makeCenteredRectWithScale(0.8, ofFrame: view.frame)
         completeLabel.font = UIFont(name: "Super Mario 256", size: 45.0)
@@ -281,21 +320,35 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
         completeLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
         completeLabel.layer.shouldRasterize = true
         view.addSubview(completeLabel)
-        spin3BounceView(completeLabel, duration:0.5)
+        bounceInView(completeLabel, duration:CGFloat(0.5), delay:CGFloat(0.0))
         
         var nextButtonFrame = makeCenteredRectWithScale(0.4, ofFrame: view.frame)
         nextButtonFrame.origin.y += completeLabel.frame.size.height*1.5
         nextButtonFrame.size.height *= 0.25
-        var nextButton = THButton(frame: nextButtonFrame, text: "Next Level")
+        //if (nextButton == nil)
+        //{
+            nextButton = THButton(frame: nextButtonFrame, text: "Next Level")
+        //}
+        nextButton.label.text = "Next Level"
+        nextButton.frame = nextButtonFrame
         nextButton.addTarget(self, action: Selector("nextButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
         view.addSubview(nextButton)
         bounceInView(nextButton, duration:CGFloat(0.5), delay:CGFloat(0.0))
+        
+        //hint.removeFromSuperview()
+        //hint2.removeFromSuperview()
+        scaleOutRemoveView(hint, duration: 0.5, delay: 0.0)
+        scaleOutRemoveView(hint2, duration: 0.5, delay: 0.0)
     }
     
     func nextButtonMethod(sender : THButton, event : UIEvent)
     {
         currentLevel++
         highestCompletedLevelNum++
+        
+        scaleOutRemoveView(completeLabel, duration: 0.5, delay: 0.0)
+        scaleOutRemoveView(nextButton, duration: 0.5, delay: 0.0)
+        
         startup(level: currentLevel)
     }
     
