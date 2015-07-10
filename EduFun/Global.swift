@@ -133,6 +133,24 @@ func scaleOutRemoveView(view: UIView, #duration: CGFloat, #delay: CGFloat)
     )
 }
 
+func scaleInAddView(view: UIView, #parentView: UIView, #duration: CGFloat, #delay: CGFloat)
+{
+    view.transform = CGAffineTransformMakeScale(0.01, 0.01)
+    parentView.addSubview(view)
+    
+    UIView.animateWithDuration(
+        NSTimeInterval(duration), delay: NSTimeInterval(delay), options: UIViewAnimationOptions.CurveLinear,
+        animations:
+        {(_) -> (Void) in
+            view.transform = CGAffineTransformMakeScale(1.0, 1.0)
+        },
+        completion:
+        {(_) -> (Void) in
+            
+        }
+    )
+}
+
 func spin3BounceView(view: UIView, #duration: CGFloat)
 {
     // start out at (nearly) zero size.  Can't be zero size since this will make the rotation matrix not work when scaling from 0

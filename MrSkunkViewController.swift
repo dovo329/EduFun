@@ -40,6 +40,8 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
     var completeLabel : THLabel = THLabel()
     var highestCompletedLevelNum : Int!
     let kHighestCompletedLevelKey = "highest.completed.level.key"
+    var mapView : MrSkunkMapView!
+    var mapVisible : Bool = false
     
     init(_ coder: NSCoder? = nil) {
         
@@ -50,6 +52,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
             highestCompletedLevelNum = 0
         }
         println("highestCompletedLevelNum = \(highestCompletedLevelNum)")
+        mapView = MrSkunkMapView(frame: CGRectMake(20, 50, 200, 200), highestCompletedLevelNum: highestCompletedLevelNum)
         
         if let coder = coder {
             super.init(coder: coder)
@@ -175,9 +178,18 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
     
     func mapMethod()
     {
-        println("Put in Map here")
-        var mapView = MrSkunkMapView(frame: CGRectMake(20, 50, 200, 200), highestCompletedLevelNum: highestCompletedLevelNum)
-        view.addSubview(mapView)
+        //println("Put in Map here")
+        if (mapVisible)
+        {
+            scaleOutRemoveView(mapView, duration: 0.5, delay: 0.0)
+            //mapView.removeFromSuperview()
+        }
+        else
+        {
+            scaleInAddView(mapView, parentView:view, duration: 0.5, delay: 0.0)
+            //view.addSubview(mapView)
+        }
+        mapVisible = !mapVisible
         //only apply the blur if the user hasn't disabled transparency effects
         /*if !UIAccessibilityIsReduceTransparencyEnabled() {
             let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
