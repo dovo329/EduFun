@@ -8,9 +8,7 @@
 
 import SpriteKit
 
-class MrSkunkLevel3Scene: SKScene, SKPhysicsContactDelegate {
-    
-    var mrSkunkDelegate : MrSkunkLevelDelegate! = nil
+class MrSkunkLevel3Scene: MrSkunkLevelScene {
     
     struct PhysicsCategory {
         static let None:       UInt32 = 0b0

@@ -8,15 +8,7 @@
 
 import SpriteKit
 
-let kContactAll : UInt32 = 0xffffffff
-
-protocol MrSkunkLevelDelegate {
-    func levelComplete()
-}
-
-class MrSkunkLevel1Scene: SKScene, SKPhysicsContactDelegate {
-    
-    var mrSkunkDelegate : MrSkunkLevelDelegate! = nil
+class MrSkunkLevel1Scene: MrSkunkLevelScene {
     
     struct PhysicsCategory {
         static let None:       UInt32 = 0b0

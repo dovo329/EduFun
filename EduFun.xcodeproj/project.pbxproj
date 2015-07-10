@@ -35,6 +35,7 @@
 		A5B85EC31B276636008012F7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5B85EC11B276636008012F7 /* LaunchScreen.xib */; };
 		A5B85ECF1B276636008012F7 /* EduFunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85ECE1B276636008012F7 /* EduFunTests.swift */; };
 		A5B85ED91B2767E3008012F7 /* MemoryGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85ED81B2767E3008012F7 /* MemoryGameViewController.swift */; };
+		A5C4B2991B50250500016C02 /* MrSkunkLevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C4B2981B50250500016C02 /* MrSkunkLevelScene.swift */; };
 		A5CA0F4F1B2F64CA008BD79D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F4E1B2F64CA008BD79D /* UIImage+Resize.m */; };
 		A5CA0F541B2F67FA008BD79D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F511B2F67FA008BD79D /* UIImage+Resize.m */; };
 		A5CA0F551B2F67FA008BD79D /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */; };
@@ -135,6 +136,7 @@
 		A5B85ECD1B276636008012F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5B85ECE1B276636008012F7 /* EduFunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduFunTests.swift; sourceTree = "<group>"; };
 		A5B85ED81B2767E3008012F7 /* MemoryGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryGameViewController.swift; sourceTree = "<group>"; };
+		A5C4B2981B50250500016C02 /* MrSkunkLevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MrSkunkLevelScene.swift; sourceTree = "<group>"; };
 		A5CA0F4D1B2F64CA008BD79D /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Art/UIImage+Resize.h"; sourceTree = "<group>"; };
 		A5CA0F4E1B2F64CA008BD79D /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Art/UIImage+Resize.m"; sourceTree = "<group>"; };
 		A5CA0F501B2F67FA008BD79D /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Art/UIImage+Resize.h"; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				A524752C1B3E0A26002E0B7B /* TitleScreenViewController.swift */,
 				A5B85ED81B2767E3008012F7 /* MemoryGameViewController.swift */,
 				A5925F541B41CB42000E8FF8 /* MrSkunkViewController.swift */,
+				A5C4B2981B50250500016C02 /* MrSkunkLevelScene.swift */,
 				A56915861B4F329C0093B6C2 /* MrSkunkMapView.swift */,
 				A5925F581B41CE7A000E8FF8 /* MrSkunkLevel1.swift */,
 				A5A633D81B48438C00728E65 /* MrSkunkLevel1.sks */,
@@ -475,6 +478,7 @@
 				A5E3C5A01B4AF9E5000D023F /* ASAttributedLabelNode.swift in Sources */,
 				A5112C161B2D0E7F00215DA2 /* OBShapedView.m in Sources */,
 				A5DB888F1B3B707D00B8CA08 /* THLabel.m in Sources */,
+				A5C4B2991B50250500016C02 /* MrSkunkLevelScene.swift in Sources */,
 				A532ADE11B27959F00A46930 /* Card.swift in Sources */,
 				A5112C091B2D019F00215DA2 /* UIImage+ColorAtPixel.m in Sources */,
 				A5CA0F4F1B2F64CA008BD79D /* UIImage+Resize.m in Sources */,
