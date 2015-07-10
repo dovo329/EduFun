@@ -151,6 +151,17 @@ func scaleInAddView(view: UIView, #parentView: UIView, #duration: CGFloat, #dela
     )
 }
 
+func makeCenteredRectWithScale(scale: CGFloat, #ofFrame: CGRect) -> CGRect
+{
+    var frame = ofFrame
+    frame.size.width *= scale
+    frame.size.height *= scale
+    frame.origin.x = (ofFrame.size.width-frame.size.width)/2.0
+    frame.origin.y = (ofFrame.size.height-frame.size.height)/2.0
+    //frame.origin.y += frame.size.height*0.07
+    return frame
+}
+
 func spin3BounceView(view: UIView, #duration: CGFloat)
 {
     // start out at (nearly) zero size.  Can't be zero size since this will make the rotation matrix not work when scaling from 0

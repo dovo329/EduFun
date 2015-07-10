@@ -8,7 +8,7 @@
 
 import UIKit
 
-let kNumMapsPerRow = 4
+let kNumMapsPerRow = 3
 let kNumLevels = 3
 
 class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
@@ -20,8 +20,10 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
     
     init(frame: CGRect, highestCompletedLevelNum: Int) {
         super.init(frame: frame)
-        let kCellWidth : CGFloat = frame.size.width*(8.0/37.0)
-        let kCellHeight : CGFloat = frame.size.height*(8.0/37.0)
+        // following math based on interCell spacing (and margin) of Cell Width or Height divided by 8
+        let numSections : Int = Int(round(CGFloat(kNumLevels)/CGFloat(kNumMapsPerRow)))
+        let kCellWidth : CGFloat = frame.size.width*(8.0/((9.0*CGFloat(kNumMapsPerRow)) + 1.0))
+        let kCellHeight : CGFloat = frame.size.height*(8.0/((9.0*CGFloat(numSections)) + 1.0))
         let kXMargin : CGFloat = kCellWidth/8.0
         let kYMargin : CGFloat = kCellHeight/8.0
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -33,7 +35,8 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
         
         self.highestCompletedLevelNum = highestCompletedLevelNum
         
-        collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: CGRectMake(0,0,self.frame.size.width, self.frame.size.height), collectionViewLayout: layout)
+        println("self.frame=\(self.frame) collectionView.frame=\(collectionView.frame)")
         collectionView.userInteractionEnabled = false
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -42,6 +45,7 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
         collectionView.scrollEnabled = false
         
         addSubview(collectionView)
+        //collectionView.backgroundColor = UIColor.purpleColor()
     }
     
     required convenience init(coder: NSCoder) {
@@ -60,28 +64,34 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
         
         var totIndex = (indexPath.section*kNumMapsPerRow)+indexPath.row
         
+        //cell!.backgroundColor = UIColor.greenColor()
+        
         if totIndex < kNumLevels
         {
             cell!.backgroundView = UIImageView(image: UIImage(named: "MapBlank"))
             if totIndex > highestCompletedLevelNum
             {
                 var lockView = UIImageView(image: UIImage(named: "Lock")!)
-                lockView.frame = cell!.frame
+                /*lockView.frame = cell!.frame
                 lockView.frame.size.width *= 0.5
                 lockView.frame.size.height  *= 0.5
                 lockView.frame.origin.x = (cell!.frame.size.width-lockView.frame.size.width)/2.0
-                lockView.frame.origin.y = (cell!.frame.size.height-lockView.frame.size.height)/2.0
+                lockView.frame.origin.y = (cell!.frame.size.height-lockView.frame.size.height)/2.0*/
+                lockView.frame = makeCenteredRectWithScale(0.5, ofFrame: cell!.frame)
+                lockView.frame.origin.x -= lockView.frame.size.width*0.08
                 cell!.contentView.addSubview(lockView)
             }
             else
             {
                 var levelNumLabel = THLabel()
-                levelNumLabel.frame = cell!.frame
+                /*levelNumLabel.frame = cell!.frame
                 levelNumLabel.frame.size.width *= 0.8
                 levelNumLabel.frame.size.height  *= 0.8
                 levelNumLabel.frame.origin.x = (cell!.frame.size.width-levelNumLabel.frame.size.width)/2.0
-                levelNumLabel.frame.origin.y = (cell!.frame.size.height-levelNumLabel.frame.size.height)/2.0
-                levelNumLabel.frame.origin.y += levelNumLabel.frame.size.height*0.07 // offset due to space under font due to the way font is made it's vertically top oriented not vertically centered so all the space is at the bottom so get rid of this offset
+                levelNumLabel.frame.origin.y = (cell!.frame.size.height-levelNumLabel.frame.size.height)/2.0*/
+                levelNumLabel.frame = makeCenteredRectWithScale(0.7, ofFrame: cell!.frame)
+                levelNumLabel.frame.origin.x -= levelNumLabel.frame.size.width*0.08 // shift left a bit since map is curled to the left to make it look centered on the curled map
+                levelNumLabel.frame.origin.y += levelNumLabel.frame.size.height*0.08 // offset due to space under font due to the way font is made it's vertically top oriented not vertically centered so all the space is at the bottom so get rid of this offset
                 levelNumLabel.text = String(format:"%d", totIndex)
                 //levelNumLabel.text = "15"
                 levelNumLabel.font = UIFont(name: "Super Mario 256", size: 25.0)
@@ -114,7 +124,8 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return Int(round(CGFloat(kNumLevels)/CGFloat(kNumMapsPerRow)))
+        var retVal = Int(round(CGFloat(kNumLevels)/CGFloat(kNumMapsPerRow)))
+        return retVal
     }
     
     /*

@@ -52,13 +52,15 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
             highestCompletedLevelNum = 0
         }
         println("highestCompletedLevelNum = \(highestCompletedLevelNum)")
-        mapView = MrSkunkMapView(frame: CGRectMake(20, 50, 200, 200), highestCompletedLevelNum: highestCompletedLevelNum)
         
         if let coder = coder {
             super.init(coder: coder)
         } else {
             super.init(nibName: nil, bundle:nil)
         }
+        
+        mapView = MrSkunkMapView(frame: makeCenteredRectWithScale(0.9, ofFrame:view.frame), highestCompletedLevelNum: highestCompletedLevelNum)
+        println("view.frame=\(view.frame) mapView.frame=\(mapView.frame)")
     }
     
     required convenience init(coder: NSCoder) {
@@ -181,12 +183,12 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
         //println("Put in Map here")
         if (mapVisible)
         {
-            scaleOutRemoveView(mapView, duration: 0.5, delay: 0.0)
+            scaleOutRemoveView(mapView, duration: 0.25, delay: 0.0)
             //mapView.removeFromSuperview()
         }
         else
         {
-            scaleInAddView(mapView, parentView:view, duration: 0.5, delay: 0.0)
+            scaleInAddView(mapView, parentView:view, duration: 0.25, delay: 0.0)
             //view.addSubview(mapView)
         }
         mapVisible = !mapVisible
