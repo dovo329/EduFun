@@ -26,9 +26,10 @@ extension SKNode {
 }
 
 class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
-
+    
+    let kNumLevels = 3
     var skView : SKView!
-    let kNewLevelAnimationDuration = 0.5
+    let kNewLevelAnimationDuration = 1.0
     var playableRect : CGRect = CGRectMake(0,0,0,0)
     var playableHeight : CGFloat = 0.0
     var playableMargin : CGFloat = 0.0
@@ -150,8 +151,15 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
                 fatalError("level3 failed to load")
             }
             
-        case 4:
-            println("You Win!")
+        case (kNumLevels+1):
+            if let level = MrSkunkWinScene.unarchiveFromFile("MrSkunkWinScene") as? MrSkunkWinScene
+            {
+                scene = level
+            }
+            else
+            {
+                fatalError("win scene failed to load")
+            }
             
         default:
             fatalError("Invalid Level")
@@ -232,7 +240,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
             let textHeight = CGFloat(15.0)
             hint = THLabel()
             hint.text = "Touch Rope To Free Wood"
-            hint.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: textHeight)
+            hint.frame = CGRect(x: 0.0, y: 0.0, width: skView.frame.size.width, height: textHeight)
             hint.font = UIFont(name: "Super Mario 256", size: textHeight)
             hint.frame.size.height = hint.font.pointSize*1.3
             hint.frame.origin.y = view.frame.size.height-(playableMargin+hint.frame.size.height)
@@ -283,7 +291,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
             let textHeight = CGFloat(15.0)
             hint = THLabel()
             hint.text = "Touch Orange Wedge to Start"
-            hint.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: textHeight)
+            hint.frame = CGRect(x: 0.0, y: 0.0, width: skView.frame.size.width, height: textHeight)
             hint.font = UIFont(name: "Super Mario 256", size: textHeight)
             hint.frame.size.height = hint.font.pointSize*1.3
             hint.frame.origin.y = view.frame.size.height-(playableMargin+hint.frame.size.height)
@@ -295,57 +303,85 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
             hint.layer.shouldRasterize = true
             //scaleInAddView(hint, parentView: view, duration: 0.5, delay: 0.0)
             skView.addSubview(hint)
-        
+            
+        case (kNumLevels+1):
+            break
+            
         default:
             fatalError("Invalid Level")
         }
     }
     
     func levelComplete() {
-        //println("mr skunk delegate method called!")
-        completeLabel = THLabel()
-        completeLabel.text = "Complete!"
-        completeLabel.frame = makeCenteredRectWithScale(0.8, ofFrame: skView.frame)
-        completeLabel.font = UIFont(name: "Super Mario 256", size: 45.0)
-        completeLabel.font = completeLabel.font.fontWithSize(getFontSizeToFitFrameOfLabel(completeLabel)-5.0)
-        completeLabel.frame.size.height = completeLabel.font.pointSize*1.2
-        completeLabel.frame.origin.y = (skView.frame.size.height/2.0) - completeLabel.frame.size.height
-        completeLabel.textAlignment = NSTextAlignment.Center
-        completeLabel.textColor = UIColor.yellowColor()
-        completeLabel.strokeSize = (3.0/320.0)*completeLabel.frame.size.width
-        completeLabel.strokeColor = UIColor.blackColor()
-        completeLabel.shadowOffset = CGSizeMake(completeLabel.strokeSize, completeLabel.strokeSize)
-        completeLabel.shadowColor = UIColor.blackColor()
-        completeLabel.shadowBlur = (1.0/320.0)*completeLabel.frame.size.width
-        completeLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
-        completeLabel.layer.shouldRasterize = true
-        view.addSubview(completeLabel)
-        
-        var nextButtonFrame = makeCenteredRectWithScale(0.4, ofFrame: view.frame)
-        nextButtonFrame.origin.y = completeLabel.frame.origin.y + (completeLabel.frame.size.height)
-        nextButtonFrame.size.height *= 0.25
-        //if (nextButton == nil)
-        //{
+        if currentLevel <= kNumLevels
+        {
+            //println("mr skunk delegate method called!")
+            completeLabel = THLabel()
+            completeLabel.text = "Complete!"
+            completeLabel.frame = makeCenteredRectWithScale(0.8, ofFrame: skView.frame)
+            completeLabel.font = UIFont(name: "Super Mario 256", size: 45.0)
+            completeLabel.font = completeLabel.font.fontWithSize(getFontSizeToFitFrameOfLabel(completeLabel)-5.0)
+            completeLabel.frame.size.height = completeLabel.font.pointSize*1.2
+            completeLabel.frame.origin.y = (skView.frame.size.height/2.0) - completeLabel.frame.size.height
+            completeLabel.textAlignment = NSTextAlignment.Center
+            completeLabel.textColor = UIColor.yellowColor()
+            completeLabel.strokeSize = (3.0/320.0)*completeLabel.frame.size.width
+            completeLabel.strokeColor = UIColor.blackColor()
+            completeLabel.shadowOffset = CGSizeMake(completeLabel.strokeSize, completeLabel.strokeSize)
+            completeLabel.shadowColor = UIColor.blackColor()
+            completeLabel.shadowBlur = (1.0/320.0)*completeLabel.frame.size.width
+            completeLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
+            completeLabel.layer.shouldRasterize = true
+            view.addSubview(completeLabel)
+            
+            var nextButtonFrame = makeCenteredRectWithScale(0.4, ofFrame: view.frame)
+            nextButtonFrame.origin.y = completeLabel.frame.origin.y + (completeLabel.frame.size.height)
+            nextButtonFrame.size.height *= 0.25
+            //if (nextButton == nil)
+            //{
             nextButton = THButton(frame: nextButtonFrame, text: "Next Level")
-        //}
-        nextButton.label.text = "Next Level"
-        nextButton.frame = nextButtonFrame
-        nextButton.addTarget(self, action: Selector("nextButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
-        view.addSubview(nextButton)
-        
-        bounceInView(nextButton, duration:CGFloat(0.5), delay:CGFloat(0.0))
-        bounceInView(completeLabel, duration:CGFloat(0.5), delay:CGFloat(0.0))
-        
-        //hint.removeFromSuperview()
-        //hint2.removeFromSuperview()
-        scaleOutRemoveView(hint, duration: 0.5, delay: 0.0)
-        scaleOutRemoveView(hint2, duration: 0.5, delay: 0.0)
+            //}
+            nextButton.label.text = "Next Level"
+            nextButton.frame = nextButtonFrame
+            nextButton.addTarget(self, action: Selector("nextButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
+            view.addSubview(nextButton)
+            
+            bounceInView(nextButton, duration:CGFloat(0.5), delay:CGFloat(0.0))
+            bounceInView(completeLabel, duration:CGFloat(0.5), delay:CGFloat(0.0))
+            
+            //hint.removeFromSuperview()
+            //hint2.removeFromSuperview()
+            scaleOutRemoveView(hint, duration: 0.5, delay: 0.0)
+            scaleOutRemoveView(hint2, duration: 0.5, delay: 0.0)
+        }        
+        else
+        {
+            // you win scene
+            var nextButtonFrame = makeCenteredRectWithScale(0.5, ofFrame: view.frame)
+            nextButtonFrame.size.height *= 0.7
+            //if (nextButton == nil)
+            //{
+            nextButton = THButton(frame: nextButtonFrame, text: "Exit")
+            //}
+            nextButton.label.text = "Exit"
+            nextButton.frame = nextButtonFrame
+            nextButton.addTarget(self, action: Selector("exitButtonMethod"), forControlEvents: UIControlEvents.TouchUpInside)
+            view.addSubview(nextButton)
+            
+            bounceInView(nextButton, duration:CGFloat(0.5), delay:CGFloat(0.0))
+        }
     }
     
     func nextButtonMethod(sender : THButton, event : UIEvent)
     {
         currentLevel++
         highestCompletedLevelNum++
+        
+        if currentLevel > (kNumLevels + 1) // +1 because of youwin scene
+        {
+            currentLevel=1
+            highestCompletedLevelNum=kNumLevels
+        }
         
         scaleOutRemoveView(completeLabel, duration: 0.5, delay: 0.0)
         scaleOutRemoveView(nextButton, duration: 0.5, delay: 0.0)
