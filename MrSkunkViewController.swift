@@ -28,7 +28,7 @@ extension SKNode {
 class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
 
     var skView : SKView!
-    let kNewLevelAnimationDuration = 2.0
+    let kNewLevelAnimationDuration = 0.5
     var playableRect : CGRect = CGRectMake(0,0,0,0)
     var playableHeight : CGFloat = 0.0
     var playableMargin : CGFloat = 0.0
@@ -172,7 +172,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
     
     func willMoveFromView() {
         // skView scene transition complete
-        println("What happen?")
+        //println("What happen?")
         levelHint(level: currentLevel)
     }
     
@@ -305,11 +305,11 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
         //println("mr skunk delegate method called!")
         completeLabel = THLabel()
         completeLabel.text = "Complete!"
-        completeLabel.frame = makeCenteredRectWithScale(0.8, ofFrame: view.frame)
+        completeLabel.frame = makeCenteredRectWithScale(0.8, ofFrame: skView.frame)
         completeLabel.font = UIFont(name: "Super Mario 256", size: 45.0)
         completeLabel.font = completeLabel.font.fontWithSize(getFontSizeToFitFrameOfLabel(completeLabel)-5.0)
-        completeLabel.frame.size.height = completeLabel.font.pointSize*1.3
-        completeLabel.frame.origin.y = (view.frame.size.height/2.0) - completeLabel.frame.size.height
+        completeLabel.frame.size.height = completeLabel.font.pointSize*1.2
+        completeLabel.frame.origin.y = (skView.frame.size.height/2.0) - completeLabel.frame.size.height
         completeLabel.textAlignment = NSTextAlignment.Center
         completeLabel.textColor = UIColor.yellowColor()
         completeLabel.strokeSize = (3.0/320.0)*completeLabel.frame.size.width
@@ -320,10 +320,9 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
         completeLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
         completeLabel.layer.shouldRasterize = true
         view.addSubview(completeLabel)
-        bounceInView(completeLabel, duration:CGFloat(0.5), delay:CGFloat(0.0))
         
         var nextButtonFrame = makeCenteredRectWithScale(0.4, ofFrame: view.frame)
-        nextButtonFrame.origin.y += completeLabel.frame.size.height*1.5
+        nextButtonFrame.origin.y = completeLabel.frame.origin.y + (completeLabel.frame.size.height)
         nextButtonFrame.size.height *= 0.25
         //if (nextButton == nil)
         //{
@@ -333,7 +332,9 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
         nextButton.frame = nextButtonFrame
         nextButton.addTarget(self, action: Selector("nextButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
         view.addSubview(nextButton)
+        
         bounceInView(nextButton, duration:CGFloat(0.5), delay:CGFloat(0.0))
+        bounceInView(completeLabel, duration:CGFloat(0.5), delay:CGFloat(0.0))
         
         //hint.removeFromSuperview()
         //hint2.removeFromSuperview()
