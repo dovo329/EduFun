@@ -65,6 +65,7 @@ class MrSkunkWinScene: MrSkunkLevelScene {
         // physics categories arranged in Z order so just use that
         skunkNode.physicsBody!.restitution = 1.0
         skunkNode.zPosition = CGFloat(PhysicsCategory.Skunk)
+        skunkNode.physicsBody!.applyAngularImpulse(1.0)
         
         youwinNode = childNodeWithName("youwin") as! SKSpriteNode
         youwinNode.physicsBody = SKPhysicsBody(rectangleOfSize:youwinNode.size)
@@ -73,6 +74,7 @@ class MrSkunkWinScene: MrSkunkLevelScene {
         // physics categories arranged in Z order so just use that
         youwinNode.zPosition = CGFloat(PhysicsCategory.YouWin)
         youwinNode.physicsBody!.restitution = 1.0
+        youwinNode.physicsBody!.applyAngularImpulse(1.0)
         
         enumerateChildNodesWithName("floor", usingBlock: { (node, _) -> Void in
             if let spriteNode = node as? SKSpriteNode {

@@ -398,8 +398,11 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             currentLevel=1
             highestCompletedLevelNum=kNumLevels
         }
-        mapView.highestCompletedLevelNum = highestCompletedLevelNum
-        mapView.collectionView.reloadData()
+        scaleOutRemoveView(mapView, duration: 0.25, delay: 0.0)
+        mapVisible = false
+        mapView = MrSkunkMapView(frame: makeCenteredRectWithScale(0.7, ofFrame:self.view.frame), highestCompletedLevelNum: highestCompletedLevelNum)
+        mapView.delegate = self
+        //mapView.collectionView.reloadData()
         saveHighestCompletedLevelNum()
     }
     
