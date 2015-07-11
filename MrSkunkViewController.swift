@@ -25,7 +25,7 @@ extension SKNode {
     }
 }
 
-class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
+class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapViewDelegate {
     
     let kNumLevels = 3
     var skView : SKView!
@@ -41,7 +41,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
     var restartBarButton : UIBarButtonItem!
     var flexibleSpace : UIBarButtonItem!
     var completeLabel : THLabel = THLabel()
-    var nextButton : THButton!
+    var nextButton : THButton = THButton(frame: CGRectMake(0,0,0,0))
     var highestCompletedLevelNum : Int = 0
     let kHighestCompletedLevelKey = "highest.completed.level.key"
     var mapView : MrSkunkMapView!
@@ -95,6 +95,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
         
         self.view.addSubview(skView)
         mapView = MrSkunkMapView(frame: makeCenteredRectWithScale(0.7, ofFrame:self.view.frame), highestCompletedLevelNum: highestCompletedLevelNum)
+        mapView.delegate = self
         //println("view.frame=\(view.frame) mapView.frame=\(mapView.frame)")
         
         let maxAspectRatio: CGFloat = 16.0/9.0
@@ -125,6 +126,11 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
     
     func startup(#level : Int)
     {
+        scaleOutRemoveView(completeLabel, duration: 0.5, delay: 0.0)
+        scaleOutRemoveView(nextButton, duration: 0.5, delay: 0.0)
+        scaleOutRemoveView(hint, duration: 0.5, delay: 0.0)
+        scaleOutRemoveView(hint2, duration: 0.5, delay: 0.0)
+        
         var scene : MrSkunkLevelScene!
         switch level
         {
@@ -199,8 +205,8 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
     
     func restartMethod()
     {
-        scaleOutRemoveView(hint, duration: 0.5, delay: 0.0)
-        scaleOutRemoveView(hint2, duration: 0.5, delay: 0.0)
+        //scaleOutRemoveView(hint, duration: 0.5, delay: 0.0)
+        //scaleOutRemoveView(hint2, duration: 0.5, delay: 0.0)
         //hint.removeFromSuperview()
         //hint2.removeFromSuperview()
         startup(level: currentLevel)
@@ -320,6 +326,9 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
     }
     
     func levelComplete() {
+        scaleOutRemoveView(hint, duration: 0.5, delay: 0.0)
+        scaleOutRemoveView(hint2, duration: 0.5, delay: 0.0)
+        
         if currentLevel <= kNumLevels
         {
             //println("mr skunk delegate method called!")
@@ -358,8 +367,8 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
             
             //hint.removeFromSuperview()
             //hint2.removeFromSuperview()
-            scaleOutRemoveView(hint, duration: 0.5, delay: 0.0)
-            scaleOutRemoveView(hint2, duration: 0.5, delay: 0.0)
+            //scaleOutRemoveView(hint, duration: 0.5, delay: 0.0)
+            //scaleOutRemoveView(hint2, duration: 0.5, delay: 0.0)
         }        
         else
         {
@@ -389,6 +398,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
             currentLevel=1
             highestCompletedLevelNum=kNumLevels
         }
+        mapView.highestCompletedLevelNum = highestCompletedLevelNum
         
         saveHighestCompletedLevelNum()
     }
@@ -398,14 +408,11 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
         // save highest completed level
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(highestCompletedLevelNum, forKey: kHighestCompletedLevelKey)
-        println("saving highest completed level \(highestCompletedLevelNum)")
+        //println("saving highest completed level \(highestCompletedLevelNum)")
     }
     
     func nextButtonMethod(sender : THButton, event : UIEvent)
     {
-        scaleOutRemoveView(completeLabel, duration: 0.5, delay: 0.0)
-        scaleOutRemoveView(nextButton, duration: 0.5, delay: 0.0)
-        
         startup(level: currentLevel)
     }
     
@@ -424,5 +431,14 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate {
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    func mapLevelSelected(level: Int)
+    {
+        //println("The map selected level \(level)")
+        scaleOutRemoveView(mapView, duration: 0.25, delay: 0.0)
+        mapVisible = false
+        currentLevel = level
+        startup(level: level)
     }
 }

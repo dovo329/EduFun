@@ -11,8 +11,14 @@ import UIKit
 let kNumMapsPerRow = 3
 let kNumLevels = 3
 
+protocol MrSkunkMapViewDelegate {
+    func mapLevelSelected(level: Int)
+}
+
 class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
 
+    var delegate : MrSkunkMapViewDelegate! = nil
+    
     let kMapCellId = "map.cell.id"
     
     var collectionView : UICollectionView!
@@ -37,7 +43,7 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
         
         collectionView = UICollectionView(frame: CGRectMake(0,0,self.frame.size.width, self.frame.size.height), collectionViewLayout: layout)
         println("self.frame=\(self.frame) collectionView.frame=\(collectionView.frame)")
-        collectionView.userInteractionEnabled = false
+        collectionView.userInteractionEnabled = true
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: kMapCellId)
@@ -62,14 +68,15 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
             cell = UICollectionViewCell()
         }*/
         
-        var totIndex = (indexPath.section*kNumMapsPerRow)+indexPath.row
+        let totIndex = (indexPath.section*kNumMapsPerRow)+indexPath.row
+        let levelNum = totIndex+1
         
         //cell!.backgroundColor = UIColor.greenColor()
         
-        if totIndex < kNumLevels
+        if levelNum <= kNumLevels
         {
             cell!.backgroundView = UIImageView(image: UIImage(named: "MapBlank"))
-            if totIndex > highestCompletedLevelNum
+            if levelNum > highestCompletedLevelNum
             {
                 var lockView = UIImageView(image: UIImage(named: "Lock")!)
                 /*lockView.frame = cell!.frame
@@ -126,6 +133,17 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         var retVal = Int(round(CGFloat(kNumLevels)/CGFloat(kNumMapsPerRow)))
         return retVal
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let totIndex = (indexPath.section*kNumMapsPerRow) + indexPath.row
+        let level = totIndex + 1
+        
+        // +1 because current level they are on is the highest completed level + 1
+        if (level <= highestCompletedLevelNum+1)
+        {
+            delegate.mapLevelSelected(level)
+        }
     }
     
     /*
