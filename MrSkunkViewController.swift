@@ -399,7 +399,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             highestCompletedLevelNum=kNumLevels
         }
         mapView.highestCompletedLevelNum = highestCompletedLevelNum
-        
+        mapView.collectionView.reloadData()
         saveHighestCompletedLevelNum()
     }
     
