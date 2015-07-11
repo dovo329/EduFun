@@ -27,7 +27,6 @@ extension SKNode {
 
 class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapViewDelegate {
     
-    let kNumLevels = 3
     var skView : SKView!
     let kNewLevelAnimationDuration = 1.0
     var playableRect : CGRect = CGRectMake(0,0,0,0)
@@ -71,6 +70,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         {
             currentLevel = highestCompletedLevelNum + 1
         }
+        //currentLevel=4 // just to test level 4 out
         
         if let coder = coder {
             super.init(coder: coder)
@@ -163,6 +163,12 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             {
                 fatalError("level3 failed to load")
             }
+            
+        case 4:
+            if let level = MrSkunkLevel4Scene.unarchiveFromFile("MrSkunkLevel4") as? MrSkunkLevel4Scene
+            {scene = level}
+            else
+            {fatalError("level4 failed to load")}
             
         case (kNumLevels+1):
             if let level = MrSkunkWinScene.unarchiveFromFile("MrSkunkWinScene") as? MrSkunkWinScene
@@ -316,6 +322,9 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             hint.layer.shouldRasterize = true
             //scaleInAddView(hint, parentView: view, duration: 0.5, delay: 0.0)
             skView.addSubview(hint)
+        
+        case 4:
+            break
             
         case (kNumLevels+1):
             break
