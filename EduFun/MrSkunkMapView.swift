@@ -76,7 +76,7 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
         if levelNum <= kNumLevels
         {
             cell!.backgroundView = UIImageView(image: UIImage(named: "MapBlank"))
-            if levelNum > highestCompletedLevelNum
+            if levelNum >= highestCompletedLevelNum
             {
                 var lockView = UIImageView(image: UIImage(named: "Lock")!)
                 /*lockView.frame = cell!.frame
