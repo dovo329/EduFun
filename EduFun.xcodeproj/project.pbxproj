@@ -17,6 +17,10 @@
 		A53600621B351EAC00443B93 /* SVGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A536005B1B351E0600443B93 /* SVGKit.framework */; };
 		A53600631B351EAC00443B93 /* SVGKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A536005B1B351E0600443B93 /* SVGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A536FE771B350D2C00443B93 /* ColoringBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A536FE731B350D2C00443B93 /* ColoringBookViewController.m */; };
+		A54E0B251B51EADC001CC505 /* Level5Back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A54E0B241B51EADC001CC505 /* Level5Back.jpg */; };
+		A54E0B281B51EB47001CC505 /* MrSkunkLevel5.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E0B271B51EB47001CC505 /* MrSkunkLevel5.swift */; };
+		A54E0B2A1B51EB66001CC505 /* MrSkunkLevel5.sks in Resources */ = {isa = PBXBuildFile; fileRef = A54E0B291B51EB66001CC505 /* MrSkunkLevel5.sks */; };
+		A54E0B2C1B51ECB2001CC505 /* Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A54E0B2B1B51ECB2001CC505 /* Arrow.png */; };
 		A5554D4C1B3239AE002B06E5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */; };
 		A556567D1B5178A700B46489 /* MrSkunkLevel4.swift in Sources */ = {isa = PBXBuildFile; fileRef = A556567C1B5178A700B46489 /* MrSkunkLevel4.swift */; };
 		A55656801B5178B800B46489 /* MrSkunkLevel4.sks in Resources */ = {isa = PBXBuildFile; fileRef = A556567F1B5178B800B46489 /* MrSkunkLevel4.sks */; };
@@ -119,6 +123,10 @@
 		A53600551B351E0600443B93 /* SVGKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SVGKit.xcodeproj; path = SVGKit/SVGKit.xcodeproj; sourceTree = "<group>"; };
 		A536FE721B350D2C00443B93 /* ColoringBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColoringBookViewController.h; path = ../ColoringBookViewController.h; sourceTree = "<group>"; };
 		A536FE731B350D2C00443B93 /* ColoringBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColoringBookViewController.m; path = ../ColoringBookViewController.m; sourceTree = "<group>"; };
+		A54E0B241B51EADC001CC505 /* Level5Back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Level5Back.jpg; path = Art/Level5/Level5Back.jpg; sourceTree = "<group>"; };
+		A54E0B271B51EB47001CC505 /* MrSkunkLevel5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MrSkunkLevel5.swift; sourceTree = "<group>"; };
+		A54E0B291B51EB66001CC505 /* MrSkunkLevel5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MrSkunkLevel5.sks; sourceTree = "<group>"; };
+		A54E0B2B1B51ECB2001CC505 /* Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Arrow.png; path = Art/Level5/Arrow.png; sourceTree = "<group>"; };
 		A5554D4B1B3239AE002B06E5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A556567C1B5178A700B46489 /* MrSkunkLevel4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MrSkunkLevel4.swift; sourceTree = "<group>"; };
 		A556567F1B5178B800B46489 /* MrSkunkLevel4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MrSkunkLevel4.sks; sourceTree = "<group>"; };
@@ -240,6 +248,7 @@
 		A5A633D51B4842CC00728E65 /* MrSkunkLevels */ = {
 			isa = PBXGroup;
 			children = (
+				A54E0B241B51EADC001CC505 /* Level5Back.jpg */,
 				A55656811B517DA900B46489 /* Level4Back.jpg */,
 				A5CBB9001B4DFC0500A446FE /* Level3Back.jpg */,
 				A5CBB9021B4E001800A446FE /* Level2Back.jpg */,
@@ -248,6 +257,7 @@
 				A5CA2C371B4F550600FD614B /* Lock.png */,
 				A5CA2C381B4F550600FD614B /* MapBlank.png */,
 				A5BEBB111B5074CA00C2363C /* YouWin.png */,
+				A54E0B2B1B51ECB2001CC505 /* Arrow.png */,
 			);
 			name = MrSkunkLevels;
 			sourceTree = "<group>";
@@ -338,6 +348,8 @@
 				A5CBB8FE1B4DF18A00A446FE /* MrSkunkLevel3.sks */,
 				A556567C1B5178A700B46489 /* MrSkunkLevel4.swift */,
 				A556567F1B5178B800B46489 /* MrSkunkLevel4.sks */,
+				A54E0B271B51EB47001CC505 /* MrSkunkLevel5.swift */,
+				A54E0B291B51EB66001CC505 /* MrSkunkLevel5.sks */,
 				A5C4B29B1B50694E00016C02 /* MrSkunkWinScene.swift */,
 				A5C4B29E1B506D6800016C02 /* MrSkunkWinScene.sks */,
 			);
@@ -480,15 +492,18 @@
 				A5B85EC01B276636008012F7 /* Images.xcassets in Resources */,
 				A5CBB9011B4DFC0500A446FE /* Level3Back.jpg in Resources */,
 				A5BEBB121B5074CA00C2363C /* YouWin.png in Resources */,
+				A54E0B2C1B51ECB2001CC505 /* Arrow.png in Resources */,
 				A5C4B29F1B506D6800016C02 /* MrSkunkWinScene.sks in Resources */,
 				A50CFA2E1B4AF74F00B5F419 /* Level1Back.jpg in Resources */,
 				A5C4B2A11B506FCA00016C02 /* YouWinBack.jpg in Resources */,
 				A5A633D91B48438C00728E65 /* MrSkunkLevel1.sks in Resources */,
 				A5CA2C3A1B4F550600FD614B /* MapBlank.png in Resources */,
 				A509E26D1B4ADD77009ACAB5 /* Unicorn.svg in Resources */,
+				A54E0B251B51EADC001CC505 /* Level5Back.jpg in Resources */,
 				A55656801B5178B800B46489 /* MrSkunkLevel4.sks in Resources */,
 				A5EBCCC51B361F0E006E52D6 /* mtnHouse.svg in Resources */,
 				A5CA2C391B4F550600FD614B /* Lock.png in Resources */,
+				A54E0B2A1B51EB66001CC505 /* MrSkunkLevel5.sks in Resources */,
 				A558C3E31B473FEC00FDBB8B /* RocketShip.svg in Resources */,
 				A5CBB9031B4E001800A446FE /* Level2Back.jpg in Resources */,
 				A5A633D41B4836A900728E65 /* MrSkunk.atlas in Resources */,
@@ -530,6 +545,7 @@
 				A5112C081B2D019F00215DA2 /* OBShapedButton.m in Sources */,
 				A56915871B4F329C0093B6C2 /* MrSkunkMapView.swift in Sources */,
 				A524752D1B3E0A26002E0B7B /* TitleScreenViewController.swift in Sources */,
+				A54E0B281B51EB47001CC505 /* MrSkunkLevel5.swift in Sources */,
 				A5CA0F541B2F67FA008BD79D /* UIImage+Resize.m in Sources */,
 				A5EB8DF51B3CC765009A8A3A /* THButton.swift in Sources */,
 				A5925F591B41CE7A000E8FF8 /* MrSkunkLevel1.swift in Sources */,

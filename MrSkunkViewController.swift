@@ -70,7 +70,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         {
             currentLevel = highestCompletedLevelNum + 1
         }
-        //currentLevel=4 // just to test level 4 out
+        currentLevel=5 // just to test level 4 out
         
         if let coder = coder {
             super.init(coder: coder)
@@ -169,6 +169,12 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             {scene = level}
             else
             {fatalError("level4 failed to load")}
+            
+        case 5:
+            if let level = MrSkunkLevel5Scene.unarchiveFromFile("MrSkunkLevel5") as? MrSkunkLevel5Scene
+            {scene = level}
+            else
+            {fatalError("level5 failed to load")}
             
         case (kNumLevels+1):
             if let level = MrSkunkWinScene.unarchiveFromFile("MrSkunkWinScene") as? MrSkunkWinScene
@@ -270,7 +276,6 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             hint.layer.anchorPoint = CGPointMake(0.5, 0.5)
             hint.layer.shouldRasterize = true
             scaleInAddView(hint, parentView: view, duration: 0.5, delay: 0.0)
-            skView.addSubview(hint)
             
         case 2:
             let textHeight = CGFloat(15.0)
@@ -300,9 +305,6 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             hint2.layer.anchorPoint = CGPointMake(0.5, 0.5)
             hint2.layer.shouldRasterize = true
             
-            //view.addSubview(hint)
-            //view.addSubview(hint2)
-            
             scaleInAddView(hint, parentView: view, duration: 0.5, delay: 0.0)
             scaleInAddView(hint2, parentView: view, duration: 0.5, delay: 0.0)
             
@@ -320,11 +322,26 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             hint.strokeColor = UIColor.blackColor()
             hint.layer.anchorPoint = CGPointMake(0.5, 0.5)
             hint.layer.shouldRasterize = true
-            //scaleInAddView(hint, parentView: view, duration: 0.5, delay: 0.0)
-            skView.addSubview(hint)
+            scaleInAddView(hint, parentView: view, duration: 0.5, delay: 0.0)
         
         case 4:
             break
+            
+        case 5:
+            let textHeight = CGFloat(15.0)
+            hint = THLabel()
+            hint.text = "Touch Arrow to Change Gravity"
+            hint.frame = CGRect(x: 0.0, y: 0.0, width: skView.frame.size.width, height: textHeight)
+            hint.font = UIFont(name: "Super Mario 256", size: textHeight)
+            hint.frame.size.height = hint.font.pointSize*1.3
+            hint.frame.origin.y = view.frame.size.height-(playableMargin+hint.frame.size.height)
+            hint.textAlignment = NSTextAlignment.Center
+            hint.textColor = UIColor.yellowColor()
+            hint.strokeSize = (0.8/320.0)*hint.frame.size.width
+            hint.strokeColor = UIColor.blackColor()
+            hint.layer.anchorPoint = CGPointMake(0.5, 0.5)
+            hint.layer.shouldRasterize = true
+            scaleInAddView(hint, parentView: view, duration: 0.5, delay: 0.0)
             
         case (kNumLevels+1):
             break

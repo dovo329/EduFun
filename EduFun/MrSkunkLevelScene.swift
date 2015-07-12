@@ -10,6 +10,7 @@ import UIKit
 import SpriteKit
 
 let kContactAll : UInt32 = 0xffffffff
+let kGravity : CGFloat = 9.8
 
 protocol MrSkunkLevelDelegate {
     func levelComplete()
