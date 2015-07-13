@@ -17,6 +17,8 @@
 		A53600621B351EAC00443B93 /* SVGKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A536005B1B351E0600443B93 /* SVGKit.framework */; };
 		A53600631B351EAC00443B93 /* SVGKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A536005B1B351E0600443B93 /* SVGKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A536FE771B350D2C00443B93 /* ColoringBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A536FE731B350D2C00443B93 /* ColoringBookViewController.m */; };
+		A53B32311B541A4500A588B3 /* MrSkunkLevel6.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53B322F1B541A4500A588B3 /* MrSkunkLevel6.swift */; };
+		A53B32321B541A4500A588B3 /* MrSkunkLevel6.sks in Resources */ = {isa = PBXBuildFile; fileRef = A53B32301B541A4500A588B3 /* MrSkunkLevel6.sks */; };
 		A54E0B251B51EADC001CC505 /* Level5Back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A54E0B241B51EADC001CC505 /* Level5Back.jpg */; };
 		A54E0B281B51EB47001CC505 /* MrSkunkLevel5.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E0B271B51EB47001CC505 /* MrSkunkLevel5.swift */; };
 		A54E0B2A1B51EB66001CC505 /* MrSkunkLevel5.sks in Resources */ = {isa = PBXBuildFile; fileRef = A54E0B291B51EB66001CC505 /* MrSkunkLevel5.sks */; };
@@ -47,6 +49,7 @@
 		A5C4B29C1B50694E00016C02 /* MrSkunkWinScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C4B29B1B50694E00016C02 /* MrSkunkWinScene.swift */; };
 		A5C4B29F1B506D6800016C02 /* MrSkunkWinScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A5C4B29E1B506D6800016C02 /* MrSkunkWinScene.sks */; };
 		A5C4B2A11B506FCA00016C02 /* YouWinBack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5C4B2A01B506FCA00016C02 /* YouWinBack.jpg */; };
+		A5C957171B542E6400E8BC50 /* Level6Back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5C957161B542E6400E8BC50 /* Level6Back.jpg */; };
 		A5CA0F4F1B2F64CA008BD79D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F4E1B2F64CA008BD79D /* UIImage+Resize.m */; };
 		A5CA0F541B2F67FA008BD79D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F511B2F67FA008BD79D /* UIImage+Resize.m */; };
 		A5CA0F551B2F67FA008BD79D /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */; };
@@ -123,6 +126,8 @@
 		A53600551B351E0600443B93 /* SVGKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SVGKit.xcodeproj; path = SVGKit/SVGKit.xcodeproj; sourceTree = "<group>"; };
 		A536FE721B350D2C00443B93 /* ColoringBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColoringBookViewController.h; path = ../ColoringBookViewController.h; sourceTree = "<group>"; };
 		A536FE731B350D2C00443B93 /* ColoringBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColoringBookViewController.m; path = ../ColoringBookViewController.m; sourceTree = "<group>"; };
+		A53B322F1B541A4500A588B3 /* MrSkunkLevel6.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MrSkunkLevel6.swift; sourceTree = "<group>"; };
+		A53B32301B541A4500A588B3 /* MrSkunkLevel6.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MrSkunkLevel6.sks; sourceTree = "<group>"; };
 		A54E0B241B51EADC001CC505 /* Level5Back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Level5Back.jpg; path = Art/Level5/Level5Back.jpg; sourceTree = "<group>"; };
 		A54E0B271B51EB47001CC505 /* MrSkunkLevel5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MrSkunkLevel5.swift; sourceTree = "<group>"; };
 		A54E0B291B51EB66001CC505 /* MrSkunkLevel5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MrSkunkLevel5.sks; sourceTree = "<group>"; };
@@ -159,6 +164,7 @@
 		A5C4B29B1B50694E00016C02 /* MrSkunkWinScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MrSkunkWinScene.swift; sourceTree = "<group>"; };
 		A5C4B29E1B506D6800016C02 /* MrSkunkWinScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MrSkunkWinScene.sks; sourceTree = "<group>"; };
 		A5C4B2A01B506FCA00016C02 /* YouWinBack.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = YouWinBack.jpg; path = Art/YouWin/YouWinBack.jpg; sourceTree = "<group>"; };
+		A5C957161B542E6400E8BC50 /* Level6Back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Level6Back.jpg; path = Art/Level6/Level6Back.jpg; sourceTree = "<group>"; };
 		A5CA0F4D1B2F64CA008BD79D /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Art/UIImage+Resize.h"; sourceTree = "<group>"; };
 		A5CA0F4E1B2F64CA008BD79D /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Art/UIImage+Resize.m"; sourceTree = "<group>"; };
 		A5CA0F501B2F67FA008BD79D /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Art/UIImage+Resize.h"; sourceTree = "<group>"; };
@@ -248,6 +254,7 @@
 		A5A633D51B4842CC00728E65 /* MrSkunkLevels */ = {
 			isa = PBXGroup;
 			children = (
+				A5C957161B542E6400E8BC50 /* Level6Back.jpg */,
 				A54E0B241B51EADC001CC505 /* Level5Back.jpg */,
 				A55656811B517DA900B46489 /* Level4Back.jpg */,
 				A5CBB9001B4DFC0500A446FE /* Level3Back.jpg */,
@@ -350,6 +357,8 @@
 				A556567F1B5178B800B46489 /* MrSkunkLevel4.sks */,
 				A54E0B271B51EB47001CC505 /* MrSkunkLevel5.swift */,
 				A54E0B291B51EB66001CC505 /* MrSkunkLevel5.sks */,
+				A53B322F1B541A4500A588B3 /* MrSkunkLevel6.swift */,
+				A53B32301B541A4500A588B3 /* MrSkunkLevel6.sks */,
 				A5C4B29B1B50694E00016C02 /* MrSkunkWinScene.swift */,
 				A5C4B29E1B506D6800016C02 /* MrSkunkWinScene.sks */,
 			);
@@ -501,7 +510,9 @@
 				A509E26D1B4ADD77009ACAB5 /* Unicorn.svg in Resources */,
 				A54E0B251B51EADC001CC505 /* Level5Back.jpg in Resources */,
 				A55656801B5178B800B46489 /* MrSkunkLevel4.sks in Resources */,
+				A53B32321B541A4500A588B3 /* MrSkunkLevel6.sks in Resources */,
 				A5EBCCC51B361F0E006E52D6 /* mtnHouse.svg in Resources */,
+				A5C957171B542E6400E8BC50 /* Level6Back.jpg in Resources */,
 				A5CA2C391B4F550600FD614B /* Lock.png in Resources */,
 				A54E0B2A1B51EB66001CC505 /* MrSkunkLevel5.sks in Resources */,
 				A558C3E31B473FEC00FDBB8B /* RocketShip.svg in Resources */,
@@ -547,6 +558,7 @@
 				A524752D1B3E0A26002E0B7B /* TitleScreenViewController.swift in Sources */,
 				A54E0B281B51EB47001CC505 /* MrSkunkLevel5.swift in Sources */,
 				A5CA0F541B2F67FA008BD79D /* UIImage+Resize.m in Sources */,
+				A53B32311B541A4500A588B3 /* MrSkunkLevel6.swift in Sources */,
 				A5EB8DF51B3CC765009A8A3A /* THButton.swift in Sources */,
 				A5925F591B41CE7A000E8FF8 /* MrSkunkLevel1.swift in Sources */,
 				A5B85ED91B2767E3008012F7 /* MemoryGameViewController.swift in Sources */,

@@ -9,7 +9,7 @@
 import UIKit
 
 let kNumMapsPerRow = 5
-let kNumLevels = 5
+let kNumLevels = 6
 
 protocol MrSkunkMapViewDelegate {
     func mapLevelSelected(level: Int)
