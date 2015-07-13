@@ -18,9 +18,7 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
         static let Wood:       UInt32 = 0b1000
         static let GarbageCan: UInt32 = 0b10000
         static let Skunk:      UInt32 = 0b100000
-    }
-    
-    let kToolbarHeight = CGFloat(30.0)
+    }        
     
     let kContactAllExceptCan : UInt32 = kContactAll & ~PhysicsCategory.GarbageCan
     

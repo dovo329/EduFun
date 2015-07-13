@@ -24,7 +24,6 @@ class MrSkunkLevel2Scene: MrSkunkLevelScene {
     
     var lastTouchedPoint : CGPoint!
     
-    let kToolbarHeight = CGFloat(30.0)
     let kHintZPosition = CGFloat(100.0)
     let kVictoryZPosition = CGFloat(101.0)
     

@@ -25,8 +25,6 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
     var lastTouchedPoint : CGPoint = CGPointZero
     let kCannonImpulseStrength : CGFloat = 1100.0
     
-    let kToolbarHeight = CGFloat(30.0)
-    
     var playableRect: CGRect
     var lastUpdateTime: NSTimeInterval = 0
     var dt : NSTimeInterval = 0

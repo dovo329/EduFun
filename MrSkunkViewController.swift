@@ -25,6 +25,8 @@ extension SKNode {
     }
 }
 
+let kMrSkunkToolbarHeight = CGFloat(30.0)
+
 class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapViewDelegate {
     
     var skView : SKView!
@@ -34,7 +36,6 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
     var playableMargin : CGFloat = 0.0
     //var exitButton : THButton!
     var toolbar = UIToolbar()
-    let kToolbarHeight = CGFloat(25.0)
     var exitBarButton : UIBarButtonItem!
     var mapButton : UIBarButtonItem!
     var restartBarButton : UIBarButtonItem!
@@ -70,7 +71,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         {
             currentLevel = highestCompletedLevelNum + 1
         }
-        currentLevel=6 // just to test level out
+        //currentLevel=6 // just to test level out
         
         if let coder = coder {
             super.init(coder: coder)
@@ -116,7 +117,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         
         flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
         
-        toolbar.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, kToolbarHeight)
+        toolbar.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, kMrSkunkToolbarHeight)
         
         toolbar.items = [exitBarButton, flexibleSpace, restartBarButton, flexibleSpace, mapButton]
         

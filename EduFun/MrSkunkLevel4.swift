@@ -23,8 +23,6 @@ class MrSkunkLevel4Scene: MrSkunkLevelScene {
         static let Skunk:      UInt32 = 0b100000000
     }
     
-    let kToolbarHeight = CGFloat(30.0)
-
     var playableRect: CGRect
     var lastUpdateTime: NSTimeInterval = 0
     var dt : NSTimeInterval = 0
