@@ -8,7 +8,7 @@
 
 import UIKit
 
-let kNumMapsPerRow = 5
+let kNumMapsPerRow = 4
 let kNumLevels = 6
 
 protocol MrSkunkMapViewDelegate {
