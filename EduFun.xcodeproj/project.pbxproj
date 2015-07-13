@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A509E26D1B4ADD77009ACAB5 /* Unicorn.svg in Resources */ = {isa = PBXBuildFile; fileRef = A509E26C1B4ADD77009ACAB5 /* Unicorn.svg */; };
-		A50CFA2E1B4AF74F00B5F419 /* Level1Back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A50CFA2D1B4AF74F00B5F419 /* Level1Back.jpg */; };
 		A5112C081B2D019F00215DA2 /* OBShapedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C051B2D019F00215DA2 /* OBShapedButton.m */; };
 		A5112C091B2D019F00215DA2 /* UIImage+ColorAtPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C071B2D019F00215DA2 /* UIImage+ColorAtPixel.m */; };
 		A5112C161B2D0E7F00215DA2 /* OBShapedView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5112C151B2D0E7F00215DA2 /* OBShapedView.m */; };
@@ -50,6 +49,7 @@
 		A5C4B29F1B506D6800016C02 /* MrSkunkWinScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A5C4B29E1B506D6800016C02 /* MrSkunkWinScene.sks */; };
 		A5C4B2A11B506FCA00016C02 /* YouWinBack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5C4B2A01B506FCA00016C02 /* YouWinBack.jpg */; };
 		A5C957171B542E6400E8BC50 /* Level6Back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5C957161B542E6400E8BC50 /* Level6Back.jpg */; };
+		A5C957191B5440FA00E8BC50 /* Level1Back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5C957181B5440FA00E8BC50 /* Level1Back.jpg */; };
 		A5CA0F4F1B2F64CA008BD79D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F4E1B2F64CA008BD79D /* UIImage+Resize.m */; };
 		A5CA0F541B2F67FA008BD79D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F511B2F67FA008BD79D /* UIImage+Resize.m */; };
 		A5CA0F551B2F67FA008BD79D /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */; };
@@ -113,7 +113,6 @@
 
 /* Begin PBXFileReference section */
 		A509E26C1B4ADD77009ACAB5 /* Unicorn.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Unicorn.svg; path = Art/Unicorn.svg; sourceTree = "<group>"; };
-		A50CFA2D1B4AF74F00B5F419 /* Level1Back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Level1Back.jpg; path = Art/Level1Back.jpg; sourceTree = "<group>"; };
 		A5112C041B2D018D00215DA2 /* OBShapedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBShapedButton.h; sourceTree = "<group>"; };
 		A5112C051B2D019F00215DA2 /* OBShapedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBShapedButton.m; sourceTree = "<group>"; };
 		A5112C061B2D019F00215DA2 /* UIImage+ColorAtPixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ColorAtPixel.h"; sourceTree = "<group>"; };
@@ -165,6 +164,7 @@
 		A5C4B29E1B506D6800016C02 /* MrSkunkWinScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MrSkunkWinScene.sks; sourceTree = "<group>"; };
 		A5C4B2A01B506FCA00016C02 /* YouWinBack.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = YouWinBack.jpg; path = Art/YouWin/YouWinBack.jpg; sourceTree = "<group>"; };
 		A5C957161B542E6400E8BC50 /* Level6Back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Level6Back.jpg; path = Art/Level6/Level6Back.jpg; sourceTree = "<group>"; };
+		A5C957181B5440FA00E8BC50 /* Level1Back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Level1Back.jpg; path = Art/Level1/Level1Back.jpg; sourceTree = "<group>"; };
 		A5CA0F4D1B2F64CA008BD79D /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Art/UIImage+Resize.h"; sourceTree = "<group>"; };
 		A5CA0F4E1B2F64CA008BD79D /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Art/UIImage+Resize.m"; sourceTree = "<group>"; };
 		A5CA0F501B2F67FA008BD79D /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Art/UIImage+Resize.h"; sourceTree = "<group>"; };
@@ -259,7 +259,7 @@
 				A55656811B517DA900B46489 /* Level4Back.jpg */,
 				A5CBB9001B4DFC0500A446FE /* Level3Back.jpg */,
 				A5CBB9021B4E001800A446FE /* Level2Back.jpg */,
-				A50CFA2D1B4AF74F00B5F419 /* Level1Back.jpg */,
+				A5C957181B5440FA00E8BC50 /* Level1Back.jpg */,
 				A5C4B2A01B506FCA00016C02 /* YouWinBack.jpg */,
 				A5CA2C371B4F550600FD614B /* Lock.png */,
 				A5CA2C381B4F550600FD614B /* MapBlank.png */,
@@ -499,11 +499,11 @@
 				A5CBB8FF1B4DF18A00A446FE /* MrSkunkLevel3.sks in Resources */,
 				A5B85EC31B276636008012F7 /* LaunchScreen.xib in Resources */,
 				A5B85EC01B276636008012F7 /* Images.xcassets in Resources */,
+				A5C957191B5440FA00E8BC50 /* Level1Back.jpg in Resources */,
 				A5CBB9011B4DFC0500A446FE /* Level3Back.jpg in Resources */,
 				A5BEBB121B5074CA00C2363C /* YouWin.png in Resources */,
 				A54E0B2C1B51ECB2001CC505 /* Arrow.png in Resources */,
 				A5C4B29F1B506D6800016C02 /* MrSkunkWinScene.sks in Resources */,
-				A50CFA2E1B4AF74F00B5F419 /* Level1Back.jpg in Resources */,
 				A5C4B2A11B506FCA00016C02 /* YouWinBack.jpg in Resources */,
 				A5A633D91B48438C00728E65 /* MrSkunkLevel1.sks in Resources */,
 				A5CA2C3A1B4F550600FD614B /* MapBlank.png in Resources */,

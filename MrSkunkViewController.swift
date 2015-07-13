@@ -25,7 +25,9 @@ extension SKNode {
     }
 }
 
-let kMrSkunkToolbarHeight = CGFloat(30.0)
+let kMrSkunkToolbarWidth = CGFloat(30.0)
+let kMrSkunkIconHeight = CGFloat(30.0)
+let kMrSkunkIconSpacing = CGFloat(20.0)
 
 class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapViewDelegate {
     
@@ -35,11 +37,16 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
     var playableHeight : CGFloat = 0.0
     var playableMargin : CGFloat = 0.0
     //var exitButton : THButton!
-    var toolbar = UIToolbar()
-    var exitBarButton : UIBarButtonItem!
-    var mapButton : UIBarButtonItem!
-    var restartBarButton : UIBarButtonItem!
-    var flexibleSpace : UIBarButtonItem!
+    //var toolbar = UIToolbar()
+    //var exitBarButton : UIBarButtonItem!
+    //var mapButton : UIBarButtonItem!
+    //var restartBarButton : UIBarButtonItem!
+    
+    var exitButton : THButton!
+    var mapButton : UIButton!
+    var restartButton : UIButton!
+    
+    //var flexibleSpace : UIBarButtonItem!
     var completeLabel : THLabel = THLabel()
     var nextButton : THButton = THButton(frame: CGRectMake(0,0,0,0))
     var highestCompletedLevelNum : Int = 0
@@ -71,7 +78,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         {
             currentLevel = highestCompletedLevelNum + 1
         }
-        //currentLevel=6 // just to test level out
+        currentLevel=3 // just to test level out
         
         if let coder = coder {
             super.init(coder: coder)
@@ -105,24 +112,47 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         playableMargin = (self.view.frame.size.height-playableHeight)/2.0
         playableRect = CGRect(x:0, y: playableMargin, width: self.view.frame.size.width, height: playableHeight)
         
-        exitBarButton = UIBarButtonItem(title: "Exit", style: UIBarButtonItemStyle.Plain, target: self, action: "exitButtonMethod")
+        let exitButtonFrame = CGRectMake(view.frame.size.width-(2.0*kMrSkunkToolbarWidth), 0, 2.0*kMrSkunkToolbarWidth, kMrSkunkIconHeight)
+        exitButton = THButton(frame: exitButtonFrame, text: "Exit")
+        exitButton!.addTarget(self, action: Selector("exitButtonMethod"), forControlEvents: UIControlEvents.TouchUpInside)
+        view.addSubview(exitButton)
+
+        //exitBarButton = UIBarButtonItem(title: "Exit", style: UIBarButtonItemStyle.Plain, target: self, action: "exitButtonMethod")
         
+        let restartButtonFrame = CGRectMake(view.frame.size.width-(2.0*kMrSkunkToolbarWidth), (kMrSkunkIconHeight+kMrSkunkIconSpacing), 2.0*kMrSkunkToolbarWidth, kMrSkunkIconHeight)
         var restartImg = UIImage(named: "Restart")
         restartImg = restartImg?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        restartBarButton = UIBarButtonItem(image: restartImg, style: UIBarButtonItemStyle.Plain, target: self, action: "restartMethod")
+        restartButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+        restartButton.setImage(restartImg, forState: UIControlState.Normal)
+        restartButton.frame = restartButtonFrame
+        restartButton!.addTarget(self, action: Selector("restartMethod"), forControlEvents: UIControlEvents.TouchUpInside)
+        view.addSubview(restartButton)
+        //restartBarButton = UIBarButtonItem(image: restartImg, style: UIBarButtonItemStyle.Plain, target: self, action: "restartMethod")
         
         var mapImg = UIImage(named: "SkunkMap")
         mapImg = mapImg?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        mapButton = UIBarButtonItem(image: mapImg, style: UIBarButtonItemStyle.Plain, target: self, action: "mapMethod")
+        let mapButtonFrame = CGRectMake(view.frame.size.width-(2.0*kMrSkunkToolbarWidth), 2*(kMrSkunkIconHeight+kMrSkunkIconSpacing), 2.0*kMrSkunkToolbarWidth, kMrSkunkIconHeight)
+        mapButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+        mapButton.setImage(mapImg, forState: UIControlState.Normal)
+        mapButton.frame = mapButtonFrame
+        mapButton!.addTarget(self, action: Selector("mapMethod"), forControlEvents: UIControlEvents.TouchUpInside)
+        view.addSubview(mapButton)
+        //mapButton = UIBarButtonItem(image: mapImg, style: UIBarButtonItemStyle.Plain, target: self, action: "mapMethod")
         
-        flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        //flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
         
-        toolbar.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, kMrSkunkToolbarHeight)
+        //toolbar.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, kMrSkunkToolbarHeight)
         
-        toolbar.items = [exitBarButton, flexibleSpace, restartBarButton, flexibleSpace, mapButton]
+        //toolbar.items = [exitBarButton, flexibleSpace, restartBarButton, flexibleSpace, mapButton]
         
         startup(level: currentLevel)
-        self.view.addSubview(toolbar)
+        
+        //toolbar.frame = CGRectMake(view.frame.size.width-(view.frame.size.height/2.0), (view.frame.size.height-kMrSkunkToolbarHeight)/2.0, view.frame.size.height, kMrSkunkToolbarHeight)
+        //toolbar.transform = CGAffineTransformRotate(CGAffineTransformIdentity, CGFloat(M_PI/2));
+        
+        //toolbar.frame = CGRectMake(size.width-kMrSkunkToolbarHeight, 0, kMrSkunkToolbarHeight, size.height)
+        
+        //self.view.addSubview(toolbar)
     }
     
     func startup(#level : Int)
