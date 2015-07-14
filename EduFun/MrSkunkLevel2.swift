@@ -61,6 +61,8 @@ class MrSkunkLevel2Scene: MrSkunkLevelScene {
     }
     
     override func didMoveToView(view: SKView) {
+        setupSwipe()
+        
         // Calculate playable margin
         let maxAspectRatio: CGFloat = 16.0/9.0 // iPhone 5
         let maxAspectRatioHeight = size.width / maxAspectRatio
@@ -213,15 +215,15 @@ class MrSkunkLevel2Scene: MrSkunkLevelScene {
     
     func sceneTouched(location: CGPoint)
     {
-        println("lastTouchedPoint=\(lastTouchedPoint)")
+        //println("lastTouchedPoint=\(lastTouchedPoint)")
         
         /*physicsWorld.enumerateBodiesAtPoint(location, usingBlock: { (physicsBody, pointer) -> Void in
             println("enumerate.physicsBody=\(physicsBody)")
         })*/
         
         let targetNode = self.nodeAtPoint(location)
-        println("targetNode=\(targetNode)")
-        println("")
+        //println("targetNode=\(targetNode)")
+        //println("")
         /*let targetNodeArr = self.nodesAtPoint(location) as! [SKSpriteNode]
         println("targetNodeArr=\(targetNodeArr)")
         println("")

@@ -61,6 +61,8 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
     }
     
     override func didMoveToView(view: SKView) {
+        setupSwipe()
+        
         // Calculate playable margin
         let maxAspectRatio: CGFloat = 16.0/9.0 // iPhone 5
         let maxAspectRatioHeight = size.width / maxAspectRatio

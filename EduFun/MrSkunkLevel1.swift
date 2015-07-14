@@ -29,9 +29,6 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
     var restartingMrSkunk : Bool = false
     var hintDisappeared : Bool = false
     
-    /*var woodNodeArr : [SKSpriteNode]! = []
-    var stoneBallNode : SKSpriteNode!
-    var ropeNode : SKSpriteNode!    */
     var skunkNode : SKSpriteNode!
     var garbageCanNode : SKSpriteNode!
     var backgroundNodeArr : [SKSpriteNode!]! = []
@@ -60,6 +57,7 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
     }
     
     override func didMoveToView(view: SKView) {
+        setupSwipe()
         // Calculate playable margin
         let maxAspectRatio: CGFloat = 16.0/9.0 // iPhone 5
         let maxAspectRatioHeight = size.width / maxAspectRatio
@@ -97,37 +95,16 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
         woodNode.physicsBody!.collisionBitMask = kContactAll & ~(PhysicsCategory.GarbageCan | PhysicsCategory.Rope)
         woodNode.zPosition = CGFloat(PhysicsCategory.Wood)
         
-        /*let range = SKRange(lowerLimit: 0.0, upperLimit: 0.0)
-        let orientConstraint = SKConstraint.orientToNode(woodNode, offset: range)
-        ropeNode.constraints = [orientConstraint]*/
-        
-        //let woodRopeJoint = SKPhysicsJointSpring.jointWithBodyA(ropeEdgeAnchorNode.physicsBody, bodyB: ropeNode.physicsBody, anchorA: ropeEdgeAnchorNode.position, anchorB: CGPointMake(ropeNode.position.x-ropeNode.size.width/2, ropeNode.position.y))
-        
-        /*let woodRopeJoint = SKPhysicsJointSpring.jointWithBodyA(ropeEdgeAnchorNode.physicsBody, bodyB: woodNode.physicsBody, anchorA: ropeEdgeAnchorNode.position, anchorB: getPointTop(woodNode))
-        physicsWorld.addJoint(woodRopeJoint)*/
-        
         woodRopeJoint = SKPhysicsJointPin.jointWithBodyA(woodNode.physicsBody, bodyB: ropeNode.physicsBody, anchor: getPointTop(woodNode))
         physicsWorld.addJoint(woodRopeJoint)
         
-        /*delay(seconds: 2.0,
-        completion:
-        {
-        self.physicsWorld.removeJoint(woodRopeJoint)
-        }
-        )*/
-        
         var woodEdgeAnchorNode = childNodeWithName("woodEdgeAnchor") as! SKSpriteNode
         
-        //let woodJoint = SKPhysicsJointSpring.jointWithBodyA(woodEdgeAnchorNode.physicsBody, bodyB: woodNode.physicsBody, anchorA: woodEdgeAnchorNode.position, anchorB: getPointBottom(woodNode))
         let woodJoint = SKPhysicsJointPin.jointWithBodyA(woodEdgeAnchorNode.physicsBody, bodyB: woodNode.physicsBody, anchor: getPointBottom(woodNode))
         physicsWorld.addJoint(woodJoint)
         
         let ropeScreenJoint = SKPhysicsJointPin.jointWithBodyA(ropeEdgeAnchorNode.physicsBody, bodyB: ropeNode.physicsBody, anchor: getPointLeft(ropeNode))
         physicsWorld.addJoint(ropeScreenJoint)
-        
-        //ropeNode = childNodeWithName("rope") as! SKSpriteNode
-        //stoneBallNode = childNodeWithName("stoneBall") as! SKSpriteNode
-        //stoneBallNode.physicsBody!.density = 2.0
         
         enumerateChildNodesWithName("background", usingBlock: { (node, _) -> Void in
             if let spriteNode = node as? SKSpriteNode {
@@ -141,71 +118,6 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
             backgroundNode.physicsBody!.categoryBitMask = PhysicsCategory.Background
             backgroundNode.zPosition = -2 // behind background image layer
         }
-        
-        /*enumerateChildNodesWithName("wood", usingBlock: { (node, _) -> Void in
-        if let spriteNode = node as? SKSpriteNode {
-        self.woodNodeArr.append(spriteNode)
-        }
-        })*/
-        
-        //ropeNode.physicsBody!.applyAngularImpulse(30.0)
-        /*delay(seconds: 2.0) {
-        self.stoneBallNode.physicsBody!.applyAngularImpulse(1)
-        self.stoneBallNode.physicsBody!.applyImpulse(CGVector(dx:500.0, dy:250.0))
-        }
-        
-        
-        delay(seconds: 2.0) {
-        
-        for node in self.woodNodeArr {
-        node.physicsBody!.applyImpulse(CGVector(dx:0.0, dy:-300.0))
-        node.physicsBody!.categoryBitMask = PhysicsCategory.Wood
-        }
-        }*/
-        
-        /*enumerateChildNodesWithName("wood") {node, _ in
-        self.woodNodeArr.append(node)
-        }*/
-        
-        //physicsWorld.gravity = CGVectorMake(0.0, -9.81)
-        /*
-        woodNode = SKSpriteNode(imageNamed: "WoodBlock")
-        woodNode.physicsBody = SKPhysicsBody(rectangleOfSize: woodNode.frame.size)
-        woodNode.position = CGPointMake(100, 250)
-        woodNode.physicsBody!.categoryBitMask = PhysicsCategory.Wood
-        woodNode.physicsBody!.collisionBitMask = PhysicsCategory.Wood | PhysicsCategory.StoneBall | PhysicsCategory.Edge | PhysicsCategory.Rope
-        addChild(woodNode)
-        woodNode.zRotation = (π/180.0)*33
-        
-        stoneBallNode = SKSpriteNode(imageNamed: "Stone")
-        stoneBallNode.physicsBody = SKPhysicsBody(circleOfRadius: stoneBallNode.frame.size.width/2)
-        stoneBallNode.physicsBody!.categoryBitMask = PhysicsCategory.StoneBall
-        stoneBallNode.physicsBody!.collisionBitMask = PhysicsCategory.Wood | PhysicsCategory.StoneBall | PhysicsCategory.Edge | PhysicsCategory.Rope
-        stoneBallNode.position = CGPointMake(100, 300)
-        stoneBallNode.zRotation = 0.0
-        stoneBallNode.xScale = 0.05
-        stoneBallNode.yScale = 0.05
-        addChild(stoneBallNode)
-        
-        ropeNode = SKSpriteNode(imageNamed: "ropeAlpha")
-        var ropeNodeSize : CGSize = ropeNode.frame.size
-        //ropeNodeSize.height /= 2
-        ropeNode.physicsBody = SKPhysicsBody(rectangleOfSize: ropeNodeSize)
-        ropeNode.physicsBody?.restitution = 0.7
-        ropeNode.physicsBody!.categoryBitMask = PhysicsCategory.Wood
-        ropeNode.physicsBody!.collisionBitMask = PhysicsCategory.Wood | PhysicsCategory.StoneBall | PhysicsCategory.Edge | PhysicsCategory.Rope
-        ropeNode.xScale = 0.25
-        ropeNode.yScale = 0.25
-        ropeNode.position = CGPointMake(100, 200)
-        ropeNode.zRotation = (π/180.0)*74
-        addChild(ropeNode)
-        
-        delay(seconds: 4.0,
-        completion:
-        {(_) -> Void in
-        self.physicsWorld.gravity = CGVectorMake(0.0, -9.81)
-        }
-        )*/
     }
     
     override func update(currentTime: NSTimeInterval)
@@ -224,6 +136,28 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
         //println("\(dt*1000) milliseconds since the last update")
     }
     
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        let touch: UITouch = touches.first as! UITouch
+        let endPoint : CGPoint = touch.locationInNode(self)
+        
+        /*if let body : SKPhysicsBody = physicsWorld.bodyAlongRayStart(beginPoint, end: endPoint)
+        {
+            println("found swipe body \(body)")
+        }*/
+        physicsWorld.enumerateBodiesAlongRayStart(beginPoint, end:endPoint, usingBlock:
+            { (body, point, normalVector, stop) -> Void in
+                if let spriteNode = body.node as? SKSpriteNode
+                {
+                    //println("spriteNode: \(spriteNode)")
+                    if body.categoryBitMask == PhysicsCategory.Rope
+                    {
+                        spriteNode.removeFromParent()
+                    }
+                }
+            }
+        )
+    }
+    
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         let touch: UITouch = touches.first as! UITouch
         sceneTouched(touch.locationInNode(self))
@@ -237,6 +171,7 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
     
     func sceneTouched(location: CGPoint)
     {
+        beginPoint = location
         //enumerateBodiesInRect(usingBlock:)
         let targetNode = self.nodeAtPoint(location)
         
@@ -264,7 +199,7 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
         {
             if !levelCompleted
             {
-                doVictory()
+                mrSkunkDelegate.levelComplete()
                 
                 //println("You got the foods!")
             }
@@ -289,93 +224,5 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
             restartingMrSkunk = true
             mrSkunkDelegate.autoRestartLevel()
         }
-    }
-    
-    /*override func didSimulatePhysics() { if let body = catNode.physicsBody {
-    if body.contactTestBitMask != PhysicsCategory.None && fabs(catNode.zRotation) > CGFloat(45).degreesToRadians() { lose()
-    } }
-    }*/
-    
-    func doVictory()
-    {
-        mrSkunkDelegate.levelComplete()
-        /*
-        let victorySize = CGFloat(size.height/5.0)
-        let victoryLabel = ASAttributedLabelNode(size:CGSizeMake(playableRect.size.width*0.8, victorySize))
-        let buttonFrame : CGRect = CGRectMake(victoryLabel.position.x, victoryLabel.position.y+victoryLabel.size.height, victoryLabel.size.width, victoryLabel.size.height*2.0/3.0)
-        let nextButton : THButton = THButton(frame: buttonFrame, text: "Next")
-        view!.addSubview(nextButton)
-        
-        victoryLabel.attributedString = outlinedCenteredString("Yum", size: victorySize)
-        
-        victoryLabel.position =
-            CGPointMake(
-                size.width/2.0,
-                (size.height/2.0) + victorySize/2.0
-        )
-
-        victoryLabel.zPosition = kVictoryZPosition
-        victoryLabel.xScale = 0.0
-        victoryLabel.yScale = 0.0
-        addChild(victoryLabel)
-        
-        var victoryAction = SKAction.sequence(
-            [
-                SKAction.scaleTo(2.0, duration: 0.25),
-                SKAction.scaleTo(1.0, duration: 0.25)
-            ])
-        
-        victoryLabel.runAction(victoryAction)
-        */
-        /*victoryLabel = SKLabelNode(fontNamed: "Super Mario 256")
-        victoryLabel.text = "Victory!"
-        victoryLabel.position = CGPointMake(size.width/2.0, size.height/2.0)
-        victoryLabel.fontSize = size.height/8
-        //victoryLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
-        //victoryLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
-        victoryLabel.fontColor = SKColor.yellowColor()
-        victoryLabel.xScale = 0.0
-        victoryLabel.yScale = 0.0
-        addChild(victoryLabel)
-        var victoryAction = SKAction.sequence(
-            [
-                SKAction.scaleTo(2.0, duration: 0.25),
-                SKAction.scaleTo(1.0, duration: 0.25)
-            ])
-        
-        victoryLabel.runAction(victoryAction)*/
-    }
-    
-    func outlinedCenteredString(string : String, size: CGFloat) -> NSAttributedString
-    {
-        var myMutableString : NSMutableAttributedString
-        var font =  UIFont(name: "Super Mario 256", size: size)!
-        var alignment : CTTextAlignment = CTTextAlignment.TextAlignmentCenter
-        let alignmentSetting = [CTParagraphStyleSetting(spec: .Alignment, valueSize: Int(sizeofValue(alignment)), value: &alignment)]
-        var paragraphRef = CTParagraphStyleCreate(alignmentSetting, 1)
-        
-        let textFontAttributes = [
-            NSFontAttributeName : font,
-            // Note: SKColor.whiteColor().CGColor breaks this
-            NSForegroundColorAttributeName: UIColor.yellowColor(),
-            NSStrokeColorAttributeName: UIColor.blackColor(),
-            // Note: Use negative value here if you want foreground color to show
-            NSStrokeWidthAttributeName:-3
-            //,NSParagraphStyleAttributeName: paragraphRef
-        ]
-        
-        myMutableString = NSMutableAttributedString(string: string, attributes: textFontAttributes as [NSObject : AnyObject])
-        
-        let para = NSMutableParagraphStyle()
-        para.headIndent = 00
-        para.firstLineHeadIndent = 00
-        para.tailIndent = 0
-        para.lineBreakMode = .ByWordWrapping
-        para.alignment = .Center
-        para.paragraphSpacing = 0
-        myMutableString.addAttribute(
-            NSParagraphStyleAttributeName,
-            value:para, range:NSMakeRange(0,1))
-        return myMutableString
     }
 }
