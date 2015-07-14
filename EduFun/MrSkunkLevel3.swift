@@ -8,20 +8,7 @@
 
 import SpriteKit
 
-class MrSkunkLevel3Scene: MrSkunkLevelScene {
-    
-    struct PhysicsCategory {
-        static let None:       UInt32 = 0b0
-        static let Edge:       UInt32 = 0b1
-        static let Floor:      UInt32 = 0b10
-        static let Rope:       UInt32 = 0b100
-        static let Plank:      UInt32 = 0b1000
-        static let Orb:        UInt32 = 0b10000
-        static let GarbageCan: UInt32 = 0b100000
-        static let Weight:     UInt32 = 0b1000000
-        static let Wedge:      UInt32 = 0b10000000
-        static let Skunk:      UInt32 = 0b100000000
-    }
+class MrSkunkLevel3Scene: MrSkunkLevelScene {        
     
     let kContactAllExceptCan : UInt32 = kContactAll & ~PhysicsCategory.GarbageCan
     
@@ -258,9 +245,4 @@ class MrSkunkLevel3Scene: MrSkunkLevelScene {
             println("collision is some other collision")
         }
     }
-    
-    /*override func didSimulatePhysics() { if let body = catNode.physicsBody {
-    if body.contactTestBitMask != PhysicsCategory.None && fabs(catNode.zRotation) > CGFloat(45).degreesToRadians() { lose()
-    } }
-    }*/
 }
