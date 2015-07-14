@@ -49,6 +49,10 @@ class MrSkunkLevelScene: SKScene, SKPhysicsContactDelegate {
         playableRect = CGRect(x: 0, y: playableMargin,
             width: size.width, height: size.height-playableMargin*2)
         
+        restartingMrSkunk = false
+        hintDisappeared = false
+        levelCompleted = false
+        
         setupNodes(view)
     }
     
