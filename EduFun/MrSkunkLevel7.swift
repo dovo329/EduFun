@@ -26,9 +26,6 @@ class MrSkunkLevel7Scene: MrSkunkLevelScene {
     
     var lastTouchedPoint : CGPoint = CGPointZero
     
-    var restartingMrSkunk : Bool = false
-    var hintDisappeared : Bool = false
-    
     var skunkNode : SKSpriteNode!
     var smallWeightRopeNode : SKSpriteNode!
     var heavyWeightRopeNode : SKSpriteNode!

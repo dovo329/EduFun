@@ -25,9 +25,6 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
     var lastTouchedPoint : CGPoint = CGPointZero
     let kCannonImpulseStrength : CGFloat = 1100.0
     
-    var restartingMrSkunk : Bool = false
-    var hintDisappeared : Bool = false
-    
     var missSkunkNodeShot : Bool = false
     
     var skunkNode : SKSpriteNode!

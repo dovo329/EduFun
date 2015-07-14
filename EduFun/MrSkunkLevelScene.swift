@@ -26,6 +26,9 @@ class MrSkunkLevelScene: SKScene, SKPhysicsContactDelegate {
     var lastUpdateTime: NSTimeInterval = 0
     var dt : NSTimeInterval = 0
     
+    var restartingMrSkunk : Bool = false
+    var hintDisappeared : Bool = false
+    
     var beginPoint : CGPoint = CGPointZero
     
     override func willMoveFromView(view: SKView) {

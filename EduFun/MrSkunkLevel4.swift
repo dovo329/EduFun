@@ -23,9 +23,6 @@ class MrSkunkLevel4Scene: MrSkunkLevelScene {
         static let Skunk:      UInt32 = 0b100000000
     }
     
-    var restartingMrSkunk : Bool = false
-    var hintDisappeared : Bool = false
-    
     var skunkNode : SKSpriteNode!
     var garbageCanNode : SKSpriteNode!
     var floorNodeArr : [SKSpriteNode!]! = []

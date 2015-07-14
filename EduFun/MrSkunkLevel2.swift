@@ -20,9 +20,6 @@ class MrSkunkLevel2Scene: MrSkunkLevelScene {
         static let Wheel:      UInt32 = 0b100000
     }
     
-    var restartingMrSkunk : Bool = false
-    var hintDisappeared : Bool = false
-    
     let kCannonImpulseStrength : CGFloat = 1100.0
     
     var lastTouchedPoint : CGPoint!

@@ -20,10 +20,7 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
         static let Skunk:      UInt32 = 0b100000
     }        
     
-    let kContactAllExceptCan : UInt32 = kContactAll & ~PhysicsCategory.GarbageCan        
-    
-    var restartingMrSkunk : Bool = false
-    var hintDisappeared : Bool = false
+    let kContactAllExceptCan : UInt32 = kContactAll & ~PhysicsCategory.GarbageCan
     
     var skunkNode : SKSpriteNode!
     var garbageCanNode : SKSpriteNode!
