@@ -22,7 +22,7 @@ protocol MrSkunkLevelDelegate {
 class MrSkunkLevelScene: SKScene, SKPhysicsContactDelegate {
     var mrSkunkDelegate : MrSkunkLevelDelegate! = nil
     
-    var playableRect: CGRect
+    var playableRect: CGRect = CGRectMake(0,0,0,0)
     var lastUpdateTime: NSTimeInterval = 0
     var dt : NSTimeInterval = 0
     
@@ -32,23 +32,32 @@ class MrSkunkLevelScene: SKScene, SKPhysicsContactDelegate {
     
     var beginPoint : CGPoint = CGPointZero
     
-    override func willMoveFromView(view: SKView) {
-        
-    }
-    
     override init(size: CGSize) {
-        let maxAspectRatio: CGFloat = 16.0/9.0
-        let playableHeight = size.width / maxAspectRatio
-        let playableMargin = (size.height - playableHeight)/2.0
-        
-        playableRect = CGRect(x:0, y: playableMargin, width: size.width, height: playableHeight)
-        
         super.init(size: size)
     }
     
     required init?(coder aDecoder: NSCoder) {
-        playableRect = CGRect(x: 0, y: 0, width: 0, height: 0)
-        
         super.init(coder: aDecoder)
+    }
+    
+    override func didMoveToView(view: SKView) {
+        // Calculate playable margin
+        let maxAspectRatio: CGFloat = 16.0/9.0 // iPhone 5
+        let maxAspectRatioHeight = size.width / maxAspectRatio
+        let playableMargin: CGFloat =
+        (size.height - maxAspectRatioHeight)/2
+        playableRect = CGRect(x: 0, y: playableMargin,
+            width: size.width, height: size.height-playableMargin*2)
+        
+        setupNodes(view)
+    }
+    
+    func setupNodes(view: SKView)
+    {
+        fatalError("Mr Skunk level subclasses should override this")
+    }
+    
+    override func willMoveFromView(view: SKView) {
+        
     }
 }

@@ -25,15 +25,7 @@ class MrSkunkLevel5Scene: MrSkunkLevelScene {
     var arrowNode : SKSpriteNode!
     var arrowDirectionIsDown : Bool = true
     
-    override func didMoveToView(view: SKView) {
-        // Calculate playable margin
-        let maxAspectRatio: CGFloat = 16.0/9.0 // iPhone 5
-        let maxAspectRatioHeight = size.width / maxAspectRatio
-        let playableMargin: CGFloat =
-        (size.height - maxAspectRatioHeight)/2
-        playableRect = CGRect(x: 0, y: playableMargin,
-            width: size.width, height: size.height-playableMargin*2)
-        
+    override func setupNodes(view: SKView) {
         physicsBody = SKPhysicsBody(edgeLoopFromRect: playableRect)
         physicsWorld.contactDelegate = self
         physicsBody!.categoryBitMask = PhysicsCategory.Edge
