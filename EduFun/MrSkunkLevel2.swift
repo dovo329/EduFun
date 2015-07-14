@@ -165,8 +165,12 @@ class MrSkunkLevel2Scene: MrSkunkLevelScene {
         
         let skunkOffRightScreen = skunkNode.position.x - (skunkNode.size.width/2.0) >= size.width
         
+        let skunkOffBottomScreen = skunkNode.position.y - (skunkNode.size.height/2.0) < 0
+        
+        let skunkOffTopScreen = skunkNode.position.y + (skunkNode.size.height/2.0) >= size.height
+        
         if !restartingMrSkunk &&
-        (skunkOffLeftScreen || skunkOffRightScreen)
+        (skunkOffLeftScreen || skunkOffRightScreen || skunkOffBottomScreen)
         {
             restartingMrSkunk = true
             mrSkunkDelegate.autoRestartLevel()

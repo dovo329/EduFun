@@ -26,6 +26,8 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
     var lastUpdateTime: NSTimeInterval = 0
     var dt : NSTimeInterval = 0
     
+    var restartingMrSkunk : Bool = false
+    
     /*var woodNodeArr : [SKSpriteNode]! = []
     var stoneBallNode : SKSpriteNode!
     var ropeNode : SKSpriteNode!    */
@@ -73,7 +75,7 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
         skunkNode = childNodeWithName("skunk") as! SKSpriteNode
         skunkNode.physicsBody!.categoryBitMask = PhysicsCategory.Skunk
         skunkNode.physicsBody!.contactTestBitMask = PhysicsCategory.GarbageCan | PhysicsCategory.Edge
-        skunkNode.physicsBody!.collisionBitMask = kContactAll & ~(PhysicsCategory.Rope)
+        skunkNode.physicsBody!.collisionBitMask = PhysicsCategory.Background | PhysicsCategory.Wood | PhysicsCategory.GarbageCan
         // physics categories arranged in Z order so just use that
         skunkNode.zPosition = CGFloat(PhysicsCategory.Skunk)
         
@@ -257,13 +259,28 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
             {
                 doVictory()
                 
-                println("You got the foods!")
+                //println("You got the foods!")
             }
             levelCompleted = true
         }
         else
         {
-            println("collision is some other collision")
+            //println("collision is some other collision")
+        }
+        
+        let skunkOffLeftScreen = skunkNode.position.x + (skunkNode.size.width/2.0) < 0
+        
+        let skunkOffRightScreen = skunkNode.position.x - (skunkNode.size.width/2.0) >= size.width
+        
+        let skunkOffBottomScreen = skunkNode.position.y - (skunkNode.size.height/2.0) < 0
+        
+        let skunkOffTopScreen = skunkNode.position.y + (skunkNode.size.height/2.0) >= size.height
+        
+        if !restartingMrSkunk &&
+        (skunkOffLeftScreen || skunkOffRightScreen || skunkOffBottomScreen || skunkOffTopScreen)
+        {
+            restartingMrSkunk = true
+            mrSkunkDelegate.autoRestartLevel()
         }
     }
     

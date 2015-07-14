@@ -23,6 +23,8 @@ class MrSkunkLevel3Scene: MrSkunkLevelScene {
         static let Skunk:      UInt32 = 0b100000000
     }
     
+    var restartingMrSkunk = false
+    
     let kContactAllExceptCan : UInt32 = kContactAll & ~PhysicsCategory.GarbageCan
     
     var playableRect: CGRect
@@ -77,7 +79,7 @@ class MrSkunkLevel3Scene: MrSkunkLevelScene {
         skunkNode.physicsBody = SKPhysicsBody(circleOfRadius: skunkNode.size.width/2)
         skunkNode.physicsBody!.categoryBitMask = PhysicsCategory.Skunk
         skunkNode.physicsBody!.contactTestBitMask = PhysicsCategory.GarbageCan
-        skunkNode.physicsBody!.collisionBitMask = kContactAll & ~(PhysicsCategory.Rope)
+        skunkNode.physicsBody!.collisionBitMask = kContactAll & ~(PhysicsCategory.Rope | PhysicsCategory.Edge)
         // physics categories arranged in Z order so just use that
         skunkNode.zPosition = CGFloat(PhysicsCategory.Skunk)
         
@@ -226,6 +228,21 @@ class MrSkunkLevel3Scene: MrSkunkLevelScene {
         //ropeNode.physicsBody!.applyTorque(0.1)
         //stoneBallNode.physicsBody!.applyTorque(-0.1)
         //println("\(dt*1000) milliseconds since the last update")
+        
+        let skunkOffLeftScreen = skunkNode.position.x + (skunkNode.size.width/2.0) < 0
+        
+        let skunkOffRightScreen = skunkNode.position.x - (skunkNode.size.width/2.0) >= size.width
+        
+        let skunkOffBottomScreen = skunkNode.position.y - (skunkNode.size.height/2.0) < 0
+        
+        let skunkOffTopScreen = skunkNode.position.y + (skunkNode.size.height/2.0) >= size.height
+        
+        if !restartingMrSkunk &&
+        (skunkOffLeftScreen || skunkOffRightScreen || skunkOffBottomScreen || skunkOffTopScreen)
+        {
+            restartingMrSkunk = true
+            mrSkunkDelegate.autoRestartLevel()
+        }
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {

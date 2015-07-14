@@ -80,7 +80,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         {
             currentLevel = highestCompletedLevelNum + 1
         }
-        currentLevel=2 // just to test level out
+        //currentLevel=2 // just to test level out
         
         if let coder = coder {
             super.init(coder: coder)

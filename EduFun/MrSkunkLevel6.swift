@@ -29,6 +29,8 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
     var lastUpdateTime: NSTimeInterval = 0
     var dt : NSTimeInterval = 0
     
+    var restartingMrSkunk : Bool = false
+    
     var missSkunkNodeShot : Bool = false
     
     var skunkNode : SKSpriteNode!
@@ -76,7 +78,7 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
         skunkNode.physicsBody = SKPhysicsBody(circleOfRadius: skunkNode.size.width/2)
         skunkNode.physicsBody!.categoryBitMask = PhysicsCategory.Skunk
         skunkNode.physicsBody!.contactTestBitMask = PhysicsCategory.GarbageCan
-        skunkNode.physicsBody!.collisionBitMask = kContactAll & ~PhysicsCategory.Rope
+        skunkNode.physicsBody!.collisionBitMask = kContactAll & (~PhysicsCategory.Rope | ~PhysicsCategory.Edge)
         // physics categories arranged in Z order so just use that
         skunkNode.zPosition = CGFloat(PhysicsCategory.Skunk)
         
@@ -158,6 +160,20 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
         }
         lastUpdateTime = currentTime
         //println("\(dt*1000) milliseconds since the last update")
+        let skunkOffLeftScreen = skunkNode.position.x + (skunkNode.size.width/2.0) < 0
+        
+        let skunkOffRightScreen = skunkNode.position.x - (skunkNode.size.width/2.0) >= size.width
+        
+        let skunkOffBottomScreen = skunkNode.position.y - (skunkNode.size.height/2.0) < 0
+        
+        let skunkOffTopScreen = skunkNode.position.y + (skunkNode.size.height/2.0) >= size.height
+        
+        if !restartingMrSkunk &&
+        (skunkOffLeftScreen || skunkOffRightScreen || skunkOffBottomScreen)
+        {
+            restartingMrSkunk = true
+            mrSkunkDelegate.autoRestartLevel()
+        }
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -212,13 +228,13 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
             {
                 mrSkunkDelegate.levelComplete()
                 
-                println("You got the foods!")
+                //println("You got the foods!")
             }
             levelCompleted = true
         }
         else
         {
-            println("collision is some other collision")
+            //println("collision is some other collision")
         }
     }
     
