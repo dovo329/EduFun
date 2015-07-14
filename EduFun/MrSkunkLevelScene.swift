@@ -28,6 +28,7 @@ class MrSkunkLevelScene: SKScene, SKPhysicsContactDelegate {
     
     var restartingMrSkunk : Bool = false
     var hintDisappeared : Bool = false
+    var levelCompleted : Bool = false
     
     var beginPoint : CGPoint = CGPointZero
     

@@ -62,7 +62,6 @@ class MrSkunkWinScene: MrSkunkLevelScene {
         
         for floorNode in floorNodeArr
         {
-            //floorNode.physicsBody?.friction = 0.5
             floorNode.physicsBody = SKPhysicsBody(rectangleOfSize: floorNode.size)
             floorNode.physicsBody!.categoryBitMask = PhysicsCategory.Floor
             floorNode.physicsBody!.dynamic = false
@@ -83,9 +82,6 @@ class MrSkunkWinScene: MrSkunkLevelScene {
             dt = 0
         }
         lastUpdateTime = currentTime
-        //ropeNode.physicsBody!.applyTorque(0.1)
-        //stoneBallNode.physicsBody!.applyTorque(-0.1)
-        //println("\(dt*1000) milliseconds since the last update")
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -103,9 +99,4 @@ class MrSkunkWinScene: MrSkunkLevelScene {
     func didBeginContact(contact: SKPhysicsContact) {
         
     }
-    
-    /*override func didSimulatePhysics() { if let body = catNode.physicsBody {
-    if body.contactTestBitMask != PhysicsCategory.None && fabs(catNode.zRotation) > CGFloat(45).degreesToRadians() { lose()
-    } }
-    }*/
 }

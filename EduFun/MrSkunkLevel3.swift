@@ -34,8 +34,6 @@ class MrSkunkLevel3Scene: MrSkunkLevelScene {
     var weightNode : SKSpriteNode!
     var wedgeNode : SKSpriteNode!
     
-    var levelCompleted : Bool = false
-    
     override func didMoveToView(view: SKView) {
         // Calculate playable margin
         let maxAspectRatio: CGFloat = 16.0/9.0 // iPhone 5

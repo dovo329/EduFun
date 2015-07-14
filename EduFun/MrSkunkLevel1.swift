@@ -27,10 +27,7 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
     var backgroundNodeArr : [SKSpriteNode!]! = []
     var ropeNode : SKSpriteNode!
     var woodNode : SKSpriteNode!
-    
     var woodRopeJoint : SKPhysicsJoint!
-    
-    var levelCompleted : Bool = false        
     
     override func didMoveToView(view: SKView) {
         // Calculate playable margin

@@ -38,8 +38,6 @@ class MrSkunkLevel7Scene: MrSkunkLevelScene {
     var garbageCanNode : SKSpriteNode!
     var floorNodeArr : [SKSpriteNode!]! = []
     
-    var levelCompleted : Bool = false
-    
     override func didMoveToView(view: SKView) {
         // Calculate playable margin
         let maxAspectRatio: CGFloat = 16.0/9.0 // iPhone 5
