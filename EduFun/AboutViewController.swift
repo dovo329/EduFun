@@ -32,7 +32,7 @@ class AboutViewController: UIViewController {
         aboutText = UITextView()
         
         aboutText.editable = false
-        aboutText.text = "KidsFun\r\rProgrammed by Douglas Carl Voss 2015\r\rArtwork in Card Match Game by Doug Voss, Font by fsuarez913\r\rArtwork in Coloring Book by Doug Voss\r\rUses the following third party code\r\rTHLabel by Tobias Hagemann\r\rSVGKit by Matt Rajca\r\rFont: SuperMario256.ttf by fsuarez913 (dafont.com) \r\rUIImage category extension from Trevor Harmon\r\rOBButton from Ole Begemann"
+        aboutText.text = "KidsFun\r\rProgrammed by Douglas Carl Voss 2015\r\rArtwork in Card Match Game by Doug Voss, Font by fsuarez913\r\rArtwork in Coloring Book by Doug Voss\r\rIncorporates the following third party code\r\rTHLabel by Tobias Hagemann\r\rFont: SuperMario256.ttf by fsuarez913 (dafont.com) \r\rUIImage category extension from Trevor Harmon\r\rOBButton from Ole Begemann\r\rSVGKit by Matt Rajca\r\rThanks to Matti Räty for SpriteKit rope cutting example\r\rThanks to Ray Wenderlich iOS Games by Tutorials book."
         
         aboutText.backgroundColor = UIColor.whiteColor()
         aboutText.layer.cornerRadius = 4.0

@@ -22,51 +22,29 @@ protocol MrSkunkLevelDelegate {
 class MrSkunkLevelScene: SKScene, SKPhysicsContactDelegate {
     var mrSkunkDelegate : MrSkunkLevelDelegate! = nil
     
+    var playableRect: CGRect
+    var lastUpdateTime: NSTimeInterval = 0
+    var dt : NSTimeInterval = 0
+    
     var beginPoint : CGPoint = CGPointZero
     
-    var verticalSwipeRecognizer : UISwipeGestureRecognizer!
-    var horizontalSwipeRecognizer : UISwipeGestureRecognizer!
-    var swipeCnt : Int = 0
-    
     override func willMoveFromView(view: SKView) {
-        /*view.removeGestureRecognizer(verticalSwipeRecognizer)
-        view.removeGestureRecognizer(horizontalSwipeRecognizer)
-        mrSkunkDelegate.willMoveFromView()*/
-    }
-    
-    func setupSwipe()
-    {
-        /*verticalSwipeRecognizer = UISwipeGestureRecognizer(target: self, action: "handleVerticalSwipe:")
-        verticalSwipeRecognizer.direction = /*UISwipeGestureRecognizerDirection.Right | UISwipeGestureRecognizerDirection.Left |*/
-            UISwipeGestureRecognizerDirection.Up |
-            UISwipeGestureRecognizerDirection.Down
-        view!.addGestureRecognizer(verticalSwipeRecognizer)
         
-        horizontalSwipeRecognizer = UISwipeGestureRecognizer(target: self, action: "handleHorizontalSwipe:")
-        horizontalSwipeRecognizer.direction = UISwipeGestureRecognizerDirection.Right | UISwipeGestureRecognizerDirection.Left
-        view!.addGestureRecognizer(horizontalSwipeRecognizer)*/
     }
     
-    func handleSwipe(sender: UISwipeGestureRecognizer)
-    {
-        if sender.state == UIGestureRecognizerState.Ended
-        {
-            let touchLocation : CGPoint = convertPointFromView(sender.locationInView(sender.view))
-            let touchedNode : SKNode = nodeAtPoint(touchLocation)
-            println("")
-            println("swipedNode\(swipeCnt)=\(touchedNode)")
-            println("")
-            swipeCnt++
-        }
+    override init(size: CGSize) {
+        let maxAspectRatio: CGFloat = 16.0/9.0
+        let playableHeight = size.width / maxAspectRatio
+        let playableMargin = (size.height - playableHeight)/2.0
+        
+        playableRect = CGRect(x:0, y: playableMargin, width: size.width, height: playableHeight)
+        
+        super.init(size: size)
     }
     
-    func handleVerticalSwipe(sender: UISwipeGestureRecognizer)
-    {
-        handleSwipe(sender)
-    }
-    
-    func handleHorizontalSwipe(sender: UISwipeGestureRecognizer)
-    {
-        handleSwipe(sender)
+    required init?(coder aDecoder: NSCoder) {
+        playableRect = CGRect(x: 0, y: 0, width: 0, height: 0)
+        
+        super.init(coder: aDecoder)
     }
 }

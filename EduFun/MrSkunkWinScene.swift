@@ -18,29 +18,9 @@ class MrSkunkWinScene: MrSkunkLevelScene {
         static let Skunk:      UInt32 = 0b1000
     }
     
-    var playableRect: CGRect
-    var lastUpdateTime: NSTimeInterval = 0
-    var dt : NSTimeInterval = 0
-    
     var skunkNode : SKSpriteNode!
     var youwinNode : SKSpriteNode!
     var floorNodeArr : [SKSpriteNode!]! = []
-    
-    override init(size: CGSize) {
-        let maxAspectRatio: CGFloat = 16.0/9.0
-        let playableHeight = size.width / maxAspectRatio
-        let playableMargin = (size.height - playableHeight)/2.0
-        
-        playableRect = CGRect(x:0, y: playableMargin, width: size.width, height: playableHeight)
-        
-        super.init(size: size)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        playableRect = CGRect(x: 0, y: 0, width: 0, height: 0)
-        
-        super.init(coder: aDecoder)
-    }
     
     override func didMoveToView(view: SKView) {
         // Calculate playable margin

@@ -26,10 +26,6 @@ class MrSkunkLevel7Scene: MrSkunkLevelScene {
     
     var lastTouchedPoint : CGPoint = CGPointZero
     
-    var playableRect: CGRect
-    var lastUpdateTime: NSTimeInterval = 0
-    var dt : NSTimeInterval = 0
-    
     var restartingMrSkunk : Bool = false
     var hintDisappeared : Bool = false
     
@@ -47,25 +43,7 @@ class MrSkunkLevel7Scene: MrSkunkLevelScene {
     
     var levelCompleted : Bool = false
     
-    override init(size: CGSize) {
-        let maxAspectRatio: CGFloat = 16.0/9.0
-        let playableHeight = size.width / maxAspectRatio
-        let playableMargin = (size.height - playableHeight)/2.0
-        
-        playableRect = CGRect(x:0, y: playableMargin, width: size.width, height: playableHeight)
-        
-        super.init(size: size)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        playableRect = CGRect(x: 0, y: 0, width: 0, height: 0)
-        
-        super.init(coder: aDecoder)
-    }
-    
     override func didMoveToView(view: SKView) {
-        setupSwipe()
-        
         // Calculate playable margin
         let maxAspectRatio: CGFloat = 16.0/9.0 // iPhone 5
         let maxAspectRatioHeight = size.width / maxAspectRatio
