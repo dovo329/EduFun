@@ -21,6 +21,8 @@ class MrSkunkLevel2Scene: MrSkunkLevelScene {
     }
     
     var restartingMrSkunk : Bool = false
+    var hintDisappeared : Bool = false
+    
     let kCannonImpulseStrength : CGFloat = 1100.0
     
     var lastTouchedPoint : CGPoint!
@@ -201,6 +203,12 @@ class MrSkunkLevel2Scene: MrSkunkLevelScene {
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         let touch: UITouch = touches.first as! UITouch
         sceneTouched(touch.locationInNode(self))
+        
+        if !hintDisappeared
+        {
+            mrSkunkDelegate.hintDisappear()
+            hintDisappeared = true
+        }
     }
     
     func sceneTouched(location: CGPoint)

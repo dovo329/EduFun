@@ -400,10 +400,14 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         }
     }
     
-    func levelComplete() {
-        levelCompleteFlag = true
+    func hintDisappear() {
         scaleOutRemoveView(hint, duration: 0.5, delay: 0.0)
         scaleOutRemoveView(hint2, duration: 0.5, delay: 0.0)
+    }
+    
+    func levelComplete() {
+        levelCompleteFlag = true
+        hintDisappear()
         
         if currentLevel <= kNumLevels
         {

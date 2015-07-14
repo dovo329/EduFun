@@ -24,6 +24,7 @@ class MrSkunkLevel5Scene: MrSkunkLevelScene {
     var dt : NSTimeInterval = 0
     
     var restartingMrSkunk : Bool = false
+    var hintDisappeared : Bool = false
     
     var skunkNode : SKSpriteNode!
     var garbageCanNode : SKSpriteNode!
@@ -135,6 +136,12 @@ class MrSkunkLevel5Scene: MrSkunkLevelScene {
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         let touch: UITouch = touches.first as! UITouch
         sceneTouched(touch.locationInNode(self))
+        
+        if !hintDisappeared
+        {
+            mrSkunkDelegate.hintDisappear()
+            hintDisappeared = true
+        }
     }
     
     func sceneTouched(location: CGPoint)

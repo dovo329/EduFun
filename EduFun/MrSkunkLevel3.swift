@@ -23,7 +23,8 @@ class MrSkunkLevel3Scene: MrSkunkLevelScene {
         static let Skunk:      UInt32 = 0b100000000
     }
     
-    var restartingMrSkunk = false
+    var restartingMrSkunk : Bool = false
+    var hintDisappeared : Bool = false
     
     let kContactAllExceptCan : UInt32 = kContactAll & ~PhysicsCategory.GarbageCan
     
@@ -248,6 +249,12 @@ class MrSkunkLevel3Scene: MrSkunkLevelScene {
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         let touch: UITouch = touches.first as! UITouch
         sceneTouched(touch.locationInNode(self))
+        
+        if !hintDisappeared
+        {
+            mrSkunkDelegate.hintDisappear()
+            hintDisappeared = true
+        }
     }
     
     func sceneTouched(location: CGPoint)

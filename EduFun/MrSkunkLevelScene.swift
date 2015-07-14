@@ -16,6 +16,7 @@ protocol MrSkunkLevelDelegate {
     func levelComplete()
     func willMoveFromView()
     func autoRestartLevel()
+    func hintDisappear()
 }
 
 class MrSkunkLevelScene: SKScene, SKPhysicsContactDelegate {
