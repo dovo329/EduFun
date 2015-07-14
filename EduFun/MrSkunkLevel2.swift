@@ -29,7 +29,7 @@ class MrSkunkLevel2Scene: MrSkunkLevelScene {
     
     var skunkNodeShot : Bool = false
     var skunkNode : SKSpriteNode!
-    var goalNode : SKSpriteNode!
+    var goalNodeArr : [SKSpriteNode!]! = []
     var hoopNode : SKSpriteNode!
     var wheelNode : SKSpriteNode!
     var cannonNode : SKSpriteNode!
@@ -53,16 +53,6 @@ class MrSkunkLevel2Scene: MrSkunkLevelScene {
         // physics categories arranged in Z order so just use that
         skunkNode.physicsBody!.restitution = 0.8
         skunkNode.zPosition = CGFloat(PhysicsCategory.Skunk)
-        
-        goalNode = childNodeWithName("goal") as! SKSpriteNode
-        goalNode.physicsBody = SKPhysicsBody(rectangleOfSize:goalNode.size)
-        goalNode.physicsBody!.dynamic = false
-        goalNode.physicsBody!.affectedByGravity = false
-        goalNode.physicsBody!.categoryBitMask = PhysicsCategory.Goal
-        goalNode.physicsBody!.contactTestBitMask = PhysicsCategory.Goal
-        goalNode.physicsBody!.collisionBitMask = kContactAll
-        // physics categories arranged in Z order so just use that
-        goalNode.zPosition = CGFloat(-101)
         
         hoopNode = childNodeWithName("hoop") as! SKSpriteNode
         hoopNode.physicsBody = SKPhysicsBody(circleOfRadius: hoopNode.size.width/2.0)
@@ -112,6 +102,24 @@ class MrSkunkLevel2Scene: MrSkunkLevelScene {
             backgroundNode.physicsBody!.collisionBitMask = kContactAll
             // physics categories arranged in Z order so just use that
             backgroundNode.zPosition = -1000
+        }
+        
+        enumerateChildNodesWithName("goal", usingBlock: { (node, _) -> Void in
+            if let spriteNode = node as? SKSpriteNode {
+                self.goalNodeArr.append(spriteNode)
+            }
+        })
+        
+        for goalNode in goalNodeArr
+        {
+            goalNode.physicsBody = SKPhysicsBody(rectangleOfSize:goalNode.size)
+            goalNode.physicsBody!.dynamic = false
+            goalNode.physicsBody!.affectedByGravity = false
+            goalNode.physicsBody!.categoryBitMask = PhysicsCategory.Goal
+            goalNode.physicsBody!.contactTestBitMask = PhysicsCategory.Goal
+            goalNode.physicsBody!.collisionBitMask = kContactAll
+            // physics categories arranged in Z order so just use that
+            goalNode.zPosition = CGFloat(-101)
         }
     }
     
@@ -229,86 +237,11 @@ class MrSkunkLevel2Scene: MrSkunkLevelScene {
         {
             if !levelCompleted
             {
-                doVictory()
+                mrSkunkDelegate.levelComplete()
                 
-                println("You made a basket!")
+                //println("You made a basket!")
             }
             levelCompleted = true
         }
-        else if (collision & PhysicsCategory.Edge) != 0
-        {
-            println("collision with edge")
-        }
-        else
-        {
-            println("collision is some other collision")
-        }
-    }
-    
-    /*override func didSimulatePhysics() { if let body = catNode.physicsBody {
-    if body.contactTestBitMask != PhysicsCategory.None && fabs(catNode.zRotation) > CGFloat(45).degreesToRadians() { lose()
-    } }
-    }*/
-    
-    func doVictory()
-    {
-        mrSkunkDelegate.levelComplete()
-        /*let victorySize = CGFloat(size.height/5.0)
-        let victoryLabel = ASAttributedLabelNode(size:CGSizeMake(playableRect.size.width*0.8, victorySize))
-        let buttonFrame : CGRect = CGRectMake(victoryLabel.position.x, victoryLabel.position.y+victoryLabel.size.height, victoryLabel.size.width, victoryLabel.size.height*2.0/3.0)
-        
-        victoryLabel.attributedString = outlinedCenteredString("Goal", size: victorySize)
-        
-        victoryLabel.position =
-            CGPointMake(
-                size.width/2.0,
-                (size.height/2.0) + victorySize/2.0
-        )
-
-        victoryLabel.zPosition = kVictoryZPosition
-        victoryLabel.xScale = 0.0
-        victoryLabel.yScale = 0.0
-        addChild(victoryLabel)
-        
-        var victoryAction = SKAction.sequence(
-            [
-                SKAction.scaleTo(2.0, duration: 0.25),
-                SKAction.scaleTo(1.0, duration: 0.25)
-            ])
-        
-        victoryLabel.runAction(victoryAction)*/
-    }
-    
-    func outlinedCenteredString(string : String, size: CGFloat) -> NSAttributedString
-    {
-        var myMutableString : NSMutableAttributedString
-        var font =  UIFont(name: "Super Mario 256", size: size)!
-        var alignment : CTTextAlignment = CTTextAlignment.TextAlignmentCenter
-        let alignmentSetting = [CTParagraphStyleSetting(spec: .Alignment, valueSize: Int(sizeofValue(alignment)), value: &alignment)]
-        var paragraphRef = CTParagraphStyleCreate(alignmentSetting, 1)
-        
-        let textFontAttributes = [
-            NSFontAttributeName : font,
-            // Note: SKColor.whiteColor().CGColor breaks this
-            NSForegroundColorAttributeName: UIColor.yellowColor(),
-            NSStrokeColorAttributeName: UIColor.blackColor(),
-            // Note: Use negative value here if you want foreground color to show
-            NSStrokeWidthAttributeName:-3
-            //,NSParagraphStyleAttributeName: paragraphRef
-        ]
-        
-        myMutableString = NSMutableAttributedString(string: string, attributes: textFontAttributes as [NSObject : AnyObject])
-        
-        let para = NSMutableParagraphStyle()
-        para.headIndent = 00
-        para.firstLineHeadIndent = 00
-        para.tailIndent = 0
-        para.lineBreakMode = .ByWordWrapping
-        para.alignment = .Center
-        para.paragraphSpacing = 0
-        myMutableString.addAttribute(
-            NSParagraphStyleAttributeName,
-            value:para, range:NSMakeRange(0,1))
-        return myMutableString
     }
 }

@@ -62,6 +62,6 @@ class MrSkunkLevelScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func willMoveFromView(view: SKView) {
-        
+        mrSkunkDelegate.willMoveFromView()
     }
 }
