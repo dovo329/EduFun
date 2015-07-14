@@ -468,12 +468,6 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             highestCompletedLevelNum = currentLevel
         }
         
-        currentLevel++
-        if currentLevel > (kNumLevels + 1) // +1 because of youwin scene
-        {
-            currentLevel=1
-            highestCompletedLevelNum=kNumLevels
-        }
         scaleOutRemoveView(mapView, duration: 0.25, delay: 0.0)
         mapVisible = false
         mapView = MrSkunkMapView(frame: makeCenteredRectWithScale(0.7, ofFrame:self.view.frame), highestCompletedLevelNum: highestCompletedLevelNum)
@@ -492,6 +486,12 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
     
     func nextButtonMethod(sender : THButton, event : UIEvent)
     {
+        currentLevel++
+        if currentLevel > (kNumLevels + 1) // +1 because of youwin scene
+        {
+            currentLevel=1
+            highestCompletedLevelNum=kNumLevels
+        }
         startup(level: currentLevel)
     }
     
