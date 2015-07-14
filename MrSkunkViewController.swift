@@ -42,6 +42,8 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
     //var mapButton : UIBarButtonItem!
     //var restartBarButton : UIBarButtonItem!
     
+    var levelCompleteFlag : Bool = false
+    
     var exitButton : THButton!
     var mapButton : UIButton!
     var restartButton : UIButton!
@@ -391,12 +393,15 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         }
     }
     
-    func restartLevel() {
-        startup(level: currentLevel)
-        //NSLog("restart the level")
+    func autoRestartLevel() {
+        if !levelCompleteFlag // only autorestart if level is not yet complete
+        {
+            startup(level: currentLevel)
+        }
     }
     
     func levelComplete() {
+        levelCompleteFlag = true
         scaleOutRemoveView(hint, duration: 0.5, delay: 0.0)
         scaleOutRemoveView(hint2, duration: 0.5, delay: 0.0)
         

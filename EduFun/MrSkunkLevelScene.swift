@@ -15,7 +15,7 @@ let kGravity : CGFloat = 9.8
 protocol MrSkunkLevelDelegate {
     func levelComplete()
     func willMoveFromView()
-    func restartLevel()
+    func autoRestartLevel()
 }
 
 class MrSkunkLevelScene: SKScene, SKPhysicsContactDelegate {

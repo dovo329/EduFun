@@ -169,7 +169,7 @@ class MrSkunkLevel2Scene: MrSkunkLevelScene {
         (skunkOffLeftScreen || skunkOffRightScreen)
         {
             restartingMrSkunk = true
-            mrSkunkDelegate.restartLevel()
+            mrSkunkDelegate.autoRestartLevel()
         }
     }
     
