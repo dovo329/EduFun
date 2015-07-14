@@ -17,8 +17,8 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
         static let Rope:       UInt32 = 0b100
         static let GarbageCan: UInt32 = 0b1000
         static let MissSkunk:  UInt32 = 0b10000
-        static let Wheel:      UInt32 = 0b100000
-        static let Cannon:     UInt32 = 0b1000000
+        static let Cannon:     UInt32 = 0b100000
+        static let Wheel:      UInt32 = 0b1000000
         static let Skunk:      UInt32 = 0b10000000
     }
     
@@ -173,6 +173,27 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
         {
             restartingMrSkunk = true
             mrSkunkDelegate.autoRestartLevel()
+        }
+    }
+    
+    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+        let touch: UITouch = touches.first as! UITouch
+        let location = touch.locationInNode(self)
+        let targetNode = self.nodeAtPoint(location)
+        
+        if targetNode.physicsBody == nil
+        {
+            lastTouchedPoint = location
+            let orientConstraint = SKConstraint.orientToPoint(lastTouchedPoint, offset: SKRange(lowerLimit: 0.0, upperLimit: 0.0))
+            cannonNode.constraints = [orientConstraint]
+            return
+        }
+        
+        if (targetNode.physicsBody!.categoryBitMask != PhysicsCategory.Cannon && targetNode.physicsBody!.categoryBitMask != PhysicsCategory.Wheel)
+        {
+            lastTouchedPoint = location
+            let orientConstraint = SKConstraint.orientToPoint(lastTouchedPoint, offset: SKRange(lowerLimit: 0.0, upperLimit: 0.0))
+            cannonNode.constraints = [orientConstraint]
         }
     }
     
