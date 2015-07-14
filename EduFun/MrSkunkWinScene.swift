@@ -10,6 +10,14 @@ import SpriteKit
 
 class MrSkunkWinScene: MrSkunkLevelScene {
     
+    struct PhysicsCategory {
+        static let None:       UInt32 = 0b0
+        static let Edge:       UInt32 = 0b1
+        static let Floor:      UInt32 = 0b10
+        static let YouWin:     UInt32 = 0b100
+        static let Skunk:      UInt32 = 0b1000
+    }
+    
     var skunkNode : SKSpriteNode!
     var youwinNode : SKSpriteNode!
     var floorNodeArr : [SKSpriteNode!]! = []

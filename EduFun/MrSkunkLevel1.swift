@@ -8,7 +8,17 @@
 
 import SpriteKit
 
-class MrSkunkLevel1Scene: MrSkunkLevelScene {        
+class MrSkunkLevel1Scene: MrSkunkLevelScene {
+    
+    struct PhysicsCategory {
+        static let None:       UInt32 = 0b0
+        static let Edge:       UInt32 = 0b1
+        static let Background: UInt32 = 0b10
+        static let Rope:       UInt32 = 0b100
+        static let Wood:       UInt32 = 0b1000
+        static let GarbageCan: UInt32 = 0b10000
+        static let Skunk:      UInt32 = 0b100000
+    }
     
     var skunkNode : SKSpriteNode!
     var garbageCanNode : SKSpriteNode!
@@ -70,7 +80,21 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
             backgroundNode.physicsBody!.categoryBitMask = PhysicsCategory.Background
             backgroundNode.zPosition = -2 // behind background image layer
         }
-    }        
+    }
+    
+    override func update(currentTime: NSTimeInterval)
+    {
+        if lastUpdateTime > 0
+        {
+            dt = currentTime - lastUpdateTime
+        }
+        else
+        {
+            dt = 0
+        }
+        lastUpdateTime = currentTime
+        //println("\(dt*1000) milliseconds since the last update")
+    }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         let touch: UITouch = touches.first as! UITouch
@@ -82,8 +106,8 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
             
         if targetNode.physicsBody != nil
         {
-            if (targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Rope ||
-                targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Wedge) {
+            if (targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Rope) {
+                self.physicsWorld.removeJoint(woodRopeJoint)
                 self.ropeNode.removeFromParent()
             }
         }
@@ -99,6 +123,10 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
         let touch: UITouch = touches.first as! UITouch
         let endPoint : CGPoint = touch.locationInNode(self)
         
+        /*if let body : SKPhysicsBody = physicsWorld.bodyAlongRayStart(beginPoint, end: endPoint)
+        {
+            println("found swipe body \(body)")
+        }*/
         physicsWorld.enumerateBodiesAlongRayStart(beginPoint, end:endPoint, usingBlock:
             { (body, point, normalVector, stop) -> Void in
                 if let spriteNode = body.node as? SKSpriteNode
@@ -130,20 +158,6 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
         {
             //println("collision is some other collision")
         }
-    }
-    
-    override func update(currentTime: NSTimeInterval)
-    {
-        if lastUpdateTime > 0
-        {
-            dt = currentTime - lastUpdateTime
-        }
-        else
-        {
-            dt = 0
-        }
-        lastUpdateTime = currentTime
-        //println("\(dt*1000) milliseconds since the last update")
         
         let skunkOffLeftScreen = skunkNode.position.x + (skunkNode.size.width/2.0) < 0
         

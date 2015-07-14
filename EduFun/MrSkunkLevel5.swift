@@ -9,7 +9,16 @@
 import SpriteKit
 
 class MrSkunkLevel5Scene: MrSkunkLevelScene {
-        
+    
+    struct PhysicsCategory {
+        static let None:       UInt32 = 0b0
+        static let Edge:       UInt32 = 0b1
+        static let Floor:      UInt32 = 0b10
+        static let GarbageCan: UInt32 = 0b100
+        static let Arrow:      UInt32 = 0b1000
+        static let Skunk:      UInt32 = 0b10000
+    }
+    
     var skunkNode : SKSpriteNode!
     var garbageCanNode : SKSpriteNode!
     var floorNodeArr : [SKSpriteNode!]! = []

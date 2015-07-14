@@ -8,7 +8,19 @@
 
 import SpriteKit
 
-class MrSkunkLevel6Scene: MrSkunkLevelScene {    
+class MrSkunkLevel6Scene: MrSkunkLevelScene {
+    
+    struct PhysicsCategory {
+        static let None:       UInt32 = 0b0
+        static let Edge:       UInt32 = 0b1
+        static let Floor:      UInt32 = 0b10
+        static let Rope:       UInt32 = 0b100
+        static let GarbageCan: UInt32 = 0b1000
+        static let MissSkunk:  UInt32 = 0b10000
+        static let Cannon:     UInt32 = 0b100000
+        static let Wheel:      UInt32 = 0b1000000
+        static let Skunk:      UInt32 = 0b10000000
+    }
     
     var lastTouchedPoint : CGPoint = CGPointZero
     let kCannonImpulseStrength : CGFloat = 1100.0
