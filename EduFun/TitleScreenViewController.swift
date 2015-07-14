@@ -202,8 +202,10 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         
         if (indexPath.row == 0) {
             cell.backgroundView = UIImageView(image: UIImage(named: "cardMatchScreenshot")!)
+        } else if (indexPath.row == 1) {
+            cell.backgroundView = UIImageView(image: UIImage(named: "ColoringScreenShot")!)
         } else {
-            cell.backgroundView = UIImageView(image: UIImage(named: "coloringBookScreenshot")!)
+            cell.backgroundView = UIImageView(image: UIImage(named: "MrSkunkSlice")!)
         }
         
         var scale = (view.frame.size.width/320.0)
