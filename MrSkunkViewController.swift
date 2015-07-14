@@ -262,10 +262,6 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
     
     func restartMethod()
     {
-        //scaleOutRemoveView(hint, duration: 0.5, delay: 0.0)
-        //scaleOutRemoveView(hint2, duration: 0.5, delay: 0.0)
-        //hint.removeFromSuperview()
-        //hint2.removeFromSuperview()
         startup(level: currentLevel)
     }
     

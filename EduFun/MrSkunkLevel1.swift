@@ -18,9 +18,7 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
         static let Wood:       UInt32 = 0b1000
         static let GarbageCan: UInt32 = 0b10000
         static let Skunk:      UInt32 = 0b100000
-    }        
-    
-    let kContactAllExceptCan : UInt32 = kContactAll & ~PhysicsCategory.GarbageCan
+    }
     
     var skunkNode : SKSpriteNode!
     var garbageCanNode : SKSpriteNode!
@@ -95,9 +93,30 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
             dt = 0
         }
         lastUpdateTime = currentTime
-        //ropeNode.physicsBody!.applyTorque(0.1)
-        //stoneBallNode.physicsBody!.applyTorque(-0.1)
         //println("\(dt*1000) milliseconds since the last update")
+    }
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        let touch: UITouch = touches.first as! UITouch
+        let location = touch.locationInNode(self)
+        
+        beginPoint = location
+        //enumerateBodiesInRect(usingBlock:)
+        let targetNode = self.nodeAtPoint(location)
+            
+        if targetNode.physicsBody != nil
+        {
+            if (targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Rope) {
+                self.physicsWorld.removeJoint(woodRopeJoint)
+                self.ropeNode.removeFromParent()
+            }
+        }
+        
+        if !hintDisappeared
+        {
+            mrSkunkDelegate.hintDisappear()
+            hintDisappeared = true
+        }
     }
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -120,40 +139,6 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
                 }
             }
         )
-    }
-    
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch: UITouch = touches.first as! UITouch
-        sceneTouched(touch.locationInNode(self))
-        
-        if !hintDisappeared
-        {
-            mrSkunkDelegate.hintDisappear()
-            hintDisappeared = true
-        }
-    }
-    
-    func sceneTouched(location: CGPoint)
-    {
-        beginPoint = location
-        //enumerateBodiesInRect(usingBlock:)
-        let targetNode = self.nodeAtPoint(location)
-        
-        if targetNode.physicsBody == nil
-        {
-            return
-        }
-        
-        if (targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Rope) {
-            self.physicsWorld.removeJoint(woodRopeJoint)
-            self.ropeNode.removeFromParent()
-        }
-        
-        //if targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Wood
-        //{
-        //    targetNode.removeFromParent()
-        //    return
-        //}
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
