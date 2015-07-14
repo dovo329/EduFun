@@ -72,7 +72,7 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
         
         skunkNode = childNodeWithName("skunk") as! SKSpriteNode
         skunkNode.physicsBody!.categoryBitMask = PhysicsCategory.Skunk
-        skunkNode.physicsBody!.contactTestBitMask = PhysicsCategory.GarbageCan
+        skunkNode.physicsBody!.contactTestBitMask = PhysicsCategory.GarbageCan | PhysicsCategory.Edge
         skunkNode.physicsBody!.collisionBitMask = kContactAll & ~(PhysicsCategory.Rope)
         // physics categories arranged in Z order so just use that
         skunkNode.zPosition = CGFloat(PhysicsCategory.Skunk)

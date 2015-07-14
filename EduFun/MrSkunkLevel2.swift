@@ -20,7 +20,8 @@ class MrSkunkLevel2Scene: MrSkunkLevelScene {
         static let Wheel:      UInt32 = 0b100000
     }
     
-    let kCannonImpulseStrength : CGFloat = 1050.0
+    var restartingMrSkunk : Bool = false
+    let kCannonImpulseStrength : CGFloat = 1100.0
     
     var lastTouchedPoint : CGPoint!
     
@@ -80,8 +81,8 @@ class MrSkunkLevel2Scene: MrSkunkLevelScene {
         skunkNode.physicsBody!.dynamic = true
         skunkNode.physicsBody!.affectedByGravity = false
         skunkNode.physicsBody!.categoryBitMask = PhysicsCategory.Skunk
-        skunkNode.physicsBody!.contactTestBitMask = PhysicsCategory.Goal
-        skunkNode.physicsBody!.collisionBitMask = kContactAll & ~(PhysicsCategory.Cannon | PhysicsCategory.Wheel | PhysicsCategory.Goal)
+        skunkNode.physicsBody!.contactTestBitMask = PhysicsCategory.Goal | PhysicsCategory.Edge
+        skunkNode.physicsBody!.collisionBitMask = PhysicsCategory.Background
         // physics categories arranged in Z order so just use that
         skunkNode.physicsBody!.restitution = 0.8
         skunkNode.zPosition = CGFloat(PhysicsCategory.Skunk)
@@ -159,6 +160,17 @@ class MrSkunkLevel2Scene: MrSkunkLevelScene {
         }
         lastUpdateTime = currentTime
         //println("\(dt*1000) milliseconds since the last update")
+        
+        let skunkOffLeftScreen = skunkNode.position.x + (skunkNode.size.width/2.0) < 0
+        
+        let skunkOffRightScreen = skunkNode.position.x - (skunkNode.size.width/2.0) >= size.width
+        
+        if !restartingMrSkunk &&
+        (skunkOffLeftScreen || skunkOffRightScreen)
+        {
+            restartingMrSkunk = true
+            mrSkunkDelegate.restartLevel()
+        }
     }
     
     override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -245,6 +257,10 @@ class MrSkunkLevel2Scene: MrSkunkLevelScene {
                 println("You made a basket!")
             }
             levelCompleted = true
+        }
+        else if (collision & PhysicsCategory.Edge) != 0
+        {
+            println("collision with edge")
         }
         else
         {
