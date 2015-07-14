@@ -80,7 +80,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         {
             currentLevel = highestCompletedLevelNum + 1
         }
-        //currentLevel=2 // just to test level out
+        //currentLevel=8 // just to test level out
         
         if let coder = coder {
             super.init(coder: coder)
@@ -214,6 +214,12 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             {scene = level}
             else
             {fatalError("level6 failed to load")}
+            
+        case 7:
+            if let level = MrSkunkLevel7Scene.unarchiveFromFile("MrSkunkLevel7") as? MrSkunkLevel7Scene
+            {scene = level}
+            else
+            {fatalError("level7 failed to load")}
             
         case (kNumLevels+1):
             if let level = MrSkunkWinScene.unarchiveFromFile("MrSkunkWinScene") as? MrSkunkWinScene
@@ -383,6 +389,9 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             scaleInAddView(hint, parentView: view, duration: 0.5, delay: 0.0)
           
         case 6:
+            break
+            
+        case 7:
             break
             
         case (kNumLevels+1):

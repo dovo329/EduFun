@@ -71,7 +71,7 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
         physicsBody = SKPhysicsBody(edgeLoopFromRect: playableRect)
         physicsWorld.contactDelegate = self
         physicsBody!.categoryBitMask = PhysicsCategory.Edge
-        physicsWorld.gravity = CGVectorMake(0.0, -4.0)
+        physicsWorld.gravity = CGVectorMake(0.0, -kGravity)
         
         skunkNode = childNodeWithName("skunk") as! SKSpriteNode
         skunkNode.physicsBody!.categoryBitMask = PhysicsCategory.Skunk
