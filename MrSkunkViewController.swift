@@ -159,6 +159,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
     
     func startup(#level : Int)
     {
+        levelCompleteFlag = false
         scaleOutRemoveView(completeLabel, duration: 0.5, delay: 0.0)
         scaleOutRemoveView(nextButton, duration: 0.5, delay: 0.0)
         scaleOutRemoveView(hint, duration: 0.5, delay: 0.0)
