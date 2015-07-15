@@ -220,7 +220,7 @@ class MrSkunkLevel3Scene: MrSkunkLevelScene {
         if targetNode.physicsBody != nil
         {
             if (targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Rope || targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Wedge) {
-                self.ropeNode.removeFromParent()
+                targetNode.removeFromParent()
             }
         }
         

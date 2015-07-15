@@ -147,13 +147,13 @@ class MrSkunkLevel5Scene: MrSkunkLevelScene {
             {
                 mrSkunkDelegate.levelComplete()
                 
-                println("You got the foods!")
+                //println("You got the foods!")
             }
             levelCompleted = true
         }
         else
         {
-            println("collision is some other collision")
+            //println("collision is some other collision")
         }
     }
     

@@ -167,7 +167,17 @@ class MrSkunkLevel4Scene: MrSkunkLevelScene {
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         let touch: UITouch = touches.first as! UITouch
-        sceneTouched(touch.locationInNode(self))
+        let location = touch.locationInNode(self)
+        
+        beginPoint = location
+        let targetNode = self.nodeAtPoint(location)
+        
+        if targetNode.physicsBody != nil
+        {
+            if (targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Rope) {
+                targetNode.removeFromParent()
+            }
+        }
         
         if !hintDisappeared
         {
@@ -176,19 +186,22 @@ class MrSkunkLevel4Scene: MrSkunkLevelScene {
         }
     }
     
-    func sceneTouched(location: CGPoint)
-    {
-        //enumerateBodiesInRect(usingBlock:)
-        let targetNode = self.nodeAtPoint(location)
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        let touch: UITouch = touches.first as! UITouch
+        let endPoint : CGPoint = touch.locationInNode(self)
         
-        if targetNode.physicsBody == nil
-        {
-            return
-        }
-        
-        if (targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Rope) {
-            targetNode.removeFromParent()
-        }
+        physicsWorld.enumerateBodiesAlongRayStart(beginPoint, end:endPoint, usingBlock:
+            { (body, point, normalVector, stop) -> Void in
+                if let spriteNode = body.node as? SKSpriteNode
+                {
+                    //println("spriteNode: \(spriteNode)")
+                    if body.categoryBitMask == PhysicsCategory.Rope
+                    {
+                        spriteNode.removeFromParent()
+                    }
+                }
+            }
+        )
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
@@ -200,18 +213,9 @@ class MrSkunkLevel4Scene: MrSkunkLevelScene {
             {
                 mrSkunkDelegate.levelComplete()
                 
-                println("You got the foods!")
+                //println("You got the foods!")
             }
             levelCompleted = true
         }
-        else
-        {
-            println("collision is some other collision")
-        }
     }
-    
-    /*override func didSimulatePhysics() { if let body = catNode.physicsBody {
-    if body.contactTestBitMask != PhysicsCategory.None && fabs(catNode.zRotation) > CGFloat(45).degreesToRadians() { lose()
-    } }
-    }*/
 }

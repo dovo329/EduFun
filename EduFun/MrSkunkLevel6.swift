@@ -46,7 +46,7 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
         skunkNode.physicsBody = SKPhysicsBody(circleOfRadius: skunkNode.size.width/2)
         skunkNode.physicsBody!.categoryBitMask = PhysicsCategory.Skunk
         skunkNode.physicsBody!.contactTestBitMask = PhysicsCategory.GarbageCan
-        skunkNode.physicsBody!.collisionBitMask = kContactAll & (~PhysicsCategory.Rope | ~PhysicsCategory.Edge)
+        skunkNode.physicsBody!.collisionBitMask = kContactAll & ~(PhysicsCategory.Rope | PhysicsCategory.Edge)
         // physics categories arranged in Z order so just use that
         skunkNode.zPosition = CGFloat(PhysicsCategory.Skunk)
         
@@ -54,7 +54,7 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
         missSkunkNode.physicsBody = SKPhysicsBody(circleOfRadius: missSkunkNode.size.width/2)
         missSkunkNode.physicsBody!.categoryBitMask = PhysicsCategory.MissSkunk
         missSkunkNode.physicsBody!.contactTestBitMask = PhysicsCategory.None
-        missSkunkNode.physicsBody!.collisionBitMask = kContactAll & ~(PhysicsCategory.Rope | PhysicsCategory.Cannon | PhysicsCategory.Wheel)
+        missSkunkNode.physicsBody!.collisionBitMask = kContactAll & ~(PhysicsCategory.Rope | PhysicsCategory.Cannon | PhysicsCategory.Wheel | PhysicsCategory.Edge)
         // physics categories arranged in Z order so just use that
         missSkunkNode.zPosition = CGFloat(PhysicsCategory.MissSkunk)
         missSkunkNode.physicsBody!.affectedByGravity = false
@@ -144,6 +144,63 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
         }
     }
     
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        let touch: UITouch = touches.first as! UITouch
+        let location = touch.locationInNode(self)
+        
+        beginPoint = location
+        let targetNode = self.nodeAtPoint(location)
+        
+        if targetNode.physicsBody != nil
+        {
+            if (targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Rope)
+            {
+                self.ropeNode.removeFromParent()
+            }
+            
+            if !missSkunkNodeShot && (targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Cannon || targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Wheel)
+            {
+                missSkunkNodeShot = true
+                missSkunkNode.physicsBody!.affectedByGravity = true
+                missSkunkNode.physicsBody!.dynamic = true
+                missSkunkNode.physicsBody!.applyAngularImpulse(0.5)
+                
+                var skunkVector = lastTouchedPoint - missSkunkNode.position
+                skunkVector /= skunkVector.length()
+                skunkVector *= kCannonImpulseStrength
+                missSkunkNode.physicsBody!.applyImpulse(CGVector(dx:skunkVector.x, dy:skunkVector.y))
+            }
+        }
+        else
+        {
+            updateCannonPoint(location)
+        }
+        
+        if !hintDisappeared
+        {
+            mrSkunkDelegate.hintDisappear()
+            hintDisappeared = true
+        }
+    }
+    
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        let touch: UITouch = touches.first as! UITouch
+        let endPoint : CGPoint = touch.locationInNode(self)
+        
+        physicsWorld.enumerateBodiesAlongRayStart(beginPoint, end:endPoint, usingBlock:
+            { (body, point, normalVector, stop) -> Void in
+                if let spriteNode = body.node as? SKSpriteNode
+                {
+                    //println("spriteNode: \(spriteNode)")
+                    if body.categoryBitMask == PhysicsCategory.Rope
+                    {
+                        spriteNode.removeFromParent()
+                    }
+                }
+            }
+        )
+    }
+    
     override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
         let touch: UITouch = touches.first as! UITouch
         let location = touch.locationInNode(self)
@@ -165,17 +222,6 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
         }
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch: UITouch = touches.first as! UITouch
-        sceneTouched(touch.locationInNode(self))
-        
-        if !hintDisappeared
-        {
-            mrSkunkDelegate.hintDisappear()
-            hintDisappeared = true
-        }
-    }
-    
     func updateCannonPoint(location: CGPoint)
     {
         lastTouchedPoint = location
@@ -186,32 +232,7 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
     
     func sceneTouched(location: CGPoint)
     {
-        //enumerateBodiesInRect(usingBlock:)
-        let targetNode = self.nodeAtPoint(location)
         
-        if (targetNode.physicsBody == nil)
-        {
-            updateCannonPoint(location)
-            return
-        }
-        
-        if (targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Rope) {
-            updateCannonPoint(location)
-            targetNode.removeFromParent()
-        }
-        
-        if !missSkunkNodeShot && (targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Cannon || targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Wheel)
-        {
-            missSkunkNodeShot = true
-            missSkunkNode.physicsBody!.affectedByGravity = true
-            missSkunkNode.physicsBody!.dynamic = true
-            missSkunkNode.physicsBody!.applyAngularImpulse(0.5)
-            
-            var skunkVector = lastTouchedPoint - missSkunkNode.position
-            skunkVector /= skunkVector.length()
-            skunkVector *= kCannonImpulseStrength
-            missSkunkNode.physicsBody!.applyImpulse(CGVector(dx:skunkVector.x, dy:skunkVector.y))
-        }
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
