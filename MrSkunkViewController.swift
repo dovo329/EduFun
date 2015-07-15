@@ -97,8 +97,8 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         super.viewDidLoad()
         
         skView = SKView(frame: UIScreen.mainScreen().applicationFrame)
-        skView.showsFPS = true
-        skView.showsNodeCount = true
+        //skView.showsFPS = true
+        //skView.showsNodeCount = true
         
         // Sprite Kit applies additional optimizations to improve rendering performance
         skView.ignoresSiblingOrder = true
@@ -306,7 +306,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         case 1:
             let textHeight = CGFloat(15.0)
             hint = THLabel()
-            hint.text = "Touch Rope To Free Wood"
+            hint.text = "Touch/Swipe Rope To Free Wood"
             hint.frame = CGRect(x: 0.0, y: 0.0, width: skView.frame.size.width, height: textHeight)
             hint.font = UIFont(name: "Super Mario 256", size: textHeight)
             hint.frame.size.height = hint.font.pointSize*1.3
@@ -367,7 +367,20 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             scaleInAddView(hint, parentView: view, duration: 0.5, delay: 0.0)
         
         case 4:
-            break
+            let textHeight = CGFloat(15.0)
+            hint = THLabel()
+            hint.text = "You can swipe two ropes at once"
+            hint.frame = CGRect(x: 0.0, y: 0.0, width: skView.frame.size.width, height: textHeight)
+            hint.font = UIFont(name: "Super Mario 256", size: textHeight)
+            hint.frame.size.height = hint.font.pointSize*1.3
+            hint.frame.origin.y = view.frame.size.height-(playableMargin+hint.frame.size.height)
+            hint.textAlignment = NSTextAlignment.Center
+            hint.textColor = UIColor.yellowColor()
+            hint.strokeSize = (0.8/320.0)*hint.frame.size.width
+            hint.strokeColor = UIColor.blackColor()
+            hint.layer.anchorPoint = CGPointMake(0.5, 0.5)
+            hint.layer.shouldRasterize = true
+            scaleInAddView(hint, parentView: view, duration: 0.5, delay: 0.0)
             
         case 5:
             let textHeight = CGFloat(15.0)
@@ -386,7 +399,20 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             scaleInAddView(hint, parentView: view, duration: 0.5, delay: 0.0)
           
         case 6:
-            break
+            let textHeight = CGFloat(15.0)
+            hint = THLabel()
+            hint.text = "Miss Skunk can help you"
+            hint.frame = CGRect(x: 0.0, y: 0.0, width: skView.frame.size.width, height: textHeight)
+            hint.font = UIFont(name: "Super Mario 256", size: textHeight)
+            hint.frame.size.height = hint.font.pointSize*1.3
+            hint.frame.origin.y = view.frame.size.height-(playableMargin+hint.frame.size.height)
+            hint.textAlignment = NSTextAlignment.Center
+            hint.textColor = UIColor.yellowColor()
+            hint.strokeSize = (0.8/320.0)*hint.frame.size.width
+            hint.strokeColor = UIColor.blackColor()
+            hint.layer.anchorPoint = CGPointMake(0.5, 0.5)
+            hint.layer.shouldRasterize = true
+            scaleInAddView(hint, parentView: view, duration: 0.5, delay: 0.0)
             
         case 7:
             break
