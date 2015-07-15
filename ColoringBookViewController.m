@@ -11,6 +11,7 @@
 #import "PaletteViewController.h"
 #import "KidsFun-Swift.h"
 #import <MessageUI/MessageUI.h>
+#import "THLabel.h"
 
 #define kMaxZoom 16.0
 #define kSvgPageIndexKey @"svg.page.index.key"
@@ -29,6 +30,7 @@
 @property (nonatomic, strong) UIBarButtonItem *cameraButton;
 @property (nonatomic, strong) NSArray *svgPageNameArr;
 @property (nonatomic, assign) int svgPageIndex;
+@property (nonatomic, strong) THLabel *hint;
 
 @end
 
@@ -124,6 +126,79 @@
     [self.view addSubview:self.toolBar];
     
     [self autoLayoutConstraints];
+    
+    CGFloat textHeight = 15.0;
+    self.hint = [[THLabel alloc] init];
+    self.hint.text = @"Tap to Color";
+    self.hint.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, textHeight);
+    self.hint.font = [UIFont fontWithName: @"Super Mario 256" size: textHeight];
+    
+    self.hint.frame = CGRectMake(0.0, textHeight, self.view.frame.size.width, self.hint.font.pointSize*1.3);
+    
+    self.hint.textAlignment = NSTextAlignmentCenter;
+    self.hint.textColor = [UIColor yellowColor];
+    self.hint.strokeSize = (0.8/320.0)*self.hint.frame.size.width;
+    self.hint.strokeColor = [UIColor blackColor];
+    self.hint.layer.anchorPoint = CGPointMake(0.5, 0.5);
+    self.hint.layer.shouldRasterize = true;
+    
+    [self scaleShow:self.hint parentView:self.view scaleDuration:0.5 showDuration:5.0];
+    //[self scaleInAddView:self.hint parentView:self.view duration:0.5 delay:0.0];
+    //[self scaleOutRemoveView:self.hint duration:0.5 delay:2.0];
+}
+
+- (void)scaleShow:(UIView *)view parentView:(UIView *)parentView scaleDuration:(CGFloat)scaleDuration showDuration:(CGFloat)showDuration
+{
+    view.transform = CGAffineTransformMakeScale(0.01, 0.01);
+    [parentView addSubview:view];
+    
+    [UIView animateWithDuration:scaleDuration
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations: ^{
+                         view.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                     }
+                     completion: ^(BOOL finished) {
+                         [UIView animateWithDuration:scaleDuration
+                                               delay:showDuration
+                                             options:UIViewAnimationOptionCurveLinear
+                                          animations: ^{
+                                              view.transform = CGAffineTransformMakeScale(0.01, 0.01);
+                                          }
+                                          completion: ^(BOOL finished) {
+                                              [view removeFromSuperview];
+                                          }];
+                     }];
+}
+
+- (void)scaleInAddView:(UIView *)view parentView:(UIView *)parentView duration:(CGFloat)duration delay:(CGFloat)delay
+{
+    view.transform = CGAffineTransformMakeScale(0.01, 0.01);
+    [parentView addSubview:view];
+    
+    [UIView animateWithDuration:duration
+                          delay:delay
+                        options:UIViewAnimationOptionCurveLinear
+                     animations: ^{
+                         view.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                     }
+                     completion: ^(BOOL finished) {
+                         
+                     }];
+}
+
+- (void)scaleOutRemoveView:(UIView *)view duration:(CGFloat)duration delay:(CGFloat)delay
+{
+    //view.transform = CGAffineTransformMakeScale(1.0, 1.0);
+    [UIView animateWithDuration:duration
+                          delay:delay
+                        options:UIViewAnimationOptionCurveLinear
+                     animations: ^{
+                         view.transform = CGAffineTransformMakeScale(0.01, 0.01);
+                     }
+                     completion: ^(BOOL finished) {
+                         [view removeFromSuperview];
+                     }];
 }
 
 - (void)autoLayoutConstraints
