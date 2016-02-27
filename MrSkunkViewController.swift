@@ -12,8 +12,8 @@ import SpriteKit
 extension SKNode {
     class func unarchiveFromFile(file : String) -> SKNode? {
         if let path = NSBundle.mainBundle().pathForResource(file, ofType: "sks") {
-            var sceneData = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe, error: nil)!
-            var archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
+            let sceneData = try! NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe)
+            let archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
             
             archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
             let scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! SKScene
@@ -70,7 +70,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         {
             highestCompletedLevelNum = 0
         }
-        println("highestCompletedLevelNum = \(highestCompletedLevelNum)")
+        print("highestCompletedLevelNum = \(highestCompletedLevelNum)")
         
         if (highestCompletedLevelNum >= kNumLevels)
         {
@@ -83,13 +83,13 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         //currentLevel=8 // just to test level out
         
         if let coder = coder {
-            super.init(coder: coder)
+            super.init(coder: coder)!
         } else {
             super.init(nibName: nil, bundle:nil)
         }
     }
     
-    required convenience init(coder: NSCoder) {
+    required convenience init?(coder: NSCoder) {
         self.init(coder)
     }
     
@@ -124,7 +124,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         let restartButtonFrame = CGRectMake(view.frame.size.width-(2.0*kMrSkunkToolbarWidth), (kMrSkunkIconHeight+kMrSkunkIconSpacing), 2.0*kMrSkunkToolbarWidth, kMrSkunkIconHeight)
         var restartImg = UIImage(named: "Restart")
         restartImg = restartImg?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        restartButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+        restartButton = UIButton(type: UIButtonType.Custom)
         restartButton.setImage(restartImg, forState: UIControlState.Normal)
         restartButton.frame = restartButtonFrame
         restartButton!.addTarget(self, action: Selector("restartMethod"), forControlEvents: UIControlEvents.TouchUpInside)
@@ -134,7 +134,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         var mapImg = UIImage(named: "SkunkMap")
         mapImg = mapImg?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
         let mapButtonFrame = CGRectMake(view.frame.size.width-(2.0*kMrSkunkToolbarWidth), 2*(kMrSkunkIconHeight+kMrSkunkIconSpacing), 2.0*kMrSkunkToolbarWidth, kMrSkunkIconHeight)
-        mapButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+        mapButton = UIButton(type: UIButtonType.Custom)
         mapButton.setImage(mapImg, forState: UIControlState.Normal)
         mapButton.frame = mapButtonFrame
         mapButton!.addTarget(self, action: Selector("mapMethod"), forControlEvents: UIControlEvents.TouchUpInside)
@@ -157,7 +157,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         //self.view.addSubview(toolbar)
     }
     
-    func startup(#level : Int)
+    func startup(level level : Int)
     {
         levelCompleteFlag = false
         scaleOutRemoveView(completeLabel, duration: 0.5, delay: 0.0)
@@ -257,7 +257,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
     
     func exitButtonMethod()
     {
-        var app = UIApplication.sharedApplication().delegate as? AppDelegate
+        let app = UIApplication.sharedApplication().delegate as? AppDelegate
         app?.animateToViewController(ViewControllerEnum.TitleScreen, srcVCEnum: ViewControllerEnum.MrSkunk)
     }
     
@@ -299,7 +299,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         }*/
     }
     
-    func levelHint(#level: Int)
+    func levelHint(level level: Int)
     {
         switch (level)
         {
@@ -535,8 +535,8 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         return true
     }
     
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.LandscapeRight.rawValue)
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.LandscapeRight
     }
     
     override func didReceiveMemoryWarning() {

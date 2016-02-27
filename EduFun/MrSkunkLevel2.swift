@@ -152,8 +152,8 @@ class MrSkunkLevel2Scene: MrSkunkLevelScene {
         }
     }
     
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch: UITouch = touches.first as! UITouch
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch: UITouch = touches.first as! UITouch!
         let location = touch.locationInNode(self)
         let targetNode = self.nodeAtPoint(location)
         
@@ -173,8 +173,8 @@ class MrSkunkLevel2Scene: MrSkunkLevelScene {
         }
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch: UITouch = touches.first as! UITouch
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch: UITouch = touches.first as! UITouch!
         sceneTouched(touch.locationInNode(self))
         
         if !hintDisappeared

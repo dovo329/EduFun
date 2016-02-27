@@ -38,7 +38,7 @@ class AboutViewController: UIViewController {
         aboutText.layer.cornerRadius = 4.0
         view.addSubview(aboutText)
         
-        aboutText.setTranslatesAutoresizingMaskIntoConstraints(false)
+        aboutText.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraint(
             NSLayoutConstraint(
                 item: aboutText,
@@ -83,7 +83,7 @@ class AboutViewController: UIViewController {
                 constant: 20.0
             )
         )
-        backButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+        backButton = UIButton(type: UIButtonType.Custom)
         backButton.setTitle("Done", forState: UIControlState.Normal)
         backButton.setTitle("Done", forState: UIControlState.Highlighted)
         backButton.backgroundColor = UIColor.blueColor()
@@ -95,7 +95,7 @@ class AboutViewController: UIViewController {
     }
     
     func backButtonMethod(sender : THButton, event : UIEvent) {
-        var app = UIApplication.sharedApplication().delegate as? AppDelegate
+        let app = UIApplication.sharedApplication().delegate as? AppDelegate
         app?.animateToViewController(ViewControllerEnum.TitleScreen, srcVCEnum: ViewControllerEnum.About)
     }
     
@@ -103,8 +103,8 @@ class AboutViewController: UIViewController {
         bgGradLayer.frame = view.bounds
     }
     
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.LandscapeRight.rawValue)
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.LandscapeRight
     }
     
     override func shouldAutorotate() -> Bool {

@@ -11,7 +11,7 @@ import QuartzCore
 
 class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
 {
-    var aboutButton : UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+    var aboutButton : UIButton = UIButton(type: UIButtonType.Custom)
     var titleLabel : THLabel!
     let kNumRows : Int = 1
     let kNumColumns : Int = 3
@@ -72,7 +72,7 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
     }
     
     func aboutButtonMethod(sender : THButton, event : UIEvent) {
-        var app = UIApplication.sharedApplication().delegate as? AppDelegate
+        let app = UIApplication.sharedApplication().delegate as? AppDelegate
         app?.animateToViewController(ViewControllerEnum.About, srcVCEnum: ViewControllerEnum.TitleScreen)
         //println("about button method")
     }
@@ -162,11 +162,11 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
     }
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        var cell = collectionView.cellForItemAtIndexPath(indexPath)!
+        let cell = collectionView.cellForItemAtIndexPath(indexPath)!
         cell.backgroundView!.alpha = 0.5
         cell.layer.borderColor = cgColorForRed(120.0, green: 190.0, blue: 255.0)
         
-        var app = UIApplication.sharedApplication().delegate as? AppDelegate
+        let app = UIApplication.sharedApplication().delegate as? AppDelegate
         
         if (indexPath.row == 0)
         {
@@ -183,7 +183,7 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
     }
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        var cell = collectionView.cellForItemAtIndexPath(indexPath)!
+        let cell = collectionView.cellForItemAtIndexPath(indexPath)!
         cell.backgroundView!.alpha = 1.0
         cell.layer.borderColor = cgColorForRed(70.0, green: 120.0, blue: 255.0)
     }
@@ -198,7 +198,7 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        var cell : UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellReuseId, forIndexPath: indexPath) as! UICollectionViewCell
+        let cell : UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellReuseId, forIndexPath: indexPath) 
         
         if (indexPath.row == 0) {
             cell.backgroundView = UIImageView(image: UIImage(named: "cardMatchScreenshot")!)
@@ -208,7 +208,7 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
             cell.backgroundView = UIImageView(image: UIImage(named: "MrSkunkSlice")!)
         }
         
-        var scale = (view.frame.size.width/320.0)
+        let scale = (view.frame.size.width/320.0)
         
         cell.layer.borderWidth = 4.0*scale
         cell.layer.borderColor = cgColorForRed(70.0, green: 120.0, blue: 255.0)
@@ -247,9 +247,9 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         collectionView.frame = CGRectMake(0, (titleLabel.frame.size.height+20.0), view.frame.size.width, view.frame.size.height)
     }
     
-    override func supportedInterfaceOrientations() -> Int {
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         //return Int(UIInterfaceOrientationMask.LandscapeLeft.rawValue)
-        return Int(UIInterfaceOrientationMask.LandscapeRight.rawValue)
+        return UIInterfaceOrientationMask.LandscapeRight
 //        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
     }
     
@@ -258,6 +258,6 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
     }
     
     deinit {
-        println("TitleScreen ViewController deinit")
+        print("TitleScreen ViewController deinit")
     }
 }

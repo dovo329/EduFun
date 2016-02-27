@@ -94,10 +94,10 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
         // physics categories arranged in Z order so just use that
         ropeNode.zPosition = CGFloat(PhysicsCategory.Rope)
         
-        let skunkRopeJoint = SKPhysicsJointPin.jointWithBodyA(skunkNode.physicsBody, bodyB: ropeNode.physicsBody, anchor: getPointRight(ropeNode))
+        let skunkRopeJoint = SKPhysicsJointPin.jointWithBodyA(skunkNode.physicsBody!, bodyB: ropeNode.physicsBody!, anchor: getPointRight(ropeNode))
         physicsWorld.addJoint(skunkRopeJoint)
         
-        let edgeRopeJoint = SKPhysicsJointPin.jointWithBodyA(physicsBody, bodyB: ropeNode.physicsBody, anchor: getPointLeft(ropeNode))
+        let edgeRopeJoint = SKPhysicsJointPin.jointWithBodyA(physicsBody!, bodyB: ropeNode.physicsBody!, anchor: getPointLeft(ropeNode))
         physicsWorld.addJoint(edgeRopeJoint)
         
         enumerateChildNodesWithName("floor", usingBlock: { (node, _) -> Void in
@@ -144,8 +144,8 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
         }
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch: UITouch = touches.first as! UITouch
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch: UITouch = touches.first as! UITouch!
         let location = touch.locationInNode(self)
         
         beginPoint = location
@@ -183,8 +183,8 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
         }
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch: UITouch = touches.first as! UITouch
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch: UITouch = touches.first as! UITouch!
         let endPoint : CGPoint = touch.locationInNode(self)
         
         physicsWorld.enumerateBodiesAlongRayStart(beginPoint, end:endPoint, usingBlock:
@@ -201,8 +201,8 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
         )
     }
     
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch: UITouch = touches.first as! UITouch
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch: UITouch = touches.first as! UITouch!
         let location = touch.locationInNode(self)
         let targetNode = self.nodeAtPoint(location)
         

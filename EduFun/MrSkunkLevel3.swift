@@ -88,13 +88,13 @@ class MrSkunkLevel3Scene: MrSkunkLevelScene {
         wedgeNode.physicsBody!.affectedByGravity = false
         wedgeNode.physicsBody!.dynamic = false
         
-        let orbPlankJoint = SKPhysicsJointPin.jointWithBodyA(orbNode.physicsBody, bodyB: plankNode.physicsBody, anchor: orbNode.position)
+        let orbPlankJoint = SKPhysicsJointPin.jointWithBodyA(orbNode.physicsBody!, bodyB: plankNode.physicsBody!, anchor: orbNode.position)
         physicsWorld.addJoint(orbPlankJoint)
         
-        let plankRopeJoint = SKPhysicsJointPin.jointWithBodyA(plankNode.physicsBody, bodyB: ropeNode.physicsBody, anchor: getPointRight(ropeNode))
+        let plankRopeJoint = SKPhysicsJointPin.jointWithBodyA(plankNode.physicsBody!, bodyB: ropeNode.physicsBody!, anchor: getPointRight(ropeNode))
         physicsWorld.addJoint(plankRopeJoint)
         
-        let ropeWeightJoint = SKPhysicsJointPin.jointWithBodyA(ropeNode.physicsBody, bodyB: weightNode.physicsBody, anchor: getPointLeft(ropeNode))
+        let ropeWeightJoint = SKPhysicsJointPin.jointWithBodyA(ropeNode.physicsBody!, bodyB: weightNode.physicsBody!, anchor: getPointLeft(ropeNode))
         physicsWorld.addJoint(ropeWeightJoint)
         
         enumerateChildNodesWithName("floor", usingBlock: { (node, _) -> Void in
@@ -210,8 +210,8 @@ class MrSkunkLevel3Scene: MrSkunkLevelScene {
         }
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch: UITouch = touches.first as! UITouch
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch: UITouch = touches.first as! UITouch!
         let location = touch.locationInNode(self)
         
         beginPoint = location
@@ -231,8 +231,8 @@ class MrSkunkLevel3Scene: MrSkunkLevelScene {
         }
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch: UITouch = touches.first as! UITouch
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch: UITouch = touches.first as! UITouch!
         let endPoint : CGPoint = touch.locationInNode(self)
         
         physicsWorld.enumerateBodiesAlongRayStart(beginPoint, end:endPoint, usingBlock:

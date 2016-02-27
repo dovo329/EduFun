@@ -67,7 +67,7 @@ class MrSkunkLevel4Scene: MrSkunkLevelScene {
         orbNode.physicsBody!.affectedByGravity = false
         orbNode.physicsBody!.dynamic = false
         
-        let orbPlankJoint = SKPhysicsJointPin.jointWithBodyA(orbNode.physicsBody, bodyB: plankNode.physicsBody, anchor: orbNode.position)
+        let orbPlankJoint = SKPhysicsJointPin.jointWithBodyA(orbNode.physicsBody!, bodyB: plankNode.physicsBody!, anchor: orbNode.position)
         physicsWorld.addJoint(orbPlankJoint)
         
         skunkRopeNode = childNodeWithName("skunkRope") as! SKSpriteNode
@@ -76,10 +76,10 @@ class MrSkunkLevel4Scene: MrSkunkLevelScene {
         skunkRopeNode.physicsBody!.collisionBitMask = PhysicsCategory.None
         skunkRopeNode.zPosition = CGFloat(PhysicsCategory.Rope)
         
-        let skunkRopeJoint = SKPhysicsJointPin.jointWithBodyA(skunkNode.physicsBody, bodyB: skunkRopeNode.physicsBody, anchor: getPointRight(skunkRopeNode))
+        let skunkRopeJoint = SKPhysicsJointPin.jointWithBodyA(skunkNode.physicsBody!, bodyB: skunkRopeNode.physicsBody!, anchor: getPointRight(skunkRopeNode))
         physicsWorld.addJoint(skunkRopeJoint)
         
-        let skunkRopeEdgeJoint = SKPhysicsJointPin.jointWithBodyA(physicsBody, bodyB: skunkRopeNode.physicsBody, anchor: getPointLeft(skunkRopeNode))
+        let skunkRopeEdgeJoint = SKPhysicsJointPin.jointWithBodyA(physicsBody!, bodyB: skunkRopeNode.physicsBody!, anchor: getPointLeft(skunkRopeNode))
         physicsWorld.addJoint(skunkRopeEdgeJoint)
         
         weightNode = childNodeWithName("weight") as! SKSpriteNode
@@ -95,10 +95,10 @@ class MrSkunkLevel4Scene: MrSkunkLevelScene {
         weightRopeNode.physicsBody!.collisionBitMask = PhysicsCategory.None
         weightRopeNode.zPosition = CGFloat(PhysicsCategory.Rope)
         
-        let weightRopeJoint = SKPhysicsJointPin.jointWithBodyA(weightNode.physicsBody, bodyB: weightRopeNode.physicsBody, anchor: getPointRight(weightRopeNode))
+        let weightRopeJoint = SKPhysicsJointPin.jointWithBodyA(weightNode.physicsBody!, bodyB: weightRopeNode.physicsBody!, anchor: getPointRight(weightRopeNode))
         physicsWorld.addJoint(weightRopeJoint)
         
-        let weightRopeEdgeJoint = SKPhysicsJointPin.jointWithBodyA(physicsBody, bodyB: weightRopeNode.physicsBody, anchor: getPointLeft(weightRopeNode))
+        let weightRopeEdgeJoint = SKPhysicsJointPin.jointWithBodyA(physicsBody!, bodyB: weightRopeNode.physicsBody!, anchor: getPointLeft(weightRopeNode))
         physicsWorld.addJoint(weightRopeEdgeJoint)
         
         enumerateChildNodesWithName("floor", usingBlock: { (node, _) -> Void in
@@ -165,8 +165,8 @@ class MrSkunkLevel4Scene: MrSkunkLevelScene {
         }
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch: UITouch = touches.first as! UITouch
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch: UITouch = touches.first as! UITouch!
         let location = touch.locationInNode(self)
         
         beginPoint = location
@@ -186,8 +186,8 @@ class MrSkunkLevel4Scene: MrSkunkLevelScene {
         }
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch: UITouch = touches.first as! UITouch
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch: UITouch = touches.first as! UITouch!
         let endPoint : CGPoint = touch.locationInNode(self)
         
         physicsWorld.enumerateBodiesAlongRayStart(beginPoint, end:endPoint, usingBlock:

@@ -57,15 +57,15 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
         woodNode.physicsBody!.collisionBitMask = kContactAll & ~(PhysicsCategory.GarbageCan | PhysicsCategory.Rope)
         woodNode.zPosition = CGFloat(PhysicsCategory.Wood)
         
-        woodRopeJoint = SKPhysicsJointPin.jointWithBodyA(woodNode.physicsBody, bodyB: ropeNode.physicsBody, anchor: getPointTop(woodNode))
+        woodRopeJoint = SKPhysicsJointPin.jointWithBodyA(woodNode.physicsBody!, bodyB: ropeNode.physicsBody!, anchor: getPointTop(woodNode))
         physicsWorld.addJoint(woodRopeJoint)
         
         var woodEdgeAnchorNode = childNodeWithName("woodEdgeAnchor") as! SKSpriteNode
         
-        let woodJoint = SKPhysicsJointPin.jointWithBodyA(woodEdgeAnchorNode.physicsBody, bodyB: woodNode.physicsBody, anchor: getPointBottom(woodNode))
+        let woodJoint = SKPhysicsJointPin.jointWithBodyA(woodEdgeAnchorNode.physicsBody!, bodyB: woodNode.physicsBody!, anchor: getPointBottom(woodNode))
         physicsWorld.addJoint(woodJoint)
         
-        let ropeScreenJoint = SKPhysicsJointPin.jointWithBodyA(ropeEdgeAnchorNode.physicsBody, bodyB: ropeNode.physicsBody, anchor: getPointLeft(ropeNode))
+        let ropeScreenJoint = SKPhysicsJointPin.jointWithBodyA(ropeEdgeAnchorNode.physicsBody!, bodyB: ropeNode.physicsBody!, anchor: getPointLeft(ropeNode))
         physicsWorld.addJoint(ropeScreenJoint)
         
         enumerateChildNodesWithName("background", usingBlock: { (node, _) -> Void in
@@ -96,8 +96,8 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
         //println("\(dt*1000) milliseconds since the last update")
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch: UITouch = touches.first as! UITouch
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch: UITouch = touches.first as! UITouch!
         let location = touch.locationInNode(self)
         
         beginPoint = location
@@ -119,8 +119,8 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
         }
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch: UITouch = touches.first as! UITouch
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch: UITouch = touches.first as! UITouch!
         let endPoint : CGPoint = touch.locationInNode(self)
         
         /*if let body : SKPhysicsBody = physicsWorld.bodyAlongRayStart(beginPoint, end: endPoint)

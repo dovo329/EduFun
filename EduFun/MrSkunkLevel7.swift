@@ -70,7 +70,7 @@ class MrSkunkLevel7Scene: MrSkunkLevelScene {
         orbNode.physicsBody!.dynamic = false
         orbNode.zPosition = CGFloat(PhysicsCategory.Orb)
         
-        let orbPlankJoint = SKPhysicsJointPin.jointWithBodyA(orbNode.physicsBody, bodyB: plankNode.physicsBody, anchor: orbNode.position)
+        let orbPlankJoint = SKPhysicsJointPin.jointWithBodyA(orbNode.physicsBody!, bodyB: plankNode.physicsBody!, anchor: orbNode.position)
         physicsWorld.addJoint(orbPlankJoint)
         
         wedgeNode = childNodeWithName("wedge") as! SKSpriteNode
@@ -90,7 +90,7 @@ class MrSkunkLevel7Scene: MrSkunkLevelScene {
         drawbridgeNode.physicsBody!.dynamic = true
         drawbridgeNode.zPosition = CGFloat(PhysicsCategory.Drawbridge)
         
-        let drawbridgeJoint = SKPhysicsJointPin.jointWithBodyA(drawbridgeNode.physicsBody, bodyB: physicsBody, anchor: getPointRight(drawbridgeNode))
+        let drawbridgeJoint = SKPhysicsJointPin.jointWithBodyA(drawbridgeNode.physicsBody!, bodyB: physicsBody!, anchor: getPointRight(drawbridgeNode))
         physicsWorld.addJoint(drawbridgeJoint)
         
         garbageCanNode = childNodeWithName("garbageCan") as! SKSpriteNode
@@ -114,10 +114,10 @@ class MrSkunkLevel7Scene: MrSkunkLevelScene {
         // physics categories arranged in Z order so just use that
         smallWeightNode.zPosition = CGFloat(PhysicsCategory.Weight)
         
-        let smallWeightRopeJoint = SKPhysicsJointPin.jointWithBodyA(smallWeightRopeNode.physicsBody, bodyB: smallWeightNode.physicsBody, anchor: getPointRight(smallWeightRopeNode))
+        let smallWeightRopeJoint = SKPhysicsJointPin.jointWithBodyA(smallWeightRopeNode.physicsBody!, bodyB: smallWeightNode.physicsBody!, anchor: getPointRight(smallWeightRopeNode))
         physicsWorld.addJoint(smallWeightRopeJoint)
         
-        let plankSmallRopeJoint = SKPhysicsJointPin.jointWithBodyA(smallWeightRopeNode.physicsBody, bodyB: plankNode.physicsBody, anchor: getPointLeft(smallWeightRopeNode))
+        let plankSmallRopeJoint = SKPhysicsJointPin.jointWithBodyA(smallWeightRopeNode.physicsBody!, bodyB: plankNode.physicsBody!, anchor: getPointLeft(smallWeightRopeNode))
         physicsWorld.addJoint(plankSmallRopeJoint)
         
         heavyWeightRopeNode = childNodeWithName("heavyWeightRope") as! SKSpriteNode
@@ -133,10 +133,10 @@ class MrSkunkLevel7Scene: MrSkunkLevelScene {
         // physics categories arranged in Z order so just use that
         heavyWeightNode.zPosition = CGFloat(PhysicsCategory.Rope)
         
-        let heavyWeightRopeJoint = SKPhysicsJointPin.jointWithBodyA(heavyWeightRopeNode.physicsBody, bodyB: heavyWeightNode.physicsBody, anchor: getPointRight(heavyWeightRopeNode))
+        let heavyWeightRopeJoint = SKPhysicsJointPin.jointWithBodyA(heavyWeightRopeNode.physicsBody!, bodyB: heavyWeightNode.physicsBody!, anchor: getPointRight(heavyWeightRopeNode))
         physicsWorld.addJoint(heavyWeightRopeJoint)
         
-        let plankHeavyRopeJoint = SKPhysicsJointPin.jointWithBodyA(heavyWeightRopeNode.physicsBody, bodyB: plankNode.physicsBody, anchor: getPointLeft(heavyWeightRopeNode))
+        let plankHeavyRopeJoint = SKPhysicsJointPin.jointWithBodyA(heavyWeightRopeNode.physicsBody!, bodyB: plankNode.physicsBody!, anchor: getPointLeft(heavyWeightRopeNode))
         physicsWorld.addJoint(plankHeavyRopeJoint)
         
         enumerateChildNodesWithName("floor", usingBlock: { (node, _) -> Void in
@@ -183,8 +183,8 @@ class MrSkunkLevel7Scene: MrSkunkLevelScene {
         }
     }
     
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch: UITouch = touches.first as! UITouch
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch: UITouch = touches.first as! UITouch!
         let location = touch.locationInNode(self)
         let targetNode = self.nodeAtPoint(location)
         
@@ -195,8 +195,8 @@ class MrSkunkLevel7Scene: MrSkunkLevelScene {
         }
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch: UITouch = touches.first as! UITouch
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch: UITouch = touches.first as! UITouch!
         let location = touch.locationInNode(self)
         
         beginPoint = location
@@ -216,8 +216,8 @@ class MrSkunkLevel7Scene: MrSkunkLevelScene {
         }
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch: UITouch = touches.first as! UITouch
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch: UITouch = touches.first as! UITouch!
         let endPoint : CGPoint = touch.locationInNode(self)
         
         physicsWorld.enumerateBodiesAlongRayStart(beginPoint, end:endPoint, usingBlock:

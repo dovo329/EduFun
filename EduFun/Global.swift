@@ -53,18 +53,18 @@ public func getFontSizeToFitFrameOfLabel(label: UILabel) -> CGFloat
     return label.font.pointSize;
 }
 
-public func cgColorForRed(red: CGFloat, #green: CGFloat, #blue: CGFloat) -> CGColor {
+public func cgColorForRed(red: CGFloat, green: CGFloat, blue: CGFloat) -> CGColor {
     return UIColor(red: red/255.0, green: green/255.0, blue: blue/255.0, alpha: 1.0).CGColor as CGColor
 }
 
-func rotateViewRecurse(view: UIView, #durationPerRotation: NSTimeInterval, #numRotationsLeft: Int, #scaleIncPerRotation: CGFloat, #startScale: CGFloat, #completionBlock: (Void) -> Void)
+func rotateViewRecurse(view: UIView, durationPerRotation: NSTimeInterval, numRotationsLeft: Int, scaleIncPerRotation: CGFloat, startScale: CGFloat, completionBlock: (Void) -> Void)
 {
     UIView.animateWithDuration(
         durationPerRotation/2.0, delay: 0.0, options: UIViewAnimationOptions.CurveLinear,
         animations:
         {(_) -> (Void) in
-            var rotateTransform : CGAffineTransform = CGAffineTransformMakeRotation(π)
-            var scaleTransform : CGAffineTransform = CGAffineTransformMakeScale(startScale + (scaleIncPerRotation/2.0), startScale + (scaleIncPerRotation/2.0))
+            let rotateTransform : CGAffineTransform = CGAffineTransformMakeRotation(π)
+            let scaleTransform : CGAffineTransform = CGAffineTransformMakeScale(startScale + (scaleIncPerRotation/2.0), startScale + (scaleIncPerRotation/2.0))
             view.transform = CGAffineTransformConcat(scaleTransform, rotateTransform)
         },
         completion:
@@ -72,8 +72,8 @@ func rotateViewRecurse(view: UIView, #durationPerRotation: NSTimeInterval, #numR
             UIView.animateWithDuration(durationPerRotation/2.0, delay: 0.0, options: UIViewAnimationOptions.CurveLinear,
                 animations:
                 {(_) -> (Void) in
-                    var rotateTransform : CGAffineTransform = CGAffineTransformMakeRotation(0)
-                    var scaleTransform : CGAffineTransform = CGAffineTransformMakeScale(startScale + (scaleIncPerRotation), startScale + (scaleIncPerRotation))
+                    let rotateTransform : CGAffineTransform = CGAffineTransformMakeRotation(0)
+                    let scaleTransform : CGAffineTransform = CGAffineTransformMakeScale(startScale + (scaleIncPerRotation), startScale + (scaleIncPerRotation))
                     view.transform = CGAffineTransformConcat(scaleTransform, rotateTransform)
                 },
                 completion:
@@ -91,7 +91,7 @@ func rotateViewRecurse(view: UIView, #durationPerRotation: NSTimeInterval, #numR
     })
 }
 
-func bounceInView(view: UIView, #duration: CGFloat, #delay: CGFloat)
+func bounceInView(view: UIView, duration: CGFloat, delay: CGFloat)
 {
     view.transform = CGAffineTransformMakeScale(0.01, 0.01)
     
@@ -116,7 +116,7 @@ func bounceInView(view: UIView, #duration: CGFloat, #delay: CGFloat)
     )
 }
 
-func scaleOutRemoveView(view: UIView, #duration: CGFloat, #delay: CGFloat)
+func scaleOutRemoveView(view: UIView, duration: CGFloat, delay: CGFloat)
 {
     view.transform = CGAffineTransformMakeScale(1.0, 1.0)
     
@@ -133,7 +133,7 @@ func scaleOutRemoveView(view: UIView, #duration: CGFloat, #delay: CGFloat)
     )
 }
 
-func scaleInAddView(view: UIView, #parentView: UIView, #duration: CGFloat, #delay: CGFloat)
+func scaleInAddView(view: UIView, parentView: UIView, duration: CGFloat, delay: CGFloat)
 {
     view.transform = CGAffineTransformMakeScale(0.01, 0.01)
     parentView.addSubview(view)
@@ -151,7 +151,7 @@ func scaleInAddView(view: UIView, #parentView: UIView, #duration: CGFloat, #dela
     )
 }
 
-func makeCenteredRectWithScale(scale: CGFloat, #ofFrame: CGRect) -> CGRect
+func makeCenteredRectWithScale(scale: CGFloat, ofFrame: CGRect) -> CGRect
 {
     var frame = ofFrame
     frame.size.width *= scale
@@ -162,7 +162,7 @@ func makeCenteredRectWithScale(scale: CGFloat, #ofFrame: CGRect) -> CGRect
     return frame
 }
 
-func spin3BounceView(view: UIView, #duration: CGFloat)
+func spin3BounceView(view: UIView, duration: CGFloat)
 {
     // start out at (nearly) zero size.  Can't be zero size since this will make the rotation matrix not work when scaling from 0
     view.transform = CGAffineTransformMakeScale(0.01, 0.01)
@@ -187,7 +187,7 @@ func spin3BounceView(view: UIView, #duration: CGFloat)
     )
 }
 
-public func delay(#seconds: Double, #completion:()->())
+public func delay(seconds seconds: Double, completion:()->())
 {
     let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64( Double(NSEC_PER_SEC) * seconds ))
     
@@ -197,7 +197,7 @@ public func delay(#seconds: Double, #completion:()->())
     }
 }
 
-func random(#min: CGFloat, #max: CGFloat) -> CGFloat
+func random(min min: CGFloat, max: CGFloat) -> CGFloat
 {
     return CGFloat(Float(arc4random()) / Float(0x7FFFFFFF)) * (max - min) + min
 }
@@ -296,35 +296,35 @@ extension CGFloat {
 
 public func getPointTop(node: SKSpriteNode) -> CGPoint
 {
-    var nodeEndPt = CGPointMake(0.0, -node.size.height/2)
+    let nodeEndPt = CGPointMake(0.0, -node.size.height/2)
     return nodeToSceneCoordinatesTransform(point: nodeEndPt, node: node)
 }
 
 public func getPointBottom(node: SKSpriteNode) -> CGPoint
 {
-    var nodeEndPt = CGPointMake(0.0, node.size.height/2)
+    let nodeEndPt = CGPointMake(0.0, node.size.height/2)
     return nodeToSceneCoordinatesTransform(point: nodeEndPt, node: node)
 }
 
 public func getPointLeft(node: SKSpriteNode) -> CGPoint
 {
-    var nodeEndPt = CGPointMake(-node.size.width/2, 0.0)
+    let nodeEndPt = CGPointMake(-node.size.width/2, 0.0)
     return nodeToSceneCoordinatesTransform(point: nodeEndPt, node: node)
 }
 
 public func getPointRight(node: SKSpriteNode) -> CGPoint
 {
-    var nodeEndPt = CGPointMake(node.size.width/2, 0.0)
+    let nodeEndPt = CGPointMake(node.size.width/2, 0.0)
     return nodeToSceneCoordinatesTransform(point: nodeEndPt, node: node)
 }
 
-public func nodeToSceneCoordinatesTransform(#point: CGPoint, #node: SKSpriteNode) -> CGPoint
+public func nodeToSceneCoordinatesTransform(point point: CGPoint, node: SKSpriteNode) -> CGPoint
 {
     var rotatedPt = CGPointApplyAffineTransform(point, CGAffineTransformMakeRotation(-node.zRotation))
     // spriteNode local coordinates have inverted y axis
     // how confusing
     rotatedPt.y = -rotatedPt.y
     
-    var finalPt = rotatedPt + node.position
+    let finalPt = rotatedPt + node.position
     return finalPt
 }

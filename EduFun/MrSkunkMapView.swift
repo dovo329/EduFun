@@ -42,7 +42,7 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
         self.highestCompletedLevelNum = highestCompletedLevelNum
         
         collectionView = UICollectionView(frame: CGRectMake(0,0,self.frame.size.width, self.frame.size.height), collectionViewLayout: layout)
-        println("self.frame=\(self.frame) collectionView.frame=\(collectionView.frame)")
+        print("self.frame=\(self.frame) collectionView.frame=\(collectionView.frame)")
         collectionView.userInteractionEnabled = true
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -54,13 +54,13 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
         //collectionView.backgroundColor = UIColor.purpleColor()
     }
     
-    required convenience init(coder: NSCoder) {
+    required convenience init?(coder: NSCoder) {
         fatalError("init coder not implemented")
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier(kMapCellId, forIndexPath: indexPath) as? UICollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kMapCellId, forIndexPath: indexPath) as? UICollectionViewCell
 
         // cell is registered so don't need to do this
         /*if cell == nil
@@ -79,7 +79,7 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
             // +1 because current level should be selected via the map
             if levelNum > highestCompletedLevelNum + 1
             {
-                var lockView = UIImageView(image: UIImage(named: "Lock")!)
+                let lockView = UIImageView(image: UIImage(named: "Lock")!)
                 /*lockView.frame = cell!.frame
                 lockView.frame.size.width *= 0.5
                 lockView.frame.size.height  *= 0.5
@@ -91,7 +91,7 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
             }
             else
             {
-                var levelNumLabel = THLabel()
+                let levelNumLabel = THLabel()
                 /*levelNumLabel.frame = cell!.frame
                 levelNumLabel.frame.size.width *= 0.8
                 levelNumLabel.frame.size.height  *= 0.8
@@ -132,7 +132,7 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        var retVal = Int(round(CGFloat(kNumLevels)/CGFloat(kNumMapsPerRow)))
+        let retVal = Int(round(CGFloat(kNumLevels)/CGFloat(kNumMapsPerRow)))
         return retVal
     }
     
