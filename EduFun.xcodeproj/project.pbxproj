@@ -63,7 +63,6 @@
 		A5CBB9011B4DFC0500A446FE /* Level3Back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5CBB9001B4DFC0500A446FE /* Level3Back.jpg */; };
 		A5CBB9031B4E001800A446FE /* Level2Back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5CBB9021B4E001800A446FE /* Level2Back.jpg */; };
 		A5DB888F1B3B707D00B8CA08 /* THLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DB888E1B3B707D00B8CA08 /* THLabel.m */; };
-		A5E3C5A01B4AF9E5000D023F /* ASAttributedLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E3C59F1B4AF9E5000D023F /* ASAttributedLabelNode.swift */; };
 		A5EB8DF51B3CC765009A8A3A /* THButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB8DF41B3CC765009A8A3A /* THButton.swift */; };
 		A5EB8DF81B3CCF39009A8A3A /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB8DF71B3CCF39009A8A3A /* Global.swift */; };
 		A5EBCCC51B361F0E006E52D6 /* mtnHouse.svg in Resources */ = {isa = PBXBuildFile; fileRef = A5EBCCC41B361F0E006E52D6 /* mtnHouse.svg */; };
@@ -185,7 +184,6 @@
 		A5CBB9021B4E001800A446FE /* Level2Back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Level2Back.jpg; path = Art/Level2/Level2Back.jpg; sourceTree = "<group>"; };
 		A5DB888D1B3B707D00B8CA08 /* THLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLabel.h; sourceTree = "<group>"; };
 		A5DB888E1B3B707D00B8CA08 /* THLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLabel.m; sourceTree = "<group>"; };
-		A5E3C59F1B4AF9E5000D023F /* ASAttributedLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ASAttributedLabelNode.swift; path = ../ASAttributedLabelNode/ASAttributedLabelNode.swift; sourceTree = "<group>"; };
 		A5EB8DF41B3CC765009A8A3A /* THButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THButton.swift; sourceTree = "<group>"; };
 		A5EB8DF71B3CCF39009A8A3A /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		A5EBCCC41B361F0E006E52D6 /* mtnHouse.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = mtnHouse.svg; path = EduFun/mtnHouse.svg; sourceTree = "<group>"; };
@@ -391,7 +389,6 @@
 				A5112C051B2D019F00215DA2 /* OBShapedButton.m */,
 				A5112C061B2D019F00215DA2 /* UIImage+ColorAtPixel.h */,
 				A5112C071B2D019F00215DA2 /* UIImage+ColorAtPixel.m */,
-				A5E3C59F1B4AF9E5000D023F /* ASAttributedLabelNode.swift */,
 			);
 			name = ThirdParty;
 			sourceTree = "<group>";
@@ -548,7 +545,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5E3C5A01B4AF9E5000D023F /* ASAttributedLabelNode.swift in Sources */,
 				A5112C161B2D0E7F00215DA2 /* OBShapedView.m in Sources */,
 				A5DB888F1B3B707D00B8CA08 /* THLabel.m in Sources */,
 				A5C4B2991B50250500016C02 /* MrSkunkLevelScene.swift in Sources */,
