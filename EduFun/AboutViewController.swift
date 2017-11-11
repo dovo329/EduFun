@@ -91,7 +91,7 @@ class AboutViewController: UIViewController {
         backButton.layer.cornerRadius = 4.0
         backButton.frame = CGRectMake(self.view.frame.width-60.0, self.view.frame.height-20.0, 60.0, 20.0)
         view.addSubview(backButton)
-        backButton.addTarget(self, action: Selector("backButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
+        backButton.addTarget(self, action: #selector(backButtonMethod(sender:event:)), forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     func backButtonMethod(sender : THButton, event : UIEvent) {

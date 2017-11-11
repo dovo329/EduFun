@@ -11,11 +11,11 @@ import QuartzCore
 
 class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
-    let kPeekDuration : NSTimeInterval = 2.0
-    let kFlipDuration : NSTimeInterval = 0.5
-    let kMatchDisappearDuration : NSTimeInterval = 2.0
+    let kPeekDuration : TimeInterval = 2.0
+    let kFlipDuration : TimeInterval = 0.5
+    let kMatchDisappearDuration : TimeInterval = 2.0
     let kSparkleLifetimeMean : Float = 1.5
-    let kConfetti4STime : NSTimeInterval = 2.0
+    let kConfetti4STime : TimeInterval = 2.0
     
     let kNumRows : Int = 4
     let kNumColumns : Int = 4
@@ -65,10 +65,10 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         // since titlescreen viewcontroller is landscape, and since apparently the view.frame never updates to be the new orientation (why?), need to swap width and height of frame
         let width = view.frame.size.width
         let height = view.frame.size.height
-        view.frame = CGRectMake(0,0,height, width)
+        view.frame = CGRect(x: 0, y: 0, width: height, height: width)
 
         let bgGradLayer = CAGradientLayer()
-        bgGradLayer.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height)
+        bgGradLayer.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
         bgGradLayer.colors = [
             cgColor(red: 255.0, green:255.0, blue:255.0),
             cgColor(red: 0.0, green:217.0, blue:240.0)
@@ -104,21 +104,21 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         layout.minimumLineSpacing = 0
         
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
-        self.collectionView.userInteractionEnabled = false
+        self.collectionView.isUserInteractionEnabled = false
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: kCellReuseId)
-        collectionView.backgroundColor = UIColor.clearColor()
-        collectionView.scrollEnabled = false
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kCellReuseId)
+        collectionView.backgroundColor = UIColor.clear
+        collectionView.isScrollEnabled = false
         
         view.addSubview(collectionView)
         collectionViewConstraints()
         
-        newGameButton = THButton(frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8, self.view.frame.width/2, self.view.frame.height/10.0), text: "New Game")
-        newGameButton!.addTarget(self, action: Selector("newGameButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
+        newGameButton = THButton(frame: CGRect(x: self.view.frame.width/4, y: self.view.frame.height*5/8, width: self.view.frame.width/2, height: self.view.frame.height/10.0), text: "New Game")
+        newGameButton!.addTarget(self, action: #selector(newGameButtonMethod(sender:event:)), for: UIControlEvents.touchUpInside)
         
-        exitButton = THButton(frame: CGRectMake(self.view.frame.width/4, self.view.frame.height*5/8 + newGameButton!.frame.size.height+20.0, self.view.frame.width/2, self.view.frame.height/10.0), text:"Exit    ")
-        exitButton!.addTarget(self, action: Selector("exitButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
+        exitButton = THButton(frame: CGRect(x: self.view.frame.width/4, y: self.view.frame.height*5/8 + newGameButton!.frame.size.height+20.0, width: self.view.frame.width/2, height: self.view.frame.height/10.0), text:"Exit    ")
+        exitButton!.addTarget(self, action: #selector(exitButtonMethod(sender:event:)), forControlEvents: UIControlEvents.touchUpInside)
         
         setupMatchSparkles()
         
@@ -178,7 +178,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         view.layer.addSublayer(emitterLayer1)
     }
     
-    func startMatchSparkles(frame1 frame1: CGRect, frame2: CGRect) {
+    func startMatchSparkles(frame1: CGRect, frame2: CGRect) {
         
         emitterLayerArr[0].emitterPosition = CGPointMake(frame1.origin.x + frame1.size.width/2, frame1.origin.y + frame1.size.height/2)
         emitterLayerArr[0].emitterSize = frame1.size
@@ -639,7 +639,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         return allMatched
     }
     
-    func newGameButtonMethod(sender : THButton, event : UIEvent) {
+    @objc func newGameButtonMethod(sender : THButton, event : UIEvent) {
         // touchupinside must have some built in apple determined finger fudge factor to account for finger fatness so I'll just use what they came up with even though technically the precise press can be somewhat outside the sender's frame and still call this
         collectionView.userInteractionEnabled = false
         // activateCardArr completion of peek reenabled collectionView

@@ -116,7 +116,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         
         let exitButtonFrame = CGRectMake(view.frame.size.width-(2.0*kMrSkunkToolbarWidth), 0, 2.0*kMrSkunkToolbarWidth, kMrSkunkIconHeight)
         exitButton = THButton(frame: exitButtonFrame, text: "Exit")
-        exitButton!.addTarget(self, action: Selector("exitButtonMethod"), forControlEvents: UIControlEvents.TouchUpInside)
+        exitButton!.addTarget(self, action: #selector(exitButtonMethod(sender:event:)), forControlEvents: UIControlEvents.TouchUpInside)
         view.addSubview(exitButton)
 
         //exitBarButton = UIBarButtonItem(title: "Exit", style: UIBarButtonItemStyle.Plain, target: self, action: "exitButtonMethod")
@@ -127,7 +127,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         restartButton = UIButton(type: UIButtonType.Custom)
         restartButton.setImage(restartImg, forState: UIControlState.Normal)
         restartButton.frame = restartButtonFrame
-        restartButton!.addTarget(self, action: Selector("restartMethod"), forControlEvents: UIControlEvents.TouchUpInside)
+        restartButton!.addTarget(self, action: #selector(restartMethod), forControlEvents: UIControlEvents.TouchUpInside)
         view.addSubview(restartButton)
         //restartBarButton = UIBarButtonItem(image: restartImg, style: UIBarButtonItemStyle.Plain, target: self, action: "restartMethod")
         
@@ -137,7 +137,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         mapButton = UIButton(type: UIButtonType.Custom)
         mapButton.setImage(mapImg, forState: UIControlState.Normal)
         mapButton.frame = mapButtonFrame
-        mapButton!.addTarget(self, action: Selector("mapMethod"), forControlEvents: UIControlEvents.TouchUpInside)
+        mapButton!.addTarget(self, action: #selector(mapMethod), forControlEvents: UIControlEvents.TouchUpInside)
         view.addSubview(mapButton)
         //mapButton = UIBarButtonItem(image: mapImg, style: UIBarButtonItemStyle.Plain, target: self, action: "mapMethod")
         
@@ -157,7 +157,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         //self.view.addSubview(toolbar)
     }
     
-    func startup(level level : Int)
+    func startup(level : Int)
     {
         levelCompleteFlag = false
         scaleOutRemoveView(completeLabel, duration: 0.5, delay: 0.0)
@@ -299,7 +299,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         }*/
     }
     
-    func levelHint(level level: Int)
+    func levelHint(level: Int)
     {
         switch (level)
         {
@@ -471,7 +471,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             //}
             nextButton.label.text = "Next Level"
             nextButton.frame = nextButtonFrame
-            nextButton.addTarget(self, action: Selector("nextButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
+            nextButton.addTarget(self, action: #selector(nextButtonMethod(sender:event:)), forControlEvents: UIControlEvents.TouchUpInside)
             view.addSubview(nextButton)
             
             bounceInView(nextButton, duration:CGFloat(0.5), delay:CGFloat(0.0))
@@ -493,7 +493,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             //}
             nextButton.label.text = "Exit"
             nextButton.frame = nextButtonFrame
-            nextButton.addTarget(self, action: Selector("exitButtonMethod"), forControlEvents: UIControlEvents.TouchUpInside)
+            nextButton.addTarget(self, action: #selector(exitButtonMethod(sender:event:)), forControlEvents: UIControlEvents.TouchUpInside)
             view.addSubview(nextButton)
             
             bounceInView(nextButton, duration:CGFloat(0.5), delay:CGFloat(0.0))

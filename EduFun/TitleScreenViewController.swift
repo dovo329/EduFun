@@ -33,7 +33,7 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         aboutButton.layer.cornerRadius = 4.0
         aboutButton.frame = CGRect(x: self.view.frame.width-60.0, y: self.view.frame.height-20.0, width: 60.0, height: 20.0)
         view.addSubview(aboutButton)
-        aboutButton.addTarget(self, action: Selector(("aboutButtonMethod:event:")), for: UIControlEvents.touchUpInside)
+        aboutButton.addTarget(self, action: #selector(aboutButtonMethod(sender:event:)), for: UIControlEvents.touchUpInside)
         
         /*aboutButton?.setTranslatesAutoresizingMaskIntoConstraints(false)
         view.addConstraint(
@@ -107,19 +107,19 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         titleLabel.frame = CGRect(x: 0.0, y: 20.0, width: view.frame.size.width, height: view.frame.size.height)
         //titleLabel.font = UIFont(name: "Super Mario 256", size: 300.0)
         titleLabel.font = UIFont(name: "Super Mario 256", size: 45.0)
-        titleLabel.font = titleLabel.font.fontWithSize(getFontSizeToFitFrameOfLabel(titleLabel)-6.0)
+        titleLabel.font = titleLabel.font.withSize(getFontSizeToFitFrameOfLabel(label: titleLabel)-6.0)
         //titleLabel.frame.origin.y -= titleLabel.font.pointSize
         //println("titleLabel.font.pointSize=\(titleLabel.font.pointSize)")
         titleLabel.frame.size.height = titleLabel.font.pointSize*1.3
-        titleLabel.textAlignment = NSTextAlignment.Center
-        titleLabel.textColor = UIColor.yellowColor()
+        titleLabel.textAlignment = NSTextAlignment.center
+        titleLabel.textColor = UIColor.yellow
         titleLabel.strokeSize = (3.0/320.0)*titleLabel.frame.size.width
-        titleLabel.strokeColor = UIColor.blackColor()
-        titleLabel.shadowOffset = CGSizeMake(titleLabel.strokeSize, titleLabel.strokeSize)
-        titleLabel.shadowColor = UIColor.blackColor()
+        titleLabel.strokeColor = UIColor.black
+        titleLabel.shadowOffset = CGSize(width: titleLabel.strokeSize, height: titleLabel.strokeSize)
+        titleLabel.shadowColor = UIColor.black
         titleLabel.shadowBlur = (1.0/320.0)*titleLabel.frame.size.width
         titleLabel.layer.shouldRasterize = true
-        titleLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
+        titleLabel.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         view.addSubview(titleLabel)
         
         //bounceInView(titleLabel, duration: 0.5, delay: 0.0)
@@ -151,17 +151,18 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
 
-        collectionView = UICollectionView(frame: CGRectMake(0, (titleLabel.frame.size.height+20.0), view.frame.size.width, view.frame.size.height), collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: CGRect(x: 0, y: (titleLabel.frame.size.height+20.0), width: view.frame.size.width, height: view.frame.size.height), collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: kCellReuseId)
-        collectionView.backgroundColor = UIColor.clearColor()
-        collectionView.scrollEnabled = false
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kCellReuseId)
+        collectionView.backgroundColor = UIColor.clear
+        collectionView.isScrollEnabled = false
         
         view.addSubview(collectionView)
     }
 
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
         let cell = collectionView.cellForItemAtIndexPath(indexPath)!
         cell.backgroundView!.alpha = 0.5
         cell.layer.borderColor = cgColor(red: 120.0, green: 190.0, blue: 255.0)
@@ -181,8 +182,8 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
             app?.animateToViewController(ViewControllerEnum.MrSkunk, srcVCEnum: ViewControllerEnum.TitleScreen)
         }
     }
-    
-    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath)!
         cell.backgroundView!.alpha = 1.0
         cell.layer.borderColor = cgColor(red: 70.0, green: 120.0, blue: 255.0)
