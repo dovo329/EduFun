@@ -15,14 +15,14 @@ let π : CGFloat = CGFloat(M_PI)
 struct ViewControllerEnum {
     static let CardMatching : UInt32 = 0b00001
     static let ColoringBook : UInt32 = 0b00010
-    static let MrSkunk  : UInt32 = 0b00100
+    static let MrSkunk      : UInt32 = 0b00100
     static let TitleScreen  : UInt32 = 0b01000
     static let About        : UInt32 = 0b10000
 }
 
 public func getFontSizeToFitFrameOfLabel(label: UILabel) -> CGFloat
 {
-    var initialSize : CGSize = label.text!.sizeWithAttributes([NSFontAttributeName : label.font])
+    var initialSize : CGSize = label.text?.sizeWithAttributes([NSFontAttributeName : label.font]) ?? CGSize(width: 0, height: 0)
     
     if initialSize.width > label.frame.size.width ||
         initialSize.height > label.frame.size.height
@@ -187,7 +187,7 @@ func spin3BounceView(view: UIView, duration: CGFloat)
     )
 }
 
-public func delay(seconds seconds: Double, completion:()->())
+public func delay(seconds: Double, completion:()->())
 {
     let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64( Double(NSEC_PER_SEC) * seconds ))
     
@@ -197,7 +197,7 @@ public func delay(seconds seconds: Double, completion:()->())
     }
 }
 
-func random(min min: CGFloat, max: CGFloat) -> CGFloat
+func random(min: CGFloat, max: CGFloat) -> CGFloat
 {
     return CGFloat(Float(arc4random()) / Float(0x7FFFFFFF)) * (max - min) + min
 }
@@ -206,7 +206,7 @@ func + (left: CGPoint, right: CGPoint) -> CGPoint {
     return CGPoint(x: left.x + right.x, y: left.y + right.y)
 }
 
-func += (inout left: CGPoint, right: CGPoint) {
+func += (left inout: CGPoint, right: CGPoint) {
     left = left + right
 }
 
@@ -214,7 +214,7 @@ func - (left: CGPoint, right: CGPoint) -> CGPoint {
     return CGPoint(x: left.x - right.x, y: left.y - right.y)
 }
 
-func -= (inout left: CGPoint, right: CGPoint) {
+func -= (left inout: CGPoint, right: CGPoint) {
     left = left - right
 }
 
@@ -222,7 +222,7 @@ func * (left: CGPoint, right: CGPoint) -> CGPoint {
     return CGPoint(x: left.x * right.x, y: left.y * right.y)
 }
 
-func *= (inout left: CGPoint, right: CGPoint) {
+func *= (left inout: CGPoint, right: CGPoint) {
     left = left * right
 }
 
@@ -230,7 +230,7 @@ func * (point: CGPoint, scalar: CGFloat) -> CGPoint {
     return CGPoint(x: point.x * scalar, y: point.y * scalar)
 }
 
-func *= (inout point: CGPoint, scalar: CGFloat) {
+func *= (point inout: CGPoint, scalar: CGFloat) {
     point = point * scalar
 }
 
@@ -238,7 +238,7 @@ func / (left: CGPoint, right: CGPoint) -> CGPoint {
     return CGPoint(x: left.x / right.x, y: left.y / right.y)
 }
 
-func /= (inout left: CGPoint, right: CGPoint) {
+func /= (left inout: CGPoint, right: CGPoint) {
     left = left / right
 }
 
@@ -246,7 +246,7 @@ func / (point: CGPoint, scalar: CGFloat) -> CGPoint {
     return CGPoint(x: point.x / scalar, y: point.y / scalar)
 }
 
-func /= (inout point: CGPoint, scalar: CGFloat) {
+func /= (point inout: CGPoint, scalar: CGFloat) {
     point = point / scalar
 }
 
@@ -318,7 +318,7 @@ public func getPointRight(node: SKSpriteNode) -> CGPoint
     return nodeToSceneCoordinatesTransform(point: nodeEndPt, node: node)
 }
 
-public func nodeToSceneCoordinatesTransform(point point: CGPoint, node: SKSpriteNode) -> CGPoint
+public func nodeToSceneCoordinatesTransform(point: CGPoint, node: SKSpriteNode) -> CGPoint
 {
     var rotatedPt = CGPointApplyAffineTransform(point, CGAffineTransformMakeRotation(-node.zRotation))
     // spriteNode local coordinates have inverted y axis
