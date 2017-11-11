@@ -70,8 +70,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         let bgGradLayer = CAGradientLayer()
         bgGradLayer.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height)
         bgGradLayer.colors = [
-            cgColorForRed(255.0, green:255.0, blue:255.0),
-            cgColorForRed(0.0, green:217.0, blue:240.0)
+            cgColor(red: 255.0, green:255.0, blue:255.0),
+            cgColor(red: 0.0, green:217.0, blue:240.0)
         ]
         bgGradLayer.startPoint = CGPoint(x:0.0, y:0.0)
         bgGradLayer.endPoint = CGPoint(x:0.0, y:1.0)

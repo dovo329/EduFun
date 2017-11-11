@@ -17,12 +17,12 @@ class AboutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bgGradLayer.colors = [
-            cgColorForRed(255.0, green:255.0, blue:255.0),
-            cgColorForRed(255.0, green:224.0, blue:224.0),
-            cgColorForRed(255.0, green:216.0, blue:173.0),
-            cgColorForRed(255.0, green:255.0, blue:167.0),
-            cgColorForRed(152.0, green:255.0, blue:152.0),
-            cgColorForRed(162.0, green:255.0, blue:255.0)
+            cgColor(red: 255.0, green:255.0, blue:255.0),
+            cgColor(red: 255.0, green:224.0, blue:224.0),
+            cgColor(red: 255.0, green:216.0, blue:173.0),
+            cgColor(red: 255.0, green:255.0, blue:167.0),
+            cgColor(red: 152.0, green:255.0, blue:152.0),
+            cgColor(red: 162.0, green:255.0, blue:255.0)
         ]
         bgGradLayer.startPoint = CGPoint(x:0.0, y:0.0)
         bgGradLayer.endPoint = CGPoint(x:0.0, y:1.0)

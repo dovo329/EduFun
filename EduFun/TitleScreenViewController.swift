@@ -11,7 +11,7 @@ import QuartzCore
 
 class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
 {
-    var aboutButton : UIButton = UIButton(type: UIButtonType.Custom)
+    var aboutButton : UIButton = UIButton(type: UIButtonType.custom)
     var titleLabel : THLabel!
     let kNumRows : Int = 1
     let kNumColumns : Int = 3
@@ -26,14 +26,14 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         setupTitleLabel()
         setupCollectionView()
         
-        aboutButton.setTitle("About", forState: UIControlState.Normal)
-        aboutButton.setTitle("About", forState: UIControlState.Highlighted)
-        aboutButton.backgroundColor = UIColor.blueColor()
+        aboutButton.setTitle("About", for: UIControlState.normal)
+        aboutButton.setTitle("About", for: UIControlState.highlighted)
+        aboutButton.backgroundColor = UIColor.blue
         //aboutButton.layer.backgroundColor = UIColor.blueColor().CGColor
         aboutButton.layer.cornerRadius = 4.0
-        aboutButton.frame = CGRectMake(self.view.frame.width-60.0, self.view.frame.height-20.0, 60.0, 20.0)
+        aboutButton.frame = CGRect(x: self.view.frame.width-60.0, y: self.view.frame.height-20.0, width: 60.0, height: 20.0)
         view.addSubview(aboutButton)
-        aboutButton.addTarget(self, action: Selector("aboutButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
+        aboutButton.addTarget(self, action: Selector(("aboutButtonMethod:event:")), for: UIControlEvents.touchUpInside)
         
         /*aboutButton?.setTranslatesAutoresizingMaskIntoConstraints(false)
         view.addConstraint(
@@ -72,12 +72,12 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
     }
     
     func aboutButtonMethod(sender : THButton, event : UIEvent) {
-        let app = UIApplication.sharedApplication().delegate as? AppDelegate
-        app?.animateToViewController(ViewControllerEnum.About, srcVCEnum: ViewControllerEnum.TitleScreen)
+        let app = UIApplication.shared.delegate as? AppDelegate
+        app?.animateToViewController(destVCEnum: ViewControllerEnum.About, srcVCEnum: ViewControllerEnum.TitleScreen)
         //println("about button method")
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         //navigationController!.navigationBarHidden = true
     }
 
@@ -87,12 +87,12 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         //bgGradLayer.frame = view.bounds
         
         bgGradLayer.colors = [
-            cgColorForRed(255.0, green:255.0, blue:255.0),
-            cgColorForRed(255.0, green:224.0, blue:224.0),
-            cgColorForRed(255.0, green:216.0, blue:173.0),
-            cgColorForRed(255.0, green:255.0, blue:167.0),
-            cgColorForRed(152.0, green:255.0, blue:152.0),
-            cgColorForRed(162.0, green:255.0, blue:255.0)
+            cgColor(red: 255.0, green:255.0, blue:255.0),
+            cgColor(red: 255.0, green:224.0, blue:224.0),
+            cgColor(red: 255.0, green:216.0, blue:173.0),
+            cgColor(red: 255.0, green:255.0, blue:167.0),
+            cgColor(red: 152.0, green:255.0, blue:152.0),
+            cgColor(red: 162.0, green:255.0, blue:255.0)
         ]
         bgGradLayer.startPoint = CGPoint(x:0.0, y:0.0)
         bgGradLayer.endPoint = CGPoint(x:0.0, y:1.0)
@@ -164,7 +164,7 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath)!
         cell.backgroundView!.alpha = 0.5
-        cell.layer.borderColor = cgColorForRed(120.0, green: 190.0, blue: 255.0)
+        cell.layer.borderColor = cgColor(red: 120.0, green: 190.0, blue: 255.0)
         
         let app = UIApplication.sharedApplication().delegate as? AppDelegate
         
@@ -185,7 +185,7 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath)!
         cell.backgroundView!.alpha = 1.0
-        cell.layer.borderColor = cgColorForRed(70.0, green: 120.0, blue: 255.0)
+        cell.layer.borderColor = cgColor(red: 70.0, green: 120.0, blue: 255.0)
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -211,7 +211,7 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         let scale = (view.frame.size.width/320.0)
         
         cell.layer.borderWidth = 4.0*scale
-        cell.layer.borderColor = cgColorForRed(70.0, green: 120.0, blue: 255.0)
+        cell.layer.borderColor = cgColor(red: 70.0, green: 120.0, blue: 255.0)
         cell.layer.cornerRadius = 10.0*scale
         cell.layer.masksToBounds = true
         //cell.layer.shadowColor = UIColor.blackColor().CGColor

@@ -53,7 +53,7 @@ public func getFontSizeToFitFrameOfLabel(label: UILabel) -> CGFloat
     return label.font.pointSize;
 }
 
-public func cgColorForRed(red: CGFloat, green: CGFloat, blue: CGFloat) -> CGColor {
+public func cgColor(red: CGFloat, green: CGFloat, blue: CGFloat) -> CGColor {
     return UIColor(red: red/255.0, green: green/255.0, blue: blue/255.0, alpha: 1.0).CGColor as CGColor
 }
 
