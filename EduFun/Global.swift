@@ -10,7 +10,7 @@ import Foundation
 import CoreGraphics
 import SpriteKit
 
-let π : CGFloat = CGFloat(M_PI)
+let π : CGFloat = CGFloat(Double.pi)
 
 struct ViewControllerEnum {
     static let CardMatching : UInt32 = 0b00001
@@ -22,7 +22,7 @@ struct ViewControllerEnum {
 
 public func getFontSizeToFitFrameOfLabel(label: UILabel) -> CGFloat
 {
-    var initialSize : CGSize = label.text?.sizeWithAttributes([NSFontAttributeName : label.font]) ?? CGSize(width: 0, height: 0)
+    var initialSize : CGSize = label.text?.size(withAttributes: [NSAttributedStringKey.font : label.font]) ?? CGSize(width: 0, height: 0)
     
     if initialSize.width > label.frame.size.width ||
         initialSize.height > label.frame.size.height
@@ -30,8 +30,8 @@ public func getFontSizeToFitFrameOfLabel(label: UILabel) -> CGFloat
         while initialSize.width > label.frame.size.width ||
             initialSize.height > label.frame.size.height
         {
-            label.font = label.font.fontWithSize(label.font.pointSize - 1)
-            initialSize = label.text!.sizeWithAttributes([NSFontAttributeName : label.font])
+            label.font = label.font.withSize(label.font.pointSize - 1)
+            initialSize = label.text!.size(withAttributes: [NSAttributedStringKey.font : label.font])
             /*println("label.size w=\(label.frame.size.width) h=\(label.frame.size.height)")
             println("initial.size w=\(initialSize.width) h=\(initialSize.height)")
             println("font.pointSize=\(label.font.pointSize)")
@@ -41,46 +41,46 @@ public func getFontSizeToFitFrameOfLabel(label: UILabel) -> CGFloat
         while initialSize.width < label.frame.size.width &&
             initialSize.height < label.frame.size.height
         {
-            label.font = label.font.fontWithSize(label.font.pointSize + 1)
-            initialSize = label.text!.sizeWithAttributes([NSFontAttributeName : label.font])
+            label.font = label.font.withSize(label.font.pointSize + 1)
+            initialSize = label.text!.size(withAttributes: [NSAttributedStringKey.font : label.font])
             /*println("label.size w=\(label.frame.size.width) h=\(label.frame.size.height)")
             println("initial.size w=\(initialSize.width) h=\(initialSize.height)")
             println("font.pointSize=\(label.font.pointSize)")
             println("")*/
         }
-        label.font = label.font.fontWithSize(label.font.pointSize - 1)
+        label.font = label.font.withSize(label.font.pointSize - 1)
     }
     return label.font.pointSize;
 }
 
 public func cgColor(red: CGFloat, green: CGFloat, blue: CGFloat) -> CGColor {
-    return UIColor(red: red/255.0, green: green/255.0, blue: blue/255.0, alpha: 1.0).CGColor as CGColor
+    return UIColor(red: red/255.0, green: green/255.0, blue: blue/255.0, alpha: 1.0).cgColor as CGColor
 }
 
-func rotateViewRecurse(view: UIView, durationPerRotation: NSTimeInterval, numRotationsLeft: Int, scaleIncPerRotation: CGFloat, startScale: CGFloat, completionBlock: (Void) -> Void)
+func rotateViewRecurse(view: UIView, durationPerRotation: TimeInterval, numRotationsLeft: Int, scaleIncPerRotation: CGFloat, startScale: CGFloat, completionBlock: @escaping () -> Void)
 {
-    UIView.animateWithDuration(
-        durationPerRotation/2.0, delay: 0.0, options: UIViewAnimationOptions.CurveLinear,
+    UIView.animate(
+        withDuration: durationPerRotation/2.0, delay: 0.0, options: UIViewAnimationOptions.curveLinear,
         animations:
-        {(_) -> (Void) in
-            let rotateTransform : CGAffineTransform = CGAffineTransformMakeRotation(π)
-            let scaleTransform : CGAffineTransform = CGAffineTransformMakeScale(startScale + (scaleIncPerRotation/2.0), startScale + (scaleIncPerRotation/2.0))
-            view.transform = CGAffineTransformConcat(scaleTransform, rotateTransform)
+        {
+            let rotateTransform : CGAffineTransform = CGAffineTransform(rotationAngle: π)
+            let scaleTransform : CGAffineTransform = CGAffineTransform(scaleX: startScale + (scaleIncPerRotation/2.0), y: startScale + (scaleIncPerRotation/2.0))
+            view.transform = scaleTransform.concatenating(rotateTransform)
         },
         completion:
         {(_) -> (Void) in
-            UIView.animateWithDuration(durationPerRotation/2.0, delay: 0.0, options: UIViewAnimationOptions.CurveLinear,
+            UIView.animate(withDuration: durationPerRotation/2.0, delay: 0.0, options: UIViewAnimationOptions.curveLinear,
                 animations:
-                {(_) -> (Void) in
-                    let rotateTransform : CGAffineTransform = CGAffineTransformMakeRotation(0)
-                    let scaleTransform : CGAffineTransform = CGAffineTransformMakeScale(startScale + (scaleIncPerRotation), startScale + (scaleIncPerRotation))
-                    view.transform = CGAffineTransformConcat(scaleTransform, rotateTransform)
+                {
+                    let rotateTransform : CGAffineTransform = CGAffineTransform(rotationAngle: 0)
+                    let scaleTransform : CGAffineTransform = CGAffineTransform(scaleX: startScale + (scaleIncPerRotation), y: startScale + (scaleIncPerRotation))
+                    view.transform = scaleTransform.concatenating(rotateTransform)
                 },
                 completion:
                 {(_) -> (Void) in
                     if (numRotationsLeft > 1)
                     {
-                        rotateViewRecurse(view, durationPerRotation: durationPerRotation, numRotationsLeft: numRotationsLeft-1, scaleIncPerRotation:scaleIncPerRotation, startScale:(startScale + scaleIncPerRotation), completionBlock: completionBlock)
+                        rotateViewRecurse(view: view, durationPerRotation: durationPerRotation, numRotationsLeft: numRotationsLeft-1, scaleIncPerRotation:scaleIncPerRotation, startScale:(startScale + scaleIncPerRotation), completionBlock: completionBlock)
                     }
                     else
                     {
@@ -93,10 +93,10 @@ func rotateViewRecurse(view: UIView, durationPerRotation: NSTimeInterval, numRot
 
 func bounceInView(view: UIView, duration: CGFloat, delay: CGFloat)
 {
-    view.transform = CGAffineTransformMakeScale(0.01, 0.01)
+    view.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
     
     UIView.animateWithDuration(
-        NSTimeInterval(duration*(1.0/2.0)), delay: NSTimeInterval(delay), options: UIViewAnimationOptions.CurveLinear,
+        TimeInterval(duration*(1.0/2.0)), delay: TimeInterval(delay), options: UIViewAnimationOptions.CurveLinear,
         animations:
         {(_) -> (Void) in
             view.transform = CGAffineTransformMakeScale(1.5, 1.5)
@@ -118,12 +118,12 @@ func bounceInView(view: UIView, duration: CGFloat, delay: CGFloat)
 
 func scaleOutRemoveView(view: UIView, duration: CGFloat, delay: CGFloat)
 {
-    view.transform = CGAffineTransformMakeScale(1.0, 1.0)
+    view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
     
     UIView.animateWithDuration(
-        NSTimeInterval(duration), delay: NSTimeInterval(delay), options: UIViewAnimationOptions.CurveLinear,
+        TimeInterval(duration), delay: TimeIntervalTimeInterval(delay), options: UIViewAnimationOptions.CurveLinear,
         animations:
-        {(_) -> (Void) in
+        {
             view.transform = CGAffineTransformMakeScale(0.01, 0.01)
         },
         completion:
@@ -135,11 +135,11 @@ func scaleOutRemoveView(view: UIView, duration: CGFloat, delay: CGFloat)
 
 func scaleInAddView(view: UIView, parentView: UIView, duration: CGFloat, delay: CGFloat)
 {
-    view.transform = CGAffineTransformMakeScale(0.01, 0.01)
+    view.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
     parentView.addSubview(view)
     
     UIView.animateWithDuration(
-        NSTimeInterval(duration), delay: NSTimeInterval(delay), options: UIViewAnimationOptions.CurveLinear,
+        TimeInterval(duration), delay: NSTimeInterval(delay), options: UIViewAnimationOptions.CurveLinear,
         animations:
         {(_) -> (Void) in
             view.transform = CGAffineTransformMakeScale(1.0, 1.0)
@@ -206,7 +206,7 @@ func + (left: CGPoint, right: CGPoint) -> CGPoint {
     return CGPoint(x: left.x + right.x, y: left.y + right.y)
 }
 
-func += (left inout: CGPoint, right: CGPoint) {
+func += (left: inout CGPoint, right: CGPoint) {
     left = left + right
 }
 
@@ -214,7 +214,7 @@ func - (left: CGPoint, right: CGPoint) -> CGPoint {
     return CGPoint(x: left.x - right.x, y: left.y - right.y)
 }
 
-func -= (left inout: CGPoint, right: CGPoint) {
+func -= (left: inout CGPoint, right: CGPoint) {
     left = left - right
 }
 
@@ -222,7 +222,7 @@ func * (left: CGPoint, right: CGPoint) -> CGPoint {
     return CGPoint(x: left.x * right.x, y: left.y * right.y)
 }
 
-func *= (left inout: CGPoint, right: CGPoint) {
+func *= (left: inout CGPoint, right: CGPoint) {
     left = left * right
 }
 
@@ -230,7 +230,7 @@ func * (point: CGPoint, scalar: CGFloat) -> CGPoint {
     return CGPoint(x: point.x * scalar, y: point.y * scalar)
 }
 
-func *= (point inout: CGPoint, scalar: CGFloat) {
+func *= (point: inout CGPoint, scalar: CGFloat) {
     point = point * scalar
 }
 
@@ -238,7 +238,7 @@ func / (left: CGPoint, right: CGPoint) -> CGPoint {
     return CGPoint(x: left.x / right.x, y: left.y / right.y)
 }
 
-func /= (left inout: CGPoint, right: CGPoint) {
+func /= (left: inout CGPoint, right: CGPoint) {
     left = left / right
 }
 
@@ -246,7 +246,7 @@ func / (point: CGPoint, scalar: CGFloat) -> CGPoint {
     return CGPoint(x: point.x / scalar, y: point.y / scalar)
 }
 
-func /= (point inout: CGPoint, scalar: CGFloat) {
+func /= (point: inout CGPoint, scalar: CGFloat) {
     point = point / scalar
 }
 
@@ -278,7 +278,7 @@ extension CGPoint {
 func shortestAngleBetween(angle1: CGFloat,
     angle2: CGFloat) -> CGFloat {
         let twoπ = π * 2.0
-        var angle = (angle2 - angle1) % twoπ
+        var angle = (angle2 - angle1).truncatingRemainder(dividingBy: twoπ)
         if (angle >= π) {
             angle = angle - twoπ
         }
@@ -296,31 +296,31 @@ extension CGFloat {
 
 public func getPointTop(node: SKSpriteNode) -> CGPoint
 {
-    let nodeEndPt = CGPointMake(0.0, -node.size.height/2)
+    let nodeEndPt = CGPoint(x: 0.0, y: -node.size.height/2)
     return nodeToSceneCoordinatesTransform(point: nodeEndPt, node: node)
 }
 
 public func getPointBottom(node: SKSpriteNode) -> CGPoint
 {
-    let nodeEndPt = CGPointMake(0.0, node.size.height/2)
+    let nodeEndPt = CGPoint(x: 0.0, y: node.size.height/2)
     return nodeToSceneCoordinatesTransform(point: nodeEndPt, node: node)
 }
 
 public func getPointLeft(node: SKSpriteNode) -> CGPoint
 {
-    let nodeEndPt = CGPointMake(-node.size.width/2, 0.0)
+    let nodeEndPt = CGPoint(x: -node.size.width/2, y: 0.0)
     return nodeToSceneCoordinatesTransform(point: nodeEndPt, node: node)
 }
 
 public func getPointRight(node: SKSpriteNode) -> CGPoint
 {
-    let nodeEndPt = CGPointMake(node.size.width/2, 0.0)
+    let nodeEndPt = CGPoint(x: node.size.width/2, y: 0.0)
     return nodeToSceneCoordinatesTransform(point: nodeEndPt, node: node)
 }
 
 public func nodeToSceneCoordinatesTransform(point: CGPoint, node: SKSpriteNode) -> CGPoint
 {
-    var rotatedPt = CGPointApplyAffineTransform(point, CGAffineTransformMakeRotation(-node.zRotation))
+    var rotatedPt = point.applying(CGAffineTransform(rotationAngle: -node.zRotation))
     // spriteNode local coordinates have inverted y axis
     // how confusing
     rotatedPt.y = -rotatedPt.y
