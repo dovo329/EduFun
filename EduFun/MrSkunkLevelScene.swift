@@ -53,7 +53,7 @@ class MrSkunkLevelScene: SKScene, SKPhysicsContactDelegate {
         hintDisappeared = false
         levelCompleted = false
         
-        setupNodes(view)
+        setupNodes(view: view)
     }
     
     func setupNodes(view: SKView)
@@ -61,7 +61,8 @@ class MrSkunkLevelScene: SKScene, SKPhysicsContactDelegate {
         fatalError("Mr Skunk level subclasses should override this")
     }
     
-    override func willMoveFromView(view: SKView) {
+    override func willMove(from view: SKView) {
+
         mrSkunkDelegate.willMoveFromView()
     }
 }
