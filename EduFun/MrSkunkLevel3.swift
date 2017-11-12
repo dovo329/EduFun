@@ -27,7 +27,7 @@ class MrSkunkLevel3Scene: MrSkunkLevelScene {
     
     var skunkNode : SKSpriteNode!
     var garbageCanNode : SKSpriteNode!
-    var floorNodeArr : [SKSpriteNode!]! = []
+    var floorNodeArr : [SKSpriteNode?]! = []
     var ropeNode : SKSpriteNode!
     var plankNode : SKSpriteNode!
     var orbNode : SKSpriteNode!
@@ -35,12 +35,12 @@ class MrSkunkLevel3Scene: MrSkunkLevelScene {
     var wedgeNode : SKSpriteNode!
     
     override func setupNodes(view: SKView) {
-        physicsBody = SKPhysicsBody(edgeLoopFromRect: playableRect)
+        physicsBody = SKPhysicsBody(edgeLoopFrom: playableRect)
         physicsWorld.contactDelegate = self
         physicsBody!.categoryBitMask = PhysicsCategory.Edge
-        physicsWorld.gravity = CGVectorMake(0.0, -kGravity)
+        physicsWorld.gravity = CGVector(dx: 0.0, dy: -kGravity)
         
-        skunkNode = childNodeWithName("skunk") as! SKSpriteNode
+        skunkNode = childNode(withName: "skunk") as! SKSpriteNode
         skunkNode.physicsBody = SKPhysicsBody(circleOfRadius: skunkNode.size.width/2)
         skunkNode.physicsBody!.categoryBitMask = PhysicsCategory.Skunk
         skunkNode.physicsBody!.contactTestBitMask = PhysicsCategory.GarbageCan
@@ -48,56 +48,56 @@ class MrSkunkLevel3Scene: MrSkunkLevelScene {
         // physics categories arranged in Z order so just use that
         skunkNode.zPosition = CGFloat(PhysicsCategory.Skunk)
         
-        garbageCanNode = childNodeWithName("garbageCan") as! SKSpriteNode
-        garbageCanNode.physicsBody = SKPhysicsBody(rectangleOfSize: garbageCanNode.size)
+        garbageCanNode = childNode(withName: "garbageCan") as! SKSpriteNode
+        garbageCanNode.physicsBody = SKPhysicsBody(rectangleOf: garbageCanNode.size)
         garbageCanNode.physicsBody!.categoryBitMask = PhysicsCategory.GarbageCan
         garbageCanNode.physicsBody!.contactTestBitMask = PhysicsCategory.Skunk
         garbageCanNode.zPosition = CGFloat(PhysicsCategory.GarbageCan)
         
-        ropeNode = childNodeWithName("rope") as! SKSpriteNode
-        ropeNode.physicsBody = SKPhysicsBody(rectangleOfSize: ropeNode.size)
+        ropeNode = childNode(withName: "rope") as! SKSpriteNode
+        ropeNode.physicsBody = SKPhysicsBody(rectangleOf: ropeNode.size)
         ropeNode.physicsBody!.categoryBitMask = PhysicsCategory.Rope
         ropeNode.physicsBody!.collisionBitMask = PhysicsCategory.Floor
         ropeNode.zPosition = CGFloat(PhysicsCategory.Rope)
         
-        plankNode = childNodeWithName("plank") as! SKSpriteNode
-        plankNode.physicsBody = SKPhysicsBody(rectangleOfSize: plankNode.size)
+        plankNode = childNode(withName: "plank") as! SKSpriteNode
+        plankNode.physicsBody = SKPhysicsBody(rectangleOf: plankNode.size)
         plankNode.physicsBody!.categoryBitMask = PhysicsCategory.Plank
         plankNode.physicsBody!.collisionBitMask = kContactAll
         plankNode.zPosition = CGFloat(PhysicsCategory.Plank)
         
-        orbNode = childNodeWithName("orb") as! SKSpriteNode
+        orbNode = childNode(withName: "orb") as! SKSpriteNode
         orbNode.physicsBody = SKPhysicsBody(circleOfRadius: orbNode.size.width/2.0)
         orbNode.physicsBody!.categoryBitMask = PhysicsCategory.Orb
         orbNode.physicsBody!.collisionBitMask = kContactAll
         orbNode.zPosition = CGFloat(PhysicsCategory.Orb)
         orbNode.physicsBody!.affectedByGravity = false
-        orbNode.physicsBody!.dynamic = false
+        orbNode.physicsBody!.isDynamic = false
         
-        weightNode = childNodeWithName("weight") as! SKSpriteNode
-        weightNode.physicsBody = SKPhysicsBody(rectangleOfSize: weightNode.size)
+        weightNode = childNode(withName: "weight") as! SKSpriteNode
+        weightNode.physicsBody = SKPhysicsBody(rectangleOf: weightNode.size)
         weightNode.physicsBody!.categoryBitMask = PhysicsCategory.Weight
         weightNode.physicsBody!.collisionBitMask = kContactAll
         weightNode.zPosition = CGFloat(PhysicsCategory.Weight)
         
-        wedgeNode = childNodeWithName("wedge") as! SKSpriteNode
+        wedgeNode = childNode(withName: "wedge") as! SKSpriteNode
         wedgeNode.physicsBody = SKPhysicsBody(circleOfRadius: wedgeNode.size.width/3.0)
         wedgeNode.physicsBody!.categoryBitMask = PhysicsCategory.Wedge
         wedgeNode.physicsBody!.collisionBitMask = kContactAll
         wedgeNode.zPosition = CGFloat(PhysicsCategory.Wedge)
         wedgeNode.physicsBody!.affectedByGravity = false
-        wedgeNode.physicsBody!.dynamic = false
+        wedgeNode.physicsBody!.isDynamic = false
         
-        let orbPlankJoint = SKPhysicsJointPin.jointWithBodyA(orbNode.physicsBody!, bodyB: plankNode.physicsBody!, anchor: orbNode.position)
-        physicsWorld.addJoint(orbPlankJoint)
+        let orbPlankJoint = SKPhysicsJointPin.joint(withBodyA: orbNode.physicsBody!, bodyB: plankNode.physicsBody!, anchor: orbNode.position)
+        physicsWorld.add(orbPlankJoint)
         
-        let plankRopeJoint = SKPhysicsJointPin.jointWithBodyA(plankNode.physicsBody!, bodyB: ropeNode.physicsBody!, anchor: getPointRight(ropeNode))
-        physicsWorld.addJoint(plankRopeJoint)
+        let plankRopeJoint = SKPhysicsJointPin.joint(withBodyA: plankNode.physicsBody!, bodyB: ropeNode.physicsBody!, anchor: getPointRight(node: ropeNode))
+        physicsWorld.add(plankRopeJoint)
         
-        let ropeWeightJoint = SKPhysicsJointPin.jointWithBodyA(ropeNode.physicsBody!, bodyB: weightNode.physicsBody!, anchor: getPointLeft(ropeNode))
-        physicsWorld.addJoint(ropeWeightJoint)
+        let ropeWeightJoint = SKPhysicsJointPin.joint(withBodyA: ropeNode.physicsBody!, bodyB: weightNode.physicsBody!, anchor: getPointLeft(node: ropeNode))
+        physicsWorld.add(ropeWeightJoint)
         
-        enumerateChildNodesWithName("floor", usingBlock: { (node, _) -> Void in
+        enumerateChildNodes(withName: "floor", using: { (node, _) -> Void in
             if let spriteNode = node as? SKSpriteNode {
                 self.floorNodeArr.append(spriteNode)
             }
@@ -105,12 +105,14 @@ class MrSkunkLevel3Scene: MrSkunkLevelScene {
         
         for floorNode in floorNodeArr
         {
-            //floorNode.physicsBody?.friction = 0.5
-            floorNode.physicsBody = SKPhysicsBody(rectangleOfSize: floorNode.size)
-            floorNode.physicsBody!.categoryBitMask = PhysicsCategory.Floor
-            floorNode.physicsBody!.dynamic = false
-            floorNode.physicsBody!.affectedByGravity = false
-            floorNode.zPosition = -2 // behind floor image layer
+            if let floorNode = floorNode {
+                //floorNode.physicsBody?.friction = 0.5
+                floorNode.physicsBody = SKPhysicsBody(rectangleOf: floorNode.size)
+                floorNode.physicsBody!.categoryBitMask = PhysicsCategory.Floor
+                floorNode.physicsBody!.isDynamic = false
+                floorNode.physicsBody!.affectedByGravity = false
+                floorNode.zPosition = -2 // behind floor image layer
+            }
         }
         
         /*enumerateChildNodesWithName("wood", usingBlock: { (node, _) -> Void in
@@ -179,7 +181,7 @@ class MrSkunkLevel3Scene: MrSkunkLevelScene {
         )*/
     }
     
-    override func update(currentTime: NSTimeInterval)
+    override func update(_ currentTime: TimeInterval)
     {
         if lastUpdateTime > 0
         {
@@ -210,12 +212,13 @@ class MrSkunkLevel3Scene: MrSkunkLevelScene {
         }
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let touch: UITouch = touches.first as! UITouch!
-        let location = touch.locationInNode(self)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+        let touch: UITouch = touches.first!
+        let location = touch.location(in: self)
         
         beginPoint = location
-        let targetNode = self.nodeAtPoint(location)
+        let targetNode = self.atPoint(location)
         
         if targetNode.physicsBody != nil
         {
@@ -231,11 +234,12 @@ class MrSkunkLevel3Scene: MrSkunkLevelScene {
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let touch: UITouch = touches.first as! UITouch!
-        let endPoint : CGPoint = touch.locationInNode(self)
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+        let touch: UITouch = touches.first!
+        let endPoint : CGPoint = touch.location(in: self)
         
-        physicsWorld.enumerateBodiesAlongRayStart(beginPoint, end:endPoint, usingBlock:
+        physicsWorld.enumerateBodies(alongRayStart: beginPoint, end:endPoint, using:
             { (body, point, normalVector, stop) -> Void in
                 if let spriteNode = body.node as? SKSpriteNode
                 {
