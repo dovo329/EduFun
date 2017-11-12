@@ -91,7 +91,7 @@ class MrSkunkLevel7Scene: MrSkunkLevelScene {
         drawbridgeNode.zPosition = CGFloat(PhysicsCategory.Drawbridge)
         
         let drawbridgeJoint = SKPhysicsJointPin.joint(withBodyA: drawbridgeNode.physicsBody!, bodyB: physicsBody!, anchor: getPointRight(node: drawbridgeNode))
-        physicsWorld.addJoint(drawbridgeJoint)
+        physicsWorld.add(drawbridgeJoint)
         
         garbageCanNode = childNode(withName: "garbageCan") as! SKSpriteNode
         garbageCanNode.physicsBody = SKPhysicsBody(rectangleOf: garbageCanNode.size)
@@ -204,7 +204,7 @@ class MrSkunkLevel7Scene: MrSkunkLevelScene {
         let location = touch.location(in: self)
         
         beginPoint = location
-        let targetNode = self.AtPoint(location)
+        let targetNode = self.atPoint(location)
         
         if targetNode.physicsBody != nil
         {
