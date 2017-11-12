@@ -31,10 +31,10 @@ class AboutViewController: UIViewController {
         
         aboutText = UITextView()
         
-        aboutText.editable = false
+        aboutText.isEditable = false
         aboutText.text = "KidsFun\r\rProgrammed by Douglas Carl Voss Copyright 2015\r\r\r\rArtwork in Card Match Game by Doug Voss, Font by fsuarez913\r\rArtwork in Coloring Book by Doug Voss\r\rArtwork in Adventures of Mr. Skunk by Doug Voss except for rope and wood textures from public domain\r\rrope image by Nikki Taylor: http://www.clker.com/clipart-223790.html\r\rwood texture by unknown: http://freestocktextures.com/texture/id/315\r\r\r\rIncorporates the following third party code:\r\rTHLabel by Tobias Hagemann\r\rFont: SuperMario256.ttf by fsuarez913 (dafont.com) \r\rUIImage category extension from Trevor Harmon\r\rOBButton from Ole Begemann\r\rSVGKit by Matt Rajca\r\r\r\rThanks:\r\rThanks to Matti Räty for SpriteKit rope cutting example\r\rThanks to Ray Wenderlich iOS Games by Tutorials book for SpriteKit tutorials.\r\rThanks to DevMountain: Joshua Howland, Taylor Mott, Caleb Hicks, Daniel Curvelo, Andrew Madsen, Layne Moseley, Bryan Bryce, Jordan Nelson, Jake Herrmann, and rest of Salt Lake City iOS immersive cohort #2 for help."
         
-        aboutText.backgroundColor = UIColor.whiteColor()
+        aboutText.backgroundColor = UIColor.white
         aboutText.layer.cornerRadius = 4.0
         view.addSubview(aboutText)
         
@@ -42,10 +42,10 @@ class AboutViewController: UIViewController {
         view.addConstraint(
             NSLayoutConstraint(
                 item: aboutText,
-                attribute: NSLayoutAttribute.Right,
-                relatedBy: NSLayoutRelation.Equal,
+                attribute: NSLayoutAttribute.right,
+                relatedBy: NSLayoutRelation.equal,
                 toItem: view,
-                attribute: NSLayoutAttribute.RightMargin,
+                attribute: NSLayoutAttribute.rightMargin,
                 multiplier: 1.0,
                 constant: 0.0
             )
@@ -53,10 +53,10 @@ class AboutViewController: UIViewController {
         view.addConstraint(
             NSLayoutConstraint(
                 item: aboutText,
-                attribute: NSLayoutAttribute.Bottom,
-                relatedBy: NSLayoutRelation.Equal,
+                attribute: NSLayoutAttribute.bottom,
+                relatedBy: NSLayoutRelation.equal,
                 toItem: view,
-                attribute: NSLayoutAttribute.Bottom,
+                attribute: NSLayoutAttribute.bottom,
                 multiplier: 1.0,
                 constant: -20.0
             )
@@ -64,10 +64,10 @@ class AboutViewController: UIViewController {
         view.addConstraint(
             NSLayoutConstraint(
                 item: aboutText,
-                attribute: NSLayoutAttribute.Left,
-                relatedBy: NSLayoutRelation.Equal,
+                attribute: NSLayoutAttribute.left,
+                relatedBy: NSLayoutRelation.equal,
                 toItem: view,
-                attribute: NSLayoutAttribute.LeftMargin,
+                attribute: NSLayoutAttribute.leftMargin,
                 multiplier: 1.0,
                 constant: 0.0
             )
@@ -75,39 +75,39 @@ class AboutViewController: UIViewController {
         view.addConstraint(
             NSLayoutConstraint(
                 item: aboutText,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: NSLayoutRelation.Equal,
+                attribute: NSLayoutAttribute.top,
+                relatedBy: NSLayoutRelation.equal,
                 toItem: view,
-                attribute: NSLayoutAttribute.Top,
+                attribute: NSLayoutAttribute.top,
                 multiplier: 1.0,
                 constant: 20.0
             )
         )
-        backButton = UIButton(type: UIButtonType.Custom)
-        backButton.setTitle("Done", forState: UIControlState.Normal)
-        backButton.setTitle("Done", forState: UIControlState.Highlighted)
-        backButton.backgroundColor = UIColor.blueColor()
+        backButton = UIButton(type: UIButtonType.custom)
+        backButton.setTitle("Done", for: UIControlState.normal)
+        backButton.setTitle("Done", for: UIControlState.highlighted)
+        backButton.backgroundColor = UIColor.blue
         //backButton.layer.backgroundColor = UIColor.blueColor().CGColor
         backButton.layer.cornerRadius = 4.0
-        backButton.frame = CGRectMake(self.view.frame.width-60.0, self.view.frame.height-20.0, 60.0, 20.0)
+        backButton.frame = CGRect(x: self.view.frame.width-60.0, y: self.view.frame.height-20.0, width: 60.0, height: 20.0)
         view.addSubview(backButton)
-        backButton.addTarget(self, action: #selector(backButtonMethod(sender:event:)), forControlEvents: UIControlEvents.TouchUpInside)
+        backButton.addTarget(self, action: #selector(backButtonMethod(sender:event:)), for: UIControlEvents.touchUpInside)
     }
     
-    func backButtonMethod(sender : THButton, event : UIEvent) {
-        let app = UIApplication.sharedApplication().delegate as? AppDelegate
-        app?.animateToViewController(ViewControllerEnum.TitleScreen, srcVCEnum: ViewControllerEnum.About)
+    @objc func backButtonMethod(sender : THButton, event : UIEvent) {
+        let app = UIApplication.shared.delegate as? AppDelegate
+        app?.animateToViewController(destVCEnum: ViewControllerEnum.TitleScreen, srcVCEnum: ViewControllerEnum.About)
     }
     
     override func viewDidLayoutSubviews() {
         bgGradLayer.frame = view.bounds
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.LandscapeRight
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.landscapeRight
     }
-    
-    override func shouldAutorotate() -> Bool {
+
+    override var shouldAutorotate: Bool {
         return true
     }
 }
