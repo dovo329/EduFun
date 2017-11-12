@@ -242,10 +242,10 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         }
         
         // Set the scale mode to scale to fit the window
-        scene.scaleMode = .AspectFill
+        scene.scaleMode = .aspectFill
         scene.mrSkunkDelegate = self
         //skView.showsPhysics = true
-        let reveal = SKTransition.flipHorizontalWithDuration(kNewLevelAnimationDuration)
+        let reveal = SKTransition.flipHorizontal(withDuration: kNewLevelAnimationDuration)
         skView.presentScene(scene, transition: reveal)
     }
     
@@ -271,12 +271,12 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         //println("Put in Map here")
         if (mapVisible)
         {
-            scaleOutRemoveView(mapView, duration: 0.25, delay: 0.0)
+            scaleOutRemoveView(view: mapView, duration: 0.25, delay: 0.0)
             //mapView.removeFromSuperview()
         }
         else
         {
-            scaleInAddView(mapView, parentView:view, duration: 0.25, delay: 0.0)
+            scaleInAddView(view: mapView, parentView:view, duration: 0.25, delay: 0.0)
             //skView.addSubview(mapView)
         }
         mapVisible = !mapVisible
@@ -311,13 +311,13 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             hint.font = UIFont(name: "Super Mario 256", size: textHeight)
             hint.frame.size.height = hint.font.pointSize*1.3
             hint.frame.origin.y = view.frame.size.height-(playableMargin+hint.frame.size.height)
-            hint.textAlignment = NSTextAlignment.Center
-            hint.textColor = UIColor.yellowColor()
+            hint.textAlignment = NSTextAlignment.center
+            hint.textColor = UIColor.yellow
             hint.strokeSize = (0.8/320.0)*hint.frame.size.width
-            hint.strokeColor = UIColor.blackColor()
-            hint.layer.anchorPoint = CGPointMake(0.5, 0.5)
+            hint.strokeColor = UIColor.black
+            hint.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             hint.layer.shouldRasterize = true
-            scaleInAddView(hint, parentView: view, duration: 0.5, delay: 0.0)
+            scaleInAddView(view: hint, parentView: view, duration: 0.5, delay: 0.0)
             
         case 2:
             let textHeight = CGFloat(15.0)
@@ -327,11 +327,11 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             hint.font = UIFont(name: "Super Mario 256", size: textHeight)
             hint.frame.size.height = hint.font.pointSize*1.3
             hint.frame.origin.y = view.frame.size.height-(playableMargin+hint.frame.size.height)
-            hint.textAlignment = NSTextAlignment.Center
-            hint.textColor = UIColor.yellowColor()
+            hint.textAlignment = NSTextAlignment.center
+            hint.textColor = UIColor.yellow
             hint.strokeSize = (0.8/320.0)*hint.frame.size.width
-            hint.strokeColor = UIColor.blackColor()
-            hint.layer.anchorPoint = CGPointMake(0.5, 0.5)
+            hint.strokeColor = UIColor.black
+            hint.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             hint.layer.shouldRasterize = true
             
             hint2 = THLabel()
@@ -340,15 +340,15 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             hint2.font = UIFont(name: "Super Mario 256", size: textHeight)
             hint2.frame.size.height = hint2.font.pointSize*1.3
             hint2.frame.origin.y = view.frame.size.height-(playableMargin+hint2.frame.size.height+hint.frame.size.height)
-            hint2.textAlignment = NSTextAlignment.Center
-            hint2.textColor = UIColor.yellowColor()
+            hint2.textAlignment = NSTextAlignment.center
+            hint2.textColor = UIColor.yellow
             hint2.strokeSize = (0.8/320.0)*hint2.frame.size.width
-            hint2.strokeColor = UIColor.blackColor()
-            hint2.layer.anchorPoint = CGPointMake(0.5, 0.5)
+            hint2.strokeColor = UIColor.black
+            hint2.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             hint2.layer.shouldRasterize = true
             
-            scaleInAddView(hint, parentView: view, duration: 0.5, delay: 0.0)
-            scaleInAddView(hint2, parentView: view, duration: 0.5, delay: 0.0)
+            scaleInAddView(view: hint, parentView: view, duration: 0.5, delay: 0.0)
+            scaleInAddView(view: hint2, parentView: view, duration: 0.5, delay: 0.0)
             
         case 3:
             let textHeight = CGFloat(15.0)
@@ -358,13 +358,13 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             hint.font = UIFont(name: "Super Mario 256", size: textHeight)
             hint.frame.size.height = hint.font.pointSize*1.3
             hint.frame.origin.y = view.frame.size.height-(playableMargin+hint.frame.size.height)
-            hint.textAlignment = NSTextAlignment.Center
-            hint.textColor = UIColor.yellowColor()
+            hint.textAlignment = NSTextAlignment.center
+            hint.textColor = UIColor.yellow
             hint.strokeSize = (0.8/320.0)*hint.frame.size.width
-            hint.strokeColor = UIColor.blackColor()
-            hint.layer.anchorPoint = CGPointMake(0.5, 0.5)
+            hint.strokeColor = UIColor.black
+            hint.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             hint.layer.shouldRasterize = true
-            scaleInAddView(hint, parentView: view, duration: 0.5, delay: 0.0)
+            scaleInAddView(view: hint, parentView: view, duration: 0.5, delay: 0.0)
         
         case 4:
             let textHeight = CGFloat(15.0)
@@ -374,13 +374,13 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             hint.font = UIFont(name: "Super Mario 256", size: textHeight)
             hint.frame.size.height = hint.font.pointSize*1.3
             hint.frame.origin.y = view.frame.size.height-(playableMargin+hint.frame.size.height)
-            hint.textAlignment = NSTextAlignment.Center
-            hint.textColor = UIColor.yellowColor()
+            hint.textAlignment = NSTextAlignment.center
+            hint.textColor = UIColor.yellow
             hint.strokeSize = (0.8/320.0)*hint.frame.size.width
-            hint.strokeColor = UIColor.blackColor()
-            hint.layer.anchorPoint = CGPointMake(0.5, 0.5)
+            hint.strokeColor = UIColor.black
+            hint.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             hint.layer.shouldRasterize = true
-            scaleInAddView(hint, parentView: view, duration: 0.5, delay: 0.0)
+            scaleInAddView(view: hint, parentView: view, duration: 0.5, delay: 0.0)
             
         case 5:
             let textHeight = CGFloat(15.0)
@@ -390,13 +390,13 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             hint.font = UIFont(name: "Super Mario 256", size: textHeight)
             hint.frame.size.height = hint.font.pointSize*1.3
             hint.frame.origin.y = view.frame.size.height-(playableMargin+hint.frame.size.height)
-            hint.textAlignment = NSTextAlignment.Center
-            hint.textColor = UIColor.yellowColor()
+            hint.textAlignment = NSTextAlignment.center
+            hint.textColor = UIColor.yellow
             hint.strokeSize = (0.8/320.0)*hint.frame.size.width
-            hint.strokeColor = UIColor.blackColor()
-            hint.layer.anchorPoint = CGPointMake(0.5, 0.5)
+            hint.strokeColor = UIColor.black
+            hint.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             hint.layer.shouldRasterize = true
-            scaleInAddView(hint, parentView: view, duration: 0.5, delay: 0.0)
+            scaleInAddView(view: hint, parentView: view, duration: 0.5, delay: 0.0)
           
         case 6:
             let textHeight = CGFloat(15.0)
@@ -406,13 +406,13 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             hint.font = UIFont(name: "Super Mario 256", size: textHeight)
             hint.frame.size.height = hint.font.pointSize*1.3
             hint.frame.origin.y = view.frame.size.height-(playableMargin+hint.frame.size.height)
-            hint.textAlignment = NSTextAlignment.Center
-            hint.textColor = UIColor.yellowColor()
+            hint.textAlignment = NSTextAlignment.center
+            hint.textColor = UIColor.yellow
             hint.strokeSize = (0.8/320.0)*hint.frame.size.width
-            hint.strokeColor = UIColor.blackColor()
-            hint.layer.anchorPoint = CGPointMake(0.5, 0.5)
+            hint.strokeColor = UIColor.black
+            hint.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             hint.layer.shouldRasterize = true
-            scaleInAddView(hint, parentView: view, duration: 0.5, delay: 0.0)
+            scaleInAddView(view: hint, parentView: view, duration: 0.5, delay: 0.0)
             
         case 7:
             break
@@ -433,8 +433,8 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
     }
     
     func hintDisappear() {
-        scaleOutRemoveView(hint, duration: 0.5, delay: 0.0)
-        scaleOutRemoveView(hint2, duration: 0.5, delay: 0.0)
+        scaleOutRemoveView(view: hint, duration: 0.5, delay: 0.0)
+        scaleOutRemoveView(view: hint2, duration: 0.5, delay: 0.0)
     }
     
     func levelComplete() {
@@ -446,23 +446,23 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             //println("mr skunk delegate method called!")
             completeLabel = THLabel()
             completeLabel.text = "Complete!"
-            completeLabel.frame = makeCenteredRectWithScale(0.8, ofFrame: skView.frame)
+            completeLabel.frame = makeCenteredRectWithScale(scale: 0.8, ofFrame: skView.frame)
             completeLabel.font = UIFont(name: "Super Mario 256", size: 45.0)
-            completeLabel.font = completeLabel.font.fontWithSize(getFontSizeToFitFrameOfLabel(completeLabel)-5.0)
+            completeLabel.font = completeLabel.font.withSize(getFontSizeToFitFrameOfLabel(label: completeLabel)-5.0)
             completeLabel.frame.size.height = completeLabel.font.pointSize*1.2
             completeLabel.frame.origin.y = (skView.frame.size.height/2.0) - completeLabel.frame.size.height
-            completeLabel.textAlignment = NSTextAlignment.Center
-            completeLabel.textColor = UIColor.yellowColor()
+            completeLabel.textAlignment = NSTextAlignment.center
+            completeLabel.textColor = UIColor.yellow
             completeLabel.strokeSize = (3.0/320.0)*completeLabel.frame.size.width
-            completeLabel.strokeColor = UIColor.blackColor()
-            completeLabel.shadowOffset = CGSizeMake(completeLabel.strokeSize, completeLabel.strokeSize)
-            completeLabel.shadowColor = UIColor.blackColor()
+            completeLabel.strokeColor = UIColor.black
+            completeLabel.shadowOffset = CGSize(width: completeLabel.strokeSize, height: completeLabel.strokeSize)
+            completeLabel.shadowColor = UIColor.black
             completeLabel.shadowBlur = (1.0/320.0)*completeLabel.frame.size.width
-            completeLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
+            completeLabel.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             completeLabel.layer.shouldRasterize = true
             view.addSubview(completeLabel)
             
-            var nextButtonFrame = makeCenteredRectWithScale(0.4, ofFrame: view.frame)
+            var nextButtonFrame = makeCenteredRectWithScale(scale: 0.4, ofFrame: view.frame)
             nextButtonFrame.origin.y = completeLabel.frame.origin.y + (completeLabel.frame.size.height)
             nextButtonFrame.size.height *= 0.25
             //if (nextButton == nil)
@@ -471,11 +471,11 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             //}
             nextButton.label.text = "Next Level"
             nextButton.frame = nextButtonFrame
-            nextButton.addTarget(self, action: #selector(nextButtonMethod(sender:event:)), forControlEvents: UIControlEvents.TouchUpInside)
+            nextButton.addTarget(self, action: #selector(nextButtonMethod(sender:event:)), for: UIControlEvents.touchUpInside)
             view.addSubview(nextButton)
             
-            bounceInView(nextButton, duration:CGFloat(0.5), delay:CGFloat(0.0))
-            bounceInView(completeLabel, duration:CGFloat(0.5), delay:CGFloat(0.0))
+            bounceInView(view: nextButton, duration:CGFloat(0.5), delay:CGFloat(0.0))
+            bounceInView(view: completeLabel, duration:CGFloat(0.5), delay:CGFloat(0.0))
             
             //hint.removeFromSuperview()
             //hint2.removeFromSuperview()
@@ -485,7 +485,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         else
         {
             // you win scene
-            var nextButtonFrame = makeCenteredRectWithScale(0.5, ofFrame: view.frame)
+            var nextButtonFrame = makeCenteredRectWithScale(scale: 0.5, ofFrame: view.frame)
             nextButtonFrame.size.height *= 0.7
             //if (nextButton == nil)
             //{
@@ -493,10 +493,10 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             //}
             nextButton.label.text = "Exit"
             nextButton.frame = nextButtonFrame
-            nextButton.addTarget(self, action: #selector(exitButtonMethod()), forControlEvents: UIControlEvents.TouchUpInside)
+            nextButton.addTarget(self, action: #selector(self.exitButtonMethod), for: UIControlEvents.touchUpInside)
             view.addSubview(nextButton)
             
-            bounceInView(nextButton, duration:CGFloat(0.5), delay:CGFloat(0.0))
+            bounceInView(view: nextButton, duration:CGFloat(0.5), delay:CGFloat(0.0))
         }
         
         if (currentLevel > highestCompletedLevelNum)
@@ -504,9 +504,9 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             highestCompletedLevelNum = currentLevel
         }
         
-        scaleOutRemoveView(mapView, duration: 0.25, delay: 0.0)
+        scaleOutRemoveView(view: mapView, duration: 0.25, delay: 0.0)
         mapVisible = false
-        mapView = MrSkunkMapView(frame: makeCenteredRectWithScale(0.7, ofFrame:self.view.frame), highestCompletedLevelNum: highestCompletedLevelNum)
+        mapView = MrSkunkMapView(frame: makeCenteredRectWithScale(scale: 0.7, ofFrame:self.view.frame), highestCompletedLevelNum: highestCompletedLevelNum)
         mapView.delegate = self
         //mapView.collectionView.reloadData()
         saveHighestCompletedLevelNum()
@@ -520,7 +520,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         //println("saving highest completed level \(highestCompletedLevelNum)")
     }
     
-    func nextButtonMethod(sender : THButton, event : UIEvent)
+    @objc func nextButtonMethod(sender : THButton, event : UIEvent)
     {
         currentLevel += 1
         if currentLevel > (kNumLevels + 1) // +1 because of youwin scene

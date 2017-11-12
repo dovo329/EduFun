@@ -33,7 +33,7 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
     var wheelNode : SKSpriteNode!
     var ropeNode : SKSpriteNode!
     var garbageCanNode : SKSpriteNode!
-    var floorNodeArr : [SKSpriteNode!]! = []
+    var floorNodeArr : [SKSpriteNode?]! = []
     
     override func setupNodes(view: SKView) {
         physicsBody = SKPhysicsBody(edgeLoopFromRect: playableRect)
@@ -116,7 +116,7 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
         }
     }
     
-    override func update(currentTime: NSTimeInterval)
+    override func update(_ currentTime: TimeInterval)
     {
         if lastUpdateTime > 0
         {
@@ -144,8 +144,9 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
         }
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let touch: UITouch = touches.first as! UITouch!
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        let touch: UITouch = touches.first!
         let location = touch.locationInNode(self)
         
         beginPoint = location
@@ -183,8 +184,9 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let touch: UITouch = touches.first as! UITouch!
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+        let touch: UITouch = touches.first!
         let endPoint : CGPoint = touch.locationInNode(self)
         
         physicsWorld.enumerateBodiesAlongRayStart(beginPoint, end:endPoint, usingBlock:
@@ -201,8 +203,9 @@ class MrSkunkLevel6Scene: MrSkunkLevelScene {
         )
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let touch: UITouch = touches.first as! UITouch!
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+        let touch: UITouch = touches.first!
         let location = touch.locationInNode(self)
         let targetNode = self.nodeAtPoint(location)
         

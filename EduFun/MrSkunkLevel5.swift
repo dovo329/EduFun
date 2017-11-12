@@ -21,7 +21,7 @@ class MrSkunkLevel5Scene: MrSkunkLevelScene {
     
     var skunkNode : SKSpriteNode!
     var garbageCanNode : SKSpriteNode!
-    var floorNodeArr : [SKSpriteNode!]! = []
+    var floorNodeArr : [SKSpriteNode?]! = []
     var arrowNode : SKSpriteNode!
     var arrowDirectionIsDown : Bool = true
     
@@ -72,7 +72,7 @@ class MrSkunkLevel5Scene: MrSkunkLevelScene {
         }
     }
     
-    override func update(currentTime: NSTimeInterval)
+    override func update(currentTime: TimeInterval)
     {
         if lastUpdateTime > 0
         {
@@ -100,8 +100,10 @@ class MrSkunkLevel5Scene: MrSkunkLevelScene {
         }
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let touch: UITouch = touches.first as! UITouch!
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+        let touch: UITouch = touches.first!
         sceneTouched(touch.locationInNode(self))
         
         if !hintDisappeared

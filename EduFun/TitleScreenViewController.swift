@@ -248,13 +248,11 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         collectionView.frame = CGRectMake(0, (titleLabel.frame.size.height+20.0), view.frame.size.width, view.frame.size.height)
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        //return Int(UIInterfaceOrientationMask.LandscapeLeft.rawValue)
-        return UIInterfaceOrientationMask.LandscapeRight
-//        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.landscapeRight
     }
-    
-    override func shouldAutorotate() -> Bool {
+
+    override var shouldAutorotate: Bool {
         return true
     }
     

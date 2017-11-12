@@ -65,7 +65,7 @@ class THButton: UIControl {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
+    override func beginTracking(_ touch: UITouch, with  event: UIEvent?) -> Bool {
         self.beginTrackPoint = touch.locationInView(self)
         //println("beginTracking @ \(self.beginTrackPoint)")
         self.layer.backgroundColor = pressedBackColor.CGColor
@@ -73,7 +73,7 @@ class THButton: UIControl {
         return true
     }
     
-    override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
+    override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
         let endTrackPoint : CGPoint = touch!.locationInView(self)
         //println("endTracking @ \(endTrackPoint)")
         if  endTrackPoint.x >= 0 && endTrackPoint.y >= 0 &&
