@@ -25,8 +25,8 @@ class MrSkunkLevel4Scene: MrSkunkLevelScene {
     
     var skunkNode : SKSpriteNode!
     var garbageCanNode : SKSpriteNode!
-    var floorNodeArr : [SKSpriteNode!]! = []
-    var grassFloorNodeArr : [SKSpriteNode!]! = []
+    var floorNodeArr : [SKSpriteNode?]! = []
+    var grassFloorNodeArr : [SKSpriteNode?]! = []
     var skunkRopeNode : SKSpriteNode!
     var weightRopeNode : SKSpriteNode!
     var plankNode : SKSpriteNode!
@@ -34,12 +34,12 @@ class MrSkunkLevel4Scene: MrSkunkLevelScene {
     var weightNode : SKSpriteNode!
     
     override func setupNodes(view: SKView) {
-        physicsBody = SKPhysicsBody(edgeLoopFromRect: playableRect)
+        physicsBody = SKPhysicsBody(edgeLoopFrom: playableRect)
         physicsWorld.contactDelegate = self
         physicsBody!.categoryBitMask = PhysicsCategory.Edge
-        physicsWorld.gravity = CGVectorMake(0.0, -kGravity)
+        physicsWorld.gravity = CGVector(dx: 0.0, dy: -kGravity)
         
-        skunkNode = childNodeWithName("skunk") as! SKSpriteNode
+        skunkNode = childNode(withName: "skunk") as! SKSpriteNode
         skunkNode.physicsBody = SKPhysicsBody(circleOfRadius: skunkNode.size.width/2)
         skunkNode.physicsBody!.categoryBitMask = PhysicsCategory.Skunk
         skunkNode.physicsBody!.contactTestBitMask = PhysicsCategory.GarbageCan
@@ -47,61 +47,61 @@ class MrSkunkLevel4Scene: MrSkunkLevelScene {
         // physics categories arranged in Z order so just use that
         skunkNode.zPosition = CGFloat(PhysicsCategory.Skunk)
         
-        garbageCanNode = childNodeWithName("garbageCan") as! SKSpriteNode
-        garbageCanNode.physicsBody = SKPhysicsBody(rectangleOfSize: garbageCanNode.size)
+        garbageCanNode = childNode(withName: "garbageCan") as! SKSpriteNode
+        garbageCanNode.physicsBody = SKPhysicsBody(rectangleOf: garbageCanNode.size)
         garbageCanNode.physicsBody!.categoryBitMask = PhysicsCategory.GarbageCan
         garbageCanNode.physicsBody!.contactTestBitMask = PhysicsCategory.Skunk
         garbageCanNode.zPosition = CGFloat(PhysicsCategory.GarbageCan)
         
-        plankNode = childNodeWithName("plank") as! SKSpriteNode
-        plankNode.physicsBody = SKPhysicsBody(rectangleOfSize: plankNode.size)
+        plankNode = childNode(withName: "plank") as! SKSpriteNode
+        plankNode.physicsBody = SKPhysicsBody(rectangleOf: plankNode.size)
         plankNode.physicsBody!.categoryBitMask = PhysicsCategory.Plank
         plankNode.physicsBody!.collisionBitMask = kContactAll
         plankNode.zPosition = CGFloat(PhysicsCategory.Plank)
         
-        orbNode = childNodeWithName("orb") as! SKSpriteNode
+        orbNode = childNode(withName: "orb") as! SKSpriteNode
         orbNode.physicsBody = SKPhysicsBody(circleOfRadius: orbNode.size.width/2.0)
         orbNode.physicsBody!.categoryBitMask = PhysicsCategory.Orb
         orbNode.physicsBody!.collisionBitMask = kContactAll
         orbNode.zPosition = CGFloat(PhysicsCategory.Orb)
         orbNode.physicsBody!.affectedByGravity = false
-        orbNode.physicsBody!.dynamic = false
+        orbNode.physicsBody!.isDynamic = false
         
-        let orbPlankJoint = SKPhysicsJointPin.jointWithBodyA(orbNode.physicsBody!, bodyB: plankNode.physicsBody!, anchor: orbNode.position)
-        physicsWorld.addJoint(orbPlankJoint)
+        let orbPlankJoint = SKPhysicsJointPin.joint(withBodyA: orbNode.physicsBody!, bodyB: plankNode.physicsBody!, anchor: orbNode.position)
+        physicsWorld.add(orbPlankJoint)
         
-        skunkRopeNode = childNodeWithName("skunkRope") as! SKSpriteNode
-        skunkRopeNode.physicsBody = SKPhysicsBody(rectangleOfSize: skunkRopeNode.size)
+        skunkRopeNode = childNode(withName: "skunkRope") as! SKSpriteNode
+        skunkRopeNode.physicsBody = SKPhysicsBody(rectangleOf: skunkRopeNode.size)
         skunkRopeNode.physicsBody!.categoryBitMask = PhysicsCategory.Rope
         skunkRopeNode.physicsBody!.collisionBitMask = PhysicsCategory.None
         skunkRopeNode.zPosition = CGFloat(PhysicsCategory.Rope)
         
-        let skunkRopeJoint = SKPhysicsJointPin.jointWithBodyA(skunkNode.physicsBody!, bodyB: skunkRopeNode.physicsBody!, anchor: getPointRight(skunkRopeNode))
-        physicsWorld.addJoint(skunkRopeJoint)
+        let skunkRopeJoint = SKPhysicsJointPin.joint(withBodyA: skunkNode.physicsBody!, bodyB: skunkRopeNode.physicsBody!, anchor: getPointRight(node: skunkRopeNode))
+        physicsWorld.add(skunkRopeJoint)
         
-        let skunkRopeEdgeJoint = SKPhysicsJointPin.jointWithBodyA(physicsBody!, bodyB: skunkRopeNode.physicsBody!, anchor: getPointLeft(skunkRopeNode))
-        physicsWorld.addJoint(skunkRopeEdgeJoint)
+        let skunkRopeEdgeJoint = SKPhysicsJointPin.joint(withBodyA: physicsBody!, bodyB: skunkRopeNode.physicsBody!, anchor: getPointLeft(node: skunkRopeNode))
+        physicsWorld.add(skunkRopeEdgeJoint)
         
-        weightNode = childNodeWithName("weight") as! SKSpriteNode
-        weightNode.physicsBody = SKPhysicsBody(rectangleOfSize: weightNode.size)
+        weightNode = childNode(withName: "weight") as! SKSpriteNode
+        weightNode.physicsBody = SKPhysicsBody(rectangleOf: weightNode.size)
         weightNode.physicsBody!.categoryBitMask = PhysicsCategory.Weight
         weightNode.physicsBody!.collisionBitMask = kContactAll
         weightNode.physicsBody!.density = 4.0
         weightNode.zPosition = CGFloat(PhysicsCategory.Weight)
         
-        weightRopeNode = childNodeWithName("weightRope") as! SKSpriteNode
-        weightRopeNode.physicsBody = SKPhysicsBody(rectangleOfSize: weightRopeNode.size)
+        weightRopeNode = childNode(withName: "weightRope") as! SKSpriteNode
+        weightRopeNode.physicsBody = SKPhysicsBody(rectangleOf: weightRopeNode.size)
         weightRopeNode.physicsBody!.categoryBitMask = PhysicsCategory.Rope
         weightRopeNode.physicsBody!.collisionBitMask = PhysicsCategory.None
         weightRopeNode.zPosition = CGFloat(PhysicsCategory.Rope)
         
-        let weightRopeJoint = SKPhysicsJointPin.jointWithBodyA(weightNode.physicsBody!, bodyB: weightRopeNode.physicsBody!, anchor: getPointRight(weightRopeNode))
-        physicsWorld.addJoint(weightRopeJoint)
+        let weightRopeJoint = SKPhysicsJointPin.joint(withBodyA: weightNode.physicsBody!, bodyB: weightRopeNode.physicsBody!, anchor: getPointRight(node: weightRopeNode))
+        physicsWorld.add(weightRopeJoint)
         
-        let weightRopeEdgeJoint = SKPhysicsJointPin.jointWithBodyA(physicsBody!, bodyB: weightRopeNode.physicsBody!, anchor: getPointLeft(weightRopeNode))
-        physicsWorld.addJoint(weightRopeEdgeJoint)
+        let weightRopeEdgeJoint = SKPhysicsJointPin.joint(withBodyA: physicsBody!, bodyB: weightRopeNode.physicsBody!, anchor: getPointLeft(node: weightRopeNode))
+        physicsWorld.add(weightRopeEdgeJoint)
         
-        enumerateChildNodesWithName("floor", usingBlock: { (node, _) -> Void in
+        enumerateChildNodes(withName: "floor", using: { (node, _) -> Void in
             if let spriteNode = node as? SKSpriteNode {
                 self.floorNodeArr.append(spriteNode)
             }
@@ -109,15 +109,17 @@ class MrSkunkLevel4Scene: MrSkunkLevelScene {
         
         for floorNode in floorNodeArr
         {
-            //floorNode.physicsBody?.friction = 0.5
-            floorNode.physicsBody = SKPhysicsBody(rectangleOfSize: floorNode.size)
-            floorNode.physicsBody!.categoryBitMask = PhysicsCategory.Floor
-            floorNode.physicsBody!.dynamic = false
-            floorNode.physicsBody!.affectedByGravity = false
-            floorNode.zPosition = -2 // behind floor image layer
+            if let floorNode = floorNode {
+                //floorNode.physicsBody?.friction = 0.5
+                floorNode.physicsBody = SKPhysicsBody(rectangleOf: floorNode.size)
+                floorNode.physicsBody!.categoryBitMask = PhysicsCategory.Floor
+                floorNode.physicsBody!.isDynamic = false
+                floorNode.physicsBody!.affectedByGravity = false
+                floorNode.zPosition = -2 // behind floor image layer
+            }
         }
         
-        enumerateChildNodesWithName("grassFloor", usingBlock: { (node, _) -> Void in
+        enumerateChildNodes(withName: "grassFloor", using: { (node, _) -> Void in
             if let spriteNode = node as? SKSpriteNode {
                 self.grassFloorNodeArr.append(spriteNode)
             }
@@ -125,17 +127,19 @@ class MrSkunkLevel4Scene: MrSkunkLevelScene {
         
         for grassFloorNode in grassFloorNodeArr
         {
-            //grassFloorNode.physicsBody?.friction = 0.5
-            grassFloorNode.physicsBody = SKPhysicsBody(rectangleOfSize: grassFloorNode.size)
-            grassFloorNode.physicsBody!.categoryBitMask = PhysicsCategory.Floor
-            grassFloorNode.physicsBody!.dynamic = false
-            grassFloorNode.physicsBody!.affectedByGravity = false
-            grassFloorNode.zPosition = -2 // behind floor image layer
-            grassFloorNode.physicsBody!.friction = 0.5 // more friction for grass
+            if let grassFloorNode = grassFloorNode {
+                //grassFloorNode.physicsBody?.friction = 0.5
+                grassFloorNode.physicsBody = SKPhysicsBody(rectangleOf: grassFloorNode.size)
+                grassFloorNode.physicsBody!.categoryBitMask = PhysicsCategory.Floor
+                grassFloorNode.physicsBody!.isDynamic = false
+                grassFloorNode.physicsBody!.affectedByGravity = false
+                grassFloorNode.zPosition = -2 // behind floor image layer
+                grassFloorNode.physicsBody!.friction = 0.5 // more friction for grass
+            }
         }
     }
     
-    override func update(currentTime: NSTimeInterval)
+    override func update(_ currentTime: TimeInterval)
     {
         if lastUpdateTime > 0
         {
@@ -155,7 +159,7 @@ class MrSkunkLevel4Scene: MrSkunkLevelScene {
         
         let skunkOffBottomScreen = skunkNode.position.y - (skunkNode.size.height/2.0) < 0
         
-        let skunkOffTopScreen = skunkNode.position.y + (skunkNode.size.height/2.0) >= size.height
+        //let skunkOffTopScreen = skunkNode.position.y + (skunkNode.size.height/2.0) >= size.height
         
         if !restartingMrSkunk &&
             (skunkOffLeftScreen || skunkOffRightScreen || skunkOffBottomScreen)
@@ -165,12 +169,13 @@ class MrSkunkLevel4Scene: MrSkunkLevelScene {
         }
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let touch: UITouch = touches.first as! UITouch!
-        let location = touch.locationInNode(self)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+        let touch: UITouch = touches.first!
+        let location = touch.location(in: self)
         
         beginPoint = location
-        let targetNode = self.nodeAtPoint(location)
+        let targetNode = self.atPoint(location)
         
         if targetNode.physicsBody != nil
         {
@@ -186,11 +191,12 @@ class MrSkunkLevel4Scene: MrSkunkLevelScene {
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let touch: UITouch = touches.first as! UITouch!
-        let endPoint : CGPoint = touch.locationInNode(self)
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+        let touch: UITouch = touches.first!
+        let endPoint : CGPoint = touch.location(in: self)
         
-        physicsWorld.enumerateBodiesAlongRayStart(beginPoint, end:endPoint, usingBlock:
+        physicsWorld.enumerateBodies(alongRayStart: beginPoint, end:endPoint, using:
             { (body, point, normalVector, stop) -> Void in
                 if let spriteNode = body.node as? SKSpriteNode
                 {
