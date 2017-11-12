@@ -130,7 +130,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         titleMethod()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         //self.activateCardArr()
     }
     
@@ -872,12 +872,12 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         //println("DeselectedCell at row:\(indexPath.section) column:\(indexPath.row)")
     }
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate: Bool {
         return true
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.portrait
     }
     
     deinit {

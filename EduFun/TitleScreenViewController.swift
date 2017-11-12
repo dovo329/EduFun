@@ -71,7 +71,7 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         ];*/
     }
     
-    func aboutButtonMethod(sender : THButton, event : UIEvent) {
+    @objc func aboutButtonMethod(sender : THButton, event : UIEvent) {
         let app = UIApplication.shared.delegate as? AppDelegate
         app?.animateToViewController(destVCEnum: ViewControllerEnum.About, srcVCEnum: ViewControllerEnum.TitleScreen)
         //println("about button method")
@@ -163,33 +163,33 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        let cell = collectionView.cellForItemAtIndexPath(indexPath)!
+        let cell = collectionView.cellForItem(at: indexPath)!
         cell.backgroundView!.alpha = 0.5
         cell.layer.borderColor = cgColor(red: 120.0, green: 190.0, blue: 255.0)
         
-        let app = UIApplication.sharedApplication().delegate as? AppDelegate
+        let app = UIApplication.shared.delegate as? AppDelegate
         
         if (indexPath.row == 0)
         {
-            app?.animateToViewController(ViewControllerEnum.CardMatching, srcVCEnum: ViewControllerEnum.TitleScreen)
+            app?.animateToViewController(destVCEnum: ViewControllerEnum.CardMatching, srcVCEnum: ViewControllerEnum.TitleScreen)
         }
         else if (indexPath.row == 1)
         {
-            app?.animateToViewController(ViewControllerEnum.ColoringBook, srcVCEnum: ViewControllerEnum.TitleScreen)
+            app?.animateToViewController(destVCEnum: ViewControllerEnum.ColoringBook, srcVCEnum: ViewControllerEnum.TitleScreen)
         }
         else if (indexPath.row == 2)
         {
-            app?.animateToViewController(ViewControllerEnum.MrSkunk, srcVCEnum: ViewControllerEnum.TitleScreen)
+            app?.animateToViewController(destVCEnum: ViewControllerEnum.MrSkunk, srcVCEnum: ViewControllerEnum.TitleScreen)
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItemAtIndexPath(indexPath)!
+        let cell = collectionView.cellForItem(at: indexPath)!
         cell.backgroundView!.alpha = 1.0
         cell.layer.borderColor = cgColor(red: 70.0, green: 120.0, blue: 255.0)
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return kNumColumns
     }
     
@@ -197,9 +197,9 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         return kNumRows
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
-        let cell : UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellReuseId, forIndexPath: indexPath) 
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        let cell : UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: kCellReuseId, for: indexPath)
         
         if (indexPath.row == 0) {
             cell.backgroundView = UIImageView(image: UIImage(named: "cardMatchScreenshot")!)
@@ -225,11 +225,11 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
     
     override func viewDidLayoutSubviews() {
         bgGradLayer.frame = self.view.bounds
-        aboutButton.frame = CGRectMake(self.view.frame.width-60.0, self.view.frame.height-20.0, 60.0, 20.0)
+        aboutButton.frame = CGRect(x: self.view.frame.width-60.0, y: self.view.frame.height-20.0, width: 60.0, height: 20.0)
         titleLabel.frame = CGRect(x: 0.0, y: 20.0, width: view.frame.size.width, height: view.frame.size.height)
         //titleLabel.font = UIFont(name: "Super Mario 256", size: 300.0)
         titleLabel.font = UIFont(name: "Super Mario 256", size: 45.0)
-        titleLabel.font = titleLabel.font.fontWithSize(getFontSizeToFitFrameOfLabel(titleLabel)-6.0)
+        titleLabel.font = titleLabel.font.withSize(getFontSizeToFitFrameOfLabel(label: titleLabel)-6.0)
         //titleLabel.frame.origin.y -= titleLabel.font.pointSize
         //println("titleLabel.font.pointSize=\(titleLabel.font.pointSize)")
         titleLabel.frame.size.height = titleLabel.font.pointSize*1.3
@@ -245,7 +245,7 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         layout.minimumLineSpacing = 0
         
         collectionView.setCollectionViewLayout(layout, animated: false)
-        collectionView.frame = CGRectMake(0, (titleLabel.frame.size.height+20.0), view.frame.size.width, view.frame.size.height)
+        collectionView.frame = CGRect(x: 0, y: (titleLabel.frame.size.height+20.0), width: view.frame.size.width, height: view.frame.size.height)
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

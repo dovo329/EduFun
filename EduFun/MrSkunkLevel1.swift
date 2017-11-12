@@ -22,53 +22,53 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
     
     var skunkNode : SKSpriteNode!
     var garbageCanNode : SKSpriteNode!
-    var backgroundNodeArr : [SKSpriteNode!]! = []
+    var backgroundNodeArr : [SKSpriteNode?]! = []
     var ropeNode : SKSpriteNode!
     var woodNode : SKSpriteNode!
     var woodRopeJoint : SKPhysicsJoint!
     
     override func setupNodes(view: SKView) {
-        physicsBody = SKPhysicsBody(edgeLoopFromRect: playableRect)
+        physicsBody = SKPhysicsBody(edgeLoopFrom: playableRect)
         physicsWorld.contactDelegate = self
         physicsBody!.categoryBitMask = PhysicsCategory.Edge
-        physicsWorld.gravity = CGVectorMake(0.0, -kGravity)
+        physicsWorld.gravity = CGVector(dx: 0.0, dy: -kGravity)
         
-        skunkNode = childNodeWithName("skunk") as! SKSpriteNode
+        skunkNode = childNode(withName: "skunk") as! SKSpriteNode
         skunkNode.physicsBody!.categoryBitMask = PhysicsCategory.Skunk
         skunkNode.physicsBody!.contactTestBitMask = PhysicsCategory.GarbageCan | PhysicsCategory.Edge
         skunkNode.physicsBody!.collisionBitMask = PhysicsCategory.Background | PhysicsCategory.Wood | PhysicsCategory.GarbageCan
         // physics categories arranged in Z order so just use that
         skunkNode.zPosition = CGFloat(PhysicsCategory.Skunk)
         
-        garbageCanNode = childNodeWithName("garbageCan") as! SKSpriteNode
+        garbageCanNode = childNode(withName: "garbageCan") as! SKSpriteNode
         garbageCanNode.physicsBody!.categoryBitMask = PhysicsCategory.GarbageCan
         garbageCanNode.physicsBody!.contactTestBitMask = PhysicsCategory.Skunk
         garbageCanNode.zPosition = CGFloat(PhysicsCategory.GarbageCan)
         
-        ropeNode = childNodeWithName("rope") as! SKSpriteNode
+        ropeNode = childNode(withName: "rope") as! SKSpriteNode
         ropeNode.physicsBody!.categoryBitMask = PhysicsCategory.Rope
         ropeNode.physicsBody!.collisionBitMask = PhysicsCategory.Background
         ropeNode.zPosition = CGFloat(PhysicsCategory.Rope)
         
-        var ropeEdgeAnchorNode = childNodeWithName("ropeEdgeAnchor") as! SKSpriteNode
+        var ropeEdgeAnchorNode = childNode(withName: "ropeEdgeAnchor") as! SKSpriteNode
         
-        woodNode = childNodeWithName("wood") as! SKSpriteNode
+        woodNode = childNode(withName: "wood") as! SKSpriteNode
         woodNode.physicsBody!.categoryBitMask = PhysicsCategory.Wood
         woodNode.physicsBody!.collisionBitMask = kContactAll & ~(PhysicsCategory.GarbageCan | PhysicsCategory.Rope)
         woodNode.zPosition = CGFloat(PhysicsCategory.Wood)
         
-        woodRopeJoint = SKPhysicsJointPin.jointWithBodyA(woodNode.physicsBody!, bodyB: ropeNode.physicsBody!, anchor: getPointTop(woodNode))
-        physicsWorld.addJoint(woodRopeJoint)
+        woodRopeJoint = SKPhysicsJointPin.joint(withBodyA: woodNode.physicsBody!, bodyB: ropeNode.physicsBody!, anchor: getPointTop(node: woodNode))
+        physicsWorld.add(woodRopeJoint)
         
-        var woodEdgeAnchorNode = childNodeWithName("woodEdgeAnchor") as! SKSpriteNode
+        var woodEdgeAnchorNode = childNode(withName: "woodEdgeAnchor") as! SKSpriteNode
         
-        let woodJoint = SKPhysicsJointPin.jointWithBodyA(woodEdgeAnchorNode.physicsBody!, bodyB: woodNode.physicsBody!, anchor: getPointBottom(woodNode))
-        physicsWorld.addJoint(woodJoint)
+        let woodJoint = SKPhysicsJointPin.joint(withBodyA: woodEdgeAnchorNode.physicsBody!, bodyB: woodNode.physicsBody!, anchor: getPointBottom(node: woodNode))
+        physicsWorld.add(woodJoint)
         
-        let ropeScreenJoint = SKPhysicsJointPin.jointWithBodyA(ropeEdgeAnchorNode.physicsBody!, bodyB: ropeNode.physicsBody!, anchor: getPointLeft(ropeNode))
-        physicsWorld.addJoint(ropeScreenJoint)
+        let ropeScreenJoint = SKPhysicsJointPin.joint(withBodyA: ropeEdgeAnchorNode.physicsBody!, bodyB: ropeNode.physicsBody!, anchor: getPointLeft(node: ropeNode))
+        physicsWorld.add(ropeScreenJoint)
         
-        enumerateChildNodesWithName("background", usingBlock: { (node, _) -> Void in
+        enumerateChildNodes(withName: "background", using: { (node, _) -> Void in
             if let spriteNode = node as? SKSpriteNode {
                 self.backgroundNodeArr.append(spriteNode)
             }
@@ -76,13 +76,15 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
         
         for backgroundNode in backgroundNodeArr
         {
-            //backgroundNode.physicsBody?.friction = 0.5
-            backgroundNode.physicsBody!.categoryBitMask = PhysicsCategory.Background
-            backgroundNode.zPosition = -2 // behind background image layer
+            if let backgroundNode = backgroundNode {
+                //backgroundNode.physicsBody?.friction = 0.5
+                backgroundNode.physicsBody!.categoryBitMask = PhysicsCategory.Background
+                backgroundNode.zPosition = -2 // behind background image layer
+            }
         }
     }
     
-    override func update(currentTime: NSTimeInterval)
+    override func update(_ currentTime: TimeInterval)
     {
         if lastUpdateTime > 0
         {
@@ -96,18 +98,19 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
         //println("\(dt*1000) milliseconds since the last update")
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let touch: UITouch = touches.first as! UITouch!
-        let location = touch.locationInNode(self)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+        let touch: UITouch = touches.first!
+        let location = touch.location(in: self)
         
         beginPoint = location
         //enumerateBodiesInRect(usingBlock:)
-        let targetNode = self.nodeAtPoint(location)
+        let targetNode = self.atPoint(location)
             
         if targetNode.physicsBody != nil
         {
             if (targetNode.physicsBody!.categoryBitMask == PhysicsCategory.Rope) {
-                self.physicsWorld.removeJoint(woodRopeJoint)
+                self.physicsWorld.remove(woodRopeJoint)
                 self.ropeNode.removeFromParent()
             }
         }
@@ -119,15 +122,16 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let touch: UITouch = touches.first as! UITouch!
-        let endPoint : CGPoint = touch.locationInNode(self)
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+        let touch: UITouch = touches.first!
+        let endPoint : CGPoint = touch.location(in: self)
         
         /*if let body : SKPhysicsBody = physicsWorld.bodyAlongRayStart(beginPoint, end: endPoint)
         {
             println("found swipe body \(body)")
         }*/
-        physicsWorld.enumerateBodiesAlongRayStart(beginPoint, end:endPoint, usingBlock:
+        physicsWorld.enumerateBodies(alongRayStart: beginPoint, end:endPoint, using:
             { (body, point, normalVector, stop) -> Void in
                 if let spriteNode = body.node as? SKSpriteNode
                 {

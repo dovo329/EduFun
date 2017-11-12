@@ -41,14 +41,14 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
         
         self.highestCompletedLevelNum = highestCompletedLevelNum
         
-        collectionView = UICollectionView(frame: CGRectMake(0,0,self.frame.size.width, self.frame.size.height), collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height), collectionViewLayout: layout)
         print("self.frame=\(self.frame) collectionView.frame=\(collectionView.frame)")
-        collectionView.userInteractionEnabled = true
+        collectionView.isUserInteractionEnabled = true
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: kMapCellId)
-        collectionView.backgroundColor = UIColor.clearColor()
-        collectionView.scrollEnabled = false
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kMapCellId)
+        collectionView.backgroundColor = UIColor.clear
+        collectionView.isScrollEnabled = false
         
         addSubview(collectionView)
         //collectionView.backgroundColor = UIColor.purpleColor()
@@ -57,10 +57,10 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
     required convenience init?(coder: NSCoder) {
         fatalError("init coder not implemented")
     }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kMapCellId, forIndexPath: indexPath) as? UICollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kMapCellId, for: indexPath) as? UICollectionViewCell
 
         // cell is registered so don't need to do this
         /*if cell == nil
@@ -85,7 +85,7 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
                 lockView.frame.size.height  *= 0.5
                 lockView.frame.origin.x = (cell!.frame.size.width-lockView.frame.size.width)/2.0
                 lockView.frame.origin.y = (cell!.frame.size.height-lockView.frame.size.height)/2.0*/
-                lockView.frame = makeCenteredRectWithScale(0.5, ofFrame: cell!.frame)
+                lockView.frame = makeCenteredRectWithScale(scale: 0.5, ofFrame: cell!.frame)
                 lockView.frame.origin.x -= lockView.frame.size.width*0.08
                 cell!.contentView.addSubview(lockView)
             }
@@ -97,20 +97,20 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
                 levelNumLabel.frame.size.height  *= 0.8
                 levelNumLabel.frame.origin.x = (cell!.frame.size.width-levelNumLabel.frame.size.width)/2.0
                 levelNumLabel.frame.origin.y = (cell!.frame.size.height-levelNumLabel.frame.size.height)/2.0*/
-                levelNumLabel.frame = makeCenteredRectWithScale(0.7, ofFrame: cell!.frame)
+                levelNumLabel.frame = makeCenteredRectWithScale(scale: 0.7, ofFrame: cell!.frame)
                 levelNumLabel.frame.origin.x -= levelNumLabel.frame.size.width*0.08 // shift left a bit since map is curled to the left to make it look centered on the curled map
                 levelNumLabel.frame.origin.y += levelNumLabel.frame.size.height*0.08 // offset due to space under font due to the way font is made it's vertically top oriented not vertically centered so all the space is at the bottom so get rid of this offset
                 levelNumLabel.text = String(format:"%d", totIndex+1)
                 //levelNumLabel.text = "15"
                 levelNumLabel.font = UIFont(name: "Super Mario 256", size: 25.0)
-                levelNumLabel.font = levelNumLabel.font.fontWithSize(getFontSizeToFitFrameOfLabel(levelNumLabel)-5.0)
-                levelNumLabel.textAlignment = NSTextAlignment.Center
-                levelNumLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
-                levelNumLabel.textColor = UIColor.yellowColor()
+                levelNumLabel.font = levelNumLabel.font.withSize(getFontSizeToFitFrameOfLabel(label: levelNumLabel)-5.0)
+                levelNumLabel.textAlignment = NSTextAlignment.center
+                levelNumLabel.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+                levelNumLabel.textColor = UIColor.yellow
                 levelNumLabel.strokeSize = (1.5/320.0)*levelNumLabel.frame.size.width
-                levelNumLabel.strokeColor = UIColor.blackColor()
-                levelNumLabel.shadowOffset = CGSizeMake(levelNumLabel.strokeSize, levelNumLabel.strokeSize)
-                levelNumLabel.shadowColor = UIColor.blackColor()
+                levelNumLabel.strokeColor = UIColor.black
+                levelNumLabel.shadowOffset = CGSize(width: levelNumLabel.strokeSize, height: levelNumLabel.strokeSize)
+                levelNumLabel.shadowColor = UIColor.black
                 levelNumLabel.shadowBlur = (1.0/320.0)*levelNumLabel.frame.size.width
                 levelNumLabel.layer.shouldRasterize = true
                 
@@ -127,7 +127,7 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
         return cell!
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return kNumMapsPerRow
     }
     
@@ -143,7 +143,7 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
         // +1 because current level they are on is the highest completed level + 1
         if (level <= highestCompletedLevelNum+1)
         {
-            delegate.mapLevelSelected(level)
+            delegate.mapLevelSelected(level: level)
         }
     }
     

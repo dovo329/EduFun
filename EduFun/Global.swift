@@ -95,19 +95,19 @@ func bounceInView(view: UIView, duration: CGFloat, delay: CGFloat)
 {
     view.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
     
-    UIView.animateWithDuration(
-        TimeInterval(duration*(1.0/2.0)), delay: TimeInterval(delay), options: UIViewAnimationOptions.CurveLinear,
+    UIView.animate(
+        withDuration: TimeInterval(duration*(1.0/2.0)), delay: TimeInterval(delay), options: UIViewAnimationOptions.curveLinear,
         animations:
         {
-            view.transform = CGAffineTransformMakeScale(1.5, 1.5)
+            view.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         },
         completion:
         {(_) -> (Void) in
-            UIView.animateWithDuration(
-                TimeInterval(duration*(1.0/2.0)), delay: 0.0, options: UIViewAnimationOptions.CurveLinear,
+            UIView.animate(
+                withDuration: TimeInterval(duration*(1.0/2.0)), delay: 0.0, options: UIViewAnimationOptions.curveLinear,
                 animations:
                 {
-                    view.transform = CGAffineTransformMakeScale(1.0, 1.0)
+                    view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                 },
                 completion:
                 nil
@@ -120,11 +120,11 @@ func scaleOutRemoveView(view: UIView, duration: CGFloat, delay: CGFloat)
 {
     view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
     
-    UIView.animateWithDuration(
-        TimeInterval(duration), delay: TimeIntervalTimeInterval(delay), options: UIViewAnimationOptions.CurveLinear,
+    UIView.animate(
+        withDuration: TimeInterval(duration), delay: TimeInterval(delay), options: UIViewAnimationOptions.curveLinear,
         animations:
         {
-            view.transform = CGAffineTransformMakeScale(0.01, 0.01)
+            view.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
         },
         completion:
         {(_) -> (Void) in
@@ -138,11 +138,11 @@ func scaleInAddView(view: UIView, parentView: UIView, duration: CGFloat, delay: 
     view.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
     parentView.addSubview(view)
     
-    UIView.animateWithDuration(
-        TimeInterval(duration), delay: TimeInterval(delay), options: UIViewAnimationOptions.CurveLinear,
+    UIView.animate(
+        withDuration: TimeInterval(duration), delay: TimeInterval(delay), options: UIViewAnimationOptions.curveLinear,
         animations:
-        {(_) -> (Void) in
-            view.transform = CGAffineTransformMakeScale(1.0, 1.0)
+        {
+            view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         },
         completion:
         {(_) -> (Void) in
@@ -167,19 +167,19 @@ func spin3BounceView(view: UIView, duration: CGFloat)
     // start out at (nearly) zero size.  Can't be zero size since this will make the rotation matrix not work when scaling from 0
     view.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
     // scale on first rotation from 0 to 1.0
-    rotateViewRecurse(view, durationPerRotation: TimeInterval(duration/3.0), numRotationsLeft:1, scaleIncPerRotation:1.0, startScale: 0.0,
+    rotateViewRecurse(view: view, durationPerRotation: TimeInterval(duration/3.0), numRotationsLeft:1, scaleIncPerRotation:1.0, startScale: 0.0,
         
         // scale on second rotation from 1.0 to 2.0
         completionBlock:
-        {(_)->Void in
-            rotateViewRecurse(view, durationPerRotation: TimeInterval(duration/3.0), numRotationsLeft:1, scaleIncPerRotation:1.0, startScale: 1.0,
+        {
+            rotateViewRecurse(view: view, durationPerRotation: TimeInterval(duration/3.0), numRotationsLeft:1, scaleIncPerRotation:1.0, startScale: 1.0,
                 
                 // scale on third rotation from 2.0 back down to 1.0
                 completionBlock:
-                {(_)->Void in
-                    rotateViewRecurse(view, durationPerRotation: TimeInterval(duration/3.0), numRotationsLeft:1, scaleIncPerRotation:-1.0, startScale: 2.0,
+                {
+                    rotateViewRecurse(view: view, durationPerRotation: TimeInterval(duration/3.0), numRotationsLeft:1, scaleIncPerRotation:-1.0, startScale: 2.0,
                         completionBlock:
-                        {(_)->Void in
+                        {
                             //println("completion block called!")
                         }
                     )}
@@ -187,12 +187,9 @@ func spin3BounceView(view: UIView, duration: CGFloat)
     )
 }
 
-public func delay(seconds: Double, completion:()->())
+public func delay(seconds: Double, completion:@escaping ()->())
 {
-    let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64( Double(NSEC_PER_SEC) * seconds ))
-    
-    dispatch_after(popTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0))
-    {
+    DispatchQueue.main.asyncAfter(deadline: .now() + Double(NSEC_PER_SEC) * seconds) {
         completion()
     }
 }
