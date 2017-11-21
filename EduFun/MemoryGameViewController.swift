@@ -118,7 +118,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         newGameButton!.addTarget(self, action: #selector(newGameButtonMethod(sender:event:)), for: UIControlEvents.touchUpInside)
         
         exitButton = THButton(frame: CGRect(x: self.view.frame.width/4, y: self.view.frame.height*5/8 + newGameButton!.frame.size.height+20.0, width: self.view.frame.width/2, height: self.view.frame.height/10.0), text:"Exit    ")
-        exitButton!.addTarget(self, action: #selector(exitButtonMethod(sender:event:)), forControlEvents: UIControlEvents.touchUpInside)
+        exitButton!.addTarget(self, action: #selector(exitButtonMethod(sender:event:)), for: UIControlEvents.touchUpInside)
         
         setupMatchSparkles()
         
@@ -136,14 +136,14 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     
     func setupMatchSparkles() {
         
-        var emitterCell : CAEmitterCell = CAEmitterCell()
-        emitterCell.contents = UIImage(named: "StarCell")!.CGImage
+        let emitterCell : CAEmitterCell = CAEmitterCell()
+        emitterCell.contents = UIImage(named: "StarCell")!.cgImage
         emitterCell.name = "StarCell" // 🌟
         
         emitterCell.birthRate = 40
         emitterCell.lifetime = kSparkleLifetimeMean
         emitterCell.lifetimeRange = 0
-        emitterCell.color = UIColor(red: 1.0, green: 1.0, blue: 0.0, alpha: 1.0).CGColor
+        emitterCell.color = UIColor(red: 1.0, green: 1.0, blue: 0.0, alpha: 1.0).cgColor
         emitterCell.redRange = 0.0
         emitterCell.redSpeed = 0.0
         emitterCell.blueRange = 0.0
@@ -163,11 +163,11 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         emitterCell.scaleSpeed = -0.125
         emitterCell.scaleRange = 0.0
         
-        var emitterLayer0 = CAEmitterLayer()
+        let emitterLayer0 = CAEmitterLayer()
         emitterLayer0.emitterCells = [emitterCell]
         emitterLayer0.lifetime = 0.0
         
-        var emitterLayer1 = CAEmitterLayer()
+        let emitterLayer1 = CAEmitterLayer()
         emitterLayer1.emitterCells = [emitterCell]
         emitterLayer1.lifetime = 0.0
         
@@ -180,7 +180,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     
     func startMatchSparkles(frame1: CGRect, frame2: CGRect) {
         
-        emitterLayerArr[0].emitterPosition = CGPointMake(frame1.origin.x + frame1.size.width/2, frame1.origin.y + frame1.size.height/2)
+        emitterLayerArr[0].emitterPosition = CGPoint(x: frame1.origin.x + frame1.size.width/2, y: frame1.origin.y + frame1.size.height/2)
         emitterLayerArr[0].emitterSize = frame1.size
         emitterLayerArr[0].emitterShape = kCAEmitterLayerRectangle
         emitterLayerArr[0].lifetime = kSparkleLifetimeMean
@@ -189,7 +189,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         //emitterLayerArr[0].beginTime = CACurrentMediaTime()
         //println("currentMediaTime=\(CACurrentMediaTime())")
         
-        emitterLayerArr[1].emitterPosition = CGPointMake(frame2.origin.x + frame2.size.width/2, frame2.origin.y + frame2.size.height/2)
+        emitterLayerArr[1].emitterPosition = CGPoint(x: frame2.origin.x + frame2.size.width/2, y: frame2.origin.y + frame2.size.height/2)
         emitterLayerArr[1].emitterSize = frame2.size
         emitterLayerArr[1].emitterShape = kCAEmitterLayerRectangle
         view.layer.addSublayer(emitterLayerArr[1])
@@ -285,18 +285,18 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
     func activateCardArr() {
         numMoves = 0
         //println("collectionView.userInteractionEnabled=\(collectionView.userInteractionEnabled)")
-        for var row=0; row<kNumRows; row++
+        for row in stride(from: 0, to: kNumRows, by: 1)
         {
-            for var column=0; column<kNumColumns; column++
+            for column in stride(from: 0, to: kNumColumns, by: 1)
             {
-                let indexPath = NSIndexPath(forRow: column, inSection: row)
-                let cell = collectionView.cellForItemAtIndexPath(indexPath)
+                let indexPath = IndexPath(row: column, section: row)
+                let cell = collectionView.cellForItem(at: indexPath)
                 let card : Card = card2dArr[row][column]
                 //var toView = UIImageView(image: UIImage(named: "CardBack"))
                 let toView = UIImageView(image: UIImage(named: card.imageName!))
                 toView.frame = cell!.backgroundView!.frame
                 
-                UIView.transitionFromView((cell!.backgroundView)!, toView:toView, duration: self.kFlipDuration, options: UIViewAnimationOptions.TransitionFlipFromBottom, completion:
+                UIView.transition(from: (cell!.backgroundView)!, to:toView, duration: self.kFlipDuration, options: UIViewAnimationOptions.transitionFlipFromBottom, completion:
                     {(Bool) in
                         cell!.backgroundView = UIImageView(image: UIImage(named: card.imageName!))
                         toView.removeFromSuperview()
@@ -309,7 +309,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             }
         }
         
-        let dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((NSTimeInterval(kFlipDuration+kPeekDuration)) * Double(NSEC_PER_SEC)))
+        let dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64((TimeInterval(kFlipDuration+kPeekDuration)) * Double(NSEC_PER_SEC)))
         dispatch_after(dispatchTime, dispatch_get_main_queue(),
             {
                 for var row=0; row<self.kNumRows; row++
@@ -410,13 +410,13 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         let viewsDictionary = ["cv": collectionView]
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-20.0-[cv]|",
-            options: NSLayoutFormatOptions.AlignAllBaseline,
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-20.0-[cv]|",
+            options: NSLayoutFormatOptions.alignAllLastBaseline,
             metrics: nil,
             views: viewsDictionary))
         
         view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[cv]|",
-            options: NSLayoutFormatOptions.AlignAllBaseline,
+            options: NSLayoutFormatOptions.alignAllLastBaseline,
             metrics: nil,
             views: viewsDictionary))
     }
@@ -429,8 +429,8 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         return kNumRows
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
         let cell : UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellReuseId, forIndexPath: indexPath) 
         
         let card : Card = card2dArr[indexPath.section][indexPath.row]
@@ -648,7 +648,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         dismissInfo()
     }
     
-    func exitButtonMethod(sender : THButton, event : UIEvent) {
+    @objc func exitButtonMethod(sender : THButton, event : UIEvent) {
         //NSLog("exit button pressed method")
         
         let app = UIApplication.sharedApplication().delegate as? AppDelegate
