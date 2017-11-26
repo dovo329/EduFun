@@ -31,7 +31,7 @@ public func getFontSizeToFitFrameOfLabel(label: UILabel) -> CGFloat
             initialSize.height > label.frame.size.height
         {
             label.font = label.font.withSize(label.font.pointSize - 1)
-            initialSize = label.text!.size(withAttributes: [NSAttributedStringKey.font : label.font])
+            initialSize = label.text?.size(withAttributes: [NSAttributedStringKey.font : label.font]) ?? CGSize(width: 0, height: 0)
             /*println("label.size w=\(label.frame.size.width) h=\(label.frame.size.height)")
             println("initial.size w=\(initialSize.width) h=\(initialSize.height)")
             println("font.pointSize=\(label.font.pointSize)")
