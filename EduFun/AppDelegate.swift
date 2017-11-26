@@ -16,30 +16,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @objc func animateToViewController(destVCEnum: UInt32, srcVCEnum: UInt32)
     {
+        guard let window = window else {
+            assert(false, "No window available")
+            return
+        }
         var destVC : UIViewController!
         
         let overlayView = UIScreen.main.snapshotView(afterScreenUpdates: true)
         let bounds = UIScreen.main.bounds
         print("bounds.width=\(bounds.width) height=\(bounds.height)")
         
-        if destVCEnum == ViewControllerEnum.MrSkunk
-        {
+        switch destVCEnum {
+        case ViewControllerEnum.MrSkunk:
+
             //overlayView.transform = CGAffineTransformMakeRotation(-π/2)
             //overlayView.frame = CGRectMake(0, 0, 480, 320)
             destVC = MrSkunkViewController()
-        }
-        else if destVCEnum == ViewControllerEnum.CardMatching
-        {
+
+        case ViewControllerEnum.CardMatching:
             overlayView.transform = CGAffineTransform(rotationAngle: π/2)
             overlayView.frame = CGRect(x: 0, y: 0, width: bounds.height, height: bounds.width)
             destVC = MemoryGameViewController()
-        }
-        else if destVCEnum == ViewControllerEnum.ColoringBook
-        {
+
+        case ViewControllerEnum.ColoringBook:
             destVC = ColoringBookViewController()
-        }
-        else if destVCEnum == ViewControllerEnum.TitleScreen
-        {
+
+        case ViewControllerEnum.TitleScreen:
             if (srcVCEnum == ViewControllerEnum.CardMatching)
             {
                 overlayView.transform = CGAffineTransform(rotationAngle: -π/2)
@@ -51,18 +53,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 overlayView.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height) // why?  but I must or else
             }
             destVC = TitleScreenViewController()
-        }
-        else if destVCEnum == ViewControllerEnum.About
-        {
+
+        case ViewControllerEnum.About:
             destVC = AboutViewController()
-        }
-        else
-        {
+
+        default:
             fatalError("unknown view controller enum passed")
         }
         
         destVC.view.addSubview(overlayView)
-        window!.rootViewController = destVC;
+        window.rootViewController = destVC;
         
         UIView.animate(
             withDuration: 0.5,
@@ -78,10 +78,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         )
     }
-    
-    /*func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> Int {
-        return Int(UIInterfaceOrientationMask.All.rawValue)
-    }*/
     
     func applicationDidFinishLaunching(_ application: UIApplication) {
 
