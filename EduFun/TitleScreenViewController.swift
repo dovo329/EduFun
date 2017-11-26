@@ -29,51 +29,16 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         aboutButton.setTitle("About", for: UIControlState.normal)
         aboutButton.setTitle("About", for: UIControlState.highlighted)
         aboutButton.backgroundColor = UIColor.blue
-        //aboutButton.layer.backgroundColor = UIColor.blueColor().CGColor
         aboutButton.layer.cornerRadius = 4.0
         aboutButton.frame = CGRect(x: self.view.frame.width-60.0, y: self.view.frame.height-20.0, width: 60.0, height: 20.0)
         view.addSubview(aboutButton)
         aboutButton.addTarget(self, action: #selector(aboutButtonMethod(sender:event:)), for: UIControlEvents.touchUpInside)
-        
-        /*aboutButton?.setTranslatesAutoresizingMaskIntoConstraints(false)
-        view.addConstraint(
-            NSLayoutConstraint(
-                item: aboutButton!,
-                attribute: NSLayoutAttribute.Right,
-                relatedBy: NSLayoutRelation.Equal,
-                toItem: view,
-                attribute: NSLayoutAttribute.Right,
-                multiplier: 1.0,
-                constant: 0.0
-            )
-        )
-        view.addConstraint(
-            NSLayoutConstraint(
-                item: aboutButton!,
-                attribute: NSLayoutAttribute.Bottom,
-                relatedBy: NSLayoutRelation.Equal,
-                toItem: view,
-                attribute: NSLayoutAttribute.Bottom,
-                multiplier: 1.0,
-                constant: 0.0
-            )
-        )*/
-        /*[self.toolBar setTranslatesAutoresizingMaskIntoConstraints:NO];
-        
-        [self.view addConstraint:
-            [NSLayoutConstraint constraintWithItem:self.scrollView
-            attribute:NSLayoutAttributeLeft
-            relatedBy:NSLayoutRelationEqual
-            toItem:self.view
-            attribute:NSLayoutAttributeLeft
-            multiplier:1.0
-            constant:0.0]
-        ];*/
     }
     
-    @objc func aboutButtonMethod(sender : THButton, event : UIEvent) {
-        let app = UIApplication.shared.delegate as? AppDelegate
-        app?.animateToViewController(destVCEnum: ViewControllerEnum.About, srcVCEnum: ViewControllerEnum.TitleScreen)
+    @objc func aboutButtonMethod(sender: UIButton, event: UIEvent) {
+        if let app = UIApplication.shared.delegate as? AppDelegate {
+            app.animateToViewController(destVCEnum: ViewControllerEnum.About, srcVCEnum: ViewControllerEnum.TitleScreen)
+        }
         //println("about button method")
     }
     
