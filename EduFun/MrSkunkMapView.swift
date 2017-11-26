@@ -131,7 +131,7 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
         return kNumMapsPerRow
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         let retVal = Int(round(CGFloat(kNumLevels)/CGFloat(kNumMapsPerRow)))
         return retVal
     }
