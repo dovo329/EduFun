@@ -90,7 +90,7 @@ class MrSkunkWinScene: MrSkunkLevelScene {
         mrSkunkDelegate.levelComplete()
     }
     
-    func didBeginContact(contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact) {
         
     }
 }

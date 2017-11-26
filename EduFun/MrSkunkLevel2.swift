@@ -236,7 +236,8 @@ class MrSkunkLevel2Scene: MrSkunkLevelScene {
         }
     }
     
-    func didBeginContact(contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact) {
+
         let collision: UInt32 = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         
         if collision == PhysicsCategory.Skunk | PhysicsCategory.Goal
