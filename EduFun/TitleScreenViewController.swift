@@ -12,7 +12,7 @@ import QuartzCore
 class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
 {
     var aboutButton : UIButton = UIButton(type: UIButtonType.custom)
-    var titleLabel : THLabel!
+    var titleLabel = THLabel()
     let kNumRows : Int = 1
     let kNumColumns : Int = 3
     let kCellReuseId : String = "title.screen.cell.reuse.id"
@@ -63,7 +63,6 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
     
     func setupTitleLabel()
     {
-        titleLabel = THLabel()
         titleLabel.text = "Kids Fun!"
         titleLabel.frame = CGRect(x: 0.0, y: 20.0, width: view.frame.size.width, height: view.frame.size.height)
         //titleLabel.font = UIFont(name: "Super Mario 256", size: 300.0)
