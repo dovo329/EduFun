@@ -16,7 +16,7 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
     let kNumRows : Int = 1
     let kNumColumns : Int = 3
     let kCellReuseId : String = "title.screen.cell.reuse.id"
-    var collectionView : UICollectionView!
+    var collectionView : UICollectionView?
     var bgGradLayer : CAGradientLayer = CAGradientLayer()
     
     override func viewDidLoad() {
@@ -42,10 +42,6 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         //println("about button method")
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        //navigationController!.navigationBarHidden = true
-    }
-
     func setupBackgroundGradient()
     {
         //var bgGradLayer = CAGradientLayer()
@@ -116,7 +112,12 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
 
-        collectionView = UICollectionView(frame: CGRect(x: 0, y: (titleLabel.frame.size.height+20.0), width: view.frame.size.width, height: view.frame.size.height), collectionViewLayout: layout)
+        self.collectionView = UICollectionView(frame: CGRect(x: 0, y: (titleLabel.frame.size.height+20.0), width: view.frame.size.width, height: view.frame.size.height), collectionViewLayout: layout)
+        guard let collectionView = self.collectionView else {
+            assert(false, "Failed to create Title Screen collection view")
+            return
+        }
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kCellReuseId)
@@ -128,29 +129,38 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        let cell = collectionView.cellForItem(at: indexPath)!
-        cell.backgroundView!.alpha = 0.5
+        guard let cell = collectionView.cellForItem(at: indexPath) else {
+            assert(false, "Failed to create collection view cell")
+            return
+        }
+        cell.backgroundView?.alpha = 0.5
         cell.layer.borderColor = cgColor(red: 120.0, green: 190.0, blue: 255.0)
         
-        let app = UIApplication.shared.delegate as? AppDelegate
+        guard let app = UIApplication.shared.delegate as? AppDelegate else {
+            assert(false, "Failed to get AppDelegate")
+            return
+        }
         
-        if (indexPath.row == 0)
-        {
-            app?.animateToViewController(destVCEnum: ViewControllerEnum.CardMatching, srcVCEnum: ViewControllerEnum.TitleScreen)
-        }
-        else if (indexPath.row == 1)
-        {
-            app?.animateToViewController(destVCEnum: ViewControllerEnum.ColoringBook, srcVCEnum: ViewControllerEnum.TitleScreen)
-        }
-        else if (indexPath.row == 2)
-        {
-            app?.animateToViewController(destVCEnum: ViewControllerEnum.MrSkunk, srcVCEnum: ViewControllerEnum.TitleScreen)
+        switch indexPath.row {
+        case 0:
+            app.animateToViewController(destVCEnum: ViewControllerEnum.CardMatching, srcVCEnum: ViewControllerEnum.TitleScreen)
+
+        case 1:
+            app.animateToViewController(destVCEnum: ViewControllerEnum.ColoringBook, srcVCEnum: ViewControllerEnum.TitleScreen)
+
+        case 2:
+            app.animateToViewController(destVCEnum: ViewControllerEnum.MrSkunk, srcVCEnum: ViewControllerEnum.TitleScreen)
+        default:
+            assert(false, "Got an unexpected indexPath.row of \(indexPath.row)")
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)!
-        cell.backgroundView!.alpha = 1.0
+        guard let cell = collectionView.cellForItem(at: indexPath) else {
+            assert(false, "Failed to get collectionView cell in didDeselectItemAt indexPath")
+            return
+        }
+        cell.backgroundView?.alpha = 1.0
         cell.layer.borderColor = cgColor(red: 70.0, green: 120.0, blue: 255.0)
     }
     
@@ -164,13 +174,14 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        let cell : UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: kCellReuseId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kCellReuseId, for: indexPath)
         
-        if (indexPath.row == 0) {
+        switch indexPath.row {
+        case 0:
             cell.backgroundView = UIImageView(image: UIImage(named: "cardMatchScreenshot")!)
-        } else if (indexPath.row == 1) {
+        case 1:
             cell.backgroundView = UIImageView(image: UIImage(named: "ColoringScreenShot")!)
-        } else {
+        default:
             cell.backgroundView = UIImageView(image: UIImage(named: "MrSkunkSlice")!)
         }
         
@@ -185,7 +196,7 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         //cell.layer.shadowOpacity = 1.0
         //cell.layer.shadowOffset = CGSizeMake(4.0*scale, 4.0*scale)
         
-        return cell as UICollectionViewCell
+        return cell
     }
     
     override func viewDidLayoutSubviews() {
@@ -209,6 +220,10 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         
+        guard let collectionView = self.collectionView else {
+            assert(false, "CollectionView is nil")
+            return
+        }
         collectionView.setCollectionViewLayout(layout, animated: false)
         collectionView.frame = CGRect(x: 0, y: (titleLabel.frame.size.height+20.0), width: view.frame.size.width, height: view.frame.size.height)
     }
