@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    func animateToViewController(destVCEnum: UInt32, srcVCEnum: UInt32)
+    @objc func animateToViewController(destVCEnum: UInt32, srcVCEnum: UInt32)
     {
         var destVC : UIViewController!
         

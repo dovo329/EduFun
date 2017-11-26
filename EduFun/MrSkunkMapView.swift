@@ -60,7 +60,7 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kMapCellId, for: indexPath) as? UICollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kMapCellId, for: indexPath) as UICollectionViewCell
 
         // cell is registered so don't need to do this
         /*if cell == nil
@@ -75,7 +75,7 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
         
         if levelNum <= kNumLevels
         {
-            cell!.backgroundView = UIImageView(image: UIImage(named: "MapBlank"))
+            cell.backgroundView = UIImageView(image: UIImage(named: "MapBlank"))
             // +1 because current level should be selected via the map
             if levelNum > highestCompletedLevelNum + 1
             {
@@ -85,9 +85,9 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
                 lockView.frame.size.height  *= 0.5
                 lockView.frame.origin.x = (cell!.frame.size.width-lockView.frame.size.width)/2.0
                 lockView.frame.origin.y = (cell!.frame.size.height-lockView.frame.size.height)/2.0*/
-                lockView.frame = makeCenteredRectWithScale(scale: 0.5, ofFrame: cell!.frame)
+                lockView.frame = makeCenteredRectWithScale(scale: 0.5, ofFrame: cell.frame)
                 lockView.frame.origin.x -= lockView.frame.size.width*0.08
-                cell!.contentView.addSubview(lockView)
+                cell.contentView.addSubview(lockView)
             }
             else
             {
@@ -97,7 +97,7 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
                 levelNumLabel.frame.size.height  *= 0.8
                 levelNumLabel.frame.origin.x = (cell!.frame.size.width-levelNumLabel.frame.size.width)/2.0
                 levelNumLabel.frame.origin.y = (cell!.frame.size.height-levelNumLabel.frame.size.height)/2.0*/
-                levelNumLabel.frame = makeCenteredRectWithScale(scale: 0.7, ofFrame: cell!.frame)
+                levelNumLabel.frame = makeCenteredRectWithScale(scale: 0.7, ofFrame: cell.frame)
                 levelNumLabel.frame.origin.x -= levelNumLabel.frame.size.width*0.08 // shift left a bit since map is curled to the left to make it look centered on the curled map
                 levelNumLabel.frame.origin.y += levelNumLabel.frame.size.height*0.08 // offset due to space under font due to the way font is made it's vertically top oriented not vertically centered so all the space is at the bottom so get rid of this offset
                 levelNumLabel.text = String(format:"%d", totIndex+1)
@@ -116,15 +116,15 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
                 
                 
                     
-                cell!.contentView.addSubview(levelNumLabel)
+                cell.contentView.addSubview(levelNumLabel)
             }
         }
         else
         {
-            cell!.backgroundView = UIView() // blank view
+            cell.backgroundView = UIView() // blank view
         }
         
-        return cell!
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -136,7 +136,7 @@ class MrSkunkMapView: UIView, UICollectionViewDataSource, UICollectionViewDelega
         return retVal
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let totIndex = (indexPath.section*kNumMapsPerRow) + indexPath.row
         let level = totIndex + 1
         

@@ -50,7 +50,7 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
         ropeNode.physicsBody!.collisionBitMask = PhysicsCategory.Background
         ropeNode.zPosition = CGFloat(PhysicsCategory.Rope)
         
-        var ropeEdgeAnchorNode = childNode(withName: "ropeEdgeAnchor") as! SKSpriteNode
+        let ropeEdgeAnchorNode = childNode(withName: "ropeEdgeAnchor") as! SKSpriteNode
         
         woodNode = childNode(withName: "wood") as! SKSpriteNode
         woodNode.physicsBody!.categoryBitMask = PhysicsCategory.Wood
@@ -60,7 +60,7 @@ class MrSkunkLevel1Scene: MrSkunkLevelScene {
         woodRopeJoint = SKPhysicsJointPin.joint(withBodyA: woodNode.physicsBody!, bodyB: ropeNode.physicsBody!, anchor: getPointTop(node: woodNode))
         physicsWorld.add(woodRopeJoint)
         
-        var woodEdgeAnchorNode = childNode(withName: "woodEdgeAnchor") as! SKSpriteNode
+        let woodEdgeAnchorNode = childNode(withName: "woodEdgeAnchor") as! SKSpriteNode
         
         let woodJoint = SKPhysicsJointPin.joint(withBodyA: woodEdgeAnchorNode.physicsBody!, bodyB: woodNode.physicsBody!, anchor: getPointBottom(node: woodNode))
         physicsWorld.add(woodJoint)

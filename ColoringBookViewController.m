@@ -352,8 +352,8 @@
 
 - (void)exitMethod
 {
-    AppDelegate *app = [[UIApplication sharedApplication] delegate];
-    [app animateToViewController:8 srcVCEnum:2];
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [app animateToViewControllerWithDestVCEnum:8 srcVCEnum:2];
 }
 
 - (void)previousArrowMethod
