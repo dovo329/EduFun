@@ -290,15 +290,15 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             for column in stride(from: 0, to: kNumColumns, by: 1)
             {
                 let indexPath = IndexPath(row: column, section: row)
-                let cell = collectionView.cellForItem(at: indexPath)
+                let cell = collectionView.cellForItem(at: indexPath)!
                 let card : Card = card2dArr[row][column]
                 //var toView = UIImageView(image: UIImage(named: "CardBack"))
                 let toView = UIImageView(image: UIImage(named: card.imageName!))
-                toView.frame = cell!.backgroundView!.frame
+                toView.frame = cell.backgroundView!.frame
                 
-                UIView.transition(from: (cell!.backgroundView)!, to:toView, duration: self.kFlipDuration, options: UIViewAnimationOptions.transitionFlipFromBottom, completion:
+                UIView.transition(from: (cell.backgroundView)!, to:toView, duration: self.kFlipDuration, options: UIViewAnimationOptions.transitionFlipFromBottom, completion:
                     {(Bool) in
-                        cell!.backgroundView = UIImageView(image: UIImage(named: card.imageName!))
+                        cell.backgroundView = UIImageView(image: UIImage(named: card.imageName!))
                         toView.removeFromSuperview()
                     }
                 )
@@ -413,12 +413,12 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             metrics: nil,
             views: viewsDictionary))
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return kNumColumns
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return kNumRows
     }
     
