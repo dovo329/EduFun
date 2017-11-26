@@ -113,6 +113,11 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
 
         self.collectionView = UICollectionView(frame: CGRect(x: 0, y: (titleLabel.frame.size.height+20.0), width: view.frame.size.width, height: view.frame.size.height), collectionViewLayout: layout)
         guard let collectionView = self.collectionView else {
+            let alert = UIAlertController(title: "Error", message: "Failed to create collection view", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(UIAlertAction) -> Void in }))
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+1.0) {
+                self.present(alert, animated: true, completion: {})
+            }
             assert(false, "Failed to create Title Screen collection view")
             return
         }
