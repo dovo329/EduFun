@@ -22,7 +22,7 @@ struct ViewControllerEnum {
 
 public func getFontSizeToFitFrameOfLabel(label: UILabel) -> CGFloat
 {
-    var initialSize : CGSize = label.text?.size(withAttributes: [NSAttributedStringKey.font : label.font]) ?? CGSize(width: 0, height: 0)
+    var initialSize : CGSize = label.text?.size(withAttributes: [NSAttributedString.Key.font : label.font]) ?? CGSize(width: 0, height: 0)
     
     if initialSize.width > label.frame.size.width ||
         initialSize.height > label.frame.size.height
@@ -31,7 +31,7 @@ public func getFontSizeToFitFrameOfLabel(label: UILabel) -> CGFloat
             initialSize.height > label.frame.size.height
         {
             label.font = label.font.withSize(label.font.pointSize - 1)
-            initialSize = label.text?.size(withAttributes: [NSAttributedStringKey.font : label.font]) ?? CGSize(width: 0, height: 0)
+            initialSize = label.text?.size(withAttributes: [NSAttributedString.Key.font : label.font]) ?? CGSize(width: 0, height: 0)
             /*println("label.size w=\(label.frame.size.width) h=\(label.frame.size.height)")
             println("initial.size w=\(initialSize.width) h=\(initialSize.height)")
             println("font.pointSize=\(label.font.pointSize)")
@@ -42,7 +42,7 @@ public func getFontSizeToFitFrameOfLabel(label: UILabel) -> CGFloat
             initialSize.height < label.frame.size.height
         {
             label.font = label.font.withSize(label.font.pointSize + 1)
-            initialSize = label.text!.size(withAttributes: [NSAttributedStringKey.font : label.font])
+            initialSize = label.text!.size(withAttributes: [NSAttributedString.Key.font : label.font])
             /*println("label.size w=\(label.frame.size.width) h=\(label.frame.size.height)")
             println("initial.size w=\(initialSize.width) h=\(initialSize.height)")
             println("font.pointSize=\(label.font.pointSize)")
@@ -60,7 +60,7 @@ public func cgColor(red: CGFloat, green: CGFloat, blue: CGFloat) -> CGColor {
 func rotateViewRecurse(view: UIView, durationPerRotation: TimeInterval, numRotationsLeft: Int, scaleIncPerRotation: CGFloat, startScale: CGFloat, completionBlock: @escaping () -> Void)
 {
     UIView.animate(
-        withDuration: durationPerRotation/2.0, delay: 0.0, options: UIViewAnimationOptions.curveLinear,
+        withDuration: durationPerRotation/2.0, delay: 0.0, options: UIView.AnimationOptions.curveLinear,
         animations:
         {
             let rotateTransform : CGAffineTransform = CGAffineTransform(rotationAngle: π)
@@ -69,7 +69,7 @@ func rotateViewRecurse(view: UIView, durationPerRotation: TimeInterval, numRotat
         },
         completion:
         {(_) -> (Void) in
-            UIView.animate(withDuration: durationPerRotation/2.0, delay: 0.0, options: UIViewAnimationOptions.curveLinear,
+            UIView.animate(withDuration: durationPerRotation/2.0, delay: 0.0, options: UIView.AnimationOptions.curveLinear,
                 animations:
                 {
                     let rotateTransform : CGAffineTransform = CGAffineTransform(rotationAngle: 0)
@@ -96,7 +96,7 @@ func bounceInView(view: UIView, duration: CGFloat, delay: CGFloat)
     view.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
     
     UIView.animate(
-        withDuration: TimeInterval(duration*(1.0/2.0)), delay: TimeInterval(delay), options: UIViewAnimationOptions.curveLinear,
+        withDuration: TimeInterval(duration*(1.0/2.0)), delay: TimeInterval(delay), options: UIView.AnimationOptions.curveLinear,
         animations:
         {
             view.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
@@ -104,7 +104,7 @@ func bounceInView(view: UIView, duration: CGFloat, delay: CGFloat)
         completion:
         {(_) -> (Void) in
             UIView.animate(
-                withDuration: TimeInterval(duration*(1.0/2.0)), delay: 0.0, options: UIViewAnimationOptions.curveLinear,
+                withDuration: TimeInterval(duration*(1.0/2.0)), delay: 0.0, options: UIView.AnimationOptions.curveLinear,
                 animations:
                 {
                     view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
@@ -121,7 +121,7 @@ func scaleOutRemoveView(view: UIView, duration: CGFloat, delay: CGFloat)
     view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
     
     UIView.animate(
-        withDuration: TimeInterval(duration), delay: TimeInterval(delay), options: UIViewAnimationOptions.curveLinear,
+        withDuration: TimeInterval(duration), delay: TimeInterval(delay), options: UIView.AnimationOptions.curveLinear,
         animations:
         {
             view.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
@@ -139,7 +139,7 @@ func scaleInAddView(view: UIView, parentView: UIView, duration: CGFloat, delay: 
     parentView.addSubview(view)
     
     UIView.animate(
-        withDuration: TimeInterval(duration), delay: TimeInterval(delay), options: UIViewAnimationOptions.curveLinear,
+        withDuration: TimeInterval(duration), delay: TimeInterval(delay), options: UIView.AnimationOptions.curveLinear,
         animations:
         {
             view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)

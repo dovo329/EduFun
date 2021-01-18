@@ -116,28 +116,28 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
         
         let exitButtonFrame = CGRect(x: view.frame.size.width-(2.0*kMrSkunkToolbarWidth), y: 0, width: 2.0*kMrSkunkToolbarWidth, height: kMrSkunkIconHeight)
         exitButton = THButton(frame: exitButtonFrame, text: "Exit")
-        exitButton!.addTarget(self, action: #selector(self.exitButtonMethod), for: UIControlEvents.touchUpInside)
+        exitButton!.addTarget(self, action: #selector(self.exitButtonMethod), for: UIControl.Event.touchUpInside)
         view.addSubview(exitButton)
 
         //exitBarButton = UIBarButtonItem(title: "Exit", style: UIBarButtonItemStyle.Plain, target: self, action: "exitButtonMethod")
         
         let restartButtonFrame = CGRect(x: view.frame.size.width-(2.0*kMrSkunkToolbarWidth), y: (kMrSkunkIconHeight+kMrSkunkIconSpacing), width: 2.0*kMrSkunkToolbarWidth, height: kMrSkunkIconHeight)
         var restartImg = UIImage(named: "Restart")
-        restartImg = restartImg?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
-        restartButton = UIButton(type: UIButtonType.custom)
-        restartButton.setImage(restartImg, for: UIControlState.normal)
+        restartImg = restartImg?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+        restartButton = UIButton(type: UIButton.ButtonType.custom)
+        restartButton.setImage(restartImg, for: UIControl.State.normal)
         restartButton.frame = restartButtonFrame
-        restartButton!.addTarget(self, action: #selector(restartMethod), for: UIControlEvents.touchUpInside)
+        restartButton!.addTarget(self, action: #selector(restartMethod), for: UIControl.Event.touchUpInside)
         view.addSubview(restartButton)
         //restartBarButton = UIBarButtonItem(image: restartImg, style: UIBarButtonItemStyle.Plain, target: self, action: "restartMethod")
         
         var mapImg = UIImage(named: "SkunkMap")
-        mapImg = mapImg?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        mapImg = mapImg?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         let mapButtonFrame = CGRect(x: view.frame.size.width-(2.0*kMrSkunkToolbarWidth), y: 2*(kMrSkunkIconHeight+kMrSkunkIconSpacing), width: 2.0*kMrSkunkToolbarWidth, height: kMrSkunkIconHeight)
-        mapButton = UIButton(type: UIButtonType.custom)
-        mapButton.setImage(mapImg, for: UIControlState.normal)
+        mapButton = UIButton(type: UIButton.ButtonType.custom)
+        mapButton.setImage(mapImg, for: UIControl.State.normal)
         mapButton.frame = mapButtonFrame
-        mapButton!.addTarget(self, action: #selector(mapMethod), for: UIControlEvents.touchUpInside)
+        mapButton!.addTarget(self, action: #selector(mapMethod), for: UIControl.Event.touchUpInside)
         view.addSubview(mapButton)
         //mapButton = UIBarButtonItem(image: mapImg, style: UIBarButtonItemStyle.Plain, target: self, action: "mapMethod")
         
@@ -471,7 +471,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             //}
             nextButton.label.text = "Next Level"
             nextButton.frame = nextButtonFrame
-            nextButton.addTarget(self, action: #selector(nextButtonMethod(sender:event:)), for: UIControlEvents.touchUpInside)
+            nextButton.addTarget(self, action: #selector(nextButtonMethod(sender:event:)), for: UIControl.Event.touchUpInside)
             view.addSubview(nextButton)
             
             bounceInView(view: nextButton, duration:CGFloat(0.5), delay:CGFloat(0.0))
@@ -493,7 +493,7 @@ class MrSkunkViewController: UIViewController, MrSkunkLevelDelegate, MrSkunkMapV
             //}
             nextButton.label.text = "Exit"
             nextButton.frame = nextButtonFrame
-            nextButton.addTarget(self, action: #selector(self.exitButtonMethod), for: UIControlEvents.touchUpInside)
+            nextButton.addTarget(self, action: #selector(self.exitButtonMethod), for: UIControl.Event.touchUpInside)
             view.addSubview(nextButton)
             
             bounceInView(view: nextButton, duration:CGFloat(0.5), delay:CGFloat(0.0))

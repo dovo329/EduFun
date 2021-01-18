@@ -115,10 +115,10 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         collectionViewConstraints()
         
         newGameButton = THButton(frame: CGRect(x: self.view.frame.width/4, y: self.view.frame.height*5/8, width: self.view.frame.width/2, height: self.view.frame.height/10.0), text: "New Game")
-        newGameButton!.addTarget(self, action: #selector(newGameButtonMethod(sender:event:)), for: UIControlEvents.touchUpInside)
+        newGameButton!.addTarget(self, action: #selector(newGameButtonMethod(sender:event:)), for: UIControl.Event.touchUpInside)
         
         exitButton = THButton(frame: CGRect(x: self.view.frame.width/4, y: self.view.frame.height*5/8 + newGameButton!.frame.size.height+20.0, width: self.view.frame.width/2, height: self.view.frame.height/10.0), text:"Exit    ")
-        exitButton!.addTarget(self, action: #selector(exitButtonMethod(sender:event:)), for: UIControlEvents.touchUpInside)
+        exitButton!.addTarget(self, action: #selector(exitButtonMethod(sender:event:)), for: UIControl.Event.touchUpInside)
         
         setupMatchSparkles()
         
@@ -182,7 +182,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         
         emitterLayerArr[0].emitterPosition = CGPoint(x: frame1.origin.x + frame1.size.width/2, y: frame1.origin.y + frame1.size.height/2)
         emitterLayerArr[0].emitterSize = frame1.size
-        emitterLayerArr[0].emitterShape = kCAEmitterLayerRectangle
+        emitterLayerArr[0].emitterShape = CAEmitterLayerEmitterShape.rectangle
         emitterLayerArr[0].lifetime = kSparkleLifetimeMean
         view.layer.addSublayer(emitterLayerArr[0])
         //emitterLayerArr[0].beginTime = CACurrentMediaTime()-0.5
@@ -191,7 +191,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         
         emitterLayerArr[1].emitterPosition = CGPoint(x: frame2.origin.x + frame2.size.width/2, y: frame2.origin.y + frame2.size.height/2)
         emitterLayerArr[1].emitterSize = frame2.size
-        emitterLayerArr[1].emitterShape = kCAEmitterLayerRectangle
+        emitterLayerArr[1].emitterShape = CAEmitterLayerEmitterShape.rectangle
         view.layer.addSublayer(emitterLayerArr[1])
         emitterLayerArr[1].lifetime = kSparkleLifetimeMean
         //emitterLayerArr[1].beginTime = CACurrentMediaTime()-0.5
@@ -296,7 +296,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                 let toView = UIImageView(image: UIImage(named: card.imageName!))
                 toView.frame = cell.backgroundView!.frame
                 
-                UIView.transition(from: (cell.backgroundView)!, to:toView, duration: self.kFlipDuration, options: UIViewAnimationOptions.transitionFlipFromBottom, completion:
+                UIView.transition(from: (cell.backgroundView)!, to:toView, duration: self.kFlipDuration, options: UIView.AnimationOptions.transitionFlipFromBottom, completion:
                     {(Bool) in
                         cell.backgroundView = UIImageView(image: UIImage(named: card.imageName!))
                         toView.removeFromSuperview()
@@ -321,7 +321,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                     //var toView = UIImageView(image: UIImage(named: card.imageName!))
                     toView.frame = cell!.backgroundView!.frame
                     
-                    UIView.transition(from: (cell!.backgroundView)!, to:toView, duration: self.kFlipDuration, options: UIViewAnimationOptions.transitionFlipFromBottom, completion:
+                    UIView.transition(from: (cell!.backgroundView)!, to:toView, duration: self.kFlipDuration, options: UIView.AnimationOptions.transitionFlipFromBottom, completion:
                         {(Bool) in
                             cell!.backgroundView = UIImageView(image: UIImage(named: "CardBack"))
                             toView.removeFromSuperview()
@@ -404,12 +404,12 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         
         let viewsDictionary = ["cv": collectionView!]
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-20.0-[cv]|",
-            options: NSLayoutFormatOptions.alignAllLastBaseline,
+                                                           options: NSLayoutConstraint.FormatOptions.alignAllLastBaseline,
             metrics: nil,
             views: viewsDictionary))
         
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[cv]|",
-            options: NSLayoutFormatOptions.alignAllLastBaseline,
+                                                           options: NSLayoutConstraint.FormatOptions.alignAllLastBaseline,
             metrics: nil,
             views: viewsDictionary))
     }
@@ -468,7 +468,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
             newImgView = UIImageView(image: UIImage(named: card.imageName!)!)
             newImgView!.frame = ((cell.backgroundView)!).frame
             UIView.transition(
-                from: (cell.backgroundView)!, to:newImgView!, duration: kFlipDuration, options: UIViewAnimationOptions.transitionFlipFromRight,
+                from: (cell.backgroundView)!, to:newImgView!, duration: kFlipDuration, options: UIView.AnimationOptions.transitionFlipFromRight,
                 completion:
                 {(Bool) in
                     ((cell.backgroundView)!) = UIImageView(image: UIImage(named: card.imageName!)!)
@@ -533,7 +533,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                         let cell1 = collectionView.cellForItem(at: indexPath1)!
                         
                         let blankView0 = UIView(frame: CGRect(x: 0, y: 0, width: cell0.backgroundView!.frame.size.width, height: cell0.backgroundView!.frame.size.height))
-                        UIView.transition(from: (cell0.backgroundView)!, to:blankView0, duration: self.kMatchDisappearDuration, options: UIViewAnimationOptions.transitionCurlUp,
+                        UIView.transition(from: (cell0.backgroundView)!, to:blankView0, duration: self.kMatchDisappearDuration, options: UIView.AnimationOptions.transitionCurlUp,
                             completion:
                             {(Bool) in
                                 (cell0.backgroundView)! = UIView(frame: CGRect(x: 0, y: 0, width: cell0.backgroundView!.frame.size.width, height: cell0.backgroundView!.frame.size.height))
@@ -542,7 +542,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                         )
                         
                         let blankView1 = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-                        UIView.transition(from: (cell1.backgroundView)!, to:blankView1, duration: self.kMatchDisappearDuration, options: UIViewAnimationOptions.transitionCurlUp,
+                        UIView.transition(from: (cell1.backgroundView)!, to:blankView1, duration: self.kMatchDisappearDuration, options: UIView.AnimationOptions.transitionCurlUp,
                             completion:
                             {(Bool) in
                                 (cell1.backgroundView)! = UIView(frame: CGRect(x: 0, y: 0, width: cell1.backgroundView!.frame.size.width, height: cell1.backgroundView!.frame.size.height))
@@ -571,7 +571,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                         let cell0 = collectionView.cellForItem(at: indexPath0)!
                         let newImgView0 = UIImageView(image: UIImage(named: "CardBack")!)
                         newImgView0.frame = ((cell0.backgroundView)!).frame
-                        UIView.transition(from: (cell0.backgroundView)!, to:newImgView0, duration: self.kFlipDuration, options: UIViewAnimationOptions.transitionFlipFromRight, completion:
+                        UIView.transition(from: (cell0.backgroundView)!, to:newImgView0, duration: self.kFlipDuration, options: UIView.AnimationOptions.transitionFlipFromRight, completion:
                             {(Bool) in
                                 (cell0.backgroundView)! = UIImageView(image: UIImage(named: "CardBack")!)
                                 newImgView0.removeFromSuperview()
@@ -583,7 +583,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
                         let cell1 = collectionView.cellForItem(at: indexPath1)!
                         let newImgView1 = UIImageView(image: UIImage(named: "CardBack")!)
                         newImgView1.frame = ((cell1.backgroundView)!).frame
-                        UIView.transition(from: (cell1.backgroundView)!, to:newImgView1, duration: self.kFlipDuration, options: UIViewAnimationOptions.transitionFlipFromRight, completion:
+                        UIView.transition(from: (cell1.backgroundView)!, to:newImgView1, duration: self.kFlipDuration, options: UIView.AnimationOptions.transitionFlipFromRight, completion:
                             {(Bool) in
                                 (cell1.backgroundView)! = UIImageView(image: UIImage(named: "CardBack")!)
                                 newImgView1.removeFromSuperview()
@@ -805,7 +805,7 @@ class MemoryGameViewController: UIViewController, UICollectionViewDelegateFlowLa
         let confettiEmitterLayer = CAEmitterLayer()
         confettiEmitterLayer.emitterPosition = CGPoint(x: self.view.frame.origin.x + (self.view.frame.size.width/2), y: self.view.frame.origin.y - confettiCellUIImage.size.height)
         confettiEmitterLayer.emitterSize = CGSize(width: self.view.frame.size.width, height: 0.0)
-        confettiEmitterLayer.emitterShape = kCAEmitterLayerLine
+        confettiEmitterLayer.emitterShape = CAEmitterLayerEmitterShape.line
         
         confettiEmitterCell.name = "ConfettiCell"
         

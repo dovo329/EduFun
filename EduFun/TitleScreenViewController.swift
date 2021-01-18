@@ -11,7 +11,7 @@ import QuartzCore
 
 class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
 {
-    var aboutButton : UIButton = UIButton(type: UIButtonType.custom)
+    var aboutButton : UIButton = UIButton(type: UIButton.ButtonType.custom)
     var titleLabel = THLabel()
     let kNumRows : Int = 1
     let kNumColumns : Int = 3
@@ -26,13 +26,13 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         setupTitleLabel()
         setupCollectionView()
         
-        aboutButton.setTitle("About", for: UIControlState.normal)
-        aboutButton.setTitle("About", for: UIControlState.highlighted)
+        aboutButton.setTitle("About", for: UIControl.State.normal)
+        aboutButton.setTitle("About", for: UIControl.State.highlighted)
         aboutButton.backgroundColor = UIColor.blue
         aboutButton.layer.cornerRadius = 4.0
         aboutButton.frame = CGRect(x: self.view.frame.width-60.0, y: self.view.frame.height-20.0, width: 60.0, height: 20.0)
         view.addSubview(aboutButton)
-        aboutButton.addTarget(self, action: #selector(aboutButtonMethod(sender:event:)), for: UIControlEvents.touchUpInside)
+        aboutButton.addTarget(self, action: #selector(aboutButtonMethod(sender:event:)), for: UIControl.Event.touchUpInside)
     }
     
     @objc func aboutButtonMethod(sender: UIButton, event: UIEvent) {

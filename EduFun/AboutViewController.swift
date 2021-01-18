@@ -42,10 +42,10 @@ class AboutViewController: UIViewController {
         view.addConstraint(
             NSLayoutConstraint(
                 item: aboutText,
-                attribute: NSLayoutAttribute.right,
-                relatedBy: NSLayoutRelation.equal,
+                attribute: NSLayoutConstraint.Attribute.right,
+                relatedBy: NSLayoutConstraint.Relation.equal,
                 toItem: view,
-                attribute: NSLayoutAttribute.rightMargin,
+                attribute: NSLayoutConstraint.Attribute.rightMargin,
                 multiplier: 1.0,
                 constant: 0.0
             )
@@ -53,10 +53,10 @@ class AboutViewController: UIViewController {
         view.addConstraint(
             NSLayoutConstraint(
                 item: aboutText,
-                attribute: NSLayoutAttribute.bottom,
-                relatedBy: NSLayoutRelation.equal,
+                attribute: NSLayoutConstraint.Attribute.bottom,
+                relatedBy: NSLayoutConstraint.Relation.equal,
                 toItem: view,
-                attribute: NSLayoutAttribute.bottom,
+                attribute: NSLayoutConstraint.Attribute.bottom,
                 multiplier: 1.0,
                 constant: -20.0
             )
@@ -64,10 +64,10 @@ class AboutViewController: UIViewController {
         view.addConstraint(
             NSLayoutConstraint(
                 item: aboutText,
-                attribute: NSLayoutAttribute.left,
-                relatedBy: NSLayoutRelation.equal,
+                attribute: NSLayoutConstraint.Attribute.left,
+                relatedBy: NSLayoutConstraint.Relation.equal,
                 toItem: view,
-                attribute: NSLayoutAttribute.leftMargin,
+                attribute: NSLayoutConstraint.Attribute.leftMargin,
                 multiplier: 1.0,
                 constant: 0.0
             )
@@ -75,23 +75,23 @@ class AboutViewController: UIViewController {
         view.addConstraint(
             NSLayoutConstraint(
                 item: aboutText,
-                attribute: NSLayoutAttribute.top,
-                relatedBy: NSLayoutRelation.equal,
+                attribute: NSLayoutConstraint.Attribute.top,
+                relatedBy: NSLayoutConstraint.Relation.equal,
                 toItem: view,
-                attribute: NSLayoutAttribute.top,
+                attribute: NSLayoutConstraint.Attribute.top,
                 multiplier: 1.0,
                 constant: 20.0
             )
         )
-        backButton = UIButton(type: UIButtonType.custom)
-        backButton.setTitle("Done", for: UIControlState.normal)
-        backButton.setTitle("Done", for: UIControlState.highlighted)
+        backButton = UIButton(type: UIButton.ButtonType.custom)
+        backButton.setTitle("Done", for: UIControl.State.normal)
+        backButton.setTitle("Done", for: UIControl.State.highlighted)
         backButton.backgroundColor = UIColor.blue
         //backButton.layer.backgroundColor = UIColor.blueColor().CGColor
         backButton.layer.cornerRadius = 4.0
         backButton.frame = CGRect(x: self.view.frame.width-60.0, y: self.view.frame.height-20.0, width: 60.0, height: 20.0)
         view.addSubview(backButton)
-        backButton.addTarget(self, action: #selector(backButtonMethod(sender:event:)), for: UIControlEvents.touchUpInside)
+        backButton.addTarget(self, action: #selector(backButtonMethod(sender:event:)), for: UIControl.Event.touchUpInside)
     }
     
     @objc func backButtonMethod(sender : THButton, event : UIEvent) {

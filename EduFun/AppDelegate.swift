@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIView.animate(
             withDuration: 0.5,
             delay: 0.0,
-            options: UIViewAnimationOptions.curveEaseInOut,
+            options: UIView.AnimationOptions.curveEaseInOut,
             animations:
             { () -> Void in
                 overlayView.alpha = 0.0

@@ -79,7 +79,7 @@ class MrSkunkWinScene: MrSkunkLevelScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch: UITouch = touches.first as UITouch!
+        let touch: UITouch = touches.first! as UITouch
         sceneTouched(location: touch.location(in: self))
     }
     
