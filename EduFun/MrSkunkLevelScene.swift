@@ -22,15 +22,15 @@ protocol MrSkunkLevelDelegate {
 class MrSkunkLevelScene: SKScene, SKPhysicsContactDelegate {
     var mrSkunkDelegate : MrSkunkLevelDelegate! = nil
     
-    var playableRect: CGRect = CGRectMake(0,0,0,0)
-    var lastUpdateTime: NSTimeInterval = 0
-    var dt : NSTimeInterval = 0
+    var playableRect: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
+    var lastUpdateTime: TimeInterval = 0
+    var dt : TimeInterval = 0
     
     var restartingMrSkunk : Bool = false
     var hintDisappeared : Bool = false
     var levelCompleted : Bool = false
     
-    var beginPoint : CGPoint = CGPointZero
+    var beginPoint : CGPoint = CGPoint.zero
     
     override init(size: CGSize) {
         super.init(size: size)
@@ -40,7 +40,7 @@ class MrSkunkLevelScene: SKScene, SKPhysicsContactDelegate {
         super.init(coder: aDecoder)
     }
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         // Calculate playable margin
         let maxAspectRatio: CGFloat = 16.0/9.0 // iPhone 5
         let maxAspectRatioHeight = size.width / maxAspectRatio
@@ -53,7 +53,7 @@ class MrSkunkLevelScene: SKScene, SKPhysicsContactDelegate {
         hintDisappeared = false
         levelCompleted = false
         
-        setupNodes(view)
+        setupNodes(view: view)
     }
     
     func setupNodes(view: SKView)
@@ -61,7 +61,8 @@ class MrSkunkLevelScene: SKScene, SKPhysicsContactDelegate {
         fatalError("Mr Skunk level subclasses should override this")
     }
     
-    override func willMoveFromView(view: SKView) {
+    override func willMove(from view: SKView) {
+
         mrSkunkDelegate.willMoveFromView()
     }
 }

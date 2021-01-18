@@ -15,7 +15,7 @@ class THButton: UIControl {
     var pressedTextColor : UIColor!
     var normalBackColor : UIColor!
     var pressedBackColor : UIColor!
-    var beginTrackPoint : CGPoint = CGPointMake(0,0)
+    var beginTrackPoint : CGPoint = CGPoint(x: 0, y: 0)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,43 +38,43 @@ class THButton: UIControl {
         label.frame.size = frame.size
         label.text = text
         label.font = UIFont(name: "Super Mario 256", size: 100.0)
-        label.font = label.font.fontWithSize(getFontSizeToFitFrameOfLabel(label)-(5.0*scale))
+        label.font = label.font.withSize(getFontSizeToFitFrameOfLabel(label: label)-(5.0*scale))
         label.frame.origin.y += label.font.pointSize*1/8.0
-        label.textAlignment = NSTextAlignment.Center
+        label.textAlignment = NSTextAlignment.center
         label.textColor = normalTextColor
         label.strokeSize = 1.5*scale
-        label.strokeColor = UIColor.blackColor()
-        label.shadowOffset = CGSizeMake(label.strokeSize, label.strokeSize)
-        label.shadowColor = UIColor.blackColor()
+        label.strokeColor = UIColor.black
+        label.shadowOffset = CGSize(width: label.strokeSize, height: label.strokeSize)
+        label.shadowColor = UIColor.black
         label.shadowBlur = 1.0*scale
         //label.backgroundColor = UIColor.purpleColor()
         self.addSubview(label)
         
-        self.layer.borderColor = UIColor.blackColor().CGColor
+        self.layer.borderColor = UIColor.black.cgColor
         self.layer.borderWidth = 2.0*scale
         self.layer.cornerRadius = 10.0*scale
-        self.layer.shadowColor = UIColor.blackColor().CGColor
+        self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowRadius = 3.0*scale
         self.layer.shadowOpacity = 0.7
-        self.layer.shadowOffset = CGSizeMake(3.0*scale, 3.0*scale)
+        self.layer.shadowOffset = CGSize(width: 3.0*scale, height: 3.0*scale)
         self.layer.masksToBounds = true
-        self.layer.backgroundColor = normalBackColor.CGColor
+        self.layer.backgroundColor = normalBackColor.cgColor
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
-        self.beginTrackPoint = touch.locationInView(self)
+    override func beginTracking(_ touch: UITouch, with  event: UIEvent?) -> Bool {
+        self.beginTrackPoint = touch.location(in: self)
         //println("beginTracking @ \(self.beginTrackPoint)")
-        self.layer.backgroundColor = pressedBackColor.CGColor
+        self.layer.backgroundColor = pressedBackColor.cgColor
         self.label.textColor = pressedTextColor
         return true
     }
     
-    override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
-        let endTrackPoint : CGPoint = touch!.locationInView(self)
+    override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+        let endTrackPoint : CGPoint = touch!.location(in: self)
         //println("endTracking @ \(endTrackPoint)")
         if  endTrackPoint.x >= 0 && endTrackPoint.y >= 0 &&
             endTrackPoint.x < self.frame.size.width && endTrackPoint.y < self.frame.size.height
@@ -84,7 +84,7 @@ class THButton: UIControl {
         {
             //NSLog("not touch up inside")
         }
-        self.layer.backgroundColor = normalBackColor.CGColor
+        self.layer.backgroundColor = normalBackColor.cgColor
         self.label.textColor = normalTextColor
     }
 }

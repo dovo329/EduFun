@@ -11,12 +11,12 @@ import QuartzCore
 
 class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
 {
-    var aboutButton : UIButton = UIButton(type: UIButtonType.Custom)
-    var titleLabel : THLabel!
+    var aboutButton : UIButton = UIButton(type: UIButtonType.custom)
+    var titleLabel = THLabel()
     let kNumRows : Int = 1
     let kNumColumns : Int = 3
     let kCellReuseId : String = "title.screen.cell.reuse.id"
-    var collectionView : UICollectionView!
+    var collectionView : UICollectionView?
     var bgGradLayer : CAGradientLayer = CAGradientLayer()
     
     override func viewDidLoad() {
@@ -26,73 +26,34 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         setupTitleLabel()
         setupCollectionView()
         
-        aboutButton.setTitle("About", forState: UIControlState.Normal)
-        aboutButton.setTitle("About", forState: UIControlState.Highlighted)
-        aboutButton.backgroundColor = UIColor.blueColor()
-        //aboutButton.layer.backgroundColor = UIColor.blueColor().CGColor
+        aboutButton.setTitle("About", for: UIControlState.normal)
+        aboutButton.setTitle("About", for: UIControlState.highlighted)
+        aboutButton.backgroundColor = UIColor.blue
         aboutButton.layer.cornerRadius = 4.0
-        aboutButton.frame = CGRectMake(self.view.frame.width-60.0, self.view.frame.height-20.0, 60.0, 20.0)
+        aboutButton.frame = CGRect(x: self.view.frame.width-60.0, y: self.view.frame.height-20.0, width: 60.0, height: 20.0)
         view.addSubview(aboutButton)
-        aboutButton.addTarget(self, action: Selector("aboutButtonMethod:event:"), forControlEvents: UIControlEvents.TouchUpInside)
-        
-        /*aboutButton?.setTranslatesAutoresizingMaskIntoConstraints(false)
-        view.addConstraint(
-            NSLayoutConstraint(
-                item: aboutButton!,
-                attribute: NSLayoutAttribute.Right,
-                relatedBy: NSLayoutRelation.Equal,
-                toItem: view,
-                attribute: NSLayoutAttribute.Right,
-                multiplier: 1.0,
-                constant: 0.0
-            )
-        )
-        view.addConstraint(
-            NSLayoutConstraint(
-                item: aboutButton!,
-                attribute: NSLayoutAttribute.Bottom,
-                relatedBy: NSLayoutRelation.Equal,
-                toItem: view,
-                attribute: NSLayoutAttribute.Bottom,
-                multiplier: 1.0,
-                constant: 0.0
-            )
-        )*/
-        /*[self.toolBar setTranslatesAutoresizingMaskIntoConstraints:NO];
-        
-        [self.view addConstraint:
-            [NSLayoutConstraint constraintWithItem:self.scrollView
-            attribute:NSLayoutAttributeLeft
-            relatedBy:NSLayoutRelationEqual
-            toItem:self.view
-            attribute:NSLayoutAttributeLeft
-            multiplier:1.0
-            constant:0.0]
-        ];*/
+        aboutButton.addTarget(self, action: #selector(aboutButtonMethod(sender:event:)), for: UIControlEvents.touchUpInside)
     }
     
-    func aboutButtonMethod(sender : THButton, event : UIEvent) {
-        let app = UIApplication.sharedApplication().delegate as? AppDelegate
-        app?.animateToViewController(ViewControllerEnum.About, srcVCEnum: ViewControllerEnum.TitleScreen)
+    @objc func aboutButtonMethod(sender: UIButton, event: UIEvent) {
+        if let app = UIApplication.shared.delegate as? AppDelegate {
+            app.animateToViewController(destVCEnum: ViewControllerEnum.About, srcVCEnum: ViewControllerEnum.TitleScreen)
+        }
         //println("about button method")
     }
     
-    override func viewDidAppear(animated: Bool) {
-        //navigationController!.navigationBarHidden = true
-    }
-
     func setupBackgroundGradient()
     {
         //var bgGradLayer = CAGradientLayer()
         //bgGradLayer.frame = view.bounds
         
         bgGradLayer.colors = [
-            cgColorForRed(255.0, green:255.0, blue:255.0),
-            cgColorForRed(255.0, green:224.0, blue:224.0),
-            cgColorForRed(255.0, green:216.0, blue:173.0),
-            cgColorForRed(255.0, green:255.0, blue:167.0),
-            cgColorForRed(152.0, green:255.0, blue:152.0),
-            cgColorForRed(162.0, green:255.0, blue:255.0)
+            cgColor(red: 255.0, green:255.0, blue:255.0),
+            cgColor(red: 255.0, green:224.0, blue:224.0),
+            cgColor(red: 255.0, green:216.0, blue:173.0),
+            cgColor(red: 255.0, green:255.0, blue:167.0),
+            cgColor(red: 152.0, green:255.0, blue:152.0),
+            cgColor(red: 162.0, green:255.0, blue:255.0)
         ]
         bgGradLayer.startPoint = CGPoint(x:0.0, y:0.0)
         bgGradLayer.endPoint = CGPoint(x:0.0, y:1.0)
@@ -102,24 +63,23 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
     
     func setupTitleLabel()
     {
-        titleLabel = THLabel()
         titleLabel.text = "Kids Fun!"
         titleLabel.frame = CGRect(x: 0.0, y: 20.0, width: view.frame.size.width, height: view.frame.size.height)
         //titleLabel.font = UIFont(name: "Super Mario 256", size: 300.0)
         titleLabel.font = UIFont(name: "Super Mario 256", size: 45.0)
-        titleLabel.font = titleLabel.font.fontWithSize(getFontSizeToFitFrameOfLabel(titleLabel)-6.0)
+        titleLabel.font = titleLabel.font.withSize(getFontSizeToFitFrameOfLabel(label: titleLabel)-6.0)
         //titleLabel.frame.origin.y -= titleLabel.font.pointSize
         //println("titleLabel.font.pointSize=\(titleLabel.font.pointSize)")
         titleLabel.frame.size.height = titleLabel.font.pointSize*1.3
-        titleLabel.textAlignment = NSTextAlignment.Center
-        titleLabel.textColor = UIColor.yellowColor()
+        titleLabel.textAlignment = NSTextAlignment.center
+        titleLabel.textColor = UIColor.yellow
         titleLabel.strokeSize = (3.0/320.0)*titleLabel.frame.size.width
-        titleLabel.strokeColor = UIColor.blackColor()
-        titleLabel.shadowOffset = CGSizeMake(titleLabel.strokeSize, titleLabel.strokeSize)
-        titleLabel.shadowColor = UIColor.blackColor()
+        titleLabel.strokeColor = UIColor.black
+        titleLabel.shadowOffset = CGSize(width: titleLabel.strokeSize, height: titleLabel.strokeSize)
+        titleLabel.shadowColor = UIColor.black
         titleLabel.shadowBlur = (1.0/320.0)*titleLabel.frame.size.width
         titleLabel.layer.shouldRasterize = true
-        titleLabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
+        titleLabel.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         view.addSubview(titleLabel)
         
         //bounceInView(titleLabel, duration: 0.5, delay: 0.0)
@@ -151,44 +111,64 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
 
-        collectionView = UICollectionView(frame: CGRectMake(0, (titleLabel.frame.size.height+20.0), view.frame.size.width, view.frame.size.height), collectionViewLayout: layout)
+        self.collectionView = UICollectionView(frame: CGRect(x: 0, y: (titleLabel.frame.size.height+20.0), width: view.frame.size.width, height: view.frame.size.height), collectionViewLayout: layout)
+        guard let collectionView = self.collectionView else {
+            let alert = UIAlertController(title: "Error", message: "Failed to create collection view", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(UIAlertAction) -> Void in }))
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+1.0) {
+                self.present(alert, animated: true, completion: {})
+            }
+            assert(false, "Failed to create Title Screen collection view")
+            return
+        }
+        
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: kCellReuseId)
-        collectionView.backgroundColor = UIColor.clearColor()
-        collectionView.scrollEnabled = false
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kCellReuseId)
+        collectionView.backgroundColor = UIColor.clear
+        collectionView.isScrollEnabled = false
         
         view.addSubview(collectionView)
     }
 
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = collectionView.cellForItemAtIndexPath(indexPath)!
-        cell.backgroundView!.alpha = 0.5
-        cell.layer.borderColor = cgColorForRed(120.0, green: 190.0, blue: 255.0)
-        
-        let app = UIApplication.sharedApplication().delegate as? AppDelegate
-        
-        if (indexPath.row == 0)
-        {
-            app?.animateToViewController(ViewControllerEnum.CardMatching, srcVCEnum: ViewControllerEnum.TitleScreen)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        guard let cell = collectionView.cellForItem(at: indexPath) else {
+            assert(false, "Failed to create collection view cell")
+            return
         }
-        else if (indexPath.row == 1)
-        {
-            app?.animateToViewController(ViewControllerEnum.ColoringBook, srcVCEnum: ViewControllerEnum.TitleScreen)
+        cell.backgroundView?.alpha = 0.5
+        cell.layer.borderColor = cgColor(red: 120.0, green: 190.0, blue: 255.0)
+        
+        guard let app = UIApplication.shared.delegate as? AppDelegate else {
+            assert(false, "Failed to get AppDelegate")
+            return
         }
-        else if (indexPath.row == 2)
-        {
-            app?.animateToViewController(ViewControllerEnum.MrSkunk, srcVCEnum: ViewControllerEnum.TitleScreen)
+        
+        switch indexPath.row {
+        case 0:
+            app.animateToViewController(destVCEnum: ViewControllerEnum.CardMatching, srcVCEnum: ViewControllerEnum.TitleScreen)
+
+        case 1:
+            app.animateToViewController(destVCEnum: ViewControllerEnum.ColoringBook, srcVCEnum: ViewControllerEnum.TitleScreen)
+
+        case 2:
+            app.animateToViewController(destVCEnum: ViewControllerEnum.MrSkunk, srcVCEnum: ViewControllerEnum.TitleScreen)
+        default:
+            assert(false, "Got an unexpected indexPath.row of \(indexPath.row)")
         }
     }
-    
-    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = collectionView.cellForItemAtIndexPath(indexPath)!
-        cell.backgroundView!.alpha = 1.0
-        cell.layer.borderColor = cgColorForRed(70.0, green: 120.0, blue: 255.0)
+
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) else {
+            assert(false, "Failed to get collectionView cell in didDeselectItemAt indexPath")
+            return
+        }
+        cell.backgroundView?.alpha = 1.0
+        cell.layer.borderColor = cgColor(red: 70.0, green: 120.0, blue: 255.0)
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return kNumColumns
     }
     
@@ -196,22 +176,23 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         return kNumRows
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kCellReuseId, for: indexPath)
         
-        let cell : UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellReuseId, forIndexPath: indexPath) 
-        
-        if (indexPath.row == 0) {
+        switch indexPath.row {
+        case 0:
             cell.backgroundView = UIImageView(image: UIImage(named: "cardMatchScreenshot")!)
-        } else if (indexPath.row == 1) {
+        case 1:
             cell.backgroundView = UIImageView(image: UIImage(named: "ColoringScreenShot")!)
-        } else {
+        default:
             cell.backgroundView = UIImageView(image: UIImage(named: "MrSkunkSlice")!)
         }
         
         let scale = (view.frame.size.width/320.0)
         
         cell.layer.borderWidth = 4.0*scale
-        cell.layer.borderColor = cgColorForRed(70.0, green: 120.0, blue: 255.0)
+        cell.layer.borderColor = cgColor(red: 70.0, green: 120.0, blue: 255.0)
         cell.layer.cornerRadius = 10.0*scale
         cell.layer.masksToBounds = true
         //cell.layer.shadowColor = UIColor.blackColor().CGColor
@@ -219,16 +200,16 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         //cell.layer.shadowOpacity = 1.0
         //cell.layer.shadowOffset = CGSizeMake(4.0*scale, 4.0*scale)
         
-        return cell as UICollectionViewCell
+        return cell
     }
     
     override func viewDidLayoutSubviews() {
         bgGradLayer.frame = self.view.bounds
-        aboutButton.frame = CGRectMake(self.view.frame.width-60.0, self.view.frame.height-20.0, 60.0, 20.0)
+        aboutButton.frame = CGRect(x: self.view.frame.width-60.0, y: self.view.frame.height-20.0, width: 60.0, height: 20.0)
         titleLabel.frame = CGRect(x: 0.0, y: 20.0, width: view.frame.size.width, height: view.frame.size.height)
         //titleLabel.font = UIFont(name: "Super Mario 256", size: 300.0)
         titleLabel.font = UIFont(name: "Super Mario 256", size: 45.0)
-        titleLabel.font = titleLabel.font.fontWithSize(getFontSizeToFitFrameOfLabel(titleLabel)-6.0)
+        titleLabel.font = titleLabel.font.withSize(getFontSizeToFitFrameOfLabel(label: titleLabel)-6.0)
         //titleLabel.frame.origin.y -= titleLabel.font.pointSize
         //println("titleLabel.font.pointSize=\(titleLabel.font.pointSize)")
         titleLabel.frame.size.height = titleLabel.font.pointSize*1.3
@@ -243,17 +224,19 @@ class TitleScreenViewController: UIViewController, UICollectionViewDelegateFlowL
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         
+        guard let collectionView = self.collectionView else {
+            assert(false, "CollectionView is nil")
+            return
+        }
         collectionView.setCollectionViewLayout(layout, animated: false)
-        collectionView.frame = CGRectMake(0, (titleLabel.frame.size.height+20.0), view.frame.size.width, view.frame.size.height)
+        collectionView.frame = CGRect(x: 0, y: (titleLabel.frame.size.height+20.0), width: view.frame.size.width, height: view.frame.size.height)
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        //return Int(UIInterfaceOrientationMask.LandscapeLeft.rawValue)
-        return UIInterfaceOrientationMask.LandscapeRight
-//        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.landscapeRight
     }
-    
-    override func shouldAutorotate() -> Bool {
+
+    override var shouldAutorotate: Bool {
         return true
     }
     

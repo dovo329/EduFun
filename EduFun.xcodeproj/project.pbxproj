@@ -54,7 +54,6 @@
 		A5C957171B542E6400E8BC50 /* Level6Back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5C957161B542E6400E8BC50 /* Level6Back.jpg */; };
 		A5C957191B5440FA00E8BC50 /* Level1Back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5C957181B5440FA00E8BC50 /* Level1Back.jpg */; };
 		A5CA0F4F1B2F64CA008BD79D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F4E1B2F64CA008BD79D /* UIImage+Resize.m */; };
-		A5CA0F541B2F67FA008BD79D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F511B2F67FA008BD79D /* UIImage+Resize.m */; };
 		A5CA0F551B2F67FA008BD79D /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0F531B2F67FA008BD79D /* UIImage+RoundedCorner.m */; };
 		A5CA2C391B4F550600FD614B /* Lock.png in Resources */ = {isa = PBXBuildFile; fileRef = A5CA2C371B4F550600FD614B /* Lock.png */; };
 		A5CA2C3A1B4F550600FD614B /* MapBlank.png in Resources */ = {isa = PBXBuildFile; fileRef = A5CA2C381B4F550600FD614B /* MapBlank.png */; };
@@ -63,7 +62,6 @@
 		A5CBB9011B4DFC0500A446FE /* Level3Back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5CBB9001B4DFC0500A446FE /* Level3Back.jpg */; };
 		A5CBB9031B4E001800A446FE /* Level2Back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5CBB9021B4E001800A446FE /* Level2Back.jpg */; };
 		A5DB888F1B3B707D00B8CA08 /* THLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DB888E1B3B707D00B8CA08 /* THLabel.m */; };
-		A5E3C5A01B4AF9E5000D023F /* ASAttributedLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E3C59F1B4AF9E5000D023F /* ASAttributedLabelNode.swift */; };
 		A5EB8DF51B3CC765009A8A3A /* THButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB8DF41B3CC765009A8A3A /* THButton.swift */; };
 		A5EB8DF81B3CCF39009A8A3A /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB8DF71B3CCF39009A8A3A /* Global.swift */; };
 		A5EBCCC51B361F0E006E52D6 /* mtnHouse.svg in Resources */ = {isa = PBXBuildFile; fileRef = A5EBCCC41B361F0E006E52D6 /* mtnHouse.svg */; };
@@ -185,7 +183,6 @@
 		A5CBB9021B4E001800A446FE /* Level2Back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Level2Back.jpg; path = Art/Level2/Level2Back.jpg; sourceTree = "<group>"; };
 		A5DB888D1B3B707D00B8CA08 /* THLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLabel.h; sourceTree = "<group>"; };
 		A5DB888E1B3B707D00B8CA08 /* THLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLabel.m; sourceTree = "<group>"; };
-		A5E3C59F1B4AF9E5000D023F /* ASAttributedLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ASAttributedLabelNode.swift; path = ../ASAttributedLabelNode/ASAttributedLabelNode.swift; sourceTree = "<group>"; };
 		A5EB8DF41B3CC765009A8A3A /* THButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THButton.swift; sourceTree = "<group>"; };
 		A5EB8DF71B3CCF39009A8A3A /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		A5EBCCC41B361F0E006E52D6 /* mtnHouse.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = mtnHouse.svg; path = EduFun/mtnHouse.svg; sourceTree = "<group>"; };
@@ -391,7 +388,6 @@
 				A5112C051B2D019F00215DA2 /* OBShapedButton.m */,
 				A5112C061B2D019F00215DA2 /* UIImage+ColorAtPixel.h */,
 				A5112C071B2D019F00215DA2 /* UIImage+ColorAtPixel.m */,
-				A5E3C59F1B4AF9E5000D023F /* ASAttributedLabelNode.swift */,
 			);
 			name = ThirdParty;
 			sourceTree = "<group>";
@@ -444,7 +440,7 @@
 			attributes = {
 				LastSwiftMigration = 0710;
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = DougsApps;
 				TargetAttributes = {
 					A5B85EAE1B276636008012F7 = {
@@ -549,7 +545,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5E3C5A01B4AF9E5000D023F /* ASAttributedLabelNode.swift in Sources */,
 				A5112C161B2D0E7F00215DA2 /* OBShapedView.m in Sources */,
 				A5DB888F1B3B707D00B8CA08 /* THLabel.m in Sources */,
 				A5C4B2991B50250500016C02 /* MrSkunkLevelScene.swift in Sources */,
@@ -572,7 +567,6 @@
 				A56915871B4F329C0093B6C2 /* MrSkunkMapView.swift in Sources */,
 				A524752D1B3E0A26002E0B7B /* TitleScreenViewController.swift in Sources */,
 				A54E0B281B51EB47001CC505 /* MrSkunkLevel5.swift in Sources */,
-				A5CA0F541B2F67FA008BD79D /* UIImage+Resize.m in Sources */,
 				A53B32311B541A4500A588B3 /* MrSkunkLevel6.swift in Sources */,
 				A5EB8DF51B3CC765009A8A3A /* THButton.swift in Sources */,
 				A5925F591B41CE7A000E8FF8 /* MrSkunkLevel1.swift in Sources */,
@@ -624,19 +618,28 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -657,7 +660,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -670,13 +673,21 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -695,7 +706,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -718,6 +730,7 @@
 					"$(PROJECT_DIR)/SVGKit",
 				);
 				New_Setting = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dougsapps.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Header.h;
 				SWIFT_VERSION = 5.0;
@@ -741,6 +754,7 @@
 					"$(PROJECT_DIR)/SVGKit",
 				);
 				New_Setting = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dougsapps.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Header.h;
 				SWIFT_VERSION = 5.0;
@@ -761,6 +775,7 @@
 				);
 				INFOPLIST_FILE = EduFunTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dougsapps.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EduFun.app/EduFun";
 			};
@@ -776,6 +791,7 @@
 				);
 				INFOPLIST_FILE = EduFunTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dougsapps.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EduFun.app/EduFun";
 			};
