@@ -44,7 +44,6 @@
 		A5B85EB51B276636008012F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85EB41B276636008012F7 /* AppDelegate.swift */; };
 		A5B85EC01B276636008012F7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5B85EBF1B276636008012F7 /* Images.xcassets */; };
 		A5B85EC31B276636008012F7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5B85EC11B276636008012F7 /* LaunchScreen.xib */; };
-		A5B85ECF1B276636008012F7 /* EduFunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85ECE1B276636008012F7 /* EduFunTests.swift */; };
 		A5B85ED91B2767E3008012F7 /* MemoryGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B85ED81B2767E3008012F7 /* MemoryGameViewController.swift */; };
 		A5BEBB121B5074CA00C2363C /* YouWin.png in Resources */ = {isa = PBXBuildFile; fileRef = A5BEBB111B5074CA00C2363C /* YouWin.png */; };
 		A5C4B2991B50250500016C02 /* MrSkunkLevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C4B2981B50250500016C02 /* MrSkunkLevelScene.swift */; };
@@ -88,13 +87,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = A536FE831B35140E00443B93;
 			remoteInfo = SVGKit;
-		};
-		A5B85EC91B276636008012F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A5B85EA71B276636008012F7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A5B85EAE1B276636008012F7;
-			remoteInfo = EduFun;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -158,9 +150,6 @@
 		A5B85EB41B276636008012F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5B85EBF1B276636008012F7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A5B85EC21B276636008012F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		A5B85EC81B276636008012F7 /* EduFunTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EduFunTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A5B85ECD1B276636008012F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A5B85ECE1B276636008012F7 /* EduFunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduFunTests.swift; sourceTree = "<group>"; };
 		A5B85ED81B2767E3008012F7 /* MemoryGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryGameViewController.swift; sourceTree = "<group>"; };
 		A5BEBB111B5074CA00C2363C /* YouWin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YouWin.png; path = Art/YouWin/YouWin.png; sourceTree = "<group>"; };
 		A5C4B2981B50250500016C02 /* MrSkunkLevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MrSkunkLevelScene.swift; sourceTree = "<group>"; };
@@ -195,13 +184,6 @@
 			files = (
 				A53600621B351EAC00443B93 /* SVGKit.framework in Frameworks */,
 				A5554D4C1B3239AE002B06E5 /* QuartzCore.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A5B85EC51B276636008012F7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,7 +262,6 @@
 				A5E3C5A21B4AF9F0000D023F /* ThirdParty */,
 				A5B85EB11B276636008012F7 /* EduFun */,
 				A536FDFD1B35071500443B93 /* Frameworks */,
-				A5B85ECB1B276636008012F7 /* EduFunTests */,
 				A5B85EB01B276636008012F7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -289,7 +270,6 @@
 			isa = PBXGroup;
 			children = (
 				A5B85EAF1B276636008012F7 /* KidsFun.app */,
-				A5B85EC81B276636008012F7 /* EduFunTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -324,23 +304,6 @@
 			isa = PBXGroup;
 			children = (
 				A5B85EB31B276636008012F7 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		A5B85ECB1B276636008012F7 /* EduFunTests */ = {
-			isa = PBXGroup;
-			children = (
-				A5B85ECE1B276636008012F7 /* EduFunTests.swift */,
-				A5B85ECC1B276636008012F7 /* Supporting Files */,
-			);
-			path = EduFunTests;
-			sourceTree = "<group>";
-		};
-		A5B85ECC1B276636008012F7 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				A5B85ECD1B276636008012F7 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -414,24 +377,6 @@
 			productReference = A5B85EAF1B276636008012F7 /* KidsFun.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A5B85EC71B276636008012F7 /* EduFunTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A5B85ED51B276636008012F7 /* Build configuration list for PBXNativeTarget "EduFunTests" */;
-			buildPhases = (
-				A5B85EC41B276636008012F7 /* Sources */,
-				A5B85EC51B276636008012F7 /* Frameworks */,
-				A5B85EC61B276636008012F7 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A5B85ECA1B276636008012F7 /* PBXTargetDependency */,
-			);
-			name = EduFunTests;
-			productName = EduFunTests;
-			productReference = A5B85EC81B276636008012F7 /* EduFunTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -446,10 +391,6 @@
 					A5B85EAE1B276636008012F7 = {
 						CreatedOnToolsVersion = 6.3;
 						DevelopmentTeam = KR64YVZD26;
-					};
-					A5B85EC71B276636008012F7 = {
-						CreatedOnToolsVersion = 6.3;
-						TestTargetID = A5B85EAE1B276636008012F7;
 					};
 				};
 			};
@@ -474,7 +415,6 @@
 			projectRoot = "";
 			targets = (
 				A5B85EAE1B276636008012F7 /* KidsFun */,
-				A5B85EC71B276636008012F7 /* EduFunTests */,
 			);
 		};
 /* End PBXProject section */
@@ -531,13 +471,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A5B85EC61B276636008012F7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -575,14 +508,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A5B85EC41B276636008012F7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A5B85ECF1B276636008012F7 /* EduFunTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -590,11 +515,6 @@
 			isa = PBXTargetDependency;
 			name = SVGKit;
 			targetProxy = A53600641B351EAC00443B93 /* PBXContainerItemProxy */;
-		};
-		A5B85ECA1B276636008012F7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A5B85EAE1B276636008012F7 /* KidsFun */;
-			targetProxy = A5B85EC91B276636008012F7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -725,10 +645,7 @@
 				INFOPLIST_FILE = EduFun/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/SVGKit",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				New_Setting = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dougsapps.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -749,51 +666,12 @@
 				INFOPLIST_FILE = EduFun/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/SVGKit",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				New_Setting = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dougsapps.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Header.h;
 				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		A5B85ED61B276636008012F7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = EduFunTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dougsapps.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EduFun.app/EduFun";
-			};
-			name = Debug;
-		};
-		A5B85ED71B276636008012F7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = EduFunTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dougsapps.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EduFun.app/EduFun";
 			};
 			name = Release;
 		};
@@ -814,15 +692,6 @@
 			buildConfigurations = (
 				A5B85ED31B276636008012F7 /* Debug */,
 				A5B85ED41B276636008012F7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A5B85ED51B276636008012F7 /* Build configuration list for PBXNativeTarget "EduFunTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A5B85ED61B276636008012F7 /* Debug */,
-				A5B85ED71B276636008012F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
